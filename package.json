@@ -1,6 +1,6 @@
 {
   "name": "blue-spec",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "🌊 Blue Spec is a toolkit for Security-Driven Hardening, a defensive workflow to help AI agents detect what a system does and harden the defenses that matter.",
   "license": "MIT",
   "type": "module",
