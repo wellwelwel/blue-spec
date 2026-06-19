@@ -40,6 +40,7 @@
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
     "@types/node": "^25.9.3",
+    "concurrently": "^10.0.3",
     "esbuild": "^0.28.1",
     "poku": "^4.4.0",
     "prettier": "^3.8.4",
