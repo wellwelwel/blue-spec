@@ -311,7 +311,7 @@ Specialize **Blue Spec** in a specific security area, from a source or topic you
 
 ```bash
 # An attack as the source: the sub-skill is still the defense
-/bluespec.specialize "' OR 1=1 -- splices SQL into the query text"
+/bluespec.specialize "a tautology-based SQL injection exploit that always evaluates true"
 ```
 
 ```bash
