@@ -402,6 +402,11 @@ html[data-theme='dark'] body {
     var(--bs-bg);
 }
 
+html,
+body {
+  min-width: 340px;
+}
+
 .navbar {
   backdrop-filter: blur(12px) saturate(120%);
   -webkit-backdrop-filter: blur(12px) saturate(120%);
