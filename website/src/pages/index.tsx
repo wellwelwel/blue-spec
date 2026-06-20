@@ -126,7 +126,7 @@ const Home = (): ReactNode => {
 
       <main className='relative z-[2] min-h-screen flex items-center justify-center p-[clamp(16px,4vw,64px)] max-[600px]:p-0 max-[600px]:items-stretch'>
         <section className='w-full max-w-[1240px] rounded-[28px] border border-[#0c155c] bg-glass overflow-hidden [backdrop-filter:blur(40px)_saturate(120%)] [-webkit-backdrop-filter:blur(40px)_saturate(120%)] [box-shadow:inset_0_1px_0_0_rgba(255,255,255,0.08),0_40px_120px_-40px_rgba(10,11,13,0.7)] max-[600px]:max-w-none max-[600px]:min-h-screen max-[600px]:[min-height:100dvh] max-[600px]:rounded-none max-[600px]:border-0 max-[600px]:flex max-[600px]:flex-col max-[600px]:overflow-visible max-[600px]:[backdrop-filter:none] max-[600px]:[-webkit-backdrop-filter:none]'>
-          <header className='grid grid-cols-[1fr_auto_1fr] items-center gap-4 px-[clamp(22px,3vw,38px)] py-[clamp(18px,2.4vw,28px)] border-b border-[#0c155c] max-[600px]:flex max-[600px]:flex-wrap max-[600px]:justify-between'>
+          <header className='grid grid-cols-[1fr_auto_1fr] items-center gap-4 px-[clamp(22px,3vw,38px)] py-[clamp(18px,2.4vw,28px)] border-b border-[#0c155c] max-[600px]:flex max-[600px]:flex-wrap max-[600px]:justify-between max-[600px]:border-b-0 max-[600px]:pb-3'>
             <div className='flex items-center gap-[18px] min-w-0'>
               <span
                 className='flex items-center gap-2 max-[600px]:hidden'
@@ -155,7 +155,7 @@ const Home = (): ReactNode => {
             >
               {pill && (
                 <span
-                  className='absolute top-1/2 -translate-y-1/2 h-[33px] rounded-full bg-white/10 transition-[left,width] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] pointer-events-none max-[600px]:top-[calc(50%+9px)]'
+                  className='absolute top-1/2 -translate-y-1/2 h-[33px] rounded-full bg-white/10 transition-[left,width] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] pointer-events-none max-[600px]:hidden'
                   style={{ left: pill.left, width: pill.width }}
                   aria-hidden
                 />
@@ -170,9 +170,9 @@ const Home = (): ReactNode => {
                   aria-current={active === tab.id ? 'page' : undefined}
                   onClick={() => goToTab(tab.id)}
                   onMouseEnter={() => setHoveredTab(tab.id)}
-                  className={`relative z-[1] inline-flex items-center justify-center gap-1.5 px-3.5 py-[7px] rounded-full text-[14px] font-semibold tracking-[-0.01em] whitespace-nowrap cursor-pointer transition-colors duration-200 hover:text-ink max-[600px]:flex-1 ${
+                  className={`relative z-[1] inline-flex items-center justify-center gap-1.5 px-3.5 py-[7px] rounded-full text-[14px] font-semibold tracking-[-0.01em] whitespace-nowrap cursor-pointer transition-colors duration-200 hover:text-ink max-[600px]:flex-1 max-[600px]:after:absolute max-[600px]:after:inset-x-3.5 max-[600px]:after:-bottom-2.5 max-[600px]:after:h-0.5 max-[600px]:after:rounded-full ${
                     active === tab.id
-                      ? 'text-ink'
+                      ? 'text-ink max-[600px]:after:bg-[#005eff]'
                       : 'text-[rgba(244,244,243,0.62)]'
                   }`}
                 >
@@ -256,7 +256,7 @@ const Home = (): ReactNode => {
               </div>
             </nav>
 
-            <div className='grid grid-cols-[1.15fr_0.85fr] gap-[clamp(20px,2.6vw,38px)] p-[clamp(22px,3vw,38px)] max-[920px]:grid-cols-[1fr] max-[600px]:pb-[calc(104px+env(safe-area-inset-bottom))]'>
+            <div className='grid grid-cols-[1.15fr_0.85fr] gap-[clamp(20px,2.6vw,38px)] p-[clamp(22px,3vw,38px)] max-[920px]:grid-cols-[1fr] max-[600px]:pt-3 max-[600px]:pb-[calc(104px+env(safe-area-inset-bottom))]'>
               <div className='bs-flow flex flex-col min-w-0 h-[var(--bs-window-h)] overflow-y-auto max-[920px]:h-auto max-[920px]:overflow-visible'>
                 <div
                   key={active}
