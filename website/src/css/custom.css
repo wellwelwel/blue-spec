@@ -408,6 +408,12 @@ html[data-theme='dark'] body {
   border-bottom: 1px solid var(--bs-panel-line);
 }
 
+.navbar.navbar-sidebar--show {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transform: none !important;
+}
+
 .navbar__title,
 .navbar__brand {
   font-family: var(--ifm-heading-font-family);
