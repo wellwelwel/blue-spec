@@ -30,10 +30,7 @@ export const noAgentSelected = (agentKeys: string[]): string => {
 export const agentSelectTitle = (): string => 'Which agent are you using?';
 
 export const agentSelectHint = (): string =>
-  'Use the arrow keys to move, Enter to confirm.';
-
-export const agentSelectedLine = (displayName: string): string =>
-  `Agent: ${displayName}`;
+  'Type to filter, arrow keys to move, Enter to confirm.';
 
 export const selectionAborted = (): string => 'No agent selected: cancelled.';
 

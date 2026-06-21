@@ -2,6 +2,8 @@
 name: architecture
 description: Authoritative architecture reference for the Blue Spec codebase. Use BEFORE writing or changing any source under src/, spec/, lib/, or test/, before adding an agent adapter, before touching the build path, and whenever a decision depends on repo layout, code conventions, the command/template split, the agent-agnostic core vs. adapter boundary, or what Blue Spec scaffolds into a target project. Covers the toolchain, directory layout, type rules, and the command formats each supported agent expects.
 user-invocable: true
+metadata:
+  internal: true
 ---
 
 # Blue Spec architecture

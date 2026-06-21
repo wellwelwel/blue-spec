@@ -93,12 +93,19 @@ export type AgentChoice = {
 
 export type SelectOption = {
   label: string;
+  keywords?: string;
 };
 
 export type SelectConfig = {
   title: string;
   hint: string;
   options: SelectOption[];
+  maxVisible?: number;
+};
+
+export type FilteredOption = {
+  option: SelectOption;
+  index: number;
 };
 
 export type KeypressEvent = {
