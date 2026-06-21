@@ -16,14 +16,14 @@ const renderDiagram = async (id: string, definition: string) => {
         background: 'transparent',
         primaryColor: 'rgba(0,94,255,0.12)',
         primaryBorderColor: 'rgba(0,94,255,0.55)',
-        primaryTextColor: '#f4f4f3',
-        lineColor: 'rgba(244,244,243,0.45)',
-        textColor: 'rgba(244,244,243,0.82)',
+        primaryTextColor: '#e9edf7',
+        lineColor: 'rgba(233, 237, 247,0.45)',
+        textColor: 'rgba(233, 237, 247,0.82)',
         fontSize: '13px',
         edgeLabelBackground: 'rgba(10,15,31,0.92)',
         tertiaryColor: 'rgba(10,15,31,0.92)',
-        tertiaryTextColor: 'rgba(244,244,243,0.82)',
-        tertiaryBorderColor: 'rgba(244,244,243,0.18)',
+        tertiaryTextColor: 'rgba(233, 237, 247,0.82)',
+        tertiaryBorderColor: 'rgba(233, 237, 247,0.18)',
         labelBackground: 'rgba(10,15,31,0.92)',
       },
     });
@@ -58,7 +58,7 @@ export const Mermaid = ({ chart }: { chart: string }): ReactNode => {
 
   if (error) {
     return (
-      <pre className='my-5 p-4 rounded-xl border border-line bg-[rgba(6,7,9,0.6)] overflow-x-auto font-mono text-[12.5px] leading-[1.5] text-[rgba(244,244,243,0.86)]'>
+      <pre className='my-5 p-4 rounded-xl border border-line bg-[rgba(6,7,9,0.6)] overflow-x-auto font-mono text-[12.5px] leading-[1.5] text-[rgba(233, 237, 247,0.86)]'>
         {chart}
       </pre>
     );

@@ -77,7 +77,7 @@ const RefPopover = ({
         createPortal(
           <span
             role='tooltip'
-            className='bs-cite-pop fixed z-[110] block w-[min(420px,calc(100vw-32px))] -mt-2.5 p-3.5 rounded-xl border border-white/12 bg-[#10162a] text-[12.5px] leading-[1.55] text-[rgba(244,244,243,0.86)] [box-shadow:0_20px_60px_-15px_rgba(0,0,0,0.85)]'
+            className='bs-cite-pop fixed z-[110] block w-[min(420px,calc(100vw-32px))] -mt-2.5 p-3.5 rounded-xl border border-white/12 bg-[#10162a] text-[12.5px] leading-[1.55] text-[rgba(233, 237, 247,0.86)] [box-shadow:0_20px_60px_-15px_rgba(0,0,0,0.85)]'
             style={{ left: pos.left, top: pos.top }}
           >
             <span className='block mb-1.5 font-mono text-[10px] tracking-[0.14em] uppercase text-[#5fb4ff]'>
@@ -151,14 +151,14 @@ const Pre = ({ children }: { children?: ReactNode }): ReactNode => {
   }
 
   return (
-    <pre className='my-5 p-4 rounded-xl border border-line bg-[rgba(6,7,9,0.6)] overflow-x-auto font-mono text-[12.5px] leading-[1.5] text-[rgba(244,244,243,0.86)] [&>code]:p-0 [&>code]:bg-transparent [&>code]:text-inherit'>
+    <pre className='my-5 p-4 rounded-xl border border-line bg-[rgba(6,7,9,0.6)] overflow-x-auto font-mono text-[12.5px] leading-[1.5] text-[rgba(233, 237, 247,0.86)] [&>code]:p-0 [&>code]:bg-transparent [&>code]:text-inherit'>
       {children}
     </pre>
   );
 };
 
 const P = ({ children }: { children?: ReactNode }) => (
-  <p className='my-4 text-[14.5px] leading-[1.7] text-[rgba(244,244,243,0.82)]'>
+  <p className='my-4 text-[14.5px] leading-[1.7] text-[rgba(233, 237, 247,0.82)]'>
     {children}
   </p>
 );
@@ -191,7 +191,7 @@ const Callout = ({ children }: { children: ReactNode }): ReactNode => {
     !isValidElement<{ children?: ReactNode }>(titleNode)
   ) {
     return (
-      <blockquote className='my-5 pl-4 border-l-2 border-accent/50 text-[rgba(244,244,243,0.72)] [&>p]:my-2 [&>p]:italic'>
+      <blockquote className='my-5 pl-4 border-l-2 border-accent/50 text-[rgba(233, 237, 247,0.72)] [&>p]:my-2 [&>p]:italic'>
         {children}
       </blockquote>
     );
@@ -204,7 +204,7 @@ const Callout = ({ children }: { children: ReactNode }): ReactNode => {
       <div className='px-4 py-2.5 border-b border-accent/25 bg-accent/[0.1] font-display font-bold text-[14px] tracking-[-0.01em] text-ink'>
         {titleNode.props.children}
       </div>
-      <div className='px-4 py-3.5 text-[14px] leading-[1.65] text-[rgba(244,244,243,0.82)] [&>p]:my-2 [&>p:first-child]:mt-0 [&>p:last-child]:mb-0 [&>ul]:my-2'>
+      <div className='px-4 py-3.5 text-[14px] leading-[1.65] text-[rgba(233, 237, 247,0.82)] [&>p]:my-2 [&>p:first-child]:mt-0 [&>p:last-child]:mb-0 [&>ul]:my-2'>
         {body}
       </div>
     </div>
@@ -228,7 +228,7 @@ const components: MDXComponents = {
     </h3>
   ),
   h4: ({ children }) => (
-    <h4 className='mt-6 mb-2 text-[15px] font-semibold tracking-[-0.01em] text-[rgba(244,244,243,0.92)]'>
+    <h4 className='mt-6 mb-2 text-[15px] font-semibold tracking-[-0.01em] text-[rgba(233, 237, 247,0.92)]'>
       {children}
     </h4>
   ),
@@ -246,12 +246,12 @@ const components: MDXComponents = {
   strong: Strong,
   em: ({ children }) => <em className='italic'>{children}</em>,
   ul: ({ children }) => (
-    <ul className='my-4 pl-5 list-disc marker:text-faint text-[14.5px] leading-[1.7] text-[rgba(244,244,243,0.82)] [&_ul]:my-1.5'>
+    <ul className='my-4 pl-5 list-disc marker:text-faint text-[14.5px] leading-[1.7] text-[rgba(233, 237, 247,0.82)] [&_ul]:my-1.5'>
       {children}
     </ul>
   ),
   ol: ({ children }) => (
-    <ol className='my-4 pl-5 list-decimal marker:text-faint text-[14.5px] leading-[1.7] text-[rgba(244,244,243,0.82)]'>
+    <ol className='my-4 pl-5 list-decimal marker:text-faint text-[14.5px] leading-[1.7] text-[rgba(233, 237, 247,0.82)]'>
       {children}
     </ol>
   ),
@@ -298,7 +298,7 @@ const components: MDXComponents = {
     </th>
   ),
   td: ({ children }) => (
-    <td className='px-3.5 py-2.5 border-b border-line align-middle text-[rgba(244,244,243,0.8)] [&_code]:whitespace-nowrap'>
+    <td className='px-3.5 py-2.5 border-b border-line align-middle text-[rgba(233, 237, 247,0.8)] [&_code]:whitespace-nowrap'>
       {children}
     </td>
   ),

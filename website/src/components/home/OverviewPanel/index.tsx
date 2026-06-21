@@ -10,7 +10,7 @@ const OverviewPanelComponent = ({
   onOpenPaper: () => void;
 }) => (
   <div className='flex flex-col min-w-0 h-full max-[920px]:h-auto'>
-    <p className='mx-1 mb-9 text-[16px] leading-[1.6] font-semibold text-[rgba(244,244,243,0.78)]'>
+    <p className='mx-1 mb-9 text-[16px] leading-[1.6] font-semibold text-[rgba(233, 237, 247,0.78)]'>
       Blue Spec runs on Node.js, you use whatever stack you want.
     </p>
 
@@ -35,7 +35,7 @@ const OverviewPanelComponent = ({
               <item.Icon className='size-[22px] shrink-0 text-accent' />
               {item.title}
             </h3>
-            <p className='mt-3.5 m-0 text-[13px] leading-[1.55] text-[rgba(244,244,243,0.72)]'>
+            <p className='mt-3.5 m-0 text-[13px] leading-[1.55] text-[rgba(233, 237, 247,0.72)]'>
               {item.lead}
             </p>
             <p className='mt-3 m-0 text-[13px] italic font-medium leading-[1.55] text-muted'>

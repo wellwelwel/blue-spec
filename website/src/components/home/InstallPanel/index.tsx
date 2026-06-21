@@ -46,7 +46,7 @@ const InstallPanelComponent = ({
           className={`flex items-center gap-3 p-[13px_14px] rounded-[14px] border text-left cursor-pointer transition-[background-color,border-color,color] duration-200 ease-out focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 ${
             selectedFromModal
               ? 'text-ink border-accent/50 bg-accent/10'
-              : 'text-muted border-line bg-card hover:bg-card-hover hover:border-white/[0.16] hover:text-ink'
+              : 'text-[rgba(233,237,247,0.78)] border-line bg-card hover:bg-card-hover hover:border-white/[0.16] hover:text-ink'
           }`}
         >
           <span className='shrink-0 size-5 flex items-center justify-center [&>svg]:size-5'>
@@ -58,7 +58,7 @@ const InstallPanelComponent = ({
           </span>
           <IconSwap
             on={selectedFromModal}
-            className={`shrink-0 [&_svg]:size-[18px] ${selectedFromModal ? 'text-accent' : 'text-faint'}`}
+            className={`shrink-0 [&_svg]:size-[18px] ${selectedFromModal ? 'text-accent' : 'text-[rgba(233,237,247,0.55)]'}`}
             active={<LuCircleCheckBig />}
             inactive={<LuPlus />}
           />

@@ -216,7 +216,7 @@ const Home = (): ReactNode => {
                   className={`relative z-[1] inline-flex items-center justify-center gap-1.5 px-3.5 py-[7px] rounded-full text-[14px] font-semibold tracking-[-0.01em] whitespace-nowrap cursor-pointer transition-colors duration-200 hover:text-ink max-[920px]:flex-1 max-[920px]:after:absolute max-[920px]:after:inset-x-3.5 max-[920px]:after:h-0.5 max-[920px]:after:rounded-full max-[920px]:after:-bottom-4 max-[600px]:after:-bottom-2.5 ${
                     active === tab.id
                       ? 'text-ink max-[920px]:after:bg-[#005eff]'
-                      : 'text-[rgba(244,244,243,0.62)]'
+                      : 'text-[rgba(233, 237, 247,0.62)]'
                   }`}
                 >
                   {tab.label}
@@ -226,7 +226,7 @@ const Home = (): ReactNode => {
 
             <div className='flex items-center justify-end gap-1.5'>
               <a
-                className='inline-flex items-center gap-1.5 pl-3.5 pr-3 py-[7px] rounded-full text-[14px] font-semibold tracking-[-0.01em] whitespace-nowrap no-underline text-[rgba(244,244,243,0.62)] transition-colors duration-200 ease-out hover:text-ink [&>svg]:size-3.5 [&>svg]:opacity-70'
+                className='inline-flex items-center gap-1.5 pl-3.5 pr-3 py-[7px] rounded-full text-[14px] font-semibold tracking-[-0.01em] whitespace-nowrap no-underline text-[rgba(233, 237, 247,0.62)] transition-colors duration-200 ease-out hover:text-ink [&>svg]:size-3.5 [&>svg]:opacity-70'
                 href='/docs'
               >
                 Docs
@@ -355,7 +355,7 @@ const Home = (): ReactNode => {
                     <span className='size-[6px] rounded-full bg-white mr-[9px]' />
                     {feature.chip}
                   </span>
-                  <p className='text-[clamp(14px,1.35vw,16px)] font-normal leading-[1.55] tracking-[-0.01em] text-[rgba(244,244,243,0.92)] [text-shadow:0_1px_12px_rgba(0,0,0,0.45)]'>
+                  <p className='text-[clamp(14px,1.35vw,16px)] font-normal leading-[1.55] tracking-[-0.01em] text-[rgba(233, 237, 247,0.92)] [text-shadow:0_1px_12px_rgba(0,0,0,0.45)]'>
                     {feature.kicker}
                   </p>
                 </div>
@@ -364,7 +364,7 @@ const Home = (): ReactNode => {
                   key={`title-${active}`}
                   className='bs-fade-in flex flex-col gap-[10px]'
                 >
-                  <span className='font-mono text-[12px] tracking-[0.18em] uppercase text-[rgba(244,244,243,0.62)]'>
+                  <span className='font-mono text-[12px] tracking-[0.18em] uppercase text-[rgba(233, 237, 247,0.62)]'>
                     {feature.eyebrow}
                   </span>
                   <h1 className='font-display font-black text-[clamp(32px,4.4vw,48px)] leading-[1.5] tracking-[-0.02em] m-0'>

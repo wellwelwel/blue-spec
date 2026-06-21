@@ -45,7 +45,7 @@ const UsagePanelComponent = ({
             aria-label={`Next: ${next.phase.title}`}
           >
             Next:{' '}
-            <span className='font-semibold text-[rgba(244,244,243,0.82)] group-hover:text-ink'>
+            <span className='font-semibold text-[rgba(233, 237, 247,0.82)] group-hover:text-ink'>
               {next.phase.title}
             </span>
             <LuArrowDown className='transition-transform duration-200 group-hover:translate-y-0.5' />

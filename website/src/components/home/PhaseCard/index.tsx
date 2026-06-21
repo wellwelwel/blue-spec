@@ -30,7 +30,7 @@ export const PhaseCard = ({
           className='absolute inset-x-0 bottom-0 h-[72px] [background:linear-gradient(to_top,rgba(4,8,22,0.85),transparent)]'
           aria-hidden
         />
-        <span className='absolute top-3.5 left-4 font-mono text-[10px] tracking-[0.12em] uppercase text-[rgba(244,244,243,0.78)] [text-shadow:0_1px_4px_rgba(0,0,0,0.7)]'>
+        <span className='absolute top-3.5 left-4 font-mono text-[10px] tracking-[0.12em] uppercase text-[rgba(233, 237, 247,0.78)] [text-shadow:0_1px_4px_rgba(0,0,0,0.7)]'>
           {phase.no}
         </span>
         <span className='absolute -bottom-[10px] left-4 z-[1] flex items-center justify-center size-[52px] rounded-[15px] border border-accent/40 bg-accent text-ink [box-shadow:0_12px_24px_-6px_rgba(0,0,0,0.7),0_4px_8px_-2px_rgba(0,0,0,0.5)] [&>svg]:size-[26px]'>
@@ -47,7 +47,7 @@ export const PhaseCard = ({
             {stage}
           </span>
         </div>
-        <p className='mt-2.5 m-0 text-[13.5px] leading-[1.55] text-[rgba(244,244,243,0.72)]'>
+        <p className='mt-2.5 m-0 text-[13.5px] leading-[1.55] text-[rgba(233, 237, 247,0.72)]'>
           {phase.desc}
         </p>
       </div>
