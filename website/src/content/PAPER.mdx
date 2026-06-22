@@ -106,13 +106,13 @@ The rest of the document develops eight named pillars. They are the parts a read
 
 SDH structures the work as a five-phase defensive lifecycle (Table 3). Each phase is framed around defense, each builds on the previous, and the phases follow real Blue Team activity: establish policy, detect, triage, remediate, verify.
 
-| #   | Phase   | Blue Team verb | Reads                                     | Writes                                                | Key invariant                                                                         |
-| --- | ------- | -------------- | ----------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| 1   | charter | policy         | the project, or the user's description    | the charter                                           | Principles carry the risk they prevent, in plain language.                            |
-| 2   | detect  | detect         | the user's code                           | the detect map                                        | Detection, not invention. Record only what the code supports.                         |
-| 3   | plan    | triage         | the detect map                            | the defense plan                                      | Plan never reads code. It works only from what detect mapped.                         |
-| 4   | harden  | remediate      | the defense plan, and the code it touches | the code, and the hardening record                    | The only phase that changes code. One fix at a time, confirmed first.                 |
-| 5   | verify  | verify         | the code, and the hardening record        | the verification report, and closure across the chain | Verification is the confrontation of code against record, statically. Never softened. |
+| #   | Phase   | Blue Team verb | Reads                                            | Writes                                                | Key invariant                                                                         |
+| --- | ------- | -------------- | ------------------------------------------------ | ----------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| 1   | charter | policy         | the project, and the user's description if given | the charter                                           | Principles carry the risk they prevent, in plain language.                            |
+| 2   | detect  | detect         | the user's code                                  | the detect map                                        | Detection, not invention. Record only what the code supports.                         |
+| 3   | plan    | triage         | the detect map                                   | the defense plan                                      | Plan never reads code. It works only from what detect mapped.                         |
+| 4   | harden  | remediate      | the defense plan, and the code it touches        | the code, and the hardening record                    | The only phase that changes code. One fix at a time, confirmed first.                 |
+| 5   | verify  | verify         | the code, and the hardening record               | the verification report, and closure across the chain | Verification is the confrontation of code against record, statically. Never softened. |
 
 **Table 3.** The five phases: what each reads, what it writes, and its load-bearing invariant.
 
@@ -124,7 +124,7 @@ The separation of duties is the contribution. Because each phase has one job, a 
 
 ### charter (policy)
 
-The charter establishes the project's security principles, the rules every later phase must respect. It is the governing layer, a kind of compile-time check for the project's security posture. Each principle has a clear name, a non-negotiable rule that can be checked against the code, and a `Why:` line stating the risk it prevents, not just the fix. The charter can be authored from the user's own description, or proposed by analyzing the project itself (its manifests, structure, and dependencies) when the user says nothing. It is versioned with semantic versioning: a major bump redefines a principle, a minor adds one, a patch fixes wording. A non-developer should be able to read it and understand both the rule and the risk.
+The charter establishes the project's security principles, the rules every later phase must respect. It is the governing layer, a kind of compile-time check for the project's security posture. Each principle has a clear name, a non-negotiable rule that can be checked against the code, and a `Why:` line stating the risk it prevents, not just the fix. The charter always reads the project itself (its manifests, structure, and dependencies), and a user's description, when given, is direction the reading then broadens beyond what the user named. With no description, the project is the only source. The two add up rather than compete, and the charter records the policy the project should hold to, not the state of its code. It is versioned with semantic versioning: a major bump redefines a principle, a minor adds one, a patch fixes wording. A non-developer should be able to read it and understand both the rule and the risk.
 
 ### detect (detect)
 
@@ -193,13 +193,13 @@ SDH does not replace people, and it does not replace specialized Blue Team tooli
 
 The inversion from `§I`, the intelligence lives in the spec, applies in both directions. For the novice, it is protection: they do not need to know what to ask for, because the spec proposes. For the expert, it is amplification: the same spec lets them aim the flow with precision instead of working against a fixed checklist.
 
-|         | Automatic mode (run with no input)                            | Manual power (run with input)                                          |
-| ------- | ------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| charter | SDH proposes principles by reading the project itself.        | The user describes the project, or hands SDH their own rules.          |
-| detect  | A full scan, after warning about token cost and asking first. | Point detect at exact paths, or describe a single concern to scan for. |
-| plan    | Plan a fix for every finding detect mapped.                   | Plan only the findings touching named paths, or a described worry.     |
-| harden  | Apply every fix, highest priority first.                      | Apply a single fix, named files, or a chosen priority band.            |
-| verify  | Verify every applied control, highest priority first.         | Verify named controls, named paths, or a chosen priority band.         |
+|         | Automatic mode (run with no input)                            | Manual power (run with input)                                                                   |
+| ------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| charter | SDH reads the project itself and proposes principles from it. | A description (or the user's own rules) sets direction, broadened by SDH's read of the project. |
+| detect  | A full scan, after warning about token cost and asking first. | Point detect at exact paths, or describe a single concern to scan for.                          |
+| plan    | Plan a fix for every finding detect mapped.                   | Plan only the findings touching named paths, or a described worry.                              |
+| harden  | Apply every fix, highest priority first.                      | Apply a single fix, named files, or a chosen priority band.                                     |
+| verify  | Verify every applied control, highest priority first.         | Verify named controls, named paths, or a chosen priority band.                                  |
 
 **Table 4.** The same five phases serving the novice (automatic mode) and the expert (manual power).
 
@@ -255,7 +255,7 @@ Every phase works the same way whether the project is brand new or already exist
 >
 > **Non-authoritative adaptivity:** The methodology adapts to the scenario rather than imposing a fixed scope the user must follow. When the user does not know what to say, it reads the environment it was invoked in, generates context, and asks the questions that shape what it does next.
 
-The charter's propose-then-review mode is the clearest case: SDH proposes a safe-by-default charter by analyzing the project, presents it in plain language, and asks the user to review and adjust before anything is written. The user is never required to know what to ask for.
+The charter's propose mode is the clearest case: SDH derives a safe-by-default charter by analyzing the project, asking the user only when a gap actually changes the result, then writes it and presents each principle in plain language with the risk it prevents. The charter is a living document the user reworks by re-running, not a contract gated behind an approval prompt, so it never requires the user to know what to ask for.
 
 This adaptivity shows up as a sensitivity to the shape of the input. The same phase reads its input and chooses a mode.
 
