@@ -5,9 +5,11 @@ import Head from '@docusaurus/Head';
 import { AgentsModal } from '@site/src/components/AgentsModal';
 import { InstallPanel } from '@site/src/components/home/InstallPanel';
 import { OverviewPanel } from '@site/src/components/home/OverviewPanel';
+import { RailTip } from '@site/src/components/home/RailTip';
 import { UsagePanel } from '@site/src/components/home/UsagePanel';
 import { PaperModal } from '@site/src/components/PaperModal';
 import { ParticleWaveField } from '@site/src/components/ParticleWaveField';
+import { PartnersModal } from '@site/src/components/PartnersModal';
 import {
   ALL_AGENTS,
   BACKGROUNDS,
@@ -17,7 +19,13 @@ import {
   STEP_ICONS,
   TABS,
 } from '@site/src/data/home';
-import { useCallback, useLayoutEffect, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import { FaGithub } from 'react-icons/fa6';
 import { LuArrowUpRight, LuWaves } from 'react-icons/lu';
 
@@ -29,6 +37,7 @@ const Home = (): ReactNode => {
   const [typedDone, setTypedDone] = useState(false);
   const [paperOpen, setPaperOpen] = useState(false);
   const [agentsOpen, setAgentsOpen] = useState(false);
+  const [partnersOpen, setPartnersOpen] = useState(false);
   const [hoveredTab, setHoveredTab] = useState<WindowId | null>(null);
   const navRef = useRef<HTMLElement | null>(null);
   const tabRefs = useRef<Record<string, HTMLButtonElement | null>>({});
@@ -57,6 +66,12 @@ const Home = (): ReactNode => {
     };
   }, [hoveredTab, active]);
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('partners') || window.location.hash === '#partners')
+      setPartnersOpen(true);
+  }, []);
+
   const goToStep = useCallback((index: number) => {
     setTypedDone(false);
     setModeIndex(0);
@@ -74,6 +89,7 @@ const Home = (): ReactNode => {
       setUsageStep(0);
       setModeIndex(0);
     }
+
     setActive(id);
   };
 
@@ -244,7 +260,7 @@ const Home = (): ReactNode => {
 
           <div className='grid grid-cols-[56px_1fr] max-[600px]:grid-cols-[1fr] max-[600px]:flex-1'>
             <nav
-              className='border-r border-[#0c155c] max-[600px]:border-r-0 max-[600px]:border max-[600px]:border-[#0c155c] max-[600px]:order-3 max-[600px]:fixed max-[600px]:bottom-[calc(16px+env(safe-area-inset-bottom))] max-[600px]:left-1/2 max-[600px]:-translate-x-1/2 max-[600px]:z-20 max-[600px]:w-auto max-[600px]:rounded-full max-[600px]:bg-[rgba(12,16,28,0.42)] max-[600px]:[backdrop-filter:blur(10px)_saturate(140%)] max-[600px]:[-webkit-backdrop-filter:blur(10px)_saturate(140%)] max-[600px]:[box-shadow:0_8px_30px_-6px_rgba(0,0,0,0.55)]'
+              className='relative z-20 border-r border-[#0c155c] max-[600px]:border-r-0 max-[600px]:border max-[600px]:border-[#0c155c] max-[600px]:order-3 max-[600px]:fixed max-[600px]:bottom-[calc(16px+env(safe-area-inset-bottom))] max-[600px]:left-1/2 max-[600px]:-translate-x-1/2 max-[600px]:z-20 max-[600px]:w-auto max-[600px]:rounded-full max-[600px]:bg-[rgba(12,16,28,0.42)] max-[600px]:[backdrop-filter:blur(10px)_saturate(140%)] max-[600px]:[-webkit-backdrop-filter:blur(10px)_saturate(140%)] max-[600px]:[box-shadow:0_8px_30px_-6px_rgba(0,0,0,0.55)]'
               aria-label='Sections'
             >
               <div
@@ -256,46 +272,69 @@ const Home = (): ReactNode => {
                       const Icon = STEP_ICONS[index];
 
                       return (
-                        <button
-                          key={step.phase.title}
-                          type='button'
-                          onClick={() => goToStep(index)}
-                          className={`relative flex items-center justify-center size-[22px] border-0 bg-none cursor-pointer transition-colors duration-200 ease-out [&>svg]:size-[19px] hover:text-ink after:absolute after:top-1/2 after:left-1/2 after:size-10 after:-translate-x-1/2 after:-translate-y-1/2 ${
-                            index === usageStep
-                              ? 'bs-rail__item--active text-ink'
-                              : 'text-faint'
-                          }`}
-                          aria-label={`${step.phase.title} (step ${index + 1} of ${PHASE_STEPS.length})`}
-                          aria-current={
-                            index === usageStep ? 'step' : undefined
-                          }
-                        >
-                          <Icon aria-hidden />
-                        </button>
+                        <RailTip key={step.phase.title} tip={step.phase.title}>
+                          <button
+                            type='button'
+                            onClick={() => goToStep(index)}
+                            className={`relative flex items-center justify-center size-[22px] border-0 bg-none cursor-pointer transition-colors duration-200 ease-out [&>svg]:size-[19px] hover:text-ink after:absolute after:top-1/2 after:left-1/2 after:size-10 after:-translate-x-1/2 after:-translate-y-1/2 ${
+                              index === usageStep
+                                ? 'bs-rail__item--active text-ink'
+                                : 'text-[#515664]'
+                            }`}
+                            aria-label={`${step.phase.title} (step ${index + 1} of ${PHASE_STEPS.length})`}
+                            aria-current={
+                              index === usageStep ? 'step' : undefined
+                            }
+                          >
+                            <Icon aria-hidden />
+                          </button>
+                        </RailTip>
                       );
                     })
-                  : RAILS[active].map((item) => (
-                      <button
-                        key={item.label}
-                        type='button'
-                        onClick={
-                          item.action === 'paper'
-                            ? () => setPaperOpen(true)
-                            : item.action === 'agents'
-                              ? () => setAgentsOpen(true)
-                              : undefined
-                        }
-                        className={`relative flex items-center justify-center size-[22px] border-0 bg-none cursor-pointer transition-colors duration-200 ease-out [&>svg]:size-[19px] hover:text-ink after:absolute after:top-1/2 after:left-1/2 after:size-10 after:-translate-x-1/2 after:-translate-y-1/2 ${
-                          item.active
-                            ? 'bs-rail__item--active text-ink'
-                            : 'text-faint'
-                        }`}
-                        aria-label={item.label}
-                        aria-current={item.active ? 'page' : undefined}
-                      >
-                        <item.Icon aria-hidden />
-                      </button>
-                    ))}
+                  : RAILS[active].map((item) => {
+                      const railItemClass = `relative flex items-center justify-center size-[22px] border-0 bg-none cursor-pointer transition-colors duration-200 ease-out [&>svg]:size-[19px] hover:text-ink after:absolute after:top-1/2 after:left-1/2 after:size-10 after:-translate-x-1/2 after:-translate-y-1/2 ${
+                        item.active
+                          ? 'bs-rail__item--active text-ink'
+                          : 'text-[#515664]'
+                      }`;
+
+                      if (item.href)
+                        return (
+                          <RailTip key={item.label} tip={item.tip}>
+                            <a
+                              href={item.href}
+                              target='_blank'
+                              rel='noreferrer'
+                              className={railItemClass}
+                              aria-label={item.label}
+                            >
+                              <item.Icon aria-hidden />
+                            </a>
+                          </RailTip>
+                        );
+
+                      return (
+                        <RailTip key={item.label} tip={item.tip}>
+                          <button
+                            type='button'
+                            onClick={
+                              item.action === 'paper'
+                                ? () => setPaperOpen(true)
+                                : item.action === 'agents'
+                                  ? () => setAgentsOpen(true)
+                                  : item.action === 'partners'
+                                    ? () => setPartnersOpen(true)
+                                    : undefined
+                            }
+                            className={railItemClass}
+                            aria-label={item.label}
+                            aria-current={item.active ? 'page' : undefined}
+                          >
+                            <item.Icon aria-hidden />
+                          </button>
+                        </RailTip>
+                      );
+                    })}
               </div>
             </nav>
 
@@ -386,6 +425,10 @@ const Home = (): ReactNode => {
         agents={ALL_AGENTS}
         onSelect={setSelected}
         onClose={() => setAgentsOpen(false)}
+      />
+      <PartnersModal
+        open={partnersOpen}
+        onClose={() => setPartnersOpen(false)}
       />
     </div>
   );

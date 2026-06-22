@@ -34,7 +34,7 @@ export const AgentButton = ({
     </span>
     <IconSwap
       on={on}
-      className={`shrink-0 [&_svg]:size-[18px] ${on ? 'text-accent' : 'text-[rgba(233,237,247,0.55)]'}`}
+      className={`shrink-0 [&_svg]:size-[18px] ${on ? 'text-accent' : 'text-[#888c99]'}`}
       active={<LuCircleCheckBig />}
       inactive={<LuCircle />}
     />

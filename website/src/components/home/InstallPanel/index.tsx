@@ -58,7 +58,7 @@ const InstallPanelComponent = ({
           </span>
           <IconSwap
             on={selectedFromModal}
-            className={`shrink-0 [&_svg]:size-[18px] ${selectedFromModal ? 'text-accent' : 'text-[rgba(233,237,247,0.55)]'}`}
+            className={`shrink-0 [&_svg]:size-[18px] ${selectedFromModal ? 'text-accent' : 'text-[#888c99]'}`}
             active={<LuCircleCheckBig />}
             inactive={<LuPlus />}
           />

@@ -5,6 +5,8 @@ import {
   LuBlocks,
   LuBookOpen,
   LuBrain,
+  LuHeart,
+  LuHeartHandshake,
   LuHouse,
   LuLayoutGrid,
   LuListChecks,
@@ -305,25 +307,43 @@ export const HIGHLIGHTS: {
 
 export type RailItem = {
   label: string;
+  tip: string;
   active: boolean;
   Icon: ComponentType;
-  action?: 'paper' | 'agents';
+  action?: 'paper' | 'agents' | 'partners';
+  href?: string;
 };
 
 export const RAILS: Record<'overview' | 'install', RailItem[]> = {
   overview: [
-    { label: 'Home', active: true, Icon: LuHouse },
+    { label: 'Home', tip: 'Overview', active: true, Icon: LuHouse },
     {
       label: 'What is Security-Driven Hardening',
+      tip: 'What is SDH',
       active: false,
       Icon: LuBookOpen,
       action: 'paper',
     },
+    {
+      label: 'Become a partner',
+      tip: 'Become a partner',
+      active: false,
+      Icon: LuHeartHandshake,
+      action: 'partners',
+    },
+    {
+      label: 'Sponsor on GitHub',
+      tip: 'Sponsor on GitHub',
+      active: false,
+      Icon: LuHeart,
+      href: 'https://github.com/sponsors/wellwelwel',
+    },
   ],
   install: [
-    { label: 'Install', active: true, Icon: LuPackage },
+    { label: 'Install', tip: 'Install', active: true, Icon: LuPackage },
     {
       label: 'All agents',
+      tip: 'All agents',
       active: false,
       Icon: LuLayoutGrid,
       action: 'agents',

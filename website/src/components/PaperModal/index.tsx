@@ -387,7 +387,7 @@ export const PaperModal = ({
             type='button'
             onClick={onClose}
             aria-label='Close'
-            className='relative inline-flex items-center justify-center size-9 -mr-1.5 rounded-full text-muted cursor-pointer transition-[color,background-color] duration-200 ease-out hover:bg-white/[0.08] hover:text-ink after:absolute after:top-1/2 after:left-1/2 after:size-10 after:-translate-x-1/2 after:-translate-y-1/2 [&>svg]:size-[18px]'
+            className='relative inline-flex items-center justify-center size-9 -mr-1.5 rounded-full text-[#9499a5] cursor-pointer transition-[color,background-color] duration-200 ease-out hover:bg-white/[0.08] hover:text-ink after:absolute after:top-1/2 after:left-1/2 after:size-10 after:-translate-x-1/2 after:-translate-y-1/2 [&>svg]:size-[18px]'
           >
             <LuX />
           </button>

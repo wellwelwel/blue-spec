@@ -90,11 +90,17 @@ Please check the [**SECURITY.md**](https://github.com/wellwelwel/blue-spec/blob/
 
 ## Acknowledgements
 
-### Sponsors
+### Partners
+
+> Help **Blue Spec** grow by [**becoming a partner**](https://bluespec.weslley.io/?partners) 🖖
+
+### Supporters
 
 Really thanks to everyone who has supported and keeps supporting my work.
 
 [![Sponsors](https://wellwelwel.github.io/wellwelwel/sponsors.svg?v=1)](https://github.com/sponsors/wellwelwel)
+
+> Support **Blue Spec** by [**becoming a sponsor**](https://github.com/sponsors/wellwelwel) too ✨
 
 ---
 
