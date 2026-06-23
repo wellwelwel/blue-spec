@@ -509,6 +509,12 @@ div[class*='codeBlockContainer'] {
   box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.9);
 }
 
+/* Word wrap is always on; the toggle button is swizzled away. */
+.theme-code-block pre code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
 .markdown table {
   display: table;
   width: 100%;
@@ -559,7 +565,7 @@ div[class*='codeBlockContainer'] {
 
 .theme-admonition-tip,
 .alert--success {
-  --ifm-alert-background-color: rgba(0, 94, 255, 0.08);
+  --ifm-alert-background-color: rgba(0, 94, 255, 0.25);
   --ifm-alert-background-color-highlight: rgba(0, 94, 255, 0.12);
   --ifm-alert-border-color: rgba(0, 94, 255, 0.55);
 }
@@ -573,21 +579,21 @@ div[class*='codeBlockContainer'] {
 
 .theme-admonition-warning,
 .alert--warning {
-  --ifm-alert-background-color: rgba(31, 123, 255, 0.08);
-  --ifm-alert-background-color-highlight: rgba(31, 123, 255, 0.12);
-  --ifm-alert-border-color: rgba(31, 123, 255, 0.5);
+  --ifm-alert-background-color: rgba(95, 26, 209, 0.25);
+  --ifm-alert-background-color-highlight: rgba(95, 26, 209, 0.18);
+  --ifm-alert-border-color: rgba(95, 26, 209, 0.6);
 }
 
 .theme-admonition-note,
 .alert--secondary {
-  --ifm-alert-background-color: rgba(168, 187, 219, 0.06);
+  --ifm-alert-background-color: rgba(94, 108, 121, 0.25);
   --ifm-alert-background-color-highlight: rgba(168, 187, 219, 0.1);
   --ifm-alert-border-color: rgba(168, 187, 219, 0.32);
 }
 
 .theme-admonition-danger,
 .alert--danger {
-  --ifm-alert-background-color: rgba(3, 55, 145, 0.18);
+  --ifm-alert-background-color: rgba(3, 55, 145, 0.25);
   --ifm-alert-background-color-highlight: rgba(3, 55, 145, 0.26);
   --ifm-alert-border-color: rgba(31, 123, 255, 0.65);
 }
