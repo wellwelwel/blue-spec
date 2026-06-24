@@ -1,6 +1,6 @@
 ---
 name: interface
-description: Design engineering principles for making interfaces feel polished. Use when building UI components, reviewing frontend code, implementing animations, hover states, shadows, borders, typography, micro-interactions, enter/exit animations, or any visual detail work. Triggers on UI polish, design details, "make it feel better", "feels off", stagger animations, border radius, optical alignment, font smoothing, tabular numbers, image outlines, box shadows.
+description: Design engineering principles for making interfaces feel polished. Use when building UI components, reviewing frontend code, implementing animations, hover states, shadows, borders, typography, micro-interactions, enter/exit animations, or any visual detail work. Triggers on UI polish, design details, "make it feel better", "feels off", stagger animations, border radius, optical alignment, font smoothing, tabular numbers, box shadows.
 metadata:
   internal: true
 ---
@@ -11,12 +11,12 @@ Great interfaces rarely come from a single thing. It's usually a collection of s
 
 ## Quick Reference
 
-| Category                      | When to Use                                                          |
-| ----------------------------- | -------------------------------------------------------------------- |
-| [Typography](typography.md)   | Text wrapping, font smoothing, tabular numbers                       |
-| [Surfaces](surfaces.md)       | Border radius, optical alignment, shadows, image outlines, hit areas |
-| [Animations](animations.md)   | Interruptible animations, enter/exit transitions, icon animations    |
-| [Performance](performance.md) | Transition specificity, `will-change` usage                          |
+| Category                      | When to Use                                                       |
+| ----------------------------- | ----------------------------------------------------------------- |
+| [Typography](typography.md)   | Text wrapping, font smoothing, tabular numbers                    |
+| [Surfaces](surfaces.md)       | Border radius, optical alignment, shadows, hit areas              |
+| [Animations](animations.md)   | Interruptible animations, enter/exit transitions, icon animations |
+| [Performance](performance.md) | Transition specificity, `will-change` usage                       |
 
 ## Core Principles
 
@@ -60,23 +60,19 @@ Use `font-variant-numeric: tabular-nums` for any dynamically updating numbers to
 
 Use `text-wrap: balance` on headings. Use `text-wrap: pretty` for body text to avoid orphans.
 
-### 11. Image Outlines
-
-Add a subtle `1px` outline with low opacity to images for consistent depth. The color must be pure black in light mode (`rgba(0, 0, 0, 0.1)`) and pure white in dark mode (`rgba(255, 255, 255, 0.1)`) — never a near-black like slate, zinc, or any tinted neutral. A tinted outline picks up the surface color underneath it and reads as dirt on the image edge.
-
-### 12. Skip Animation on Page Load
+### 11. Skip Animation on Page Load
 
 Use `initial={false}` on `AnimatePresence` to prevent enter animations on first render. Verify it doesn't break intentional entrance animations.
 
-### 13. Never Use `transition: all`
+### 12. Never Use `transition: all`
 
 Always specify exact properties: `transition-property: scale, opacity`. Tailwind's `transition-transform` covers `transform, translate, scale, rotate`.
 
-### 14. Use `will-change` Sparingly
+### 13. Use `will-change` Sparingly
 
 Only for `transform`, `opacity`, `filter` — properties the GPU can composite. Never use `will-change: all`. Only add when you notice first-frame stutter.
 
-### 15. Minimum Hit Area
+### 14. Minimum Hit Area
 
 Interactive elements need at least 40×40px hit area. Extend with a pseudo-element if the visible element is smaller. Never let hit areas of two elements overlap.
 
@@ -127,7 +123,6 @@ Rows should cite the specific file and the specific property that changed when i
 - [ ] Dynamic numbers use tabular-nums
 - [ ] Font smoothing is applied
 - [ ] Headings use text-wrap: balance
-- [ ] Images have subtle outlines
 - [ ] AnimatePresence uses `initial={false}` for default-state elements
 - [ ] No `transition: all` — only specific properties
 - [ ] `will-change` only on transform/opacity/filter, never `all`
@@ -136,7 +131,7 @@ Rows should cite the specific file and the specific property that changed when i
 ## Reference Files
 
 - [typography.md](typography.md) — Text wrapping, font smoothing, tabular numbers
-- [surfaces.md](surfaces.md) — Border radius, optical alignment, shadows, image outlines
+- [surfaces.md](surfaces.md) — Border radius, optical alignment, shadows
 - [animations.md](animations.md) — Interruptible animations, enter/exit transitions, icon animations
 - [performance.md](performance.md) — Transition specificity, `will-change` usage
 

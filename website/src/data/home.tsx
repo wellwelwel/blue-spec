@@ -325,18 +325,11 @@ export const RAILS: Record<'overview' | 'install', RailItem[]> = {
       action: 'paper',
     },
     {
-      label: 'Become a partner',
-      tip: 'Become a partner',
+      label: 'Become a Sponsor',
+      tip: 'Become a Sponsor',
       active: false,
       Icon: LuHeartHandshake,
       action: 'partners',
-    },
-    {
-      label: 'Sponsor on GitHub',
-      tip: 'Sponsor on GitHub',
-      active: false,
-      Icon: LuHeart,
-      href: 'https://github.com/sponsors/wellwelwel',
     },
   ],
   install: [
