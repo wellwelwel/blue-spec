@@ -1,11 +1,13 @@
 import type { ReactNode } from 'react';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { FaGithub, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa6';
+import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa6';
+import { GoHeartFill } from 'react-icons/go';
 import {
+  LuBuilding2,
   LuCheck,
-  LuContact,
-  LuHeartHandshake,
+  LuMail,
   LuSend,
+  LuUser,
   LuX,
 } from 'react-icons/lu';
 
@@ -64,9 +66,9 @@ const SOCIALS = [
     Icon: FaInstagram,
   },
   {
-    name: 'YouTube',
-    url: 'https://www.youtube.com/@weslleyio',
-    Icon: FaYoutube,
+    name: 'GitHub Sponsors',
+    url: 'https://github.com/sponsors/wellwelwel',
+    Icon: GoHeartFill,
   },
 ] as const;
 
@@ -87,10 +89,10 @@ const groupClass =
   'flex items-stretch overflow-hidden rounded-xl border border-line bg-card transition-[border-color,background-color,box-shadow] duration-200 ease-out hover:border-white/[0.18] focus-within:border-accent focus-within:bg-card-hover focus-within:[box-shadow:0_0_0_3px_rgba(0,94,255,0.18)]';
 
 const groupLabelClass =
-  'flex w-[96px] shrink-0 items-center justify-end border-r border-line bg-white/[0.03] px-3.5 text-[13px] font-semibold tracking-[-0.005em] text-[rgba(233,237,247,0.7)]';
+  'flex w-12 shrink-0 items-center justify-center border-r border-line bg-white/[0.03] text-[#9499a5] [&>svg]:size-[18px]';
 
 const groupInputClass =
-  'w-full bg-transparent px-3.5 py-2 [font-family:var(--font-mono)] font-normal text-[16px] leading-[1.5] text-ink placeholder:[font-family:var(--font-mono)] placeholder:text-muted outline-none';
+  'w-full bg-transparent px-3.5 py-2 [font-family:var(--font-mono)] font-semibold text-[16px] leading-[1.5] text-ink placeholder:[font-family:var(--font-mono)] placeholder:text-muted outline-none';
 
 const labelClass =
   'flex flex-col gap-2 text-[13px] font-semibold tracking-[-0.005em] text-ink';
@@ -110,13 +112,18 @@ const Field = ({
 
 const InlineField = ({
   label,
+  icon,
   children,
 }: {
   label: string;
+  icon: ReactNode;
   children: ReactNode;
 }): ReactNode => (
   <label className={groupClass}>
-    <span className={groupLabelClass}>{label}</span>
+    <span className={groupLabelClass} aria-hidden>
+      {icon}
+    </span>
+    <span className='sr-only'>{label}</span>
     {children}
   </label>
 );
@@ -202,7 +209,7 @@ const TypeChips = ({
             role='radio'
             aria-checked={on}
             onClick={() => onChange(type)}
-            className={`relative z-[1] flex-1 rounded-lg px-3.5 py-1.5 text-[14px] font-medium tracking-[-0.01em] whitespace-nowrap transition-colors duration-200 ease-out focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 ${
+            className={`relative z-[1] flex-1 rounded-lg px-3.5 py-1.5 text-[14px] font-bold tracking-[-0.01em] whitespace-nowrap transition-colors duration-200 ease-out focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 ${
               on ? 'text-ink' : 'text-[rgba(233,237,247,0.7)] hover:text-ink'
             }`}
           >
@@ -364,7 +371,7 @@ export const PartnersModal = ({
 
   return (
     <div
-      className='bs-modal-backdrop fixed inset-0 z-[100] flex items-center justify-center p-[clamp(12px,4vw,48px)] bg-[rgba(2,4,12,0.72)] [backdrop-filter:blur(6px)] [-webkit-backdrop-filter:blur(6px)]'
+      className='bs-modal-backdrop fixed inset-0 z-[100] flex items-center justify-center p-[clamp(12px,2.5vw,28px)] bg-[rgba(2,4,12,0.72)] [backdrop-filter:blur(6px)] [-webkit-backdrop-filter:blur(6px)]'
       onClick={onClose}
       role='presentation'
     >
@@ -375,84 +382,55 @@ export const PartnersModal = ({
         aria-label='Partner with Weslley Araújo'
         tabIndex={-1}
         onClick={(event) => event.stopPropagation()}
-        className='bs-modal-panel relative flex flex-col w-full max-w-[560px] max-h-full rounded-[20px] border border-[#0c155c] bg-[#0a0f1f] overflow-hidden [box-shadow:0_40px_120px_-30px_rgba(0,0,0,0.8)] outline-none'
+        className='bs-modal-panel relative flex flex-col w-full max-w-[1240px] max-h-full rounded-[28px] bg-[#0a0f1f] bg-cover bg-center overflow-hidden [box-shadow:0_40px_120px_-30px_rgba(0,0,0,0.8)] outline-none'
+        style={{
+          backgroundImage: 'url(/img/bg-partner.jpeg)',
+        }}
       >
-        <div className='flex items-center justify-between gap-4 shrink-0 px-[clamp(20px,3vw,32px)] py-4 border-b border-[#0c155c] bg-[#0a0f1f]'>
-          <span className='inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.14em] uppercase text-muted [&>svg]:size-3.5 [&>svg]:text-accent'>
-            <LuHeartHandshake aria-hidden />
-            Partnerships
-          </span>
-          <button
-            type='button'
-            onClick={onClose}
-            aria-label='Close'
-            className='relative inline-flex items-center justify-center size-9 -mr-1.5 rounded-full text-[#9499a5] transition-[color,background-color] duration-200 ease-out hover:bg-white/[0.08] hover:text-ink after:absolute after:top-1/2 after:left-1/2 after:size-10 after:-translate-x-1/2 after:-translate-y-1/2 [&>svg]:size-[18px]'
-          >
-            <LuX />
-          </button>
-        </div>
+        <div
+          className='pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(6,9,20,0.25)_0%,rgba(6,9,20,0.18)_45%,rgba(6,9,20,0.4)_100%)]'
+          aria-hidden
+        />
 
-        <div className='flex flex-col min-h-0 overflow-y-auto px-[clamp(20px,3vw,32px)] py-[clamp(20px,3vw,28px)]'>
+        <button
+          type='button'
+          onClick={onClose}
+          aria-label='Close'
+          className='absolute top-3 right-3 z-[2] inline-flex items-center justify-center size-9 rounded-full text-[#9499a5] bg-black/30 border border-white/[0.12] [backdrop-filter:blur(8px)] [-webkit-backdrop-filter:blur(8px)] transition-[color,background-color] duration-200 ease-out hover:bg-black/50 hover:text-ink [&>svg]:size-[18px]'
+        >
+          <LuX />
+        </button>
+
+        <div className='relative flex flex-1 flex-col min-h-0 overflow-y-auto'>
           {sent ? (
-            <SuccessState onReset={() => setSent(false)} />
+            <div className='px-[clamp(20px,3vw,32px)] py-[clamp(20px,3vw,28px)]'>
+              <SuccessState onReset={() => setSent(false)} />
+            </div>
           ) : (
-            <>
-              <div className='bs-fade-in flex flex-col gap-2'>
-                <h2 className='font-display font-bold text-[clamp(22px,3vw,26px)] leading-[1.2] tracking-[-0.02em] text-ink m-0'>
-                  Partner with{' '}
-                  <span className='relative inline-block whitespace-nowrap [text-shadow:0_2px_4px_rgba(0,0,0,0.6)] before:absolute before:inset-x-[-0.2em] before:bottom-[-0.1em] before:top-[0.05em] before:-z-10 before:bg-[#002767] before:[mask:url(/img/text-brush.svg)_center/100%_100%_no-repeat] before:[transform:rotate(358deg)] before:content-[""]'>
-                    Weslley Araújo
-                  </span>
-                </h2>
-
-                <p className='text-[15px] leading-[1.6] text-[rgba(233,237,247,0.82)] m-0'>
-                  Back the open source work across all my projects. Partners get
-                  an exclusive logo across the repositories and landing pages,
-                  plus a spot on a dedicated partners page.
-                </p>
-
-                <div className='mt-4 flex items-stretch gap-3'>
-                  <div className='relative w-20 shrink-0 self-stretch'>
-                    <img
-                      src='/img/wellwelwel.png'
-                      alt='Weslley Araújo'
-                      loading='lazy'
-                      className='size-full rounded-md object-cover outline outline-1 -outline-offset-1 outline-white/10'
-                    />
-                    <span className='absolute -top-2 -left-2 flex items-center justify-center size-7 rounded-full text-white [background:linear-gradient(180deg,#1f7bff_0%,var(--color-accent)_100%)] [box-shadow:inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.35)] [&>svg]:size-[15px]'>
-                      <LuContact aria-hidden />
-                    </span>
-                  </div>
-                  <div className='flex flex-col gap-2.5 self-center'>
-                    <p className='text-[12px] font-semibold leading-[1.6] text-pretty text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.25)] m-0'>
-                      With over {downloads} downloads across his own projects,
-                      Weslley impacts millions of developers worldwide through
-                      open source. A recognized Microsoft MVP, he specializes in
-                      building for developers and brings the essence of
-                      creativity back to development.
-                    </p>
-                    <div className='flex items-center gap-1'>
-                      {SOCIALS.map(({ name, url, Icon }) => (
-                        <a
-                          key={name}
-                          href={url}
-                          target='_blank'
-                          rel='noopener'
-                          aria-label={name}
-                          className='relative inline-flex items-center justify-center size-7 text-white/70 transition-colors duration-200 ease-out hover:text-white after:absolute after:top-1/2 after:left-1/2 after:size-10 after:-translate-x-1/2 after:-translate-y-1/2 [&>svg]:size-[18px]'
-                        >
-                          <Icon aria-hidden />
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
+            <div className='grid flex-1 gap-7 p-[clamp(24px,4vw,56px)] md:grid-cols-[minmax(0,1fr)_auto]'>
               <form
                 onSubmit={onSubmit}
-                className='bs-fade-in mt-6 flex flex-col gap-4 [animation-delay:0.08s]'
+                className='bs-fade-in relative isolate flex w-full max-w-[480px] flex-col gap-4 self-start overflow-hidden rounded-[18px] border border-white/[0.12] bg-[rgba(10,15,31,0.55)] px-[clamp(18px,2.5vw,26px)] py-[clamp(18px,2.5vw,24px)] [backdrop-filter:blur(24px)_saturate(150%)] [-webkit-backdrop-filter:blur(24px)_saturate(150%)] [box-shadow:inset_0_1px_0_rgba(255,255,255,0.08),0_8px_32px_-12px_rgba(0,0,0,0.5)] [animation-delay:0.08s]'
               >
+                <div
+                  className='pointer-events-none absolute inset-0 -z-10 bg-cover bg-center opacity-[0.025] mix-blend-screen'
+                  style={{
+                    backgroundImage: 'url(/img/bg-partner-texture.jpg)',
+                  }}
+                  aria-hidden
+                />
+                <div className='flex flex-col gap-2'>
+                  <h2 className='font-display font-bold text-[clamp(22px,3vw,26px)] leading-[1.2] tracking-[-0.02em] text-balance text-ink m-0'>
+                    Partner with Weslley Araújo
+                  </h2>
+
+                  <p className='text-[14px] leading-[1.6] text-pretty text-[rgba(233,237,247,0.82)] m-0'>
+                    Back the open source work across all my projects. Partners
+                    get an exclusive logo across the repositories and landing
+                    pages, plus a spot on a dedicated partners page.
+                  </p>
+                </div>
+
                 <input
                   type='text'
                   name='website'
@@ -462,7 +440,7 @@ export const PartnersModal = ({
                   aria-hidden
                 />
 
-                <InlineField label='Name'>
+                <InlineField label='Name' icon={<LuUser />}>
                   <input
                     className={groupInputClass}
                     type='text'
@@ -475,7 +453,7 @@ export const PartnersModal = ({
                   />
                 </InlineField>
 
-                <InlineField label='Email'>
+                <InlineField label='Email' icon={<LuMail />}>
                   <input
                     className={groupInputClass}
                     type='email'
@@ -488,7 +466,7 @@ export const PartnersModal = ({
                   />
                 </InlineField>
 
-                <InlineField label='Company'>
+                <InlineField label='Company' icon={<LuBuilding2 />}>
                   <input
                     className={groupInputClass}
                     type='text'
@@ -552,7 +530,53 @@ export const PartnersModal = ({
                   </span>
                 </button>
               </form>
-            </>
+
+              <aside className='bs-fade-in relative isolate flex flex-col items-center gap-4 overflow-hidden rounded-[18px] border border-white/[0.12] text-center md:rounded-none md:border-0 md:border-l md:border-white/[0.12] md:max-w-[300px] bg-[rgba(10,15,31,0.55)] px-[clamp(18px,2.5vw,28px)] py-[clamp(20px,2.5vw,24px)] [backdrop-filter:blur(20px)_saturate(150%)] [-webkit-backdrop-filter:blur(20px)_saturate(150%)] md:-mt-[clamp(24px,4vw,56px)] md:-mb-[clamp(24px,4vw,56px)] md:-mr-[clamp(24px,4vw,56px)] md:py-[clamp(24px,4vw,56px)] [animation-delay:0.16s]'>
+                <div
+                  className='pointer-events-none absolute inset-0 -z-10 bg-cover bg-center opacity-[0.025] mix-blend-screen'
+                  style={{
+                    backgroundImage: 'url(/img/bg-partner-texture.jpg)',
+                  }}
+                  aria-hidden
+                />
+
+                <div className='flex flex-col items-center gap-4'>
+                  <img
+                    src='/img/wellwelwel.png'
+                    alt='Weslley Araújo'
+                    loading='lazy'
+                    draggable={false}
+                    className='pointer-events-none w-32 shrink-0 select-none object-cover [filter:drop-shadow(0_5px_10px_rgba(2,6,20,0.5))_drop-shadow(0_2px_4px_rgba(0,0,0,0.4))] md:w-55'
+                  />
+
+                  <p className='text-[13px] font-medium leading-[1.6] text-pretty text-[rgba(233,237,247,0.88)] m-0'>
+                    With over{' '}
+                    <span className='font-semibold text-ink tabular-nums'>
+                      {downloads}
+                    </span>{' '}
+                    downloads across his own projects, Weslley impacts millions
+                    of developers worldwide through open source. A recognized
+                    Microsoft MVP, he specializes in building for developers and
+                    brings the essence of creativity back to development.
+                  </p>
+                </div>
+
+                <div className='mt-auto flex items-center justify-center gap-1'>
+                  {SOCIALS.map(({ name, url, Icon }) => (
+                    <a
+                      key={name}
+                      href={url}
+                      target='_blank'
+                      rel='noopener'
+                      aria-label={name}
+                      className='relative inline-flex items-center justify-center size-7 text-[rgba(233,237,247,0.6)] transition-colors duration-200 ease-out hover:text-ink after:absolute after:top-1/2 after:left-1/2 after:size-10 after:-translate-x-1/2 after:-translate-y-1/2 [&>svg]:size-[18px]'
+                    >
+                      <Icon aria-hidden />
+                    </a>
+                  ))}
+                </div>
+              </aside>
+            </div>
           )}
         </div>
       </div>

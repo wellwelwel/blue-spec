@@ -27,6 +27,7 @@ import {
   useState,
 } from 'react';
 import { FaGithub } from 'react-icons/fa6';
+import { GoHeartFill } from 'react-icons/go';
 import { LuArrowUpRight, LuWaves } from 'react-icons/lu';
 
 const Home = (): ReactNode => {
@@ -255,6 +256,14 @@ const Home = (): ReactNode => {
                 <FaGithub aria-hidden />
                 GitHub
               </a>
+              <button
+                type='button'
+                onClick={() => setPartnersOpen(true)}
+                className='inline-flex items-center gap-[9px] pl-4 pr-[18px] py-[9px] rounded-full border border-line bg-card text-ink text-[14px] font-semibold tracking-[-0.01em] cursor-pointer transition-[background-color,border-color] duration-200 ease-out hover:bg-card-hover hover:border-white/[0.18] [&>svg]:size-4 [&>svg]:text-[#db61a2]'
+              >
+                <GoHeartFill aria-hidden />
+                Support
+              </button>
             </div>
           </header>
 
