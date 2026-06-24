@@ -203,7 +203,7 @@ const Home = (): ReactNode => {
                 className='inline-flex items-center gap-2 font-display text-[clamp(18px,1.8vw,23px)] font-extrabold tracking-[-0.02em] leading-none cursor-pointer rounded-md focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4'
               >
                 <LuWaves className='shrink-0 w-[1.05em] h-[1.05em] text-accent' />
-                <span>Blue Spec</span>
+                <span>S-DH Blue Spec</span>
               </button>
             </div>
 
@@ -243,14 +243,18 @@ const Home = (): ReactNode => {
 
             <div className='flex items-center justify-end gap-1.5'>
               <a
-                className='inline-flex items-center gap-1.5 pl-3.5 pr-3 py-[7px] rounded-full text-[14px] font-semibold tracking-[-0.01em] whitespace-nowrap no-underline text-[rgba(233, 237, 247,0.62)] transition-colors duration-200 ease-out hover:text-ink [&>svg]:size-3.5 [&>svg]:opacity-70'
+                className='inline-flex items-center gap-1.5 pl-3.5 pr-3 py-[7px] rounded-full text-[14px] font-semibold tracking-[-0.01em] whitespace-nowrap no-underline text-[rgba(233, 237, 247,0.62)] transition-colors duration-200 ease-out hover:text-ink [&>svg]:size-3.5'
                 href='/docs'
               >
                 Docs
-                <LuArrowUpRight aria-hidden />
+                <LuArrowUpRight
+                  strokeWidth={3}
+                  aria-hidden
+                  className='text-[#0088ff]'
+                />
               </a>
               <a
-                className='inline-flex items-center gap-[9px] pl-4 pr-[18px] py-[9px] rounded-full border border-line bg-card text-ink text-[14px] font-semibold tracking-[-0.01em] no-underline cursor-pointer transition-[background-color,border-color] duration-200 ease-out hover:bg-card-hover hover:border-white/[0.18] [&>svg]:size-4 [&>svg]:text-[#0088ff]'
+                className='inline-flex items-center gap-[9px] pl-4 pr-[18px] py-[9px] rounded-xl border border-line bg-card text-ink text-[14px] font-semibold tracking-[-0.01em] no-underline cursor-pointer transition-[background-color,border-color] duration-200 ease-out hover:bg-card-hover hover:border-accent/50 [&>svg]:size-4 [&>svg]:text-[#0088ff]'
                 href='https://github.com/wellwelwel/blue-spec'
                 target='_blank'
                 rel='noopener'
@@ -261,7 +265,7 @@ const Home = (): ReactNode => {
               <button
                 type='button'
                 onClick={() => setPartnersOpen(true)}
-                className='inline-flex items-center gap-[9px] pl-4 pr-[18px] py-[9px] rounded-full border border-line bg-card text-ink text-[14px] font-semibold tracking-[-0.01em] cursor-pointer transition-[background-color,border-color] duration-200 ease-out hover:bg-card-hover hover:border-white/[0.18] [&>svg]:size-4 [&>svg]:text-[#0088ff]'
+                className='inline-flex items-center gap-[9px] pl-4 pr-[18px] py-[9px] rounded-xl border border-line bg-card text-ink text-[14px] font-semibold tracking-[-0.01em] cursor-pointer transition-[background-color,border-color] duration-200 ease-out hover:bg-card-hover hover:border-accent/50 [&>svg]:size-4 [&>svg]:text-[#0088ff]'
               >
                 <GoHeartFill aria-hidden />
                 Support

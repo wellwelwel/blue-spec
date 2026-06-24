@@ -209,7 +209,7 @@ const TypeChips = ({
             role='radio'
             aria-checked={on}
             onClick={() => onChange(type)}
-            className={`relative z-[1] flex-1 rounded-lg px-3.5 py-1.5 text-[14px] font-bold tracking-[-0.01em] whitespace-nowrap transition-colors duration-200 ease-out focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 ${
+            className={`relative z-[1] flex-1 rounded-lg px-3.5 py-1.5 text-[13px] font-bold tracking-[-0.01em] whitespace-nowrap transition-colors duration-200 ease-out focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 ${
               on ? 'text-ink' : 'text-[rgba(233,237,247,0.7)] hover:text-ink'
             }`}
           >
