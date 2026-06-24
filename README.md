@@ -1,6 +1,6 @@
 <img src="./website/static/img/banner.png" />
 
-# 🌊 Blue Spec: Security-Driven Hardening
+# 🌊 Security-Driven Hardening: Blue Spec
 
 [![Version](https://img.shields.io/npm/v/blue-spec?label=&color=2f7bff&logo=npm&logoColor=white)](https://www.npmjs.com/package/blue-spec)
 [![Docs](https://img.shields.io/badge/Documentation-005eff?logo=docusaurus&logoColor=white)](https://bluespec.weslley.io)

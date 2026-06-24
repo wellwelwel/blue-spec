@@ -154,7 +154,7 @@ const Home = (): ReactNode => {
     <div className='bs-canvas relative min-h-screen m-0 antialiased text-ink bg-[#050a18] font-sans'>
       <Head>
         <title>
-          Blue Spec — Security-Driven Hardening for AI-built software
+          SDH: Blue Spec — Security-Driven Hardening for AI-built software
         </title>
         <html className='bs-canvas-html' lang='en' />
         <body className='bs-canvas-body' />
@@ -167,7 +167,7 @@ const Home = (): ReactNode => {
         <meta property='og:url' content='https://bluespec.weslley.io/' />
         <meta
           property='og:title'
-          content='Blue Spec — Security-Driven Hardening for AI-built software'
+          content='SDH: Blue Spec — Security-Driven Hardening for AI-built software'
         />
         <meta
           property='og:description'
@@ -179,7 +179,7 @@ const Home = (): ReactNode => {
         />
         <meta
           name='twitter:title'
-          content='Blue Spec — Security-Driven Hardening'
+          content='SDH: Blue Spec — Security-Driven Hardening'
         />
         <meta
           name='twitter:description'

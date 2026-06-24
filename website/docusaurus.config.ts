@@ -152,7 +152,7 @@ const config: Config = {
       { name: 'twitter:card', content: 'summary_large_image' },
       {
         name: 'twitter:title',
-        content: 'Blue Spec — Security-Driven Hardening',
+        content: 'SDH: Blue Spec — Security-Driven Hardening',
       },
       {
         name: 'twitter:description',
