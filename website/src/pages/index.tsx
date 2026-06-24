@@ -28,7 +28,7 @@ import {
 } from 'react';
 import { FaStar } from 'react-icons/fa6';
 import { GoHeartFill } from 'react-icons/go';
-import { LuArrowUpRight, LuWaves } from 'react-icons/lu';
+import { LuBookOpen } from 'react-icons/lu';
 
 const Home = (): ReactNode => {
   const [active, setActive] = useState<WindowId>('overview');
@@ -202,7 +202,6 @@ const Home = (): ReactNode => {
                 aria-label='Blue Spec, back to overview'
                 className='inline-flex items-center gap-2 font-display text-[clamp(18px,1.8vw,23px)] font-extrabold tracking-[-0.02em] leading-none cursor-pointer rounded-md focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4'
               >
-                <LuWaves className='shrink-0 w-[1.05em] h-[1.05em] text-accent' />
                 <span>
                   S<span className='text-[#2092ff]'>-</span>DH
                   <span className='text-[#2092ff]'>:</span> Blue Spec
@@ -212,13 +211,13 @@ const Home = (): ReactNode => {
 
             <nav
               ref={navRef}
-              className='relative flex items-center gap-1 rounded-xl border border-line bg-card p-1 max-[920px]:overflow-x-visible max-[920px]:order-3 max-[920px]:w-full max-[920px]:rounded-none max-[920px]:border-0 max-[920px]:bg-transparent max-[920px]:p-0 max-[920px]:pt-3.5 max-[920px]:mt-3.5 max-[920px]:border-t max-[920px]:border-[#0c155c]'
+              className='relative flex items-center gap-1 rounded-xl border border-line bg-card p-1 max-[920px]:order-3 max-[920px]:w-full'
               aria-label='Windows'
               onMouseLeave={() => setHoveredTab(null)}
             >
               {pill && (
                 <span
-                  className='absolute top-1 bottom-1 rounded-lg border border-accent/50 bg-accent/15 transition-[left,width] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] pointer-events-none max-[920px]:hidden'
+                  className='absolute top-1 bottom-1 rounded-lg border border-accent/50 bg-accent/15 transition-[left,width] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] pointer-events-none'
                   style={{ left: pill.left, width: pill.width }}
                   aria-hidden
                 />
@@ -233,9 +232,9 @@ const Home = (): ReactNode => {
                   aria-current={active === tab.id ? 'page' : undefined}
                   onClick={() => goToTab(tab.id)}
                   onMouseEnter={() => setHoveredTab(tab.id)}
-                  className={`relative z-[1] inline-flex items-center justify-center gap-1.5 px-3.5 py-[7px] rounded-lg text-[14px] font-bold tracking-[-0.01em] whitespace-nowrap cursor-pointer transition-colors duration-200 hover:text-ink max-[920px]:flex-1 max-[920px]:rounded-none max-[920px]:after:absolute max-[920px]:after:inset-x-3.5 max-[920px]:after:h-0.5 max-[920px]:after:rounded-full max-[920px]:after:-bottom-4 max-[600px]:after:-bottom-2.5 ${
+                  className={`relative z-[1] inline-flex items-center justify-center gap-1.5 px-3.5 py-[7px] rounded-lg text-[14px] font-bold tracking-[-0.01em] whitespace-nowrap cursor-pointer transition-colors duration-200 hover:text-ink max-[920px]:flex-1 ${
                     active === tab.id
-                      ? 'text-ink max-[920px]:after:bg-[#005eff]'
+                      ? 'text-ink'
                       : 'text-[rgba(233,237,247,0.7)]'
                   }`}
                 >
@@ -244,17 +243,13 @@ const Home = (): ReactNode => {
               ))}
             </nav>
 
-            <div className='flex items-center justify-end gap-1.5'>
+            <div className='flex items-center justify-end gap-1.5 max-[920px]:mt-1.5 max-[920px]:w-full max-[920px]:justify-center'>
               <a
-                className='inline-flex items-center gap-1.5 pl-3.5 pr-3 py-[7px] rounded-full text-[14px] font-semibold tracking-[-0.01em] whitespace-nowrap no-underline text-[rgba(233, 237, 247,0.62)] transition-colors duration-200 ease-out hover:text-ink [&>svg]:size-3.5'
+                className='inline-flex items-center gap-[9px] pl-4 pr-[18px] py-[9px] rounded-xl border border-line bg-card text-ink text-[14px] font-semibold tracking-[-0.01em] no-underline cursor-pointer transition-[background-color,border-color] duration-200 ease-out hover:bg-card-hover hover:border-accent/50 [&>svg]:size-4 [&>svg]:text-[#0088ff]'
                 href='/docs'
               >
+                <LuBookOpen aria-hidden />
                 Docs
-                <LuArrowUpRight
-                  strokeWidth={3}
-                  aria-hidden
-                  className='text-[#0088ff]'
-                />
               </a>
               <a
                 className='inline-flex items-center gap-[9px] pl-4 pr-[18px] py-[9px] rounded-xl border border-line bg-card text-ink text-[14px] font-semibold tracking-[-0.01em] no-underline cursor-pointer transition-[background-color,border-color] duration-200 ease-out hover:bg-card-hover hover:border-accent/50 [&>svg]:size-4 [&>svg]:text-[#0088ff]'
