@@ -16,6 +16,7 @@ const COMMAND_FILES: Record<CommandKey, string> = {
   skills: 'spec/commands/bluespec.skills.md',
   list: 'spec/commands/bluespec.list.md',
   specialize: 'spec/commands/bluespec.specialize.md',
+  prove: 'spec/commands/bluespec.prove.md',
 };
 
 const TEMPLATE_FILES: Record<TemplateKey, string> = {
@@ -25,6 +26,7 @@ const TEMPLATE_FILES: Record<TemplateKey, string> = {
   harden: 'spec/templates/harden-template.md',
   verify: 'spec/templates/verify-template.md',
   specialize: 'spec/templates/specialize-template.md',
+  prove: 'spec/templates/proof-template.md',
 };
 
 const HOOKS_DIR = 'lib/hooks';

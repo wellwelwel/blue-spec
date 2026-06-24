@@ -52,6 +52,7 @@ Once **Blue Spec** is set up in your project, your **AI** agent unlocks a set of
 
 | Command                                                                          | What it does                                                                               |
 | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| [**/bluespec.prove**](https://bluespec.weslley.io/docs/commands/prove)           | Turns each detected finding into a runnable, defense-only proof for responsible disclosure |
 | [**/bluespec.specialize**](https://bluespec.weslley.io/docs/commands/specialize) | Specializes **Blue Spec** in a new security _sub_-skill from articles, exploits, or topics |
 | [**/bluespec.skills**](https://bluespec.weslley.io/docs/commands/skills)         | Loads an on-demand security _sub_-skill                                                    |
 | [**/bluespec.repair**](https://bluespec.weslley.io/docs/commands/repair)         | Repairs **Blue Spec**'s internal tracking                                                  |
@@ -108,3 +109,13 @@ Really thanks to everyone who has supported and keeps supporting my work.
 
 **Blue Spec** is under the [**MIT License**](https://github.com/wellwelwel/blue-spec/blob/main/LICENSE).<br />
 Copyright © 2026-present [**Weslley Araújo**](https://github.com/wellwelwel) and [**contributors**](https://github.com/wellwelwel/blue-spec/graphs/contributors).
+
+> [!IMPORTANT]
+>
+> ### Disclaimer
+>
+> **Blue Spec** is an independent open-source project and is not affiliated with, endorsed by, or associated with **Bluespec, Inc.** or the **Bluespec Hardware Description Language (HDL)** and its compiler (`bsc`).
+>
+> The project name "Blue Spec" comes from Blue Team (defensive security) and Spec-Driven Development. It refers to an AI-assisted security hardening tool for software projects, a different domain from Bluespec, Inc., which provides RISC-V processor IP and hardware design tools.
+>
+> "Bluespec" is a trademark of Bluespec, Inc. All other product names, trademarks, and registered trademarks mentioned are the property of their respective owners and are used for identification purposes only.

@@ -17,6 +17,7 @@ const templateFiles = [
   '.bluespec/templates/harden-template.md',
   '.bluespec/templates/verify-template.md',
   '.bluespec/templates/specialize-template.md',
+  '.bluespec/templates/proof-template.md',
 ];
 
 const hookFiles = assets.hooks.map(

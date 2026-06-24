@@ -22,6 +22,8 @@ const ARGUMENT_HINTS: Record<CommandKey, string> = {
   list: 'Takes no input, it lists every tracked finding by name',
   specialize:
     'Describe the security topic the sub-skill should cover, or name an existing sub-skill to refine',
+  prove:
+    'Optionally name findings or files/dirs to prove, or leave empty to prove every detected finding',
 };
 
 const TEMPLATE_FILES: Record<TemplateKey, string> = {
@@ -31,6 +33,7 @@ const TEMPLATE_FILES: Record<TemplateKey, string> = {
   harden: 'harden-template.md',
   verify: 'verify-template.md',
   specialize: 'specialize-template.md',
+  prove: 'proof-template.md',
 };
 
 const FRONTMATTER_PATTERN = /^---\n([\s\S]*?)\n---\n/;

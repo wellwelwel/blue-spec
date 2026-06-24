@@ -238,12 +238,18 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © 2026-present Weslley Araújo and contributors. Blue Spec is under the MIT License.`,
+      copyright: `Copyright © 2026-present <a href="https://github.com/wellwelwel" target="_blank" rel="noopener">Weslley Araújo</a> and <a href="https://github.com/wellwelwel/blue-spec/graphs/contributors" target="_blank" rel="noopener">contributors</a>. Blue Spec is under the <a href="https://github.com/wellwelwel/blue-spec/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>.<br />Blue Spec is an independent open-source project and is not affiliated with, endorsed by, or associated with Bluespec, Inc. or the Bluespec Hardware Description Language (HDL) and its compiler (bsc).<br />The name "Blue Spec" comes from Blue Team (defensive security) and Spec-Driven Development. It refers to an AI-assisted security hardening tool for software projects, a different domain from Bluespec, Inc., which provides RISC-V processor IP and hardware design tools.<br>"Bluespec" is a trademark of Bluespec, Inc. All other product names, trademarks, and registered trademarks mentioned are the property of their respective owners and are used for identification purposes only.`,
     },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
-      additionalLanguages: ['bash', 'json', 'python'],
+      additionalLanguages: [
+        'javascript',
+        'bash',
+        'json',
+        'python',
+        'typescript',
+      ],
     },
   } satisfies Preset.ThemeConfig,
 };

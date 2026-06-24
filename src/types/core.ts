@@ -28,7 +28,8 @@ export type CommandKey =
   | 'repair'
   | 'skills'
   | 'list'
-  | 'specialize';
+  | 'specialize'
+  | 'prove';
 
 export type TemplateKey = Exclude<CommandKey, 'repair' | 'skills' | 'list'>;
 

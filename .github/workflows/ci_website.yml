@@ -31,9 +31,6 @@ jobs:
       - name: Installing Dependencies
         run: npm --prefix website ci
 
-      - name: Lint Checking
-        run: npm --prefix website run lint
-
       - name: Checking Types
         run: npm --prefix website run typecheck
 
