@@ -5,7 +5,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'Blue Spec',
+  title: 'SDH: Blue Spec',
   tagline: 'Security-Driven Hardening for AI-built software',
   favicon: 'favicon.png',
 
@@ -61,7 +61,7 @@ const config: Config = {
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'SoftwareApplication',
-        name: 'Blue Spec',
+        name: 'SDH: Blue Spec',
         applicationCategory: 'DeveloperApplication',
         applicationSubCategory: 'Security',
         operatingSystem: 'Node.js',
@@ -160,7 +160,7 @@ const config: Config = {
           'Blue Spec helps your AI agent make a project more secure. Point it at your code, and it guides you through the security work that matters for it.',
       },
       { property: 'og:type', content: 'website' },
-      { property: 'og:site_name', content: 'Blue Spec' },
+      { property: 'og:site_name', content: 'SDH: Blue Spec' },
       { property: 'og:locale', content: 'en_US' },
     ],
     colorMode: {
@@ -169,7 +169,7 @@ const config: Config = {
       respectPrefersColorScheme: false,
     },
     navbar: {
-      title: 'Blue Spec',
+      title: 'SDH: Blue Spec',
       logo: {
         alt: 'Blue Spec',
         src: 'favicon.png',
