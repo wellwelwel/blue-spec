@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/wellwelwel/blue-spec/compare/v0.3.0...v0.4.0) (2026-06-24)
+
+
+### Features
+
+* create security reports and PoCs from detections ([#5](https://github.com/wellwelwel/blue-spec/issues/5)) ([cf9eafe](https://github.com/wellwelwel/blue-spec/commit/cf9eafe095ee98f20796f395703f2d888984d14f))
+
 ## [0.3.0](https://github.com/wellwelwel/blue-spec/compare/v0.2.0...v0.3.0) (2026-06-22)
 
 
