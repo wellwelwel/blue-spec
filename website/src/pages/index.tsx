@@ -1,5 +1,5 @@
 import type { WindowId } from '@site/src/data/home';
-import type { ReactNode } from 'react';
+import type { ComponentType, ReactNode } from 'react';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import Head from '@docusaurus/Head';
 import { AgentsModal } from '@site/src/components/AgentsModal';
@@ -28,7 +28,7 @@ import {
 } from 'react';
 import { FaStar } from 'react-icons/fa6';
 import { GoHeartFill } from 'react-icons/go';
-import { LuBookOpen } from 'react-icons/lu';
+import { LuBookOpen, LuMenu, LuX } from 'react-icons/lu';
 
 const Home = (): ReactNode => {
   const [active, setActive] = useState<WindowId>('overview');
@@ -40,6 +40,9 @@ const Home = (): ReactNode => {
   const [agentsOpen, setAgentsOpen] = useState(false);
   const [partnersOpen, setPartnersOpen] = useState(false);
   const [hoveredTab, setHoveredTab] = useState<WindowId | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
   const navRef = useRef<HTMLElement | null>(null);
   const tabRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const [pill, setPill] = useState<{ left: number; width: number } | null>(
@@ -73,6 +76,26 @@ const Home = (): ReactNode => {
       setPartnersOpen(true);
   }, []);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMenuOpen(false);
+    };
+
+    const onPointer = (event: PointerEvent) => {
+      if (!menuRef.current?.contains(event.target as Node)) setMenuOpen(false);
+    };
+
+    window.addEventListener('keydown', onKey);
+    window.addEventListener('pointerdown', onPointer);
+
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('pointerdown', onPointer);
+    };
+  }, [menuOpen]);
+
   const goToStep = useCallback((index: number) => {
     setTypedDone(false);
     setModeIndex(0);
@@ -92,14 +115,36 @@ const Home = (): ReactNode => {
     }
 
     setActive(id);
+    contentRef.current?.scrollTo({ top: 0 });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const openInstall = useCallback(() => setActive('install'), []);
+  const openInstall = useCallback(() => goToTab('install'), []);
   const openPaper = useCallback(() => setPaperOpen(true), []);
   const openAgents = useCallback(() => setAgentsOpen(true), []);
   const markTyped = useCallback(() => setTypedDone(true), []);
 
   const feature = FEATURE[active];
+
+  const headerLinks: {
+    label: string;
+    Icon: ComponentType;
+    href?: string;
+    external?: boolean;
+    onClick?: () => void;
+  }[] = [
+    { label: 'Docs', Icon: LuBookOpen, href: '/docs' },
+    {
+      label: 'GitHub',
+      Icon: FaStar,
+      href: 'https://github.com/wellwelwel/blue-spec',
+      external: true,
+    },
+    { label: 'Support', Icon: GoHeartFill, onClick: () => setPartnersOpen(true) },
+  ];
+
+  const headerLinkClass =
+    'inline-flex items-center gap-[9px] pl-4 pr-[18px] py-[9px] rounded-xl border border-line bg-card text-ink text-[14px] font-semibold tracking-[-0.01em] no-underline cursor-pointer transition-[background-color,border-color] duration-200 ease-out hover:bg-card-hover hover:border-accent/50 [&>svg]:size-4 [&>svg]:text-[#0088ff]';
 
   return (
     <div className='bs-canvas relative min-h-screen m-0 antialiased text-ink bg-[#050a18] font-sans'>
@@ -186,7 +231,7 @@ const Home = (): ReactNode => {
 
       <main className='relative z-[2] min-h-screen flex items-center justify-center p-[clamp(16px,4vw,64px)] max-[600px]:p-0 max-[600px]:items-stretch'>
         <section className='w-full max-w-[1240px] rounded-[28px] border border-[#0c155c] bg-glass overflow-hidden [backdrop-filter:blur(40px)_saturate(120%)] [-webkit-backdrop-filter:blur(40px)_saturate(120%)] [box-shadow:inset_0_1px_0_0_rgba(255,255,255,0.08),0_40px_120px_-40px_rgba(10,11,13,0.7)] max-[600px]:max-w-none max-[600px]:min-h-screen max-[600px]:[min-height:100dvh] max-[600px]:rounded-none max-[600px]:border-0 max-[600px]:flex max-[600px]:flex-col max-[600px]:overflow-visible max-[600px]:[backdrop-filter:none] max-[600px]:[-webkit-backdrop-filter:none]'>
-          <header className='grid grid-cols-[1fr_auto_1fr] items-center gap-4 px-[clamp(22px,3vw,38px)] py-[clamp(18px,2.4vw,28px)] border-b border-[#0c155c] max-[920px]:flex max-[920px]:flex-wrap max-[920px]:justify-between max-[920px]:pb-3.5 max-[600px]:border-b-0'>
+          <header className='grid grid-cols-[1fr_auto_1fr] items-center gap-4 px-[clamp(22px,3vw,38px)] py-[clamp(18px,2.4vw,28px)] border-b border-[#0c155c] max-[920px]:flex max-[920px]:flex-wrap max-[920px]:justify-between max-[920px]:pb-3.5 max-[600px]:sticky max-[600px]:top-0 max-[600px]:z-30 max-[600px]:border-b max-[600px]:bg-[rgba(5,10,24,0.82)] max-[600px]:[backdrop-filter:blur(16px)_saturate(140%)] max-[600px]:[-webkit-backdrop-filter:blur(16px)_saturate(140%)]'>
             <div className='flex items-center gap-[18px] min-w-0'>
               <span
                 className='flex items-center gap-2 max-[920px]:hidden'
@@ -243,31 +288,98 @@ const Home = (): ReactNode => {
               ))}
             </nav>
 
-            <div className='flex items-center justify-end gap-1.5 max-[920px]:mt-1.5 max-[920px]:w-full max-[920px]:justify-center'>
-              <a
-                className='inline-flex items-center gap-[9px] pl-4 pr-[18px] py-[9px] rounded-xl border border-line bg-card text-ink text-[14px] font-semibold tracking-[-0.01em] no-underline cursor-pointer transition-[background-color,border-color] duration-200 ease-out hover:bg-card-hover hover:border-accent/50 [&>svg]:size-4 [&>svg]:text-[#0088ff]'
-                href='/docs'
-              >
-                <LuBookOpen aria-hidden />
-                Docs
-              </a>
-              <a
-                className='inline-flex items-center gap-[9px] pl-4 pr-[18px] py-[9px] rounded-xl border border-line bg-card text-ink text-[14px] font-semibold tracking-[-0.01em] no-underline cursor-pointer transition-[background-color,border-color] duration-200 ease-out hover:bg-card-hover hover:border-accent/50 [&>svg]:size-4 [&>svg]:text-[#0088ff]'
-                href='https://github.com/wellwelwel/blue-spec'
-                target='_blank'
-                rel='noopener'
-              >
-                <FaStar aria-hidden />
-                GitHub
-              </a>
+            <div
+              ref={menuRef}
+              className='relative flex items-center justify-end gap-1.5 max-[920px]:justify-center'
+            >
+              <div className='flex items-center gap-1.5 max-[920px]:hidden'>
+                {headerLinks.map(({ label, Icon, href, external, onClick }) =>
+                  href ? (
+                    <a
+                      key={label}
+                      className={headerLinkClass}
+                      href={href}
+                      {...(external && {
+                        target: '_blank',
+                        rel: 'noopener',
+                      })}
+                    >
+                      <Icon aria-hidden />
+                      {label}
+                    </a>
+                  ) : (
+                    <button
+                      key={label}
+                      type='button'
+                      onClick={onClick}
+                      className={headerLinkClass}
+                    >
+                      <Icon aria-hidden />
+                      {label}
+                    </button>
+                  )
+                )}
+              </div>
+
               <button
                 type='button'
-                onClick={() => setPartnersOpen(true)}
-                className='inline-flex items-center gap-[9px] pl-4 pr-[18px] py-[9px] rounded-xl border border-line bg-card text-ink text-[14px] font-semibold tracking-[-0.01em] cursor-pointer transition-[background-color,border-color] duration-200 ease-out hover:bg-card-hover hover:border-accent/50 [&>svg]:size-4 [&>svg]:text-[#0088ff]'
+                aria-label='Menu'
+                aria-expanded={menuOpen}
+                onClick={() => setMenuOpen((open) => !open)}
+                className='relative hidden size-10 items-center justify-center rounded-xl border border-line bg-card text-ink transition-[background-color,border-color] duration-200 ease-out hover:bg-card-hover hover:border-accent/50 max-[920px]:inline-flex'
               >
-                <GoHeartFill aria-hidden />
-                Support
+                <LuMenu
+                  aria-hidden
+                  className={`absolute size-[18px] transition-[opacity,transform,filter] duration-300 ease-[cubic-bezier(0.2,0,0,1)] ${
+                    menuOpen
+                      ? 'opacity-0 scale-[0.25] blur-[4px]'
+                      : 'opacity-100 scale-100 blur-0'
+                  }`}
+                />
+                <LuX
+                  aria-hidden
+                  className={`absolute size-[18px] transition-[opacity,transform,filter] duration-300 ease-[cubic-bezier(0.2,0,0,1)] ${
+                    menuOpen
+                      ? 'opacity-100 scale-100 blur-0'
+                      : 'opacity-0 scale-[0.25] blur-[4px]'
+                  }`}
+                />
               </button>
+
+              {menuOpen && (
+                <div className='bs-menu-pop absolute top-[calc(100%+8px)] right-0 z-[20] flex w-[200px] flex-col gap-1 rounded-2xl border border-line bg-[rgba(10,15,31,0.92)] p-1.5 [backdrop-filter:blur(16px)_saturate(150%)] [-webkit-backdrop-filter:blur(16px)_saturate(150%)] [box-shadow:inset_0_1px_0_rgba(255,255,255,0.08),0_20px_48px_-16px_rgba(0,0,0,0.6)] min-[921px]:hidden'>
+                  {headerLinks.map(({ label, Icon, href, external, onClick }) =>
+                    href ? (
+                      <a
+                        key={label}
+                        className='inline-flex items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-[14px] font-semibold tracking-[-0.01em] no-underline text-ink transition-colors duration-200 ease-out hover:bg-white/[0.06] [&>svg]:size-[18px] [&>svg]:text-[#0088ff]'
+                        href={href}
+                        onClick={() => setMenuOpen(false)}
+                        {...(external && {
+                          target: '_blank',
+                          rel: 'noopener',
+                        })}
+                      >
+                        <Icon aria-hidden />
+                        {label}
+                      </a>
+                    ) : (
+                      <button
+                        key={label}
+                        type='button'
+                        onClick={() => {
+                          onClick?.();
+                          setMenuOpen(false);
+                        }}
+                        className='inline-flex items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-[14px] font-semibold tracking-[-0.01em] text-ink transition-colors duration-200 ease-out hover:bg-white/[0.06] [&>svg]:size-[18px] [&>svg]:text-[#0088ff]'
+                      >
+                        <Icon aria-hidden />
+                        {label}
+                      </button>
+                    )
+                  )}
+                </div>
+              )}
             </div>
           </header>
 
@@ -352,7 +464,10 @@ const Home = (): ReactNode => {
             </nav>
 
             <div className='grid grid-cols-[1.15fr_0.85fr] gap-[clamp(20px,2.6vw,38px)] p-[clamp(22px,3vw,38px)] max-[920px]:grid-cols-[1fr] max-[600px]:pt-3 max-[600px]:pb-[calc(104px+env(safe-area-inset-bottom))]'>
-              <div className='bs-flow flex flex-col min-w-0 h-[var(--bs-window-h)] overflow-y-auto max-[920px]:h-auto max-[920px]:overflow-visible'>
+              <div
+                ref={contentRef}
+                className='bs-flow flex flex-col min-w-0 h-[var(--bs-window-h)] overflow-y-auto max-[920px]:h-auto max-[920px]:overflow-visible'
+              >
                 <div
                   key={active}
                   className='bs-fade-in flex flex-col min-w-0 h-full max-[920px]:h-auto'
