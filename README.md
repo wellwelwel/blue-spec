@@ -109,3 +109,13 @@ Really thanks to everyone who has supported and keeps supporting my work.
 
 **Blue Spec** is under the [**MIT License**](https://github.com/wellwelwel/blue-spec/blob/main/LICENSE).<br />
 Copyright © 2026-present [**Weslley Araújo**](https://github.com/wellwelwel) and [**contributors**](https://github.com/wellwelwel/blue-spec/graphs/contributors).
+
+> [!IMPORTANT]
+>
+> ### Disclaimer
+>
+> **Blue Spec** is an independent open-source project and is not affiliated with, endorsed by, or associated with **Bluespec, Inc.** or the **Bluespec Hardware Description Language (HDL)** and its compiler (`bsc`).
+>
+> The project name "Blue Spec" comes from Blue Team (defensive security) and Spec-Driven Development. It refers to an AI-assisted security hardening tool for software projects, a different domain from Bluespec, Inc., which provides RISC-V processor IP and hardware design tools.
+>
+> "Bluespec" is a trademark of Bluespec, Inc. All other product names, trademarks, and registered trademarks mentioned are the property of their respective owners and are used for identification purposes only.

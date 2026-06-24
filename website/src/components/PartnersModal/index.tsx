@@ -383,6 +383,28 @@ export const PartnersModal = ({
                     {status === 'sending' ? 'Sending…' : "Let's work together"}
                   </span>
                 </button>
+
+                <p className='flex flex-col gap-2 text-[12px] leading-[1.5] text-muted m-0'>
+                  <span>
+                    Blue Spec is an independent open-source project and is not
+                    affiliated with, endorsed by, or associated with Bluespec,
+                    Inc. or the Bluespec Hardware Description Language (HDL) and
+                    its compiler (bsc).
+                  </span>
+                  <span>
+                    The project name "Blue Spec" comes from Blue Team (defensive
+                    security) and Spec-Driven Development. It refers to an
+                    AI-assisted security hardening tool for software projects, a
+                    different domain from Bluespec, Inc., which provides RISC-V
+                    processor IP and hardware design tools.
+                  </span>
+                  <span>
+                    "Bluespec" is a trademark of Bluespec, Inc. All other
+                    product names, trademarks, and registered trademarks
+                    mentioned are the property of their respective owners and
+                    are used for identification purposes only.
+                  </span>
+                </p>
               </form>
             </>
           )}
