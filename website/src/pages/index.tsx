@@ -251,7 +251,7 @@ const Home = (): ReactNode => {
                 className='inline-flex items-center gap-2 font-display text-[clamp(18px,1.8vw,23px)] font-extrabold tracking-[-0.02em] leading-none cursor-pointer rounded-md focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4'
               >
                 <span>
-                  S<span className='text-[#2092ff]'>-</span>DH
+                  SDH
                   <span className='text-[#2092ff]'>:</span> Blue Spec
                 </span>
               </button>
