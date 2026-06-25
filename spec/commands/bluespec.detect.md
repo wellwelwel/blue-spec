@@ -51,7 +51,19 @@ Read the code within the chosen scope and detect the things that carry security 
 
 ### Step 5: Consult the sub-skills
 
-Run `/bluespec.skills` (with no input) to list the available sub-skills and the tags that say what each covers. For every listed sub-skill whose area is present in the scope you just read, apply it (the command loads and follows it). The only judgment here is which listed sub-skills match the scope, not whether to consult at all. A sub-skill whose context is absent is simply skipped, and finding none applicable is a valid outcome. Anything a sub-skill surfaces is recorded as a finding through the steps below, like any other.
+Sub-skills are focused, language-agnostic security knowledge modules that load only on demand. This step is the door to them, and it has a fixed mechanism. Do not improvise an equivalent.
+
+1. **List the catalog by running the hook**, from the project root:
+
+   ```bash
+   node ./.bluespec/hooks/skills.mjs
+   ```
+
+   This is the only authoritative source. It merges the built-in sub-skills with any the user registered in `.bluespec/skills.json`, and prints each one as `name: tags`. The **tags are the matching signal, and they exist nowhere else**.
+
+2. **Apply every entry whose tags match the scope you just read.** To apply one, read `.bluespec/skills/<name>.md` directly and follow it, scoped to the paths in question. The knowledge lives in that file: do what it says, do not improvise beyond it, and do not edit the user's code. The only judgment here is which listed sub-skills match the scope, not whether to consult at all. A sub-skill whose context is absent is simply skipped, and finding none applicable is a valid outcome.
+
+Anything a sub-skill surfaces is recorded as a finding through the steps below, like any other.
 
 Report only the sub-skills you applied and what each surfaced, never the ones that did not match: an absent context is skipped in silence, not announced. If none applied, say so in one line.
 
@@ -76,6 +88,7 @@ Report only the sub-skills you applied and what each surfaced, never the ones th
 - No finding that Step 3 found resolved is still in the map, and no finding is duplicated.
 - Every finding's name is unique. The tracking map keys an item by its name alone, and the later phases reuse that name verbatim, so two findings sharing a name would collide into one item. If two would share a name, qualify each so they read distinctly.
 - The `Scope` line matches the mode you actually ran.
+- You ran the sub-skill hook in Step 5 and can name every sub-skill it printed. For each printed name, you either applied it or can say in one line why its context is absent from the scope. If you cannot account for a printed name, Step 5 is unfinished: go back.
 - The date is ISO `YYYY-MM-DD`.
 
 ### Step 8: Write and summarize

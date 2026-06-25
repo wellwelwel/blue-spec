@@ -17,8 +17,6 @@ const ARGUMENT_HINTS: Record<CommandKey, string> = {
     'Optionally name controls, files/dirs, or priorities, or leave empty to verify every applied control',
   repair:
     'Optionally name a phase or scope, or leave empty to repair the whole tracking map',
-  skills:
-    'Name a sub-skill to load (for example `redos`), or leave empty to list them',
   list: 'Takes no input, it lists every tracked finding by name',
   specialize:
     'Describe the security topic the sub-skill should cover, or name an existing sub-skill to refine',

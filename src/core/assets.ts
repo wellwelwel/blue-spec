@@ -13,7 +13,6 @@ const COMMAND_FILES: Record<CommandKey, string> = {
   harden: 'spec/commands/bluespec.harden.md',
   verify: 'spec/commands/bluespec.verify.md',
   repair: 'spec/commands/bluespec.repair.md',
-  skills: 'spec/commands/bluespec.skills.md',
   list: 'spec/commands/bluespec.list.md',
   specialize: 'spec/commands/bluespec.specialize.md',
   prove: 'spec/commands/bluespec.prove.md',

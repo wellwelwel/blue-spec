@@ -1,5 +1,5 @@
 ---
-description: Specialize Blue Spec in a security area from a source or topic you give it, distilling it into a new on-demand sub-skill that /bluespec.skills can load later. It writes a focused, language-agnostic, defense-only knowledge module under `.bluespec/skills/`, shaped like the built-in sub-skills. It never writes attack inputs or exploits, never rewrites your code, and the sub-skill is never invoked on its own. Specializing a name that exists reconciles that file, never overwriting it blindly.
+description: Specialize Blue Spec in a security area from a source or topic you give it, distilling it into a new on-demand sub-skill the detect and verify phases can load later. It writes a focused, language-agnostic, defense-only knowledge module under `.bluespec/skills/`, shaped like the built-in sub-skills. It never writes attack inputs or exploits, never rewrites your code, and the sub-skill is never invoked on its own. Specializing a name that exists reconciles that file, never overwriting it blindly.
 ---
 
 ## User Input
@@ -12,7 +12,7 @@ The User Input above decides how this command runs. Read it before proceeding.
 
 ## Outline
 
-You are giving Blue Spec a new **specialty**: a focused, language-agnostic security sub-skill that `/bluespec.skills` loads on demand. You distill the user's source or topic into it. A sub-skill audits and explains a risk area, it never rewrites the user's code, and it never produces an attack input. The shape lives in `templates/specialize-template.md`, and the built-in sub-skills under `.bluespec/skills/` (`regex`, `javascript`, `browser`) are worked examples to mirror.
+You are giving Blue Spec a new **specialty**: a focused, language-agnostic security sub-skill the detect and verify phases load on demand, listed by the `skills` hook and importable directly with `@.bluespec/skills/<name>.md`. You distill the user's source or topic into it. A sub-skill audits and explains a risk area, it never rewrites the user's code, and it never produces an attack input. The shape lives in `templates/specialize-template.md`, and the built-in sub-skills under `.bluespec/skills/` (`regex`, `javascript`, `browser`) are worked examples to mirror.
 
 The result is two files: the sub-skill at `.bluespec/skills/<name>.md`, and a one-line entry in the catalog `.bluespec/skills.json` so the dispatcher hook lists it. You write both. You never touch the user's source.
 
@@ -67,4 +67,4 @@ Derive 2 to 4 tags by the same terrain principle as the name (Step 3): the terra
 
 ### Step 8: Summarize
 
-In plain language, tell the user the sub-skill's name, its tags, what it covers, and that it now loads with `/bluespec.skills <name>` (mentioning it shadows any built-in of the same name on a refine). Suggest a commit message such as `feat: specialize Blue Spec in <name>`. Say it as a suggestion, not a mandate.
+In plain language, tell the user the sub-skill's name, its tags, what it covers, and that the detect and verify phases now load it on demand (and they can import it directly with `@.bluespec/skills/<name>.md`), mentioning it shadows any built-in of the same name on a refine. Suggest a commit message such as `feat: specialize Blue Spec in <name>`. Say it as a suggestion, not a mandate.

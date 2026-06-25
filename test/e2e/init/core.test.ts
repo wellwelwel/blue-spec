@@ -58,15 +58,17 @@ await describe('init scaffolds the agent-agnostic core', async () => {
     }
   });
 
-  await it('renders the skills dispatcher for skill and markdown agents', async () => {
+  await it('renders a command for both skill and markdown agents', async () => {
     const skillWorkspace = await newWorkspace();
     await initInto(skillWorkspace, { init: true, agent: 'claude' });
-    await stat(join(skillWorkspace, '.claude/skills/bluespec.skills/SKILL.md'));
+    await stat(
+      join(skillWorkspace, '.claude/skills/bluespec.charter/SKILL.md')
+    );
 
     const markdownWorkspace = await newWorkspace();
     await initInto(markdownWorkspace, { init: true, agent: 'opencode' });
     await stat(
-      join(markdownWorkspace, '.opencode/commands/bluespec.skills.md')
+      join(markdownWorkspace, '.opencode/commands/bluespec.charter.md')
     );
   });
 

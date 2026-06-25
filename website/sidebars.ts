@@ -26,9 +26,9 @@ const sidebars: SidebarsConfig = {
       label: 'Tools',
       collapsed: false,
       items: [
-        'commands/prove',
         'commands/skills',
         'commands/specialize',
+        'commands/prove',
         'commands/list',
       ],
     },

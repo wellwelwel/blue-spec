@@ -1,20 +1,17 @@
 ---
 id: skills
-title: /bluespec.skills
+title: Skills
 sidebar_label: Skills
 description: How sub-skills are loaded, by a phase on demand, and by you directly.
 ---
 
-import TabItem from '@theme/TabItem';
-import Tabs from '@theme/Tabs';
+# Skills (_sub_-skills)
 
-# /bluespec.skills
-
-🧠 The dispatcher for **Blue Spec**'s sub-skills: focused, language-agnostic security knowledge modules that load only on demand, never by default.
+🧠 **Blue Spec**'s sub-skills are focused, language-agnostic security knowledge modules that load only on demand, never by default. They are not commands. The detect and verify phases reach for them while they run, and you can use one directly any time.
 
 ## Run yourself
 
-To use a sub-skill directly, import its file with `@` and write the task in the same prompt. The knowledge then acts on what you asked for. This is the user-facing way, and it works in any prompt, even one unrelated to the **Blue Spec** flow.
+To use a sub-skill directly, import its file with `@` and write the task in the same prompt. The knowledge then acts on what you asked for. This works in any prompt, even one unrelated to the **Blue Spec** flow.
 
 They all live in `.bluespec/skills/`, so the file to import is always `@.bluespec/skills/<name>.md`.
 
@@ -59,20 +56,16 @@ The catalog grows by adding one knowledge file plus one catalog row, never a new
 
 :::note[Internally, Blue Spec loads sub-skills automatically, on demand]
 
-When a phase like detect or verify hits a context a sub-skill covers, it runs `/bluespec.skills` itself and the dispatcher loads the right knowledge. This happens automatically, as part of the phase. You do not run it by hand for this to work.
-
-```bash
-/bluespec.skills regex
-```
+When the detect or verify phase hits a context a sub-skill covers, it lists the catalog with the [`skills` hook](/docs/hooks/skills) and reads the matching `.bluespec/skills/<name>.md` itself. This happens automatically, as part of the phase. You do not do it by hand for this to work.
 
 :::
 
 ## Discover what is available
 
-Run the command with no selector to list the catalog.
+Run the [`skills` hook](/docs/hooks/skills) with no input to list the catalog, each sub-skill with the tags that say what it covers:
 
 ```bash
-/bluespec.skills
+node ./.bluespec/hooks/skills.mjs
 ```
 
 :::note[_Sub_-Skills are not loaded by default]

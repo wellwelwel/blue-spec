@@ -41,12 +41,11 @@ export type CommandKey =
   | 'harden'
   | 'verify'
   | 'repair'
-  | 'skills'
   | 'list'
   | 'specialize'
   | 'prove';
 
-export type TemplateKey = Exclude<CommandKey, 'repair' | 'skills' | 'list'>;
+export type TemplateKey = Exclude<CommandKey, 'repair' | 'list'>;
 
 export type BundledAsset = {
   fileName: string;

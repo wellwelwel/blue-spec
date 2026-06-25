@@ -7,7 +7,7 @@ description: List the available sub-skills and their tags from the command line.
 
 # `skills` hook
 
-The `skills` hook lists every sub-skill **Blue Spec** ships, with the tags that describe what each one covers. It is the deterministic catalog the `/bluespec.skills` dispatcher reads, and you can run it yourself to see what is available.
+The `skills` hook lists every sub-skill **Blue Spec** ships, with the tags that describe what each one covers. It is the deterministic catalog the detect and verify phases read to find the sub-skills that fit, and you can run it yourself to see what is available.
 
 ## Run it
 
@@ -21,5 +21,5 @@ node ./.bluespec/hooks/skills.mjs
 ```
 
 :::tip
-To actually run one of these against your code, import its file with a task, for example `@.bluespec/skills/regex.md`. See [**/bluespec.skills**](/docs/commands/skills) for the full walkthrough.
+To actually run one of these against your code, import its file with a task, for example `@.bluespec/skills/regex.md`. See [**sub-skills**](/docs/commands/skills) for the full walkthrough.
 :::

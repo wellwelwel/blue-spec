@@ -12,7 +12,7 @@ import Tabs from '@theme/Tabs';
 
 🎓 Specialize **Blue Spec** in a specific security area, from a source or topic you give it.
 
-It reads the material and distills it into a focused, defense-only sub-skill, shaped exactly like the built-in ones, so [`/bluespec.skills`](/docs/commands/skills) loads it afterwards like any other. It only audits and explains: it never writes attack inputs or exploits, and it never touches your code.
+It reads the material and distills it into a focused, defense-only [sub-skill](/docs/commands/skills), shaped exactly like the built-in ones, so the detect and verify phases load it afterwards like any other. It only audits and explains: it never writes attack inputs or exploits, and it never touches your code.
 
 <Tabs>
   <TabItem value="article" label="From an article" default>
@@ -60,7 +60,7 @@ Specializing a name that already exists, whether a built-in like `regex` or one 
 
 :::tip
 
-- The new _sub_-skill loads exactly like a built-in: `/bluespec.skills <name>`, or import it with `@.bluespec/skills/<name>.md` and give it a task.
+- The new _sub_-skill loads exactly like a built-in: the detect and verify phases pick it up on demand, or import it yourself with `@.bluespec/skills/<name>.md` and give it a task.
 - When the material has an identifiable origin (an article, an author, a link, a standard), the sub-skill credits it. A bare topic carries no source.
 
 :::

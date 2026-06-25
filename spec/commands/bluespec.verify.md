@@ -77,7 +77,17 @@ The `✅ Risk closed` findings are this run's **closure candidates**, stood down
 
 ### Step 5: Consult the sub-skills
 
-Run `/bluespec.skills` (with no input) to list the available sub-skills and the tags that say what each covers. For any control whose area a listed sub-skill covers, apply it (the command loads and follows it) to judge the code as it now stands, and let that judgment inform the verdict. The only judgment here is which listed sub-skills match the controls in scope, not whether to consult at all. A control no sub-skill covers is simply left to the reading above. This stays read-only on the user's code: the sub-skill reads and reports, it never edits the code.
+Sub-skills are focused, language-agnostic security knowledge modules that load only on demand. This step is the door to them, and it has a fixed mechanism. Do not improvise an equivalent.
+
+1. **List the catalog by running the hook**, from the project root:
+
+   ```bash
+   node ./.bluespec/hooks/skills.mjs
+   ```
+
+   This is the only authoritative source. It merges the built-in sub-skills with any the user registered in `.bluespec/skills.json`, and prints each one as `name: tags`. The **tags are the matching signal, and they exist nowhere else**.
+
+2. **Apply every entry whose tags cover a control in scope.** To apply one, read `.bluespec/skills/<name>.md` directly and follow it, to judge the code as it now stands and let that judgment inform the verdict. The only judgment here is which listed sub-skills match the controls in scope, not whether to consult at all. A control no sub-skill covers is simply left to the reading above. This stays read-only on the user's code: the sub-skill reads and reports, it never edits the code.
 
 Report only the sub-skills you applied and how each informed a verdict, never the ones that did not match: an uncovered control is left to the reading above, not announced as a non-match. If none applied, say so in one line.
 
@@ -104,6 +114,7 @@ Report only the sub-skills you applied and how each informed a verdict, never th
 - Every result rests on the code you actually read, not on the record's claim alone, and no result was softened to match the record. A control that is present but leaves its risk reachable is `❌ Risk not closed`, not `✅ Risk closed`.
 - Nothing was written to the user's code: no test, no dependency, no code change. Writes are confined to Blue Spec's own chain artifacts and tracking.
 - The `Scope` line matches the mode you actually ran.
+- You ran the sub-skill hook in Step 5 and can name every sub-skill it printed. For each printed name, you either applied it to the controls it covers or can say in one line why no in-scope control falls under it. If you cannot account for a printed name, Step 5 is unfinished: go back.
 - The date is ISO `YYYY-MM-DD`.
 
 ### Step 8: Write, close, and summarize

@@ -28,16 +28,16 @@ The product mission and workflow philosophy live in [CLAUDE.md](../../../CLAUDE.
 
 Top-level directories. Their internal structure is defined in the sections below.
 
-| Directory         | Purpose                                                                             |
-| ----------------- | ----------------------------------------------------------------------------------- |
-| `src/`            | TypeScript source. Everything authored by hand lives here.                          |
-| `src/types/`      | The single home for every type declaration. No type is declared elsewhere.          |
-| `lib/`            | Compiled JavaScript build output. Generated, not edited. This is what ships.        |
-| `spec/`           | The Blue Spec core: the commands, templates, and sub-skills that ship.              |
-| `spec/commands/`  | The `/bluespec.*` command definitions an agent reads to run each phase.             |
-| `spec/templates/` | The files a command fills in (the security artifacts produced per phase).           |
-| `spec/skills/`    | Non-invocable sub-skills: on-demand knowledge the `/bluespec.skills` command loads. |
-| `test/`           | Poku test suites, run against Node, Bun, and Deno.                                  |
+| Directory         | Purpose                                                                          |
+| ----------------- | -------------------------------------------------------------------------------- |
+| `src/`            | TypeScript source. Everything authored by hand lives here.                       |
+| `src/types/`      | The single home for every type declaration. No type is declared elsewhere.       |
+| `lib/`            | Compiled JavaScript build output. Generated, not edited. This is what ships.     |
+| `spec/`           | The Blue Spec core: the commands, templates, and sub-skills that ship.           |
+| `spec/commands/`  | The `/bluespec.*` command definitions an agent reads to run each phase.          |
+| `spec/templates/` | The files a command fills in (the security artifacts produced per phase).        |
+| `spec/skills/`    | Non-invocable sub-skills: on-demand knowledge the detect and verify phases load. |
+| `test/`           | Poku test suites, run against Node, Bun, and Deno.                               |
 
 ## Code conventions
 
@@ -81,7 +81,7 @@ A command that produces no artifact has no template, and the type layer encodes 
 
 ### Sub-skills
 
-`spec/skills/` holds the **built-in sub-skills**: agent-agnostic knowledge modules that load only on demand. Nothing opens them directly. The `/bluespec.skills` command is the single door, resolving a selector to a sub-skill file, so a phase needing the knowledge runs `/bluespec.skills <selector>`. Adding a built-in is one `.md` plus one row in the baked catalog (`src/hooks/skills/catalog.ts`), no new command. A user grows the same set at runtime with `/bluespec.specialize`, which writes a sub-skill into `.bluespec/skills/` and its row into `.bluespec/skills.json`. The `skills` hook reads that file and merges it over the baked catalog, the user's entry winning a name collision.
+`spec/skills/` holds the **built-in sub-skills**: agent-agnostic knowledge modules that load only on demand. They are not commands. The detect and verify phases consume them inline: a phase lists the catalog with the `skills` hook (`node ./.bluespec/hooks/skills.mjs`, which prints each sub-skill as `name: tags`), then reads and follows the matching `.bluespec/skills/<name>.md` directly. A user can import one into any prompt with `@.bluespec/skills/<name>.md`. Adding a built-in is one `.md` plus one row in the baked catalog (`src/hooks/skills/catalog.ts`), no new command. A user grows the same set at runtime with `/bluespec.specialize`, which writes a sub-skill into `.bluespec/skills/` and its row into `.bluespec/skills.json`. The `skills` hook reads that file and merges it over the baked catalog, the user's entry winning a name collision.
 
 ## Agent-agnostic core vs. agent adapters
 
@@ -107,7 +107,7 @@ A future agent is one more row, leaving the core untouched. Keep adapters thin a
 
 Running Blue Spec in a user's project creates two things:
 
-- **`.bluespec/`** holds Blue Spec's state in that project: the filled-in charter and the artifacts each phase produces (the detect map, the defense plan, and so on), plus `hooks/` (the compiled helper scripts the agent runs, see The tracking map) and `skills/` (the non-invocable sub-skills `/bluespec.skills` loads on demand, both the built-ins copied at init and any the user adds with `/bluespec.specialize`). Init also seeds `skills.json`, the runtime catalog of user sub-skills (empty until `specialize` writes to it), a sibling of `tracking.json`. It is committed alongside the user's code, so the security work is versioned and reviewable like any other part of the project.
+- **`.bluespec/`** holds Blue Spec's state in that project: the filled-in charter and the artifacts each phase produces (the detect map, the defense plan, and so on), plus `hooks/` (the compiled helper scripts the agent runs, see The tracking map) and `skills/` (the non-invocable sub-skills the detect and verify phases load on demand, both the built-ins copied at init and any the user adds with `/bluespec.specialize`). Init also seeds `skills.json`, the runtime catalog of user sub-skills (empty until `specialize` writes to it), a sibling of `tracking.json`. It is committed alongside the user's code, so the security work is versioned and reviewable like any other part of the project.
 - **Agent commands** are written by the adapter into the agent's own location, in that agent's native format (a skill directory, a prompt file, a markdown command, a TOML command, or a Goose recipe, per the chosen agent's registry entry). For example, Claude Code reads them from `.claude/skills/`, GitHub Copilot from `.github/prompts/`, and opencode from `.opencode/commands/`. All hold the `/bluespec.*` commands the user invokes.
 
 The split mirrors the repository's own core/adapter boundary: `.bluespec/` is the agent-agnostic state, and the agent's own directory is where the adapter places what that specific agent reads.
