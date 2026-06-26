@@ -1,7 +1,7 @@
 # Python-specific vulnerabilities
 
 > - This knowledge extends your judgment. Apply what fits the project and keep reasoning beyond the list.
-> - Source: the official CPython docs (`pickle`, `yaml`/PyYAML, `tarfile`, `string`, the `-O` flag), Armin Ronacher's "Be careful with Python's new-style string format" (`str.format` traversal), and Abdulraheem Khaled (Abdulrah33m), "Prototype Pollution in Python" (class pollution).
+> - Source: the official CPython docs (`pickle`, `yaml`/PyYAML, `tarfile`, `string`, the `-O` flag), Armin Ronacher's "Be careful with Python's new-style string format" (`str.format` traversal), Abdulraheem Khaled (Abdulrah33m), "Prototype Pollution in Python" (class pollution), and OWASP, <https://cheatsheetseries.owasp.org/>.
 
 ## Rules
 
@@ -12,25 +12,25 @@
 
 ### Insecure deserialization via `pickle` (and `shelve`, `dill`, `jsonpickle`, `numpy.load`)
 
-`pickle` is designed to reconstruct arbitrary objects, and it lets an object control its own reconstruction through `__reduce__`, which returns a callable and its arguments to be invoked at load time. This is a documented stdlib feature, not a bug: the docs warn the module is not secure and to only unpickle data you trust. Any class can define `__reduce__` to return `(os.system, ("command",))`, so when `pickle.loads` deserializes attacker-controlled bytes that callable executes immediately, which is remote code execution. A common shape is a Flask session cookie or an ML model file (`torch.load`, `paddle.load`) that is base64-encoded pickle.
+`pickle` reconstructs arbitrary objects, and an object controls its own reconstruction through `__reduce__`, which returns a callable and its arguments to invoke at load time. A class whose `__reduce__` returns `(os.system, ("command",))` runs that callable the moment `pickle.loads` deserializes attacker-controlled bytes, which is remote code execution. Common carriers are a Flask session cookie or an ML model file (`torch.load`, `paddle.load`) holding base64-encoded pickle.
 
-The same execution-by-design property reaches the things built on, or modeled after, pickle:
+The same property reaches what is built on, or modeled after, pickle:
 
 - **`shelve`** is pickle-backed: `shelve.open` on an attacker-supplied `.db` deserializes on key access, not only at a top-level `loads`, so flag the file path, not just a literal `pickle.loads`.
-- **`dill`** and **`jsonpickle`** use or mirror the pickle protocol and honor the same reconstruction hooks. They cannot be made safe against arbitrary input.
-- **`numpy.load`** runs pickle only when `allow_pickle=True` (the default was flipped to `False` in NumPy 1.16.3 in response to CVE-2019-6446), so a `.npy`/`.npz` load is a sink only with that flag set. Treat `allow_pickle=True` on untrusted data as the finding, not every `np.load`.
+- **`dill`** and **`jsonpickle`** use or mirror the pickle protocol and honor the same reconstruction hooks, so they cannot be made safe against arbitrary input.
+- **`numpy.load`** runs pickle only with `allow_pickle=True` (defaulted to `False` in NumPy 1.16.3 for CVE-2019-6446), so a `.npy`/`.npz` load is a sink only with that flag. Treat `allow_pickle=True` on untrusted data as the finding, not every `np.load`.
 
 Safer shapes, applied where they fit:
 
-- **Never unpickle untrusted data.** Use a data-only format: `json` for simple structures, or `protobuf`/`msgpack`. JSON supports only basic types and cannot instantiate arbitrary objects.
-- For ML models, prefer a format like **safetensors** that does not execute code on load.
-- An **HMAC signature** verified with `hmac.compare_digest` before deserializing is integrity-only defense-in-depth, not a fix: it rejects payloads from anyone without the signing key, but the underlying `loads` is still a full RCE primitive if the key leaks or a trusted producer is compromised. Do not treat an HMAC wrapper as closing a pickle-on-untrusted-input finding. (Django deprecated its `PickleSerializer` in 4.1 and removed it in 5.0 for this reason.)
+- **Never unpickle untrusted data.** Use a data-only format: `json` for simple structures, or `protobuf`/`msgpack`. JSON carries only basic types and cannot instantiate arbitrary objects.
+- For ML models, prefer **safetensors**, which does not execute code on load.
+- An **HMAC signature** verified with `hmac.compare_digest` before deserializing is integrity-only defense-in-depth, not a fix: it rejects payloads from anyone without the signing key, but the underlying `loads` stays a full RCE primitive if the key leaks or a trusted producer is compromised. Do not treat an HMAC wrapper as closing a pickle-on-untrusted-input finding. (Django removed `PickleSerializer` in 4.1 for this reason.)
 
-Note `marshal` is a separate case: it does **not** honor `__reduce__` (it cannot even serialize such an object) and has no callable-invocation step, so it is not an RCE sink by this mechanism. It is still documented as unsafe against maliciously constructed data for a narrower reason (parser memory-unsafety and loading code objects), so do not treat `marshal.loads` of untrusted bytes as safe, but do not flag it as a `(callable, args)` RCE either.
+`marshal` is a separate case: it does **not** honor `__reduce__` and has no callable-invocation step, so it is not an RCE sink by this mechanism. It is still documented as unsafe against malicious data for a narrower reason (parser memory-unsafety and loading code objects), so treat `marshal.loads` of untrusted bytes as unsafe, but not as a `(callable, args)` RCE.
 
 ### Class pollution (Python's "prototype pollution") via `__class__`, `__init__.__globals__`, `__base__`
 
-Python exposes deep object internals as ordinary attributes: every object has `__class__`, every Python-level method has `__globals__` (a reference to the dict holding the function's module-level globals), and class hierarchies are walkable via `__base__`/`__bases__`. A recursive "merge" or "set nested attribute" function that copies attacker-controlled keys into an object via `setattr`/`__setitem__` can therefore traverse from an instance into module globals and other classes' attributes.
+Python exposes object internals as ordinary attributes: every object has `__class__`, every Python-level method has `__globals__` (the dict of its module-level globals), and class hierarchies are walkable via `__base__`/`__bases__`. A recursive "merge" or "set nested attribute" function that copies attacker-controlled keys into an object via `setattr`/`__setitem__` can therefore traverse from an instance into module globals and other classes' attributes.
 
 The canonical, demonstrated payload nests `__class__.__init__.__globals__` to overwrite the default value of another function's keyword-only argument (its `__kwdefaults__`):
 
@@ -46,17 +46,17 @@ The canonical, demonstrated payload nests `__class__.__init__.__globals__` to ov
 }
 ```
 
-Impact ranges from global-variable tampering to authentication bypass. Reaching a Flask app's `secret_key` through `__globals__` and `sys.modules` to forge privileged session cookies is a plausible escalation, but in the source research it was an unexplored idea, not a working exploit: the only confirmed impact there was denial of service, and the `sys.modules` hop depends on `sys` being reachable in the target module's globals. Treat it as a hypothetical gadget, not a demonstrated one.
+Impact ranges from global-variable tampering to authentication bypass.
 
 Safer shapes, applied where they fit:
 
 - **Validate against a schema as the primary control** (`pydantic`, or `dataclasses` with explicit fields), reading known keys explicitly, so attacker-named attributes never reach a live object.
-- **As a backstop, reject dunder keys** (keys that begin and end with `__`: `__class__`, `__init__`, `__globals__`, `__base__`, `__dict__`, and the rest) in any recursive merge or mass-assignment routine. This guard must run at **every recursion level**, not only the top, or nesting bypasses it, and it should refuse to recurse into non-data attributes rather than walk attribute chains.
-- Where you parse external JSON, keep it as plain `dict`/`list` and read the keys you expect, rather than merging it into objects.
+- **As a backstop, reject dunder keys** (those that begin and end with `__`: `__class__`, `__init__`, `__globals__`, `__base__`, `__dict__`, and the rest) in any recursive merge or mass-assignment routine. This guard must run at **every recursion level**, or nesting bypasses it, and it should refuse to recurse into non-data attributes rather than walk attribute chains.
+- When you parse external JSON, keep it as plain `dict`/`list` and read the keys you expect, rather than merging it into objects.
 
 ### Format-string attribute traversal via `str.format()` / `.format_map()`
 
-Python's `str.format()` mini-language (PEP 3101, shared by `.format_map()` and `string.Formatter`) lets the format string itself navigate attributes and items of its arguments: `"{0.attr}"` reads an attribute, `"{0[key]}"` reads an item. Because every Python-level method exposes `__init__.__globals__`, an attacker who controls the format string (not just the arguments) can read module globals and secrets:
+Python's `str.format()` mini-language (PEP 3101, shared by `.format_map()` and `string.Formatter`) lets the format string itself navigate its arguments: `"{0.attr}"` reads an attribute, `"{0[key]}"` reads an item. Because every Python-level method exposes `__init__.__globals__`, an attacker who controls the format string (not just the arguments) can read module globals and secrets:
 
 ```python
 CONFIG = {'SECRET_KEY': 'super secret key'}
@@ -65,13 +65,13 @@ def format_event(fmt, event):
 # attacker supplies: "{event.__init__.__globals__[CONFIG].SECRET_KEY}"
 ```
 
-The final hop must match how it is accessed: `[CONFIG]` reads an item (the globals dict), then `.SECRET_KEY` reads an attribute (mixing them, ending in `[SECRET_KEY]` against a non-dict, raises `TypeError`). The vector also needs the object's class to define its own Python-level `__init__` (or another Python-level method to traverse): a class inheriting `object.__init__` exposes a C-level wrapper with no `__globals__`. Impact is disclosure of secrets, which often escalates to forging signed tokens. This is distinct from f-strings: an f-string is a fixed source literal, so its embedded expressions are never sourced from runtime or attacker input.
+Each hop must match how it is accessed: `[CONFIG]` reads an item, then `.SECRET_KEY` reads an attribute. The vector also needs the object's class to define its own Python-level `__init__` (or another Python-level method to traverse): a class inheriting `object.__init__` exposes a C-level wrapper with no `__globals__`. Impact is secret disclosure, which often escalates to forging signed tokens. An f-string is not affected: it is a fixed source literal, so its embedded expressions never come from runtime or attacker input.
 
-Safer shape: never let untrusted input be the format string. Use `"{}".format(user_value)` where the literal is fixed and the user value is an argument, not `user_string.format(...)`. When end users must supply templates, prefer f-strings or `string.Template`, whose grammar only supports `$name` substitution and has no attribute access. If you genuinely must accept user-supplied format strings, subclass `string.Formatter` and override `get_field` to reject any field name containing `__` (Ronacher's `SafeFormatter`), but the never-untrusted-format-string rule is the real fix.
+Safer shape: never let untrusted input be the format string. Use `"{}".format(user_value)`, where the literal is fixed and the user value is an argument, not `user_string.format(...)`. When end users must supply templates, prefer f-strings or `string.Template`, whose grammar supports only `$name` substitution with no attribute access. If you must accept user-supplied format strings, subclass `string.Formatter` and override `get_field` to reject any field name containing `__` (Ronacher's `SafeFormatter`), but never-untrusted-format-string is the real fix.
 
 ### PyYAML `yaml.load` without SafeLoader
 
-PyYAML implements YAML tags like `!!python/object/apply:os.system` and `!!python/object/new:...` that instantiate arbitrary Python objects and callables. `yaml.load` historically defaulted to the full, unsafe loader.
+PyYAML implements YAML tags like `!!python/object/apply:os.system` and `!!python/object/new:...` that instantiate arbitrary Python objects and callables, and `yaml.load` historically defaulted to the full, unsafe loader.
 
 `yaml.load(untrusted)` with `Loader=yaml.Loader`/`UnsafeLoader` (or `yaml.unsafe_load`, and historically `FullLoader`) yields RCE:
 
@@ -81,28 +81,28 @@ PyYAML implements YAML tags like `!!python/object/apply:os.system` and `!!python
 
 Real CVEs: CVE-2017-18342 (`yaml.load` ACE before 5.1), CVE-2020-1747 (the original `FullLoader`/`full_load` RCE via the object-constructor tag, fixed in 5.3.1), and CVE-2020-14343 (a bypass of that incomplete fix, fixed in 5.4).
 
-Safer shape: use `yaml.safe_load` (or `yaml.load(data, Loader=yaml.SafeLoader)`), which constructs only standard scalars, sequences, and mappings and cannot instantiate Python objects. Upgrade PyYAML to ≥ 5.4 and ban `yaml.load` without an explicit safe loader, plus `unsafe_load`, `Loader`, and `UnsafeLoader`, in CI (Bandit/Semgrep rules). For `ruamel.yaml`, avoid `typ='unsafe'`.
+Safer shape: use `yaml.safe_load` (or `yaml.load(data, Loader=yaml.SafeLoader)`), which constructs only standard scalars, sequences, and mappings and cannot instantiate Python objects. Upgrade PyYAML to ≥ 5.4, and in CI (Bandit/Semgrep) ban `yaml.load` without an explicit safe loader, plus `unsafe_load`, `Loader`, and `UnsafeLoader`. For `ruamel.yaml`, avoid `typ='unsafe'`.
 
 ### `assert` statements stripped under `-O`
 
-CPython removes every `assert` statement (and `if __debug__:` block) from the compiled bytecode when run with `-O`/`-OO` or `PYTHONOPTIMIZE`. This is documented, intentional behavior. Any security check written as an `assert`, input validation, an auth check, an invariant, therefore silently vanishes in optimized production builds, so code that was safe in development becomes exploitable:
+CPython removes every `assert` statement (and `if __debug__:` block) from the compiled bytecode under `-O`/`-OO` or `PYTHONOPTIMIZE`. This is documented, intentional behavior. Any security check written as an `assert`, input validation, an auth check, an invariant, therefore silently vanishes in optimized production builds, so code that was safe in development becomes exploitable:
 
 ```python
 def process(user):
     assert user.is_admin, "forbidden"   # gone under python -O
 ```
 
-Safer shape: never use `assert` for runtime validation, input checking, or a security boundary. Use an explicit `if not condition: raise ...` with a proper exception. Reserve `assert` for tests and internal debugging invariants that are safe to disable. Bandit `B101` (`assert_used`) flags every `assert`, so it cannot tell production from test code on its own and is suppressed by path skips.
+Safer shape: never use `assert` for runtime validation, input checking, or a security boundary. Use an explicit `if not condition: raise ...` with a proper exception. Reserve `assert` for tests and internal debugging invariants that are safe to disable.
 
 ### `tarfile.extractall` / `zipfile` path traversal (CVE-2007-4559, "tar slip")
 
-`tarfile.extract`/`extractall` historically wrote each member's path as-is with no sanitization, so an entry named `../../etc/passwd` (or an absolute path, or a symlink) escaped the target directory. This was documented-but-unpatched for about 15 years (CVE-2007-4559). In a September 2022 re-discovery, Trellix found Python's `tarfile` in use across roughly 588,000 unique repositories and estimated that about 61% of those examined, over 350,000 repositories, would be vulnerable. A separate follow-up effort patched 61,895 projects. The bug frequently escalates to code execution. `tar.extractall(path)` on an untrusted archive overwrites arbitrary files.
+`tarfile.extract`/`extractall` historically wrote each member's path as-is, so an entry named `../../etc/passwd` (or an absolute path, or a symlink) escaped the target directory, which frequently escalates to code execution: `tar.extractall(path)` on an untrusted archive overwrites arbitrary files.
 
 Safer shapes, applied where they fit:
 
-- On **Python 3.12+**, pass the extraction filter: `tar.extractall(path, filter="data")` (PEP 706). The `data` filter blocks absolute paths, `..` traversal, and unsafe symlinks/devices. It becomes the default in Python 3.14. This is the first-line fix.
-- On older Pythons, validate each member: resolve the absolute path of the join and confirm it stays within the destination before extracting, reject members whose resolved path escapes, and skip symlinks/hardlinks pointing outside. Hand-rolled validation is easy to get subtly wrong (symlink members, absolute paths, `..` surviving normalization), so prefer the stdlib filter on 3.12+.
-- The identical care applies to `zipfile` ("Zip Slip") and to `shutil.unpack_archive`, which dispatches to both.
+- On **Python 3.12+**, pass the extraction filter: `tar.extractall(path, filter="data")` (PEP 706). The `data` filter blocks absolute paths, `..` traversal, and unsafe symlinks/devices, and becomes the default in 3.14. This is the first-line fix.
+- On older Pythons, validate each member: resolve the absolute path of the join, confirm it stays within the destination before extracting, reject members whose resolved path escapes, and skip symlinks/hardlinks pointing outside. Hand-rolled validation is easy to get subtly wrong (symlink members, absolute paths, `..` surviving normalization), so prefer the stdlib filter on 3.12+.
+- The same care applies to `zipfile` ("Zip Slip") and to `shutil.unpack_archive`, which dispatches to both.
 
 ### Mutable default arguments (`def f(x=[])`)
 
@@ -114,7 +114,7 @@ def add(item, items=[]):   # the same list every call
     return items
 ```
 
-This is primarily a correctness footgun, but it has real security and privacy consequences: state leaks across calls or requests. Per-user data held in a shared mutable default can surface to the wrong caller (an illustrative class of bug, not a single cited incident).
+The security consequence is leakage: per-user data held in a shared mutable default crosses calls or requests to the wrong caller.
 
 Safer shape: default to `None` and create the object inside the body.
 
@@ -128,7 +128,25 @@ def add(item, items=None):
 
 Pylint `W0102` (`dangerous-default-value`) flags it.
 
+### Django REST Framework: insecure-by-default settings
+
+Unlike most of Django, DRF ships several open global defaults in the `REST_FRAMEWORK` settings namespace, so a view is unprotected until the project changes them. `DEFAULT_PERMISSION_CLASSES` defaults to `AllowAny`, so **every view is public unless the default is changed** or each view sets its own permission. `DEFAULT_THROTTLE_CLASSES` is empty, so there is no rate limiting. `DEFAULT_PAGINATION_CLASS` is unset, so a list endpoint returns the whole table, an unbounded query an attacker can turn into denial of service.
+
+Safer shape: set `DEFAULT_PERMISSION_CLASSES` to a real default (for example `IsAuthenticated`), reserving `AllowAny` for genuinely public endpoints, and do not override `permission_classes` on a view without understanding the impact. Configure `DEFAULT_THROTTLE_CLASSES`/`DEFAULT_THROTTLE_RATES` for rate limiting (with a WAF as the outer layer), and set `DEFAULT_PAGINATION_CLASS` so list endpoints are bounded. (The authorization decision and the credential live on the `access-control` and `credential-endpoint` surfaces. This block is the DRF configuration that backs them.)
+
+### Django / DRF framework defaults: keep them on, do not widen them
+
+Django is secure by default, and the recurring finding is code or config that reopens a default. The template engine auto-escapes, and the `safe` filter / `mark_safe()` disable it, so reaching either with untrusted data is XSS (the browser-side detail is the `browser` surface, the Django-specific point is that the safe default was switched off). The other cases are settings or idioms that widen a default:
+
+- `DEBUG = True` in production discloses stack traces, settings, and the `SECRET_KEY`. Keep `DEBUG = False` (and `DEBUG_PROPAGATE_EXCEPTIONS = False`), and never leave `ALLOWED_HOSTS` empty.
+- A DRF `ModelSerializer` (or `ModelForm`) using `Meta.exclude` or `fields = "__all__"` is mass assignment: a denylist or "everything" exposes fields the user should not set. Use an explicit `Meta.fields` allowlist.
+- Overriding a DRF view's `get_object()` without calling `self.check_object_permissions(request, obj)` reintroduces broken object-level authorization (IDOR): the object loads with no per-object check.
+- The ORM's raw escape hatches, `raw()`, `extra()`, and `cursor.execute()`, bypass query parameterization. Never splice user input into them, parameterize (trace these through the `interpreter` surface).
+- Hash passwords with Django's `make_password`/`check_password` (and configure `AUTH_PASSWORD_VALIDATORS`), never a hand-rolled hash.
+
+Safer shape: leave the framework's defaults on and tighten, never loosen, them. Render through auto-escaping (avoid `safe`/`mark_safe` on untrusted data), keep `DEBUG = False` with `ALLOWED_HOSTS` set, allowlist serializer fields, check object permissions on every object fetch, and keep raw SQL parameterized. Run `manage.py check --deploy`, which audits the deployment settings (`DEBUG`, `SECRET_KEY`, `ALLOWED_HOSTS`, secure cookies, SSL redirect, HSTS), and resolve its warnings.
+
 ## How to act on the result
 
-- **In detect (detection):** each pattern you confirm is a finding. Describe it in plain language: what it is (the Python behavior being abused), why it matters (the concrete impact, for example arbitrary code execution from an unpickled payload, secret disclosure from a user-controlled format string, or a security check that vanishes under `-O`), and the evidence (the function or area where it lives). It flows through detect's normal steps and is tracked like any other finding.
-- **In verify (proof):** the control holds only when the unsafe pattern is gone or properly guarded: untrusted data parsed with a data-only format instead of pickle, a schema validating mass-assignment with the dunder reject running at every level, a fixed literal format string, `yaml.safe_load`, an explicit `raise` instead of `assert`, `filter="data"` on extraction, and a `None` sentinel for defaults. An HMAC wrapper around pickle, or a top-level-only dunder check, does not close the risk. If the dangerous pattern still reaches untrusted input, record it as not closed and point back to harden.
+- **In detect (detection):** each pattern above that you confirm is a finding. Describe it in plain language: what it is (the Python behavior being abused, or a Django/DRF default left open, for example arbitrary code execution from an unpickled payload), why it matters (the concrete impact), and the evidence (the function, setting, or area where it lives). It flows through detect's normal steps and is tracked like any other finding.
+- **In verify (proof):** the control holds only when the unsafe pattern is gone or properly guarded by the safer shape from its risk block. An HMAC wrapper around pickle, or a top-level-only dunder check, does not close the risk. If the dangerous pattern still reaches untrusted input, record it as not closed and point back to harden.

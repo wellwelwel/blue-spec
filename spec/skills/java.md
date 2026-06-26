@@ -1,7 +1,7 @@
 # Java-specific vulnerabilities
 
 > - This knowledge extends your judgment. Apply what fits the project and keep reasoning beyond the list.
-> - Source: OWASP, "Deserialization Cheat Sheet" (`resolveClass` allowlist, `transient`, the `readObject`-that-throws pattern), JEP 290, "Filter Incoming Serialization Data" (`ObjectInputFilter`, `jdk.serialFilter`), and the `ysoserial` gadget-chain research tool.
+> - Source: OWASP, <https://cheatsheetseries.owasp.org/> and <https://owasp.org/www-community/attacks/>, with JEP 290 ("Filter Incoming Serialization Data") and the `ysoserial` gadget-chain research tool.
 
 ## Rules
 
@@ -12,21 +12,19 @@
 
 ### Insecure native deserialization (`ObjectInputStream.readObject`) gadget chains
 
-Java's built-in serialization reconstructs any class implementing `Serializable`, and it invokes that class's custom `readObject` during reconstruction. `ObjectInputStream.readObject()` therefore deserializes _any_ serializable class on the classpath, before any application validation runs. Attackers chain "gadget" classes (Apache Commons Collections, Groovy, and others) whose `readObject`/`hashCode`/`equals`/comparator side-effects culminate in `Runtime.exec`, the classic Java-specific remote code execution. The dangerous pattern is a single line:
+Java's built-in serialization reconstructs any `Serializable` class on the classpath and runs that class's custom `readObject` during reconstruction, before any application validation. Attackers chain "gadget" classes (Apache Commons Collections, Groovy, and others) whose `readObject`/`hashCode`/`equals`/comparator side effects culminate in `Runtime.exec`, the classic Java remote code execution. The dangerous pattern is a single line:
 
 ```java
 Object obj = new ObjectInputStream(untrusted).readObject();
 ```
 
-Reaching it with attacker-controlled bytes yields RCE, demonstrated by tools like `ysoserial`. The danger is often not an obvious user upload but a trusted-looking component: an RMI endpoint, a JMX channel, a cache, a session store, or a message body. Anything that injects attacker-influenced bytes into a stream that ends at `readObject()` is the risk. Treat the byte source, not just a literal `readObject` call, as the thing to trace: `readUnshared`, and library wrappers that deserialize internally, carry the same risk.
-
-This is distinct from text formats. JSON, Protobuf, and XML parsers that build only plain data structures do not invoke arbitrary classes' code on load. The risk here is specific to Java's object-graph serialization reconstructing live objects.
+Attacker-controlled bytes reaching it yield RCE, as `ysoserial` demonstrates. The source is often not an obvious user upload but a trusted-looking component: an RMI endpoint, a JMX channel, a cache, a session store, a message body. Trace the byte source, not just a literal `readObject` call: `readUnshared` and library wrappers that deserialize internally carry the same risk. This is specific to Java's object-graph serialization rebuilding live objects, JSON, Protobuf, and XML parsers that build only plain data structures do not run arbitrary classes' code on load.
 
 Safer shapes, applied where they fit:
 
-- **Prefer not to use Java native serialization for untrusted data at all.** Use JSON, Protobuf, or XML with a safe, data-only parser. The cleanest fix is to delete `readObject`/`writeObject` usage entirely and stop accepting serialized object graphs.
-- Where native serialization must remain, set a **JEP 290 deserialization filter** (`ObjectInputFilter`) with a strict **allowlist** of expected classes. Apply it process-wide via the `jdk.serialFilter` system property, or per-stream via `ObjectInputStream.setObjectInputFilter`. An allowlist (accept only known-good classes) is the control. A blocklist of known gadget classes is weaker: new gadget chains appear, so it is defense-in-depth, not a fix.
-- Where a filter does not fit, implement a **`LookAheadObjectInputStream`** that overrides `resolveClass` to reject any class outside the expected set:
+- **Do not use Java native serialization for untrusted data.** Delete `readObject`/`writeObject` usage and accept JSON, Protobuf, or XML through a data-only parser instead.
+- Where native serialization must remain, set a **JEP 290 deserialization filter** (`ObjectInputFilter`) with a strict **allowlist** of expected classes, process-wide via the `jdk.serialFilter` system property or per-stream via `ObjectInputStream.setObjectInputFilter`. A blocklist of known gadgets is weaker, since new chains appear: defense in depth, not a fix.
+- Where a filter does not fit, override `resolveClass` in a look-ahead stream (a `LookAheadObjectInputStream`) to reject any class outside the expected set:
 
   ```java
   @Override
@@ -39,12 +37,46 @@ Safer shapes, applied where they fit:
   }
   ```
 
-  `resolveClass` runs before the object is reconstructed, so the rejection lands before any gadget `readObject` fires. Whitelist beats blacklist here too.
+  `resolveClass` runs before reconstruction, so the rejection lands before any gadget `readObject` fires. Apache Commons IO's `ValidatingObjectInputStream` and SerialKiller enforce the same allowlist.
 
-- **Keep dependencies patched** (OWASP Dependency-Check) to remove libraries with known gadget chains, so a present allowlist is not the only line of defense. Apache Commons IO's `ValidatingObjectInputStream` and SerialKiller offer allowlist-enforcing streams. Where deserialization of untrusted data is unavoidable, run it in a sandboxed, low-privilege service.
-- For a class that must never be deserialized at all, declare a `private void readObject(ObjectInputStream in)` that throws `java.io.InvalidClassException`, and mark sensitive fields `private transient` so they are neither restored from nor exposed in the stream. Annotate serialization hooks with `@Serial`, and keep `readObject`/`writeObject` `private` so they are real serialization hooks, not ordinary overridable methods.
+- **Keep dependencies patched** (OWASP Dependency-Check) so the allowlist is not the only line against a known gadget chain. Where untrusted deserialization is unavoidable, run it in a sandboxed, low-privilege service.
+- For a class that must never be deserialized, declare a `private void readObject(ObjectInputStream in)` that throws `java.io.InvalidClassException`, and mark sensitive fields `private transient` so they are neither restored nor exposed in the stream. Annotate hooks with `@Serial` and keep `readObject`/`writeObject` `private`, so they stay real serialization hooks rather than overridable methods.
+
+### Unsafe mobile code: mutable shared state and constructor-bypassing extension
+
+When a class shares a JVM with code an attacker can influence (a plugin, an agent, any class loaded into the runtime), the language's own visibility and extensibility rules become an attack surface. Unlike the deserialization risk above, no untrusted bytes are required, only a class whose design leaves its state mutable or its construction bypassable. Two patterns recur.
+
+A **non-final public field** (CWE-493) is mutable state any reachable code can overwrite. A `public URL server_addr` left non-`final` can be repointed by another class in the same runtime, redirecting the application after construction.
+
+Safer shape: declare fields holding trusted configuration or security-relevant references `final`, with the narrowest visibility (`private` plus accessors) over `public`. A value that must not change after construction must be `final` so no other code can reassign it.
+
+An **object hijack** (CWE-491) abuses a construction path that skips the constructor's validation. A `public`, non-`final`, `Cloneable` class with a `public clone()` can be subclassed, and the subclass mints instances through any path that produces an object without running the constructor (`clone()`, deserialization, reflection), so an attacker substitutes a manipulated instance for a legitimate one.
+
+Safer shape: make sensitive classes `final` so they cannot be subclassed, and do not expose a `public clone()` on a class that holds invariants. Where a class must stay extensible, enforce its invariants on every construction path, not only the constructor, and guard `clone()` or remove `Cloneable`. Treat any object produced without its constructor as untrusted until its invariants are re-checked.
+
+### Injection through string-built commands and queries
+
+Injection is a cross-language surface (the `interpreter` sub-skill covers SQL, OS command, XPath, NoSQL, LDAP, and log injection generically), but Java has its own safe idioms and one Java-specific variant: **JPA / JPQL injection**, concatenating untrusted input into a string passed to `EntityManager.createQuery`, the JPQL equivalent of SQL injection with the same impact. The rule across all of these: never build the command or query by string concatenation, use the API the stack already provides.
+
+Safer shape: parameterize. Use `PreparedStatement` with `?` placeholders for SQL, named parameters with `setParameter` for JPQL, an `XPathVariableResolver` for XPath, and the driver's expression builder (MongoDB's `Bson` filters) for NoSQL. For system actions, prefer the Java API over shelling out: `InetAddress.isReachable` instead of `ping`, file APIs instead of `Runtime.exec`. When untrusted data must reach HTML, encode with the OWASP Java Encoder and sanitize allowed markup with the OWASP Java HTML Sanitizer. Trace each finding through the `interpreter` surface, this block only names the Java APIs that close it.
+
+### Log injection through the logging API
+
+Building a log line by concatenating untrusted input lets an attacker inject CR/LF and forge or split log entries (CWE-93).
+
+Safer shape: use parameterized logging with a compile-time-constant message pattern, `logger.warn("Login failed for user {}.", username)`, never `logger.warn("... " + username)`, so the framework, not the attacker, controls structure. Prefer a structured layout (Log4j2 JSON Template Layout, Logback `JsonEncoder`) and cap field size (`maxStringLength`) so one field cannot smuggle line breaks or unbounded data. Apply the usual XSS encoding when logs are later rendered in a browser.
+
+### Weak or hand-rolled cryptography (JCA/JCE)
+
+The raw JCA/JCE primitives make the common mistakes easy: a default or ECB cipher mode, a reused or predictable nonce/IV, a non-cryptographic random source, a hard-coded or poorly stored key, a home-grown algorithm. Any of these silently weakens encryption that looks correct.
+
+Safer shapes, applied where they fit:
+
+- **Never write your own cryptographic primitive**, and avoid hand-using JCA/JCE. Prefer a vetted high-level library (Google Tink) or your platform's managed crypto service.
+- When JCA/JCE is unavoidable, use an authenticated mode (`AES/GCM/NoPadding`), generate a **unique nonce per encryption** with `SecureRandom` (never reuse a nonce under the same key), and use a strong key size (AES-256). Have the design and code reviewed by someone with cryptography expertise.
+- Draw all keys, nonces, IVs, and salts from `SecureRandom`, never `java.util.Random` or `Math.random`. Store keys outside the code (a secret manager or platform keystore), and keep the design agile so an algorithm can be rotated later. Follow the OWASP Cryptographic Storage guidance for algorithm choices.
 
 ## How to act on the result
 
-- **In detect (detection):** each pattern you confirm is a finding. Describe it in plain language: what it is (untrusted bytes reaching Java native deserialization), why it matters (the concrete impact, remote code execution via a gadget chain that ends in `Runtime.exec`), and the evidence (the call and the stream's byte source, the function or area where it lives). Trace the source to the sink: a `readObject`/`readUnshared` whose input is attacker-influenced, even through a trusted-looking component, is the finding. It flows through detect's normal steps and is tracked like any other finding.
-- **In verify (proof):** the control holds only when the unsafe path is gone or properly guarded: native serialization replaced by a data-only format, or a strict allowlist enforced by a JEP 290 `ObjectInputFilter` or a `resolveClass` look-ahead stream that rejects unexpected classes before reconstruction. A blocklist of known gadgets, or an unpatched dependency with a live gadget chain, does not close the risk on its own. If untrusted bytes still reach `readObject` unfiltered, record it as not closed and point back to harden.
+- **In detect (detection):** each pattern in the body that you confirm is a finding. Describe it in plain language: what it is (for example, untrusted bytes reaching Java native deserialization), why it matters (the concrete impact, such as remote code execution via a gadget chain ending in `Runtime.exec`), and the evidence (the call and its untrusted input, or the field/class declaration, and the area where it lives). Trace the source to the sink, and track an injection finding through the `interpreter` surface. It flows through detect's normal steps like any other finding.
+- **In verify (proof):** the control holds only when the unsafe path is gone or properly guarded, per the Safer shapes in the body: native serialization replaced or allowlist-filtered before reconstruction, a security-relevant field made `final`, a sensitive class made `final` or its `clone()` guarded, a query/command/log line parameterized, and crypto on a vetted library or an authenticated mode with a unique `SecureRandom` nonce. A blocklist of known gadgets, an unpatched dependency with a live gadget chain, a field still mutable from outside, a still-concatenated query or log line, or a reused nonce, does not close the risk on its own. If any unsafe path still reaches untrusted input, record it as not closed and point back to harden.
