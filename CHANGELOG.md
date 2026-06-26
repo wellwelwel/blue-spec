@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.5.0](https://github.com/wellwelwel/blue-spec/compare/v0.4.0...v0.5.0) (2026-06-26)
+
+
+### Features
+
+* add specialization in `C` and `C++` defense ([e274060](https://github.com/wellwelwel/blue-spec/commit/e274060d1b1e0051bd4931f78cf28e3799eb8ff6))
+* add specialization in `Golang` defense ([8d5737f](https://github.com/wellwelwel/blue-spec/commit/8d5737f4a715c9c29186f55b8d28c903eabac53a))
+* add specialization in `Java` defense ([b7708af](https://github.com/wellwelwel/blue-spec/commit/b7708afbfd4aefca67066d78535f4affee07c305))
+* add specialization in `PHP` defense ([ac264e8](https://github.com/wellwelwel/blue-spec/commit/ac264e8879c513c178c5f95b2d1660c37e5e80df))
+* add specialization in `Python` defense ([d3bb5f4](https://github.com/wellwelwel/blue-spec/commit/d3bb5f420b11c3731e181792357932fdd02d2156))
+* add specialization in `Ruby` defense ([740b5f4](https://github.com/wellwelwel/blue-spec/commit/740b5f43e63a1ad047b2829826cd227a7ff20d88))
+* add specialization in `Rust` defense ([cead4b5](https://github.com/wellwelwel/blue-spec/commit/cead4b55bb02a9869f11e8635fa6916ae6e770cb))
+* add specialization in SSRF defense ([be1baba](https://github.com/wellwelwel/blue-spec/commit/be1babaf63a11520cbdfb35b33c7a36ab6c6b584))
+* support skills by categories ([a04b969](https://github.com/wellwelwel/blue-spec/commit/a04b969f08fc925456cd618f7857061c8bee6f5f))
+
 ## [0.4.0](https://github.com/wellwelwel/blue-spec/compare/v0.3.0...v0.4.0) (2026-06-24)
 
 
