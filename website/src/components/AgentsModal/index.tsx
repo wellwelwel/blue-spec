@@ -1,8 +1,9 @@
 import type { ReactNode } from 'react';
 import { IconSwap } from '@site/src/components/home/IconSwap';
-import { useEffect, useRef } from 'react';
+import { ScrollFade } from '@site/src/components/ScrollFade';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { LuCircle, LuCircleCheckBig, LuX } from 'react-icons/lu';
+import { LuCircle, LuCircleCheckBig, LuSearch, LuX } from 'react-icons/lu';
 
 export type AgentEntry = { key: string; name: string };
 
@@ -50,6 +51,15 @@ export const AgentsModal = ({
   onClose: () => void;
 }): ReactNode => {
   const panelRef = useRef<HTMLDivElement>(null);
+  const [query, setQuery] = useState('');
+
+  const filtered = useMemo(() => {
+    const term = query.trim().toLowerCase();
+
+    if (!term) return agents;
+
+    return agents.filter((agent) => agent.name.toLowerCase().includes(term));
+  }, [agents, query]);
 
   useEffect(() => {
     if (!open) return;
@@ -69,6 +79,10 @@ export const AgentsModal = ({
     };
   }, [open, onClose]);
 
+  useEffect(() => {
+    if (!open) setQuery('');
+  }, [open]);
+
   if (!open) return null;
 
   return createPortal(
@@ -84,11 +98,13 @@ export const AgentsModal = ({
         aria-label='All agents'
         tabIndex={-1}
         onClick={(event) => event.stopPropagation()}
-        className='bs-modal-panel relative flex flex-col w-full max-w-[680px] max-h-full rounded-[20px] border border-[#0c155c] bg-[#0a0f1f] overflow-hidden [box-shadow:0_40px_120px_-30px_rgba(0,0,0,0.8)] outline-none'
+        className='bs-modal-panel relative flex flex-col w-full max-w-[680px] h-[640px] max-h-full rounded-[20px] border border-[#0c155c] bg-[#0a0f1f] overflow-hidden [box-shadow:0_40px_120px_-30px_rgba(0,0,0,0.8)] outline-none'
       >
         <div className='flex items-center justify-between gap-4 shrink-0 px-[clamp(20px,3vw,32px)] py-4 border-b border-[#0c155c] bg-[#0a0f1f]'>
-          <span className='font-mono text-[11px] tracking-[0.14em] uppercase text-muted'>
-            All agents · {agents.length}
+          <span className='font-mono text-[11px] tracking-[0.14em] uppercase text-muted tabular-nums'>
+            {query.trim()
+              ? `Agents · ${filtered.length}`
+              : `All agents · ${agents.length}`}
           </span>
           <button
             type='button'
@@ -100,25 +116,50 @@ export const AgentsModal = ({
           </button>
         </div>
 
-        <div
-          className='bs-paper grow overflow-y-auto px-[clamp(20px,3vw,32px)] py-[clamp(20px,3vw,28px)]'
+        <div className='shrink-0 px-[clamp(20px,3vw,32px)] pt-[clamp(20px,3vw,28px)]'>
+          <div className='relative'>
+            <LuSearch
+              aria-hidden
+              className='pointer-events-none absolute left-[14px] top-1/2 size-[18px] -translate-y-1/2 text-[#888c99]'
+            />
+            <input
+              type='text'
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder='Search agents'
+              aria-label='Search agents'
+              autoFocus
+              className='w-full rounded-[14px] border border-line bg-card py-[12px] pl-[42px] pr-[14px] text-[14px] text-ink placeholder:text-[#888c99] transition-[border-color,background-color] duration-200 ease-out hover:border-white/[0.16] focus:border-accent/50 focus:bg-accent/[0.06] focus:outline-none'
+            />
+          </div>
+        </div>
+
+        <ScrollFade
+          className='grow'
+          scrollClassName='bs-paper h-full overflow-y-auto px-[clamp(20px,3vw,32px)] py-[clamp(20px,3vw,28px)]'
           role='radiogroup'
           aria-label='Choose your agent'
         >
-          <div className='grid grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-2'>
-            {agents.map((agent) => (
-              <AgentRow
-                key={agent.key}
-                agent={agent}
-                on={false}
-                onClick={() => {
-                  onSelect(agent.key);
-                  onClose();
-                }}
-              />
-            ))}
-          </div>
-        </div>
+          {filtered.length > 0 ? (
+            <div className='grid grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-2'>
+              {filtered.map((agent) => (
+                <AgentRow
+                  key={agent.key}
+                  agent={agent}
+                  on={false}
+                  onClick={() => {
+                    onSelect(agent.key);
+                    onClose();
+                  }}
+                />
+              ))}
+            </div>
+          ) : (
+            <p className='py-6 text-center text-[13.5px] text-muted'>
+              No agents match “{query.trim()}”.
+            </p>
+          )}
+        </ScrollFade>
       </div>
     </div>,
     document.body
