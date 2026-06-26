@@ -15,7 +15,7 @@ On a crafted input, the pattern takes an exploding amount of time to match, stal
 
 #### How to check a pattern
 
-Blue Spec ships a deterministic checker. Run it from the project root, passing the pattern as a single argument so quotes or backticks in the pattern cannot break the command:
+Blue Spec ships a deterministic checker. Run it from the project root, passing the pattern as a single argument so its quotes or backticks cannot break the command:
 
 ```bash
 node ./.bluespec/hooks/regex.mjs '<PATTERN>'
@@ -34,7 +34,7 @@ Pass the pattern's source only, without the surrounding slashes or flags. Check 
 The checker prints exactly one of three words:
 
 - **`safe`**: the pattern is not ReDoS-prone by this check. It passes.
-- **`unsafe`**: the pattern is ReDoS-prone (nested or stacked quantifiers that can backtrack explosively). Treat it as a real risk.
+- **`unsafe`**: the pattern is ReDoS-prone (nested or stacked quantifiers that can backtrack explosively). Always treat it as a real risk, without exception.
 - **`invalid regex`**: the pattern did not parse.
 
 #### Common safer shapes
