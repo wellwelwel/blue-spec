@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.6.0](https://github.com/wellwelwel/blue-spec/compare/v0.5.0...v0.6.0) (2026-06-26)
+
+
+### Features
+
+* add comprehensive specialization in `OWASP` tracks ([31fe9c9](https://github.com/wellwelwel/blue-spec/commit/31fe9c9c369a1eb79f574e4673cf36ade3b280cc))
+* add specialization in `.NET` defense ([7397bb7](https://github.com/wellwelwel/blue-spec/commit/7397bb7fd81deaab555a86995ff3059376a03452))
+* add specialization in `Infrastructure` defense ([7017420](https://github.com/wellwelwel/blue-spec/commit/7017420cecad03483229cf3423407509eb422700))
+* add specialization in `LLM` defense ([0e42f47](https://github.com/wellwelwel/blue-spec/commit/0e42f475e4f428d8e395b5d53f693e7422202d3c))
+* add specialization in `Lovable` and `Supabase` defense ([1dd1977](https://github.com/wellwelwel/blue-spec/commit/1dd19771492a0eb848a462f7714443da201ef169))
+* improve CLI layout and interactivity (`TTY`) ([df3fb95](https://github.com/wellwelwel/blue-spec/commit/df3fb95a5cf986e50f4de341eab73d7712bb0194))
+
+
+### Bug Fixes
+
+* drop `list` hook ([b517f4d](https://github.com/wellwelwel/blue-spec/commit/b517f4d49b61d06d06efa52761b1e1af860793d8))
+
 ## [0.5.0](https://github.com/wellwelwel/blue-spec/compare/v0.4.0...v0.5.0) (2026-06-26)
 
 
