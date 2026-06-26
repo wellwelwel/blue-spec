@@ -1,21 +1,19 @@
-import type { Agent } from '@site/src/data/home';
-import { IconSwap } from '@site/src/components/home/IconSwap';
-import { LuCircle, LuCircleCheckBig } from 'react-icons/lu';
+import type { Category } from '@site/src/data/home';
 
-export const AgentButton = ({
-  agent,
+export const CategoryCheckbox = ({
+  category,
   on,
-  onClick,
+  onToggle,
 }: {
-  agent: Agent;
+  category: Category;
   on: boolean;
-  onClick: () => void;
+  onToggle: () => void;
 }) => (
   <button
     type='button'
-    role='radio'
+    role='checkbox'
     aria-checked={on}
-    onClick={onClick}
+    onClick={onToggle}
     className={`flex items-center gap-3 p-[12px_14px] rounded-[14px] border text-left cursor-pointer transition-[background-color,border-color,color] duration-200 ease-out focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 ${
       on
         ? 'text-ink border-accent/50 bg-accent/10'
@@ -27,18 +25,12 @@ export const AgentButton = ({
         on ? 'text-accent' : 'text-[#888c99]'
       }`}
       style={{
-        maskImage: `url(${agent.icon})`,
-        WebkitMaskImage: `url(${agent.icon})`,
+        maskImage: `url(${category.icon})`,
+        WebkitMaskImage: `url(${category.icon})`,
       }}
     />
     <span className='flex-1 min-w-0 text-[13.5px] font-semibold tracking-[-0.01em] overflow-hidden text-ellipsis whitespace-nowrap'>
-      {agent.name}
+      {category.name}
     </span>
-    <IconSwap
-      on={on}
-      className={`shrink-0 [&_svg]:size-[18px] ${on ? 'text-accent' : 'text-[#888c99]'}`}
-      active={<LuCircleCheckBig />}
-      inactive={<LuCircle />}
-    />
   </button>
 );

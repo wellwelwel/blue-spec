@@ -34,6 +34,7 @@ import { LuMenu, LuX } from 'react-icons/lu';
 const Home = (): ReactNode => {
   const [active, setActive] = useState<WindowId>('overview');
   const [selected, setSelected] = useState<string>('claude');
+  const [skills, setSkills] = useState<string[]>([]);
   const [usageStep, setUsageStep] = useState(0);
   const [modeIndex, setModeIndex] = useState(0);
   const [typedDone, setTypedDone] = useState(false);
@@ -119,6 +120,14 @@ const Home = (): ReactNode => {
     contentRef.current?.scrollTo({ top: 0 });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const toggleSkill = useCallback((key: string) => {
+    setSkills((current) =>
+      current.includes(key)
+        ? current.filter((skill) => skill !== key)
+        : [...current, key]
+    );
+  }, []);
 
   const openInstall = useCallback(() => goToTab('install'), []);
   const openPaper = useCallback(() => setPaperOpen(true), []);
@@ -461,7 +470,7 @@ const Home = (): ReactNode => {
               >
                 <div
                   key={active}
-                  className='bs-fade-in flex flex-col min-w-0 h-full max-[920px]:h-auto'
+                  className='bs-fade-in-soft flex flex-col min-w-0 h-full max-[920px]:h-auto'
                 >
                   {active === 'overview' && (
                     <OverviewPanel
@@ -475,6 +484,8 @@ const Home = (): ReactNode => {
                       selected={selected}
                       onSelect={setSelected}
                       onOpenAgents={openAgents}
+                      skills={skills}
+                      onToggleSkill={toggleSkill}
                     />
                   )}
 

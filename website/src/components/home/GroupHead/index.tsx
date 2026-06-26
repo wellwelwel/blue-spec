@@ -7,8 +7,10 @@ export const GroupHead = ({
   title: string;
   meta?: string;
 }) => (
-  <div className='flex items-baseline justify-between mx-1 mb-3 [&:not(:first-child)]:mt-[22px]'>
-    <span className={`${monoLabel} text-[12px] text-muted`}>{title}</span>
-    {meta && <span className={`${monoLabel} text-faint`}>{meta}</span>}
+  <div className='flex items-baseline justify-between mx-1 mb-3 [&:not(:first-child)]:mt-[15px]'>
+    <span className={`${monoLabel} !text-[13px] text-muted`}>{title}</span>
+    {meta && (
+      <span className={`${monoLabel} !text-[12px] text-faint`}>{meta}</span>
+    )}
   </div>
 );

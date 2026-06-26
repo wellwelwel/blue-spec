@@ -21,7 +21,7 @@ export const PromptCard = ({
           Example
         </span>
       </div>
-      <p className='m-0 px-[18px] pt-1 pb-[18px] font-mono text-[13.5px] leading-[1.65] text-ink [&_.typed-cursor]:text-[#5fb4ff]'>
+      <p className='m-0 px-[18px] pt-1 pb-[18px] font-mono text-[13.5px] leading-[1.65] text-ink text-justify [&_.typed-cursor]:text-[#5fb4ff]'>
         <ReactTyped
           key={`${command}${body}`}
           strings={[`<span style="color:#5fb4ff">${command}</span>${body}`]}

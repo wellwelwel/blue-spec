@@ -5,7 +5,6 @@ import {
   LuBlocks,
   LuBookOpen,
   LuBrain,
-  LuHeart,
   LuHeartHandshake,
   LuHouse,
   LuLayoutGrid,
@@ -47,6 +46,13 @@ export type Group = {
 export type Agent = {
   key: string;
   name: string;
+  icon: string;
+};
+
+export type Category = {
+  key: string;
+  name: string;
+  desc: string;
   icon: string;
 };
 
@@ -185,6 +191,23 @@ export const AGENTS: Agent[] = [
   { key: 'opencode', name: 'opencode', icon: '/img/icons/opencode.svg' },
 ];
 
+// TODO: Mirror of SKILL_GROUPS in ../../../src/hooks/skills/groups.ts
+export const CATEGORIES: Category[] = [
+  {
+    key: 'owasp',
+    name: 'OWASP (Beta)',
+    desc: 'OWASP Top 10 risks',
+    icon: '/img/icons/owasp.svg',
+  },
+  {
+    key: 'javascript',
+    name: 'JavaScript',
+    desc: 'JavaScript and its runtimes',
+    icon: '/img/icons/javascript.svg',
+  },
+];
+
+// TODO: Mirror of AGENT_SPECS in ../../../src/providers/registry.ts
 export const ALL_AGENTS: AgentEntry[] = [
   { key: 'amazonq', name: 'Amazon Q Developer' },
   { key: 'amp', name: 'Amp' },

@@ -214,6 +214,22 @@
   }
 }
 
+/* Opacity-only variant for full-height containers, where a translateY would
+   extend past a fixed-height scroller and trigger a phantom scrollbar. */
+.bs-fade-in-soft {
+  opacity: 0;
+  animation: bs-fade-in-soft 0.36s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes bs-fade-in-soft {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .bs-modal-backdrop {
   animation: bs-modal-backdrop 0.24s ease both;
 }
