@@ -2,12 +2,14 @@
 id: skills
 title: skills hook
 sidebar_label: skills
-description: List the available sub-skills and their tags from the command line.
+description: List the sub-skills installed in this project and their tags from the command line.
 ---
 
 # `skills` hook
 
-The `skills` hook lists every sub-skill **Blue Spec** ships, with the tags that describe what each one covers. It is the deterministic catalog the detect and verify phases read to find the sub-skills that fit, and you can run it yourself to see what is available.
+The `skills` hook lists the sub-skills **installed** in this project, with the tags that describe what each one covers. It is the deterministic listing the detect and verify phases read to find the sub-skills that fit, and you can run it yourself to see what is available here.
+
+It lists what is present under `.bluespec/skills/`, the built-ins from the categories you installed plus any you authored with [`/bluespec.specialize`](/docs/commands/specialize). To see every category that exists, installed or not, use [`list --skills`](/docs/get-started/install#see-what-exists) instead.
 
 ## Run it
 

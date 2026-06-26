@@ -4,7 +4,7 @@ export const SKILL_GROUPS: SkillGroup[] = [
   {
     key: 'owasp',
     label: 'OWASP',
-    description: 'OWASP Top 10 risks',
+    description: 'Harden against the application security risks OWASP tracks',
   },
   {
     key: 'javascript',

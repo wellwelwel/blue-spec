@@ -181,7 +181,11 @@ await describe('list reports category state', async () => {
     });
     const output = await runCli(workspace, ['list', '--skills']);
 
-    strict(/owasp\s+\[installed]\s+OWASP Top 10 risks/.test(output));
+    strict(
+      /owasp\s+\[installed]\s+Harden against the application security risks OWASP tracks/.test(
+        output
+      )
+    );
     strict(
       /javascript\s+\[available]\s+JavaScript and its runtimes/.test(output)
     );

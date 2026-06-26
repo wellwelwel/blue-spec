@@ -43,26 +43,38 @@ Test a pattern yourself at [**devina.io/redos-checker**](https://devina.io/redos
 
 ## The catalog
 
-This is the built-in set that ships with **Blue Spec**:
+The built-in sub-skills are grouped into **categories** you install on demand. This is the set that ships with **Blue Spec**:
 
-| _Sub_-Skill  | Path                             | Focus                                                       |
-| ------------ | -------------------------------- | ----------------------------------------------------------- |
-| `regex`      | `.bluespec/skills/regex.md`      | **ReDoS:** patterns that explode on crafted input.          |
-| `javascript` | `.bluespec/skills/javascript.md` | **Language-level risks:** RCE, prototype pollution, etc.    |
-| `browser`    | `.bluespec/skills/browser.md`    | **Client-side risks:** DOM XSS, origin, storage, etc.       |
-| `network`    | `.bluespec/skills/network.md`    | **SSRF:** user-supplied fetch destinations reaching inside. |
+| _Sub_-Skill  | Category     | Focus                                                       |
+| ------------ | ------------ | ----------------------------------------------------------- |
+| `regex`      | `owasp`      | **ReDoS:** patterns that explode on crafted input.          |
+| `network`    | `owasp`      | **SSRF:** user-supplied fetch destinations reaching inside. |
+| `javascript` | `javascript` | **Language-level risks:** RCE, prototype pollution, etc.    |
+| `browser`    | `javascript` | **Client-side risks:** DOM XSS, origin, storage, etc.       |
 
-The catalog grows by adding one knowledge file plus one catalog row, never a new command. You add your own the same way, with [`/bluespec.specialize`](/docs/commands/specialize): point it at an article or a topic and it distills a new sub-skill into the same catalog (the file under `.bluespec/skills/`, the row in `.bluespec/skills.json`), loaded exactly like the built-ins.
+You choose which categories to install when you set up **Blue Spec**, and change them any time with `add` and `remove`. See [**Install**](/docs/get-started/install#specializations) for the `--skills` flag. Each installed sub-skill is a file under `.bluespec/skills/`.
+
+The catalog grows by adding one knowledge file plus one catalog row, never a new command. You add your own the same way, with [`/bluespec.specialize`](/docs/commands/specialize): point it at an article or a topic and it distills a new sub-skill into the project's own catalog (the file under `.bluespec/skills/`, the row in `.bluespec/skills.json`), loaded exactly like the built-ins.
 
 :::note[Internally, Blue Spec loads sub-skills automatically, on demand]
 
-When the detect or verify phase hits a context a sub-skill covers, it lists the catalog with the [`skills` hook](/docs/hooks/skills) and reads the matching `.bluespec/skills/<name>.md` itself. This happens automatically, as part of the phase. You do not do it by hand for this to work.
+When the detect or verify phase hits a context a sub-skill covers, it lists the installed sub-skills with the [`skills` hook](/docs/hooks/skills) and reads the matching `.bluespec/skills/<name>.md` itself. This happens automatically, as part of the phase. You do not do it by hand for this to work.
 
 :::
 
 ## Discover what is available
 
-Run the [`skills` hook](/docs/hooks/skills) with no input to list the catalog, each sub-skill with the tags that say what it covers:
+Two views, for two questions.
+
+To see every **category** and whether it is installed, from the terminal:
+
+```bash
+npx -y blue-spec@latest list --skills
+#   owasp       [installed]  Harden against the application security risks OWASP tracks
+#   javascript  [available]  JavaScript and its runtimes
+```
+
+To list the sub-skills **installed** in this project, each with the tags that say what it covers, run the [`skills` hook](/docs/hooks/skills):
 
 ```bash
 node ./.bluespec/hooks/skills.mjs

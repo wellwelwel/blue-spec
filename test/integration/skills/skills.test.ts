@@ -236,7 +236,7 @@ describe('findGroup resolves a descriptor by exact key', () => {
     strict.deepStrictEqual(findGroup(SKILL_GROUPS, 'owasp'), {
       key: 'owasp',
       label: 'OWASP',
-      description: 'OWASP Top 10 risks',
+      description: 'Harden against the application security risks OWASP tracks',
     });
   });
 

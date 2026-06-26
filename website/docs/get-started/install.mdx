@@ -2,28 +2,44 @@
 id: install
 title: Install
 sidebar_label: Install
-description: Set Blue Spec up in any project, new or existing, with a single command via npx.
+description: Set Blue Spec up in any project, new or existing, with a single command via npx, and choose the security specializations that fit it.
 keywords:
   - install blue spec
   - npx blue-spec
   - setup
   - getting started
+  - specializations
+  - skills
 ---
+
+import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
 
 # Install
 
 **Blue Spec** adapts to your environment, whether it is a new project or an existing one.
 
+<Tabs>
+  <TabItem value="prompt" label="Interactive" default>
+
+Run without an agent key and **Blue Spec** asks you to choose one, then which specializations to install:
+
 ```bash
-npx -y blue-spec@latest init
+npx -y blue-spec@latest init --skills
 ```
 
-Run without an agent key and **Blue Spec** asks you to choose one. Pass the key to skip the prompt:
+  </TabItem>
+  <TabItem value="key" label="Pass the agent">
+
+Pass the key to skip the agent prompt:
 
 ```bash
 # For example, using Blue Spec with Claude
 npx -y blue-spec@latest init claude
 ```
+
+  </TabItem>
+</Tabs>
 
 See every key in [**Supported Agents**](/docs/supported-agents).
 
@@ -35,8 +51,94 @@ See every key in [**Supported Agents**](/docs/supported-agents).
 
 Running **Blue Spec** in your project creates two things:
 
-- **`.bluespec/`** holds Blue Spec's state in that project: the charter, the artifact each phase produces, the on-demand skills, and the internal tracking. It is committed alongside your code, so the security work is versioned and reviewable like any other part of the project.
+- **`.bluespec/`** holds Blue Spec's state in that project: the charter, the artifact each phase produces, the on-demand skills you installed, and the internal tracking. It is committed alongside your code, so the security work is versioned and reviewable like any other part of the project.
 - **Agent commands** are written into your agent's own location, in its native format, so the `/bluespec.*` commands are ready to run.
+
+## Specializations
+
+**Blue Spec** ships focused security [**_sub_-skills**](/docs/commands/skills) grouped into **categories** (for example `owasp`). You install them by category with the `--skills` flag. The flag is the same everywhere, so what you learn for `init` works for `add` and `remove` too.
+
+The agent commands are always set up. Specializations are what you choose on top.
+
+### Install at init
+
+<Tabs>
+  <TabItem value="picker" label="Interactive" default>
+
+`--skills` with no category opens an interactive picker (space to toggle, enter to confirm, empty to skip):
+
+```bash
+npx -y blue-spec@latest init claude --skills
+```
+
+  </TabItem>
+  <TabItem value="categories" label="Pick categories">
+
+Pass the categories after `--skills`, on the same line as the agent:
+
+```bash
+npx -y blue-spec@latest init claude --skills owasp
+npx -y blue-spec@latest init claude --skills owasp javascript
+```
+
+  </TabItem>
+  <TabItem value="all" label="Every category">
+
+`--skills all` installs every category:
+
+```bash
+npx -y blue-spec@latest init claude --skills all
+```
+
+  </TabItem>
+  <TabItem value="none" label="No specialization">
+
+Without `--skills`, the agent is set up and no specialization is installed. You can always add them later:
+
+```bash
+npx -y blue-spec@latest init claude
+```
+
+  </TabItem>
+</Tabs>
+
+### Add and remove anytime
+
+The same `--skills` flag, without touching the agent.
+
+<Tabs>
+  <TabItem value="add" label="Add" default>
+
+```bash
+npx -y blue-spec@latest add --skills # interactive
+npx -y blue-spec@latest add --skills owasp
+npx -y blue-spec@latest add --skills owasp javascript
+npx -y blue-spec@latest add --skills all
+```
+
+  </TabItem>
+  <TabItem value="remove" label="Remove">
+
+```bash
+npx -y blue-spec@latest remove --skills # interactive
+npx -y blue-spec@latest remove --skills owasp
+npx -y blue-spec@latest remove --skills owasp javascript
+npx -y blue-spec@latest remove --skills all
+```
+
+  </TabItem>
+</Tabs>
+
+### See what exists
+
+`list --skills` prints every category and whether it is installed:
+
+```bash
+npx -y blue-spec@latest list --skills
+#   owasp       [installed]  Harden against the application security risks OWASP tracks
+#   javascript  [available]  JavaScript and its runtimes
+#   ...
+```
 
 ## Next
 

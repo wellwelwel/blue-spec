@@ -196,7 +196,7 @@ export const CATEGORIES: Category[] = [
   {
     key: 'owasp',
     name: 'OWASP (Beta)',
-    desc: 'OWASP Top 10 risks',
+    desc: 'Harden against the application security risks OWASP tracks',
     icon: '/img/icons/owasp.svg',
   },
   {
