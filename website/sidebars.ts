@@ -34,13 +34,13 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: 'Maintenance',
-      items: ['commands/repair'],
+      label: 'Hooks',
+      items: ['hooks/regex', 'hooks/url-safety', 'hooks/skills'],
     },
     {
       type: 'category',
-      label: 'Hooks',
-      items: ['hooks/regex', 'hooks/url-safety', 'hooks/skills'],
+      label: 'Maintenance',
+      items: ['commands/repair'],
     },
     'supported-agents',
     'requirements',
