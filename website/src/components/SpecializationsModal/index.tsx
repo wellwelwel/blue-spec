@@ -150,7 +150,7 @@ export const SpecializationsModal = ({
               placeholder='Search specializations'
               aria-label='Search specializations'
               autoFocus
-              className='w-full rounded-[14px] border border-line bg-card py-[12px] pl-[42px] pr-[14px] text-[14px] text-ink placeholder:text-[#888c99] transition-[border-color,background-color] duration-200 ease-out hover:border-white/[0.16] focus:border-accent/50 focus:bg-accent/[0.06] focus:outline-none'
+              className='w-full rounded-[14px] border border-line bg-card py-[12px] pl-[42px] pr-[14px] font-mono !text-[16px] text-ink placeholder:text-[#888c99] transition-[border-color,background-color] duration-200 ease-out hover:border-white/[0.16] focus:border-accent/50 focus:bg-accent/[0.06] focus:outline-none'
             />
           </div>
         </div>
