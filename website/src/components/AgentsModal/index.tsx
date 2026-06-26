@@ -98,7 +98,7 @@ export const AgentsModal = ({
         aria-label='All agents'
         tabIndex={-1}
         onClick={(event) => event.stopPropagation()}
-        className='bs-modal-panel relative flex flex-col w-full max-w-[680px] h-[640px] max-h-full rounded-[20px] border border-[#0c155c] bg-[#0a0f1f] overflow-hidden [box-shadow:0_40px_120px_-30px_rgba(0,0,0,0.8)] outline-none'
+        className='bs-modal-panel relative flex flex-col w-full max-w-[680px] h-[800px] max-h-full rounded-[20px] border border-[#0c155c] bg-[#0a0f1f] overflow-hidden [box-shadow:0_40px_120px_-30px_rgba(0,0,0,0.8)] outline-none'
       >
         <div className='flex items-center justify-between gap-4 shrink-0 px-[clamp(20px,3vw,32px)] py-4 border-b border-[#0c155c] bg-[#0a0f1f]'>
           <span className='font-mono text-[11px] tracking-[0.14em] uppercase text-muted tabular-nums'>

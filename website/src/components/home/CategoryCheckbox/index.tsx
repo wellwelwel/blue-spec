@@ -29,7 +29,7 @@ export const CategoryCheckbox = ({
         WebkitMaskImage: `url(${category.icon})`,
       }}
     />
-    <span className='flex-1 min-w-0 text-[13.5px] font-semibold tracking-[-0.01em] overflow-hidden text-ellipsis whitespace-nowrap'>
+    <span className='flex-1 min-w-0 text-[12px] font-bold tracking-[-0.01em] overflow-hidden text-ellipsis whitespace-nowrap'>
       {category.name}
     </span>
   </button>

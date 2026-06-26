@@ -200,6 +200,18 @@ export const ALL_CATEGORIES: Category[] = [
     icon: '/img/icons/owasp.svg',
   },
   {
+    key: 'infra',
+    name: 'Infrastructure',
+    desc: 'Container, workload, and serverless config: Dockerfile, Compose, Pod security, FaaS IAM and triggers',
+    icon: '/img/icons/kubernetes.svg',
+  },
+  {
+    key: 'ai',
+    name: 'AI / LLM',
+    desc: 'AI and LLM integrations: prompts, tools, agents, retrieval, and MCP',
+    icon: '/img/icons/ai.svg',
+  },
+  {
     key: 'javascript',
     name: 'JavaScript',
     desc: 'JavaScript and its runtimes',
@@ -246,6 +258,12 @@ export const ALL_CATEGORIES: Category[] = [
     name: 'Ruby',
     desc: 'Ruby and its language-specific risks',
     icon: '/img/icons/ruby.svg',
+  },
+  {
+    key: 'dotnet',
+    name: '.NET',
+    desc: '.NET and C# and their platform-specific risks',
+    icon: '/img/icons/dot-net.svg',
   },
 ];
 

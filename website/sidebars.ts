@@ -32,13 +32,18 @@ const sidebars: SidebarsConfig = {
       label: 'Hooks',
       items: ['hooks/regex', 'hooks/url-safety', 'hooks/skills'],
     },
+    'supported-agents',
+    'requirements',
+    {
+      type: 'category',
+      label: 'References & Sources',
+      items: ['references/skills-sources'],
+    },
     {
       type: 'category',
       label: 'Maintenance',
       items: ['commands/repair'],
     },
-    'supported-agents',
-    'requirements',
   ],
 };
 
