@@ -469,7 +469,6 @@ describe('installedGroupKeys lists groups with a present built-in', () => {
         'regex',
         'network',
         'javascript',
-        'browser',
       ]),
       ['owasp', 'javascript']
     );
@@ -477,8 +476,15 @@ describe('installedGroupKeys lists groups with a present built-in', () => {
 
   it('claims a group from a single present member', () => {
     strict.deepStrictEqual(
+      installedGroupKeys(SKILL_GROUPS, SKILLS_CATALOG, ['regex']),
+      ['owasp']
+    );
+  });
+
+  it('claims every group a multi-group member belongs to, in registry order', () => {
+    strict.deepStrictEqual(
       installedGroupKeys(SKILL_GROUPS, SKILLS_CATALOG, ['browser']),
-      ['javascript']
+      ['lovable', 'javascript']
     );
   });
 

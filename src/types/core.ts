@@ -16,6 +16,7 @@ export type SkillGroupKey =
   | 'owasp'
   | 'infra'
   | 'ai'
+  | 'lovable'
   | 'javascript'
   | 'python'
   | 'rust'

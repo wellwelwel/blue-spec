@@ -212,6 +212,12 @@ export const ALL_CATEGORIES: Category[] = [
     icon: '/img/icons/ai.svg',
   },
   {
+    key: 'lovable',
+    name: 'Lovable',
+    desc: 'AI-generated Supabase apps (Lovable and similar): RLS and key model, plus the access, secret, validation, and delivery defaults that ship insecure',
+    icon: '/img/icons/lovable.svg',
+  },
+  {
     key: 'javascript',
     name: 'JavaScript',
     desc: 'JavaScript and its runtimes',

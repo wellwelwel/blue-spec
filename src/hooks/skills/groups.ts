@@ -19,6 +19,12 @@ export const SKILL_GROUPS: SkillGroup[] = [
       'AI and LLM integrations: prompts, tools, agents, retrieval, and MCP',
   },
   {
+    key: 'lovable',
+    label: 'Lovable',
+    description:
+      'AI-generated Supabase apps (Lovable and similar): RLS and key model, plus the access, secret, validation, and delivery defaults that ship insecure',
+  },
+  {
     key: 'javascript',
     label: 'JavaScript',
     description: 'JavaScript and its runtimes',

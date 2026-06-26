@@ -45,40 +45,41 @@ Test a pattern yourself at [**devina.io/redos-checker**](https://devina.io/redos
 
 The built-in sub-skills are grouped into **categories** you install on demand. This is the set that ships with **Blue Spec**:
 
-| _Sub_-Skill           | Category         | Focus                                                                         |
-| --------------------- | ---------------- | ----------------------------------------------------------------------------- |
-| `regex`               | `owasp`          | **ReDoS:** patterns that explode on crafted input.                            |
-| `network`             | `owasp`          | **SSRF & redirects:** user-supplied fetch or redirect destinations.           |
-| `interpreter`         | `owasp`          | **Code injection:** `eval`, dynamic include, name dispatch.                   |
-| `path`                | `owasp`          | **Filesystem paths:** traversal, null-byte, NTFS streams, planting.           |
-| `upload`              | `owasp`          | **File uploads:** type/signature, malicious content, storage, limits.         |
-| `access-control`      | `owasp`          | **Authn/authz/session:** IDOR, mass assignment, tenants, sessions.            |
-| `credential-endpoint` | `owasp`          | **Guessing & bots:** brute force, spraying, stuffing, throttling.             |
-| `federation`          | `owasp`          | **Token trust:** OAuth/OIDC, SAML, JWT validation, QR login.                  |
-| `http-request`        | `owasp`          | **Request provenance:** CSRF, CORS misconfig, spoofed client-IP.              |
-| `transport`           | `owasp`          | **Channel security:** TLS config, HTTPS/cleartext, HSTS, pinning.             |
-| `crypto`              | `owasp`          | **Crypto at rest:** weak/custom algorithms, CSPRNG, key management.           |
-| `api-endpoint`        | `owasp`          | **Non-REST surfaces:** GraphQL, gRPC, WebSocket authz, DoS, schema.           |
-| `payment`             | `owasp`          | **Checkout flow:** verify gateway server-side, signed callbacks, idempotency. |
-| `xml`                 | `owasp`          | **XML parsing:** XXE, external entities, billion-laughs expansion.            |
-| `csv`                 | `owasp`          | **Formula injection:** spreadsheet cells starting `=`/`+`/`-`/`@`.            |
-| `container`           | `owasp`, `infra` | **Container config:** root, capabilities, socket mount, image hardening.      |
-| `serverless`          | `owasp`, `infra` | **FaaS functions:** least-privilege IAM, event input, context, secrets.       |
-| `llm`                 | `ai`             | **AI/LLM risks:** prompt injection, agency, RAG, MCP, output.                 |
-| `browser`             | `javascript`     | **Client-side risks:** XSS, CSP, framing, storage, etc.                       |
-| `javascript`          | `javascript`     | **Language-level risks:** RCE, prototype pollution, etc.                      |
-| `python`              | `python`         | **Language-level risks:** `pickle` RCE, class pollution, `-O`, etc.           |
-| `rust`                | `rust`           | **`unsafe` soundness:** UB from safe callers, `transmute`, overflow.          |
-| `java`                | `java`           | **Deserialization & mobile code:** `readObject` chains, object hijack.        |
-| `ruby`                | `ruby`           | **Deserialization & `open`:** `Marshal`/YAML revival, pipe quirk.             |
-| `php`                 | `php`            | **Type juggling & `unserialize`:** magic hashes, POP chains.                  |
-| `go`                  | `go`             | **Typed-nil & data races:** `nil != nil`, shared-memory goroutines.           |
-| `c-cpp`               | `c-cpp`          | **Format strings:** `printf(user_input)`, `%n` write-what-where.              |
-| `dotnet`              | `dotnet`         | **Platform-level risks:** `BinaryFormatter` RCE, `@Html.Raw`, enum gaps.      |
+| _Sub_-Skill           | Category                    | Focus                                                                          |
+| --------------------- | --------------------------- | ------------------------------------------------------------------------------ |
+| `regex`               | `owasp`                     | **ReDoS:** patterns that explode on crafted input.                             |
+| `network`             | `owasp`                     | **SSRF & redirects:** user-supplied fetch or redirect destinations.            |
+| `interpreter`         | `owasp`, `lovable`          | **Code injection:** `eval`, dynamic include, name dispatch.                    |
+| `path`                | `owasp`                     | **Filesystem paths:** traversal, null-byte, NTFS streams, planting.            |
+| `upload`              | `owasp`                     | **File uploads:** type/signature, malicious content, storage, limits.          |
+| `access-control`      | `owasp`, `lovable`          | **Authn/authz/session:** IDOR, mass assignment, tenants, sessions.             |
+| `credential-endpoint` | `owasp`, `lovable`          | **Guessing & bots:** brute force, spraying, stuffing, throttling.              |
+| `federation`          | `owasp`                     | **Token trust:** OAuth/OIDC, SAML, JWT validation, QR login.                   |
+| `http-request`        | `owasp`                     | **Request provenance:** CSRF, CORS misconfig, spoofed client-IP.               |
+| `transport`           | `owasp`                     | **Channel security:** TLS config, HTTPS/cleartext, HSTS, pinning.              |
+| `crypto`              | `owasp`, `lovable`          | **Crypto at rest:** weak/custom algorithms, CSPRNG, key management.            |
+| `api-endpoint`        | `owasp`                     | **Non-REST surfaces:** GraphQL, gRPC, WebSocket authz, DoS, schema.            |
+| `payment`             | `owasp`, `lovable`          | **Checkout flow:** verify gateway server-side, signed callbacks, idempotency.  |
+| `xml`                 | `owasp`                     | **XML parsing:** XXE, external entities, billion-laughs expansion.             |
+| `csv`                 | `owasp`                     | **Formula injection:** spreadsheet cells starting `=`/`+`/`-`/`@`.             |
+| `container`           | `owasp`, `infra`            | **Container config:** root, capabilities, socket mount, image hardening.       |
+| `serverless`          | `owasp`, `infra`, `lovable` | **FaaS functions:** least-privilege IAM, event input, context, secrets.        |
+| `llm`                 | `ai`, `lovable`             | **AI/LLM risks:** prompt injection, agency, RAG, MCP, output.                  |
+| `supabase`            | `lovable`                   | **Supabase backend:** RLS off by default, AI-misgenerated policies, key model. |
+| `browser`             | `javascript`, `lovable`     | **Client-side risks:** XSS, CSP, framing, storage, etc.                        |
+| `javascript`          | `javascript`                | **Language-level risks:** RCE, prototype pollution, etc.                       |
+| `python`              | `python`                    | **Language-level risks:** `pickle` RCE, class pollution, `-O`, etc.            |
+| `rust`                | `rust`                      | **`unsafe` soundness:** UB from safe callers, `transmute`, overflow.           |
+| `java`                | `java`                      | **Deserialization & mobile code:** `readObject` chains, object hijack.         |
+| `ruby`                | `ruby`                      | **Deserialization & `open`:** `Marshal`/YAML revival, pipe quirk.              |
+| `php`                 | `php`                       | **Type juggling & `unserialize`:** magic hashes, POP chains.                   |
+| `go`                  | `go`                        | **Typed-nil & data races:** `nil != nil`, shared-memory goroutines.            |
+| `c-cpp`               | `c-cpp`                     | **Format strings:** `printf(user_input)`, `%n` write-what-where.               |
+| `dotnet`              | `dotnet`                    | **Platform-level risks:** `BinaryFormatter` RCE, `@Html.Raw`, enum gaps.       |
 
 You choose which categories to install when you set up **Blue Spec**, and change them any time with `add` and `remove`. See [**Install**](/docs/get-started/install#specializations) for the `--skills` flag. Each installed sub-skill is a file under `.bluespec/skills/`.
 
-The built-in knowledge is distilled from OWASP. See [**OWASP Sources**](/docs/references/skills-sources) for the full mapping of each sub-skill to its canonical OWASP attack and Cheat Sheet pages.
+Most built-in knowledge is distilled from OWASP. See [**OWASP Sources**](/docs/references/skills-sources) for the full mapping of each sub-skill to its canonical OWASP attack and Cheat Sheet pages. A few stack-specific modules draw from the vendor's own guidance instead: `supabase`, for instance, comes from the Supabase docs and CVE-2025-48757.
 
 The catalog grows by adding one knowledge file plus one catalog row, never a new command. You add your own the same way, with [`/bluespec.specialize`](/docs/commands/specialize): point it at an article or a topic and it distills a new sub-skill into the project's own catalog (the file under `.bluespec/skills/`, the row in `.bluespec/skills.json`), loaded exactly like the built-ins.
 
@@ -99,6 +100,7 @@ npx -y blue-spec@latest list --skills
 # Specializations .bluespec/skills/
 #   • owasp       [installed]  Harden against the application security risks OWASP tracks
 #   • ai          [available]  AI and LLM integrations: prompts, tools, agents, retrieval, and MCP
+#   • lovable     [available]  AI-generated Supabase apps (Lovable and similar): RLS and key model, plus the defaults that ship insecure
 #   • javascript  [available]  JavaScript and its runtimes
 #   • python      [available]  Python and its language-specific risks
 #   • rust        [available]  Rust and its language-specific risks

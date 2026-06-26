@@ -14,7 +14,7 @@ export const SKILLS_CATALOG: BuiltinSkillEntry[] = [
   {
     name: 'browser',
     tags: ['DOM', 'Client-Side', 'CSP'],
-    groups: ['javascript'],
+    groups: ['javascript', 'lovable'],
   },
   {
     name: 'network',
@@ -24,7 +24,7 @@ export const SKILLS_CATALOG: BuiltinSkillEntry[] = [
   {
     name: 'interpreter',
     tags: ['Evaluator', 'Sink', 'Shell', 'Dynamic Execution'],
-    groups: ['owasp'],
+    groups: ['owasp', 'lovable'],
   },
   {
     name: 'path',
@@ -39,12 +39,12 @@ export const SKILLS_CATALOG: BuiltinSkillEntry[] = [
   {
     name: 'access-control',
     tags: ['Authentication', 'Authorization', 'Session', 'RBAC'],
-    groups: ['owasp'],
+    groups: ['owasp', 'lovable'],
   },
   {
     name: 'credential-endpoint',
     tags: ['Login', 'Rate Limiting', 'Anti-Automation', 'CAPTCHA'],
-    groups: ['owasp'],
+    groups: ['owasp', 'lovable'],
   },
   {
     name: 'federation',
@@ -64,7 +64,7 @@ export const SKILLS_CATALOG: BuiltinSkillEntry[] = [
   {
     name: 'crypto',
     tags: ['Cryptography', 'Encryption', 'Key Management', 'Randomness'],
-    groups: ['owasp'],
+    groups: ['owasp', 'lovable'],
   },
   {
     name: 'api-endpoint',
@@ -74,7 +74,7 @@ export const SKILLS_CATALOG: BuiltinSkillEntry[] = [
   {
     name: 'payment',
     tags: ['Checkout', 'Gateway', 'PSP', 'Stripe'],
-    groups: ['owasp'],
+    groups: ['owasp', 'lovable'],
   },
   {
     name: 'xml',
@@ -94,12 +94,17 @@ export const SKILLS_CATALOG: BuiltinSkillEntry[] = [
   {
     name: 'serverless',
     tags: ['FaaS', 'Lambda', 'Cloud Functions', 'IAM'],
-    groups: ['owasp', 'infra'],
+    groups: ['owasp', 'infra', 'lovable'],
   },
   {
     name: 'llm',
     tags: ['AI API', 'RAG', 'MCP', 'Agent'],
-    groups: ['ai'],
+    groups: ['ai', 'lovable'],
+  },
+  {
+    name: 'supabase',
+    tags: ['Lovable', 'RLS', 'PostgREST', 'service_role'],
+    groups: ['lovable'],
   },
   {
     name: 'python',
