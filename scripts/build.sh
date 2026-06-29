@@ -4,7 +4,7 @@ set -euo pipefail
 rm -rf lib
 
 esbuild() {
-  echo "npx esbuild $1 \
+  echo "esbuild $1 \
     --bundle \
     --platform=node \
     --format=esm \
@@ -37,7 +37,7 @@ done
 
 names_joined="$(IFS=,; echo "${names[*]}")"
 
-npx concurrently \
+concurrently \
   --names "$names_joined" \
   --kill-others-on-fail \
   "${commands[@]}"

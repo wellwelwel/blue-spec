@@ -32,4 +32,4 @@ if [[ -n "$doubleCastHits" ]]; then
   exit 1
 fi
 
-npx tsc --noEmit
+tsc --noEmit

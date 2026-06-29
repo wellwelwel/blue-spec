@@ -44,9 +44,6 @@ jobs:
       - name: 📦 Installing Dependencies
         run: npm ci
 
-      - name: 🤹🏻‍♀️ Building the Project
-        run: npm run build
-
       - name: 🔬 Node ${{ matrix.node-version }}
         run: npm test
 
@@ -83,9 +80,6 @@ jobs:
       - name: 📦 Installing Dependencies
         run: npm ci
 
-      - name: 🤹🏻‍♀️ Building the Project
-        run: npm run build
-
       - name: 🔬 Deno ${{ matrix.deno-version }}
         run: deno task test:deno
 
@@ -121,9 +115,6 @@ jobs:
 
       - name: 📦 Installing Dependencies
         run: npm ci
-
-      - name: 🤹🏻‍♀️ Building the Project
-        run: npm run build
 
       - name: 🔬 Bun ${{ matrix.bun-version }}
         run: bun run test:bun
