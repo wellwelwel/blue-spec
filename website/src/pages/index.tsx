@@ -162,7 +162,7 @@ const Home = (): ReactNode => {
   ];
 
   const headerLinkClass =
-    'inline-flex items-center gap-[9px] pl-4 pr-[18px] py-[9px] rounded-xl border border-line bg-card text-ink text-[14px] font-semibold tracking-[-0.01em] no-underline cursor-pointer transition-[background-color,border-color] duration-200 ease-out hover:bg-card-hover hover:border-accent/50 [&>svg]:size-4 [&>svg]:text-[#0088ff]';
+    'inline-flex items-center gap-[9px] py-[9px] rounded-xl text-[#a1b1e7] text-[13px] font-bold tracking-[-0.01em] no-underline cursor-pointer [&>svg]:size-4 [&>svg]:text-[#0c3c9f] [&>svg]:transition-colors [&>svg]:duration-200 [&>svg]:ease-out hover:[&>svg]:text-accent';
 
   return (
     <div className='bs-canvas relative min-h-screen m-0 antialiased text-ink bg-[#050a18] font-sans'>
@@ -210,7 +210,7 @@ const Home = (): ReactNode => {
           crossOrigin='anonymous'
         />
         <link
-          href='https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=Ubuntu+Mono:wght@400;700&display=swap'
+          href='https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=Ubuntu+Mono:wght@400;700&display=swap'
           rel='stylesheet'
         />
         <script type='application/ld+json'>
@@ -263,18 +263,20 @@ const Home = (): ReactNode => {
                 type='button'
                 onClick={() => goToTab('overview')}
                 aria-label='Blue Spec, back to overview'
-                className='inline-flex items-center gap-2 font-display text-[clamp(18px,1.8vw,23px)] font-extrabold tracking-[-0.02em] leading-none cursor-pointer rounded-md focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4'
+                className='inline-flex items-center gap-2 font-["Fraunces"] font-bold text-[clamp(18px,1.8vw,23px)] font-extrabold tracking-[-0.035em] leading-none cursor-pointer rounded-md focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4'
               >
                 <span>
-                  SDH
-                  <span className='text-[#2092ff]'>:</span> Blue Spec
+                  <span className='tracking-normal text-[1.04em] text-[#1168ff]'>
+                    SDH
+                  </span>
+                  <span className='px-0.5 text-[#2092ff]'>:</span> Blue Spec
                 </span>
               </button>
             </div>
 
             <nav
               ref={navRef}
-              className='relative flex items-center gap-1 rounded-xl border border-line bg-card p-1 max-[920px]:order-3 max-[920px]:w-full'
+              className='relative flex items-center gap-1 rounded-xl p-1 max-[920px]:order-3 max-[920px]:w-full'
               aria-label='Windows'
               onMouseLeave={() => setHoveredTab(null)}
             >
@@ -310,7 +312,7 @@ const Home = (): ReactNode => {
               ref={menuRef}
               className='relative flex items-center justify-end gap-1.5 max-[920px]:justify-center'
             >
-              <div className='flex items-center gap-1.5 max-[920px]:hidden'>
+              <div className='flex items-center gap-4 max-[920px]:hidden'>
                 {headerLinks.map(({ label, Icon, href, onClick }) =>
                   href ? (
                     <Link key={label} className={headerLinkClass} to={href}>
