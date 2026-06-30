@@ -237,7 +237,7 @@ await describe('scan maps unsafe regex across a path, language-gated', async () 
   await it('scans ambiguous dirs that may hold real source', async () => {
     const workspace = await newWorkspace();
     const pattern = 'const re = /(a+)+$/;';
-    const files: Record<string, string> = {};
+    const files: Record<string, string> = Object.create(null);
 
     for (const dir of ['dist', 'build', 'bin', 'vendor'])
       files[join(dir, 'tool.js')] = pattern;

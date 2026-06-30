@@ -49,7 +49,9 @@ const Home = (): ReactNode => {
   const menuRef = useRef<HTMLDivElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const navRef = useRef<HTMLElement | null>(null);
-  const tabRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const tabRefs = useRef<Record<string, HTMLButtonElement | null>>(
+    Object.create(null)
+  );
   const [pill, setPill] = useState<{ left: number; width: number } | null>(
     null
   );

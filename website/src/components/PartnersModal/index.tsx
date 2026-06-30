@@ -158,7 +158,9 @@ const TypeChips = ({
   onChange: (type: PartnershipType) => void;
 }): ReactNode => {
   const groupRef = useRef<HTMLDivElement>(null);
-  const refs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const refs = useRef<Record<string, HTMLButtonElement | null>>(
+    Object.create(null)
+  );
   const [pill, setPill] = useState<{ left: number; width: number } | null>(
     null
   );
