@@ -51,8 +51,10 @@ See every key in [**Supported Agents**](/docs/supported-agents).
 
 Running **Blue Spec** in your project creates two things:
 
-- **`.bluespec/`** holds Blue Spec's state in that project: the charter, the artifact each phase produces, the on-demand skills you installed, and the internal tracking. It is committed alongside your code, so the security work is versioned and reviewable like any other part of the project.
+- **`.bluespec/`** holds Blue Spec's state in that project: the charter, the artifact each phase produces, the on-demand skills you installed, and the internal tracking.
 - **Agent commands** are written into your agent's own location, in its native format, so the `/bluespec.*` commands are ready to run.
+
+Your security work is committed alongside your code, versioned and reviewable like any other part of the project. **Blue Spec**'s own files are gitignored by default, since [`pull`](#pull) brings them back from the manifest.
 
 ## Update
 
