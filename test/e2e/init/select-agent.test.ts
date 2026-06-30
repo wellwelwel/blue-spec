@@ -4,7 +4,7 @@ import { selectAgent } from '../../../src/cli/select-agent.js';
 await describe('selecting an agent with no agent argument (non-interactive)', async () => {
   await it('refuses instead of prompting', async () => {
     await strict.rejects(
-      selectAgent(undefined, {
+      selectAgent(undefined, [], {
         isInteractive: () => false,
         promptForAgent: () =>
           Promise.reject(new Error('should not prompt without a TTY')),
@@ -18,16 +18,23 @@ await describe('selecting an agent with no agent argument (non-interactive)', as
 await describe('selecting an agent interactively', async () => {
   await it('resolves the provider from the chosen key', async () => {
     let offered: { key: string; displayName: string }[] = [];
+    let offeredInstalled: string[] = [];
 
-    const provider = await selectAgent(undefined, {
+    const provider = await selectAgent(undefined, ['copilot'], {
       isInteractive: () => true,
-      promptForAgent: (agents) => {
+      promptForAgent: (agents, installed) => {
         offered = agents;
+        offeredInstalled = installed;
         return Promise.resolve('claude');
       },
     });
 
     strict.strictEqual(provider.key, 'claude', 'it resolves the chosen agent');
+    strict.deepStrictEqual(
+      offeredInstalled,
+      ['copilot'],
+      'the installed agents are forwarded to the picker'
+    );
     strict(
       offered.every(
         (agent) =>
@@ -54,7 +61,7 @@ await describe('selecting an agent interactively', async () => {
 
   await it('propagates an aborted selection', async () => {
     await strict.rejects(
-      selectAgent(undefined, {
+      selectAgent(undefined, [], {
         isInteractive: () => true,
         promptForAgent: () =>
           Promise.reject(new Error('No agent selected: cancelled.')),

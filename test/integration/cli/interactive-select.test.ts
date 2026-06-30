@@ -1,9 +1,17 @@
+import type { FilteredOption } from '../../../src/types/core.js';
 import { describe, it, strict } from 'poku';
 import {
   ESC,
+  firstSelectable,
   matches,
+  moveCursor,
   windowStart,
 } from '../../../src/cli/interactive-select.js';
+
+const row = (label: string, locked = false): FilteredOption => ({
+  option: { label, locked },
+  index: 0,
+});
 
 describe('the escape byte that drives the redraw', () => {
   it('is the real control character, not an empty string', () => {
@@ -55,5 +63,35 @@ describe('scrolling the visible window', () => {
 
   it('clamps to the bottom edge', () => {
     strict.strictEqual(windowStart(36, 37, 10), 27, '37 - 10 = 27');
+  });
+});
+
+describe('skipping locked options', () => {
+  it('starts on the first unlocked option', () => {
+    const visible = [row('a', true), row('b', true), row('c')];
+
+    strict.strictEqual(firstSelectable(visible), 2);
+  });
+
+  it('falls back to 0 when every option is locked', () => {
+    strict.strictEqual(firstSelectable([row('a', true), row('b', true)]), 0);
+  });
+
+  it('moves down past a locked option', () => {
+    const visible = [row('a'), row('b', true), row('c')];
+
+    strict.strictEqual(moveCursor(visible, 0, 1), 2, 'skips the locked middle');
+  });
+
+  it('moves up past a locked option', () => {
+    const visible = [row('a'), row('b', true), row('c')];
+
+    strict.strictEqual(moveCursor(visible, 2, -1), 0);
+  });
+
+  it('stays put when there is no unlocked option in that direction', () => {
+    const visible = [row('a'), row('b', true), row('c', true)];
+
+    strict.strictEqual(moveCursor(visible, 0, 1), 0, 'nothing unlocked below');
   });
 });

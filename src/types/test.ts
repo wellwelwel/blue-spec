@@ -4,6 +4,15 @@ export type InitArgs = {
   skills?: string[];
 };
 
+export type ManifestSeed = {
+  name?: string;
+  version?: string;
+  agent?: string | string[];
+  createdAt?: string;
+  files?: string[];
+  categories?: string[];
+};
+
 export type Frontmatter = {
   name?: string;
   description: string;

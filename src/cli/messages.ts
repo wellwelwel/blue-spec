@@ -146,20 +146,32 @@ export const updateNotInitialized = (agentKeys: string[]): string => {
 export const agentSelectTitle = (): string => 'Which agent are you using?';
 
 export const agentSelectHint = (): string =>
-  'Type to filter, arrow keys to move, Enter to confirm.';
+  'Type to filter, arrow keys to move.';
+
+export const agentChoiceLabel = (
+  displayName: string,
+  installed: boolean
+): string =>
+  installed ? `${displayName} ${color.green('[installed]')}` : displayName;
 
 export const selectionAborted = (): string => 'No agent selected: cancelled.';
 
+const footer = (...middle: string[]): string =>
+  ['Enter to confirm', ...middle, 'Esc to cancel'].join(' · ');
+
+export const selectFooter = (): string => footer();
+
+export const skillsSelectFooter = (): string => footer('empty to skip');
+
 export const listSelectTitle = (): string => 'What do you want to list?';
 
-export const listSelectHint = (): string =>
-  'Arrow keys to move, Enter to confirm.';
+export const listSelectHint = (): string => 'Arrow keys to move.';
 
 export const skillsSelectTitle = (): string =>
   'Which security specializations do you want?';
 
 export const skillsSelectHint = (): string =>
-  'Space to toggle, arrow keys to move, Enter to confirm, empty to skip.';
+  'Space to toggle, arrow keys to move.';
 
 const createdLine = (path: string): string => `  ${GLYPH.added} ${path}`;
 

@@ -157,6 +157,8 @@ export type AgentChoice = {
 export type SelectOption = {
   label: string;
   keywords?: string;
+  selected?: boolean;
+  locked?: boolean;
 };
 
 export type SelectConfig = {
@@ -166,6 +168,7 @@ export type SelectConfig = {
   maxVisible?: number;
   emptyLabel?: string;
   confirmLabel?: string;
+  footer?: string;
 };
 
 export type ListTarget = 'findings' | 'skills';
@@ -175,6 +178,11 @@ export type FilteredOption = {
   index: number;
 };
 
+export type SelectRowRenderer = (
+  entry: FilteredOption,
+  isActive: boolean
+) => string;
+
 export type KeypressEvent = {
   name?: string;
   sequence?: string;
@@ -183,27 +191,40 @@ export type KeypressEvent = {
 
 export type SelectAgentDeps = {
   isInteractive: () => boolean;
-  promptForAgent: (agents: AgentChoice[]) => Promise<string>;
+  promptForAgent: (
+    agents: AgentChoice[],
+    installed: string[]
+  ) => Promise<string>;
 };
 
 export type SelectCategoriesInput = {
   requested: string[];
   shouldPrompt: boolean;
   groups: SkillGroup[];
+  preselected: string[];
+  locked: string[];
 };
 
 export type SelectCategoriesDeps = {
   isInteractive: () => boolean;
-  promptForSkills: (groups: SkillGroup[]) => Promise<string[]>;
+  promptForSkills: (
+    groups: SkillGroup[],
+    options: { preselected: string[]; locked: string[] }
+  ) => Promise<string[]>;
 };
 
 export type ScaffoldOptions = {
   targetDir: string;
-  provider: AgentProvider;
+  provider?: AgentProvider;
+  assets: BundledAssets;
+};
+
+export type RefreshOptions = {
+  targetDir: string;
+  providers: AgentProvider[];
   assets: BundledAssets;
   version: string;
   now: Date;
-  categories: string[];
 };
 
 export type ScaffoldResult = {
@@ -217,8 +238,10 @@ export type RefreshResult = {
   manifestPath: string;
 };
 
+export type ManifestAgent = string | string[];
+
 export type ManifestInstall = {
-  agent: string;
+  agents: string[];
   categories: string[];
 };
 
@@ -233,7 +256,7 @@ export type ManifestInput = {
 export type ManifestData = {
   name: 'blue-spec';
   version: string;
-  agent: string;
+  agent: ManifestAgent;
   createdAt: string;
   files: string[];
   categories: string[];

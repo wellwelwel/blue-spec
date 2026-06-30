@@ -1,4 +1,5 @@
 import type {
+  AgentProvider,
   BundledAssets,
   FileOutcome,
   ListTarget,
@@ -10,6 +11,7 @@ import {
   applyManifestChange,
   readManifestCategories,
   readManifestInstall,
+  recordManifestInstall,
 } from '../core/manifest.js';
 import {
   groupOutcomes,
@@ -27,7 +29,7 @@ import {
   unknownGroupKeys,
 } from '../hooks/skills/skills.js';
 import {
-  getProvider,
+  getProviders,
   listAgentChoices,
   listAgentKeys,
 } from '../providers/registry.js';
@@ -98,16 +100,32 @@ const groupsForKeys = (keys: string[]): typeof SKILL_GROUPS =>
     .map((key) => findGroup(SKILL_GROUPS, key))
     .filter((group) => group !== undefined);
 
+const allAgentsInstalled = (installed: string[]): boolean =>
+  listAgentKeys().every((key) => installed.includes(key));
+
+const resolveInitAgent = (
+  requested: string | undefined,
+  installedAgents: string[]
+): Promise<AgentProvider | undefined> => {
+  if (typeof requested !== 'string' && allAgentsInstalled(installedAgents))
+    return Promise.resolve(undefined);
+
+  return selectAgent(requested, installedAgents);
+};
+
 const runInit = async (
   args: ParsedCliArgs,
   cwd: string,
   packageRoot: URL
 ): Promise<void> => {
-  const provider = await selectAgent(args.agent);
+  const installed = await readManifestInstall(cwd);
+  const provider = await resolveInitAgent(args.agent, installed.agents);
   const categories = await selectCategories({
     requested: args.skills,
     shouldPrompt: args.skillsRequested || typeof args.agent !== 'string',
     groups: SKILL_GROUPS,
+    preselected: installed.categories.length > 0 ? [] : ['owasp'],
+    locked: installed.categories,
   });
   const keys = resolveCategoryKeys(categories);
   const [assets, version] = await Promise.all([
@@ -119,12 +137,21 @@ const runInit = async (
     targetDir: cwd,
     provider,
     assets: { ...assets, skills: skillsForKeys(assets, keys) },
-    version,
-    now: new Date(),
-    categories: keys,
   });
 
-  const groups = groupScaffoldOutcomes(result, provider.displayName);
+  await recordManifestInstall(cwd, {
+    agent: provider?.key,
+    categories: keys,
+    version,
+    now: new Date(),
+    addFiles: result.created,
+  });
+
+  const { agents } = await readManifestInstall(cwd);
+  const agentsLabel = getProviders(agents)
+    .map((installedProvider) => installedProvider.displayName)
+    .join(', ');
+  const groups = groupScaffoldOutcomes(result, agentsLabel);
 
   print(banner());
   print('');
@@ -134,24 +161,25 @@ const runInit = async (
     print('');
   }
 
-  print(summaryLine(provider.displayName, result));
+  print(summaryLine(agentsLabel, result));
 
   if (result.created.length > 0) {
     print('');
-    print(nextSteps(provider.displayName));
+    print(nextSteps(agentsLabel));
     print('');
   }
 };
 
 const runUpdate = async (cwd: string, packageRoot: URL): Promise<void> => {
-  const { agent, categories } = await readManifestInstall(cwd);
+  const { agents, categories } = await readManifestInstall(cwd);
 
-  if (agent === '') {
+  if (agents.length === 0) {
     print(updateNotInitialized(listAgentKeys()));
     return;
   }
 
-  const provider = getProvider(agent);
+  const providers = getProviders(agents);
+  const label = providers.map((provider) => provider.displayName).join(', ');
   const keys = resolveCategoryKeys(categories);
   const [assets, version] = await Promise.all([
     loadAssets(packageRoot),
@@ -160,16 +188,15 @@ const runUpdate = async (cwd: string, packageRoot: URL): Promise<void> => {
 
   const result = await refresh({
     targetDir: cwd,
-    provider,
+    providers,
     assets: { ...assets, skills: skillsForKeys(assets, keys) },
     version,
     now: new Date(),
-    categories: keys,
   });
 
   const groups = groupOutcomes(
     result.refreshed.map((path) => ({ path, status: 'refreshed' })),
-    provider.displayName
+    label
   );
 
   print(banner());
@@ -180,11 +207,11 @@ const runUpdate = async (cwd: string, packageRoot: URL): Promise<void> => {
     print('');
   }
 
-  print(updateSummary(provider.displayName, result.refreshed.length));
+  print(updateSummary(label, result.refreshed.length));
 
   if (result.refreshed.length > 0) {
     print('');
-    print(nextSteps(provider.displayName));
+    print(nextSteps(label));
     print('');
   }
 };
@@ -203,6 +230,8 @@ const runAdd = async (
     requested: args.skills,
     shouldPrompt: true,
     groups: SKILL_GROUPS,
+    preselected: [],
+    locked: [],
   });
   const [assets, version, installed] = await Promise.all([
     loadAssets(packageRoot),
@@ -264,6 +293,8 @@ const runRemove = async (
     requested: args.skills,
     shouldPrompt: true,
     groups: groupsForKeys(installed),
+    preselected: [],
+    locked: [],
   });
   const change = await removeSkills(cwd, installed, categories);
 

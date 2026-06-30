@@ -1,189 +1,265 @@
-import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
-import { tmpdir } from 'node:os';
-import { join } from 'node:path';
 import { describe, it, strict } from 'poku';
 import {
   applyManifestChange,
+  readManifestAgents,
   readManifestCategories,
+  recordManifestInstall,
+  serializeAgents,
 } from '../../../src/core/manifest.js';
+import {
+  newWorkspace,
+  readManifest,
+  seedManifest,
+  writeManifest,
+} from './__utils__.js';
 
-const withWorkspace = async (
-  fn: (workspace: string) => Promise<void>
-): Promise<void> => {
-  const workspace = await mkdtemp(join(tmpdir(), 'blue-spec-manifest-'));
-
-  try {
-    await fn(workspace);
-  } finally {
-    await rm(workspace, { recursive: true, force: true });
-  }
-};
-
-const readManifest = async (
-  workspace: string
-): Promise<Record<string, unknown>> =>
-  JSON.parse(
-    await readFile(join(workspace, '.bluespec/manifest.json'), 'utf8')
-  );
-
-const writeManifest = async (
-  workspace: string,
-  contents: string
-): Promise<void> => {
-  await mkdir(join(workspace, '.bluespec'), { recursive: true });
-  await writeFile(join(workspace, '.bluespec/manifest.json'), contents, 'utf8');
-};
+const now = new Date('2026-01-01T00:00:00.000Z');
 
 await describe('readManifestCategories', async () => {
   await it('returns [] when the manifest is absent', async () => {
-    await withWorkspace(async (workspace) => {
-      strict.deepStrictEqual(await readManifestCategories(workspace), []);
-    });
+    strict.deepStrictEqual(
+      await readManifestCategories(await newWorkspace()),
+      []
+    );
   });
 
   await it('returns [] when the manifest is malformed JSON', async () => {
-    await withWorkspace(async (workspace) => {
-      await writeManifest(workspace, 'not json{');
+    const workspace = await newWorkspace();
+    await writeManifest(workspace, 'not json{');
 
-      strict.deepStrictEqual(await readManifestCategories(workspace), []);
-    });
+    strict.deepStrictEqual(await readManifestCategories(workspace), []);
   });
 
   await it('returns [] when categories is missing', async () => {
-    await withWorkspace(async (workspace) => {
-      await writeManifest(
-        workspace,
-        JSON.stringify({ name: 'blue-spec', files: [] })
-      );
+    const workspace = await newWorkspace();
+    await writeManifest(
+      workspace,
+      JSON.stringify({ name: 'blue-spec', files: [] })
+    );
 
-      strict.deepStrictEqual(await readManifestCategories(workspace), []);
-    });
+    strict.deepStrictEqual(await readManifestCategories(workspace), []);
   });
 
   await it('returns [] when categories is not a string array', async () => {
-    await withWorkspace(async (workspace) => {
-      await writeManifest(
-        workspace,
-        JSON.stringify({ name: 'blue-spec', categories: [1, 2, 3] })
-      );
+    const workspace = await newWorkspace();
+    await writeManifest(
+      workspace,
+      JSON.stringify({ name: 'blue-spec', categories: [1, 2, 3] })
+    );
 
-      strict.deepStrictEqual(await readManifestCategories(workspace), []);
-    });
+    strict.deepStrictEqual(await readManifestCategories(workspace), []);
   });
 
   await it('returns the categories array when present', async () => {
-    await withWorkspace(async (workspace) => {
-      await writeManifest(
-        workspace,
-        JSON.stringify({ name: 'blue-spec', categories: ['owasp'] })
-      );
+    const workspace = await newWorkspace();
+    await seedManifest(workspace, { categories: ['owasp'] });
 
-      strict.deepStrictEqual(await readManifestCategories(workspace), [
-        'owasp',
-      ]);
-    });
+    strict.deepStrictEqual(await readManifestCategories(workspace), ['owasp']);
   });
 });
 
 await describe('applyManifestChange', async () => {
-  const now = new Date('2026-01-01T00:00:00.000Z');
-
   await it('creates a minimal manifest when none exists', async () => {
-    await withWorkspace(async (workspace) => {
-      await applyManifestChange(
-        workspace,
-        {
-          categories: ['owasp'],
-          addFiles: [
-            '.bluespec/skills/regex.md',
-            '.bluespec/skills/network.md',
-          ],
-          removeFiles: [],
-        },
-        { version: '9.9.9', now }
-      );
+    const workspace = await newWorkspace();
 
-      const manifest = await readManifest(workspace);
+    await applyManifestChange(
+      workspace,
+      {
+        categories: ['owasp'],
+        addFiles: ['.bluespec/skills/regex.md', '.bluespec/skills/network.md'],
+        removeFiles: [],
+      },
+      { version: '9.9.9', now }
+    );
 
-      strict.strictEqual(manifest.name, 'blue-spec');
-      strict.strictEqual(manifest.version, '9.9.9');
-      strict.strictEqual(manifest.agent, '');
-      strict.strictEqual(manifest.createdAt, '2026-01-01T00:00:00.000Z');
-      strict.deepStrictEqual(manifest.categories, ['owasp']);
-      strict.deepStrictEqual(manifest.files, [
-        '.bluespec/skills/regex.md',
-        '.bluespec/skills/network.md',
-      ]);
-    });
+    const manifest = await readManifest(workspace);
+
+    strict.strictEqual(manifest.name, 'blue-spec');
+    strict.strictEqual(manifest.version, '9.9.9');
+    strict.strictEqual(manifest.agent, '');
+    strict.strictEqual(manifest.createdAt, '2026-01-01T00:00:00.000Z');
+    strict.deepStrictEqual(manifest.categories, ['owasp']);
+    strict.deepStrictEqual(manifest.files, [
+      '.bluespec/skills/regex.md',
+      '.bluespec/skills/network.md',
+    ]);
   });
 
   await it('preserves other fields when the manifest exists', async () => {
-    await withWorkspace(async (workspace) => {
-      await writeManifest(
-        workspace,
-        JSON.stringify({
-          name: 'blue-spec',
-          version: '1.0.0',
-          agent: 'claude',
-          createdAt: '2020-01-01T00:00:00.000Z',
-          files: ['.bluespec/templates/x.md', '.bluespec/skills/regex.md'],
-          categories: ['owasp'],
-        })
-      );
-
-      await applyManifestChange(
-        workspace,
-        {
-          categories: [],
-          addFiles: [],
-          removeFiles: ['.bluespec/skills/regex.md'],
-        },
-        { version: '9.9.9', now }
-      );
-
-      const manifest = await readManifest(workspace);
-
-      strict.strictEqual(manifest.agent, 'claude');
-      strict.strictEqual(manifest.version, '1.0.0');
-      strict.strictEqual(manifest.createdAt, '2020-01-01T00:00:00.000Z');
-      strict.deepStrictEqual(manifest.categories, []);
-      strict.deepStrictEqual(manifest.files, ['.bluespec/templates/x.md']);
+    const workspace = await newWorkspace();
+    await seedManifest(workspace, {
+      files: ['.bluespec/templates/x.md', '.bluespec/skills/regex.md'],
     });
+
+    await applyManifestChange(
+      workspace,
+      {
+        categories: [],
+        addFiles: [],
+        removeFiles: ['.bluespec/skills/regex.md'],
+      },
+      { version: '9.9.9', now }
+    );
+
+    const manifest = await readManifest(workspace);
+
+    strict.strictEqual(manifest.agent, 'claude');
+    strict.strictEqual(manifest.version, '1.0.0');
+    strict.strictEqual(manifest.createdAt, '2020-01-01T00:00:00.000Z');
+    strict.deepStrictEqual(manifest.categories, []);
+    strict.deepStrictEqual(manifest.files, ['.bluespec/templates/x.md']);
   });
 
   await it('merges addFiles without duplicating', async () => {
-    await withWorkspace(async (workspace) => {
-      await writeManifest(
-        workspace,
-        JSON.stringify({
-          name: 'blue-spec',
-          version: '1.0.0',
-          agent: 'claude',
-          createdAt: '2020-01-01T00:00:00.000Z',
-          files: ['.bluespec/skills/regex.md'],
-          categories: ['owasp'],
-        })
-      );
+    const workspace = await newWorkspace();
+    await seedManifest(workspace, { files: ['.bluespec/skills/regex.md'] });
 
-      await applyManifestChange(
-        workspace,
-        {
-          categories: ['owasp'],
-          addFiles: [
-            '.bluespec/skills/regex.md',
-            '.bluespec/skills/network.md',
-          ],
-          removeFiles: [],
-        },
-        { version: '9.9.9', now }
-      );
+    await applyManifestChange(
+      workspace,
+      {
+        categories: ['owasp'],
+        addFiles: ['.bluespec/skills/regex.md', '.bluespec/skills/network.md'],
+        removeFiles: [],
+      },
+      { version: '9.9.9', now }
+    );
 
-      const manifest = await readManifest(workspace);
+    strict.deepStrictEqual((await readManifest(workspace)).files, [
+      '.bluespec/skills/regex.md',
+      '.bluespec/skills/network.md',
+    ]);
+  });
+});
 
-      strict.deepStrictEqual(manifest.files, [
-        '.bluespec/skills/regex.md',
-        '.bluespec/skills/network.md',
-      ]);
+await describe('serializeAgents', async () => {
+  it('keeps a single agent as a string', () => {
+    strict.strictEqual(serializeAgents(['claude']), 'claude');
+  });
+
+  it('keeps two or more agents as an array', () => {
+    strict.deepStrictEqual(serializeAgents(['claude', 'copilot']), [
+      'claude',
+      'copilot',
+    ]);
+  });
+});
+
+await describe('readManifestAgents', async () => {
+  await it('returns [] when the manifest is absent', async () => {
+    strict.deepStrictEqual(await readManifestAgents(await newWorkspace()), []);
+  });
+
+  await it('wraps a string agent into a list', async () => {
+    const workspace = await newWorkspace();
+    await seedManifest(workspace, { agent: 'claude' });
+
+    strict.deepStrictEqual(await readManifestAgents(workspace), ['claude']);
+  });
+
+  await it('returns an array agent as is', async () => {
+    const workspace = await newWorkspace();
+    await seedManifest(workspace, { agent: ['claude', 'copilot'] });
+
+    strict.deepStrictEqual(await readManifestAgents(workspace), [
+      'claude',
+      'copilot',
+    ]);
+  });
+
+  await it('returns [] when agent is not a string or string array', async () => {
+    const workspace = await newWorkspace();
+    await writeManifest(
+      workspace,
+      JSON.stringify({ name: 'blue-spec', agent: [1, 2] })
+    );
+
+    strict.deepStrictEqual(await readManifestAgents(workspace), []);
+  });
+});
+
+await describe('recordManifestInstall', async () => {
+  await it('seeds a string agent when no manifest exists', async () => {
+    const workspace = await newWorkspace();
+
+    await recordManifestInstall(workspace, {
+      agent: 'claude',
+      categories: ['owasp'],
+      version: '9.9.9',
+      now,
+      addFiles: ['.claude/skills/bluespec.charter/SKILL.md'],
     });
+
+    const manifest = await readManifest(workspace);
+
+    strict.strictEqual(manifest.agent, 'claude');
+    strict.deepStrictEqual(manifest.categories, ['owasp']);
+    strict.deepStrictEqual(manifest.files, [
+      '.claude/skills/bluespec.charter/SKILL.md',
+    ]);
+  });
+
+  await it('migrates string to array and unions categories on a second agent', async () => {
+    const workspace = await newWorkspace();
+    await seedManifest(workspace, {
+      files: ['.claude/skills/bluespec.charter/SKILL.md'],
+    });
+
+    await recordManifestInstall(workspace, {
+      agent: 'copilot',
+      categories: ['python'],
+      version: '9.9.9',
+      now,
+      addFiles: ['.github/prompts/bluespec.charter.prompt.md'],
+    });
+
+    const manifest = await readManifest(workspace);
+
+    strict.deepStrictEqual(manifest.agent, ['claude', 'copilot']);
+    strict.deepStrictEqual(manifest.categories, ['owasp', 'python']);
+    strict.strictEqual(
+      manifest.createdAt,
+      '2020-01-01T00:00:00.000Z',
+      'createdAt is preserved'
+    );
+  });
+
+  await it('is idempotent for an already recorded agent', async () => {
+    const workspace = await newWorkspace();
+    await seedManifest(workspace, {});
+
+    await recordManifestInstall(workspace, {
+      agent: 'claude',
+      categories: ['owasp'],
+      version: '9.9.9',
+      now,
+      addFiles: [],
+    });
+
+    const manifest = await readManifest(workspace);
+
+    strict.strictEqual(manifest.agent, 'claude');
+    strict.deepStrictEqual(manifest.categories, ['owasp']);
+  });
+
+  await it('records categories without an agent, preserving the agent list', async () => {
+    const workspace = await newWorkspace();
+    await seedManifest(workspace, { agent: ['claude', 'copilot'] });
+
+    await recordManifestInstall(workspace, {
+      categories: ['python'],
+      version: '9.9.9',
+      now,
+      addFiles: ['.bluespec/skills/python.md'],
+    });
+
+    const manifest = await readManifest(workspace);
+
+    strict.deepStrictEqual(
+      manifest.agent,
+      ['claude', 'copilot'],
+      'the agent list is preserved when no agent is recorded'
+    );
+    strict.deepStrictEqual(manifest.categories, ['owasp', 'python']);
+    strict.deepStrictEqual(manifest.files, ['.bluespec/skills/python.md']);
   });
 });

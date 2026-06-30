@@ -1,4 +1,5 @@
 import type {
+  ManifestAgent,
   ManifestChange,
   ManifestData,
   ManifestInput,
@@ -38,11 +39,25 @@ const readManifestFields = async (
 const fieldCategories = (fields: Record<string, unknown>): string[] =>
   isStringArray(fields.categories) ? fields.categories : [];
 
-/** The categories recorded in the project's manifest, failing closed to [] */
+const fieldAgents = (fields: Record<string, unknown>): string[] => {
+  if (typeof fields.agent === 'string') return [fields.agent];
+  if (isStringArray(fields.agent)) return fields.agent;
+
+  return [];
+};
+
+export const serializeAgents = (agents: string[]): ManifestAgent =>
+  agents.length === 1 ? agents[0] : agents;
+
 export const readManifestCategories = async (
   targetDir: string
 ): Promise<string[]> =>
   fieldCategories(await readManifestFields(join(targetDir, MANIFEST_PATH)));
+
+export const readManifestAgents = async (
+  targetDir: string
+): Promise<string[]> =>
+  fieldAgents(await readManifestFields(join(targetDir, MANIFEST_PATH)));
 
 export const readManifestInstall = async (
   targetDir: string
@@ -50,7 +65,7 @@ export const readManifestInstall = async (
   const fields = await readManifestFields(join(targetDir, MANIFEST_PATH));
 
   return {
-    agent: typeof fields.agent === 'string' ? fields.agent : '',
+    agents: fieldAgents(fields),
     categories: fieldCategories(fields),
   };
 };
@@ -111,3 +126,34 @@ export const restampManifestVersion = async (
     version: input.version,
     files: input.files,
   });
+
+const union = (current: string[], incoming: string[]): string[] => [
+  ...current,
+  ...incoming.filter((item) => !current.includes(item)),
+];
+
+export const recordManifestInstall = async (
+  targetDir: string,
+  input: {
+    agent?: string;
+    categories: string[];
+    version: string;
+    now: Date;
+    addFiles: string[];
+  }
+): Promise<void> => {
+  const existing = await readManifestFields(join(targetDir, MANIFEST_PATH));
+  const agents = input.agent
+    ? union(fieldAgents(existing), [input.agent])
+    : fieldAgents(existing);
+
+  await upsertManifest(
+    targetDir,
+    { version: input.version, now: input.now },
+    {
+      agent: serializeAgents(agents),
+      categories: union(fieldCategories(existing), input.categories),
+      files: mergeFiles(existing.files, input.addFiles, []),
+    }
+  );
+};

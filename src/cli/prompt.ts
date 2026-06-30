@@ -5,16 +5,27 @@ import {
   interactiveSelect,
 } from './interactive-select.js';
 import {
+  agentChoiceLabel,
   agentSelectHint,
   agentSelectTitle,
   listSelectHint,
   listSelectTitle,
+  selectFooter,
   selectionAborted,
+  skillsSelectFooter,
   skillsSelectHint,
   skillsSelectTitle,
 } from './messages.js';
 
 export const isInteractive = (): boolean => stdin.isTTY === true;
+
+const lockedFirst = <Item>(
+  items: Item[],
+  isLocked: (item: Item) => boolean
+): Item[] => [
+  ...items.filter((item) => isLocked(item)),
+  ...items.filter((item) => !isLocked(item)),
+];
 
 const LIST_TARGETS: { value: ListTarget; label: string }[] = [
   {
@@ -38,6 +49,7 @@ export const promptForListTarget = async (): Promise<
       keywords: target.value,
     })),
     confirmLabel: 'List:',
+    footer: selectFooter(),
   });
 
   if (index === undefined) return undefined;
@@ -46,35 +58,46 @@ export const promptForListTarget = async (): Promise<
 };
 
 export const promptForAgent = async (
-  agents: AgentChoice[]
+  agents: AgentChoice[],
+  installed: string[]
 ): Promise<string> => {
+  const ordered = lockedFirst(agents, (agent) => installed.includes(agent.key));
   const index = await interactiveSelect({
     title: agentSelectTitle(),
     hint: agentSelectHint(),
-    options: agents.map((agent) => ({
-      label: agent.displayName,
+    options: ordered.map((agent) => ({
+      label: agentChoiceLabel(agent.displayName, installed.includes(agent.key)),
       keywords: agent.key,
+      locked: installed.includes(agent.key),
     })),
+    footer: selectFooter(),
   });
 
   if (index === undefined) throw new Error(selectionAborted());
 
-  return agents[index].key;
+  return ordered[index].key;
 };
 
 export const promptForSkills = async (
-  groups: SkillGroup[]
+  groups: SkillGroup[],
+  options: { preselected: string[]; locked: string[] }
 ): Promise<string[]> => {
+  const ordered = lockedFirst(groups, (group) =>
+    options.locked.includes(group.key)
+  );
   const indexes = await interactiveMultiSelect({
     title: skillsSelectTitle(),
     hint: skillsSelectHint(),
-    options: groups.map((group) => ({
+    options: ordered.map((group) => ({
       label: `${group.label}: ${group.description}`,
       keywords: group.key,
+      selected: options.preselected.includes(group.key),
+      locked: options.locked.includes(group.key),
     })),
+    footer: skillsSelectFooter(),
   });
 
   if (indexes === undefined) return [];
 
-  return indexes.map((index) => groups[index].key);
+  return indexes.map((index) => ordered[index].key);
 };

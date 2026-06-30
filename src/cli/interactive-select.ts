@@ -3,6 +3,7 @@ import type {
   KeypressEvent,
   SelectConfig,
   SelectOption,
+  SelectRowRenderer,
 } from '../types/core.js';
 import { stdin, stdout } from 'node:process';
 import { emitKeypressEvents } from 'node:readline';
@@ -48,264 +49,300 @@ export const windowStart = (
   return Math.max(0, Math.min(cursor - half, count - maxVisible));
 };
 
+const isLocked = (entry: FilteredOption | undefined): boolean =>
+  entry?.option.locked === true;
+
+export const firstSelectable = (visible: FilteredOption[]): number => {
+  const index = visible.findIndex((entry) => !isLocked(entry));
+
+  return index === -1 ? 0 : index;
+};
+
+export const moveCursor = (
+  visible: FilteredOption[],
+  cursor: number,
+  step: 1 | -1
+): number => {
+  for (
+    let next = cursor + step;
+    next >= 0 && next < visible.length;
+    next += step
+  )
+    if (!isLocked(visible[next])) return next;
+
+  return cursor;
+};
+
+const labelStyle = (option: SelectOption, isActive: boolean): string => {
+  if (option.locked) return color.dim(option.label);
+
+  return isActive ? color.blue(option.label) : option.label;
+};
+
+const pointerFor = (option: SelectOption, isActive: boolean): string =>
+  isActive && !option.locked ? color.blue('›') : ' ';
+
+const overflowLine = (
+  hiddenBefore: number,
+  hiddenAfter: number
+): string | undefined => {
+  if (hiddenBefore === 0 && hiddenAfter === 0) return undefined;
+
+  const parts: string[] = [];
+
+  if (hiddenBefore > 0) parts.push(`↑ ${hiddenBefore} more`);
+  if (hiddenAfter > 0) parts.push(`↓ ${hiddenAfter} more`);
+
+  return color.dim(`   ${parts.join('   ')}`);
+};
+
+const visibleRows = (
+  visible: FilteredOption[],
+  cursor: number,
+  maxVisible: number,
+  renderRow: SelectRowRenderer
+): string[] => {
+  const start = windowStart(cursor, visible.length, maxVisible);
+  const end = Math.min(visible.length, start + maxVisible);
+  const rows: string[] = [];
+
+  for (let position = start; position < end; position += 1)
+    rows.push(renderRow(visible[position], position === cursor));
+
+  const overflow = overflowLine(start, visible.length - end);
+
+  return overflow ? [...rows, overflow] : rows;
+};
+
+const createScreen = (
+  buildLines: () => string[],
+  onKeypress: (key: KeypressEvent) => void
+): { render: () => void; writeFinal: (summary: string) => void } => {
+  let lastHeight = 0;
+
+  const clear = (): void => {
+    if (lastHeight === 0) return;
+
+    stdout.write(`${ESC}[${lastHeight}A`);
+
+    for (let row = 0; row < lastHeight; row += 1)
+      stdout.write(`${ESC}[2K${ESC}[1B`);
+
+    stdout.write(`${ESC}[${lastHeight}A`);
+  };
+
+  const render = (): void => {
+    clear();
+
+    const lines = buildLines();
+
+    stdout.write(`${lines.join('\n')}\n`);
+    lastHeight = totalRows(lines);
+  };
+
+  const cleanup = (): void => {
+    stdin.off('keypress', handler);
+
+    if (stdin.isTTY) stdin.setRawMode(false);
+
+    stdin.pause();
+    stdout.write(CURSOR_SHOW);
+  };
+
+  const writeFinal = (summary: string): void => {
+    clear();
+    stdout.write(`${summary}\n`);
+    lastHeight = 0;
+    cleanup();
+  };
+
+  const handler = (_str: string, key: KeypressEvent): void => onKeypress(key);
+
+  stdout.write(CURSOR_HIDE);
+  emitKeypressEvents(stdin);
+
+  if (stdin.isTTY) stdin.setRawMode(true);
+
+  stdin.resume();
+  stdin.on('keypress', handler);
+
+  return { render, writeFinal };
+};
+
+const header = (config: SelectConfig, query: string): string[] => [
+  color.bold(config.title),
+  color.dim(config.hint),
+  `${color.dim('Search:')} ${query}${color.blue('█')}`,
+  '',
+];
+
+const withFooter = (lines: string[], footer: string | undefined): string[] =>
+  footer ? [...lines, '', color.dim(footer)] : lines;
+
+const isCancel = (key: KeypressEvent): boolean =>
+  key?.name === 'escape' || (key?.ctrl === true && key?.name === 'c');
+
+const isTextInput = (key: KeypressEvent): boolean => {
+  const sequence = key?.sequence;
+
+  return (
+    sequence !== undefined &&
+    !key.ctrl &&
+    sequence.length === 1 &&
+    sequence >= ' '
+  );
+};
+
 export const interactiveSelect = (
   config: SelectConfig
 ): Promise<number | undefined> => {
   const {
-    title,
-    hint,
     options,
     maxVisible = DEFAULT_MAX_VISIBLE,
     emptyLabel = 'No matching agents.',
     confirmLabel = 'Agent:',
+    footer,
   } = config;
 
   return new Promise((resolve) => {
     let query = '';
-    let cursor = 0;
-    let lastHeight = 0;
 
     const filtered = (): FilteredOption[] =>
       options
         .map((option, index) => ({ option, index }))
         .filter(({ option }) => matches(option, query));
 
+    let cursor = firstSelectable(filtered());
+
+    const renderRow: SelectRowRenderer = ({ option }, isActive) =>
+      ` ${pointerFor(option, isActive)} ${labelStyle(option, isActive)}`;
+
     const buildLines = (): string[] => {
       const visible = filtered();
-      const lines: string[] = [
-        color.bold(title),
-        color.dim(hint),
-        `${color.dim('Search:')} ${query}${color.blue('█')}`,
-        '',
-      ];
 
-      if (visible.length === 0) {
-        lines.push(color.dim(`  ${emptyLabel}`));
+      if (visible.length === 0)
+        return withFooter(
+          [...header(config, query), color.dim(`  ${emptyLabel}`)],
+          footer
+        );
 
-        return lines;
-      }
-
-      const start = windowStart(cursor, visible.length, maxVisible);
-      const end = Math.min(visible.length, start + maxVisible);
-
-      for (let position = start; position < end; position += 1) {
-        const isActive = position === cursor;
-        const { label } = visible[position].option;
-        const pointer = isActive ? color.blue('›') : ' ';
-        const rendered = isActive ? color.blue(label) : label;
-
-        lines.push(` ${pointer} ${rendered}`);
-      }
-
-      const hiddenBefore = start;
-      const hiddenAfter = visible.length - end;
-
-      if (hiddenBefore > 0 || hiddenAfter > 0) {
-        const parts: string[] = [];
-
-        if (hiddenBefore > 0) parts.push(`↑ ${hiddenBefore} more`);
-        if (hiddenAfter > 0) parts.push(`↓ ${hiddenAfter} more`);
-
-        lines.push(color.dim(`   ${parts.join('   ')}`));
-      }
-
-      return lines;
-    };
-
-    const clear = (): void => {
-      if (lastHeight === 0) return;
-
-      stdout.write(`${ESC}[${lastHeight}A`);
-
-      for (let row = 0; row < lastHeight; row += 1)
-        stdout.write(`${ESC}[2K${ESC}[1B`);
-
-      stdout.write(`${ESC}[${lastHeight}A`);
-    };
-
-    const render = (): void => {
-      clear();
-
-      const lines = buildLines();
-
-      stdout.write(`${lines.join('\n')}\n`);
-      lastHeight = totalRows(lines);
-    };
-
-    const renderFinal = (label: string | undefined): void => {
-      clear();
-
-      const summary =
-        label === undefined
-          ? color.dim('Cancelled')
-          : `${color.green(confirmLabel)} ${label}`;
-
-      stdout.write(`${color.bold(title)}\n${summary}\n`);
-      lastHeight = 0;
-    };
-
-    const cleanup = (): void => {
-      stdin.off('keypress', onKeypress);
-
-      if (stdin.isTTY) stdin.setRawMode(false);
-
-      stdin.pause();
-      stdout.write(CURSOR_SHOW);
+      return withFooter(
+        [
+          ...header(config, query),
+          ...visibleRows(visible, cursor, maxVisible, renderRow),
+        ],
+        footer
+      );
     };
 
     const finish = (result: number | undefined): void => {
-      const label = result === undefined ? undefined : options[result]?.label;
+      const summary =
+        result === undefined
+          ? color.dim('Cancelled')
+          : `${color.green(confirmLabel)} ${options[result]?.label}`;
 
-      renderFinal(label);
-      cleanup();
+      screen.writeFinal(`${color.bold(config.title)}\n${summary}`);
       resolve(result);
     };
 
-    const onKeypress = (_str: string, key: KeypressEvent): void => {
-      const name = key?.name;
+    const onKeypress = (key: KeypressEvent): void => {
+      if (isCancel(key)) return finish(undefined);
+
       const visible = filtered();
 
-      if (key?.ctrl && name === 'c') {
-        finish(undefined);
-        return;
+      if (key?.name === 'up') {
+        cursor = moveCursor(visible, cursor, -1);
+        return screen.render();
       }
 
-      if (name === 'escape') {
-        finish(undefined);
-        return;
+      if (key?.name === 'down') {
+        cursor = moveCursor(visible, cursor, 1);
+        return screen.render();
       }
 
-      if (name === 'up') {
-        cursor = Math.max(0, cursor - 1);
-        render();
-        return;
-      }
-
-      if (name === 'down') {
-        cursor = Math.min(visible.length - 1, cursor + 1);
-        render();
-        return;
-      }
-
-      if (name === 'return' || name === 'enter') {
+      if (key?.name === 'return' || key?.name === 'enter') {
         const chosen = visible[cursor];
 
-        if (chosen) finish(chosen.index);
+        if (chosen && !chosen.option.locked) finish(chosen.index);
 
         return;
       }
 
-      if (name === 'backspace') {
+      if (key?.name === 'backspace') {
         query = query.slice(0, -1);
-        cursor = 0;
-        render();
-        return;
+        cursor = firstSelectable(filtered());
+        return screen.render();
       }
 
-      const sequence = key?.sequence;
-
-      if (sequence && !key.ctrl && sequence.length === 1 && sequence >= ' ') {
-        query += sequence;
-        cursor = 0;
-        render();
+      if (isTextInput(key)) {
+        query += key.sequence;
+        cursor = firstSelectable(filtered());
+        screen.render();
       }
     };
 
-    stdout.write(CURSOR_HIDE);
+    const screen = createScreen(buildLines, onKeypress);
 
-    emitKeypressEvents(stdin);
-
-    if (stdin.isTTY) stdin.setRawMode(true);
-
-    stdin.resume();
-    stdin.on('keypress', onKeypress);
-
-    render();
+    screen.render();
   });
 };
+
+const initialSelection = (options: SelectOption[]): Set<number> =>
+  new Set(
+    options
+      .map((option, index) => ({ option, index }))
+      .filter(({ option }) => option.selected || option.locked)
+      .map(({ index }) => index)
+  );
 
 export const interactiveMultiSelect = (
   config: SelectConfig
 ): Promise<number[] | undefined> => {
-  const { title, hint, options, maxVisible = DEFAULT_MAX_VISIBLE } = config;
+  const { options, maxVisible = DEFAULT_MAX_VISIBLE, footer } = config;
 
   return new Promise((resolve) => {
     let query = '';
-    let cursor = 0;
-    let lastHeight = 0;
-    const selected = new Set<number>();
+    const selected = initialSelection(options);
 
     const filtered = (): FilteredOption[] =>
       options
         .map((option, index) => ({ option, index }))
         .filter(({ option }) => matches(option, query));
 
+    let cursor = firstSelectable(filtered());
+
+    const renderRow: SelectRowRenderer = ({ option, index }, isActive) => {
+      const box = option.locked
+        ? color.dim('[x]')
+        : selected.has(index)
+          ? color.green('[x]')
+          : '[ ]';
+
+      return ` ${pointerFor(option, isActive)} ${box} ${labelStyle(option, isActive)}`;
+    };
+
     const buildLines = (): string[] => {
       const visible = filtered();
-      const lines: string[] = [
-        color.bold(title),
-        color.dim(hint),
-        `${color.dim('Search:')} ${query}${color.blue('█')}`,
-        '',
-      ];
 
-      if (visible.length === 0) {
-        lines.push(color.dim('  No matching specializations.'));
+      if (visible.length === 0)
+        return withFooter(
+          [
+            ...header(config, query),
+            color.dim('  No matching specializations.'),
+          ],
+          footer
+        );
 
-        return lines;
-      }
-
-      const start = windowStart(cursor, visible.length, maxVisible);
-      const end = Math.min(visible.length, start + maxVisible);
-
-      for (let position = start; position < end; position += 1) {
-        const isActive = position === cursor;
-        const { option, index } = visible[position];
-        const box = selected.has(index) ? color.green('[x]') : '[ ]';
-        const pointer = isActive ? color.blue('›') : ' ';
-        const rendered = isActive ? color.blue(option.label) : option.label;
-
-        lines.push(` ${pointer} ${box} ${rendered}`);
-      }
-
-      const hiddenBefore = start;
-      const hiddenAfter = visible.length - end;
-
-      if (hiddenBefore > 0 || hiddenAfter > 0) {
-        const parts: string[] = [];
-
-        if (hiddenBefore > 0) parts.push(`↑ ${hiddenBefore} more`);
-        if (hiddenAfter > 0) parts.push(`↓ ${hiddenAfter} more`);
-
-        lines.push(color.dim(`   ${parts.join('   ')}`));
-      }
-
-      return lines;
+      return withFooter(
+        [
+          ...header(config, query),
+          ...visibleRows(visible, cursor, maxVisible, renderRow),
+        ],
+        footer
+      );
     };
 
-    const clear = (): void => {
-      if (lastHeight === 0) return;
-
-      stdout.write(`${ESC}[${lastHeight}A`);
-
-      for (let row = 0; row < lastHeight; row += 1)
-        stdout.write(`${ESC}[2K${ESC}[1B`);
-
-      stdout.write(`${ESC}[${lastHeight}A`);
-    };
-
-    const render = (): void => {
-      clear();
-
-      const lines = buildLines();
-
-      stdout.write(`${lines.join('\n')}\n`);
-      lastHeight = totalRows(lines);
-    };
-
-    const renderFinal = (result: number[] | undefined): void => {
-      clear();
-
+    const finish = (result: number[] | undefined): void => {
       const summary =
         result === undefined
           ? color.dim('Cancelled')
@@ -315,94 +352,56 @@ export const interactiveMultiSelect = (
                 .map((index) => options[index]?.label)
                 .join(', ')}`;
 
-      stdout.write(`${color.bold(title)}\n${summary}\n`);
-      lastHeight = 0;
-    };
-
-    const cleanup = (): void => {
-      stdin.off('keypress', onKeypress);
-
-      if (stdin.isTTY) stdin.setRawMode(false);
-
-      stdin.pause();
-      stdout.write(CURSOR_SHOW);
-    };
-
-    const finish = (result: number[] | undefined): void => {
-      renderFinal(result);
-      cleanup();
+      screen.writeFinal(`${color.bold(config.title)}\n${summary}`);
       resolve(result);
     };
 
-    const onKeypress = (_str: string, key: KeypressEvent): void => {
-      const name = key?.name;
+    const onKeypress = (key: KeypressEvent): void => {
+      if (isCancel(key)) return finish(undefined);
+
       const visible = filtered();
 
-      if (key?.ctrl && name === 'c') {
-        finish(undefined);
-        return;
+      if (key?.name === 'up') {
+        cursor = moveCursor(visible, cursor, -1);
+        return screen.render();
       }
 
-      if (name === 'escape') {
-        finish(undefined);
-        return;
+      if (key?.name === 'down') {
+        cursor = moveCursor(visible, cursor, 1);
+        return screen.render();
       }
 
-      if (name === 'up') {
-        cursor = Math.max(0, cursor - 1);
-        render();
-        return;
-      }
-
-      if (name === 'down') {
-        cursor = Math.min(visible.length - 1, cursor + 1);
-        render();
-        return;
-      }
-
-      if (name === 'space') {
+      if (key?.name === 'space') {
         const chosen = visible[cursor];
 
-        if (chosen) {
+        if (chosen && !chosen.option.locked) {
           if (selected.has(chosen.index)) selected.delete(chosen.index);
           else selected.add(chosen.index);
 
-          render();
+          screen.render();
         }
 
         return;
       }
 
-      if (name === 'return' || name === 'enter') {
-        finish([...selected].sort((left, right) => left - right));
-        return;
-      }
+      if (key?.name === 'return' || key?.name === 'enter')
+        return finish([...selected].sort((left, right) => left - right));
 
-      if (name === 'backspace') {
+      if (key?.name === 'backspace') {
         query = query.slice(0, -1);
-        cursor = 0;
-        render();
-        return;
+        cursor = firstSelectable(filtered());
+        return screen.render();
       }
 
-      const sequence = key?.sequence;
-
-      if (sequence && !key.ctrl && sequence.length === 1 && sequence >= ' ') {
-        query += sequence;
-        cursor = 0;
-        render();
+      if (isTextInput(key)) {
+        query += key.sequence;
+        cursor = firstSelectable(filtered());
+        screen.render();
       }
     };
 
-    stdout.write(CURSOR_HIDE);
+    const screen = createScreen(buildLines, onKeypress);
 
-    emitKeypressEvents(stdin);
-
-    if (stdin.isTTY) stdin.setRawMode(true);
-
-    stdin.resume();
-    stdin.on('keypress', onKeypress);
-
-    render();
+    screen.render();
   });
 };

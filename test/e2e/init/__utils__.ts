@@ -1,13 +1,25 @@
 import type { ParsedCliArgs } from '../../../src/types/core.js';
 import type { InitArgs } from '../../../src/types/test.js';
-import { mkdtemp, rm } from 'node:fs/promises';
+import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { stdin } from 'node:process';
 import { afterEach, beforeEach } from 'poku';
 import { run } from '../../../src/cli/run.js';
 
 const workspaces: string[] = [];
 export const packageRoot = new URL('../../../', import.meta.url);
+
+const runHeadless = async (args: ParsedCliArgs, cwd: string): Promise<void> => {
+  const wasTTY = stdin.isTTY;
+  stdin.isTTY = false;
+
+  try {
+    await run(args, cwd, packageRoot);
+  } finally {
+    stdin.isTTY = wasTTY;
+  }
+};
 
 const baseArgs: ParsedCliArgs = {
   command: undefined,
@@ -26,8 +38,15 @@ export const newWorkspace = async (): Promise<string> => {
   return workspace;
 };
 
+export const readManifest = async (
+  workspace: string
+): Promise<Record<string, unknown>> =>
+  JSON.parse(
+    await readFile(join(workspace, '.bluespec/manifest.json'), 'utf8')
+  );
+
 export const initInto = (workspace: string, args: InitArgs): Promise<void> =>
-  run(
+  runHeadless(
     {
       ...baseArgs,
       command: args.init ? 'init' : undefined,
@@ -35,12 +54,11 @@ export const initInto = (workspace: string, args: InitArgs): Promise<void> =>
       skills: args.skills ?? [],
       skillsRequested: args.skills !== undefined,
     },
-    workspace,
-    packageRoot
+    workspace
   );
 
 export const updateInto = (workspace: string): Promise<void> =>
-  run({ ...baseArgs, command: 'update' }, workspace, packageRoot);
+  runHeadless({ ...baseArgs, command: 'update' }, workspace);
 
 const clear = async () => {
   await Promise.all(

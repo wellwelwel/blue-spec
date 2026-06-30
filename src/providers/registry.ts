@@ -265,3 +265,6 @@ export const getProvider = (key: string): AgentProvider => {
 
   return provider;
 };
+
+export const getProviders = (keys: string[]): AgentProvider[] =>
+  keys.map(getProvider);

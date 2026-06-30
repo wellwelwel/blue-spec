@@ -3,6 +3,7 @@ import type {
   BundledAssets,
   CommandWrite,
   FileOutcome,
+  RefreshOptions,
   RefreshResult,
   ScaffoldOptions,
   ScaffoldResult,
@@ -14,11 +15,7 @@ import {
   writeFileIfAbsent,
   writeFileOverwrite,
 } from './fs-actions.js';
-import {
-  buildManifest,
-  restampManifestVersion,
-  serializeManifest,
-} from './manifest.js';
+import { restampManifestVersion } from './manifest.js';
 import {
   emptySkillsCatalog,
   serializeSkillsCatalog,
@@ -58,15 +55,16 @@ const skillJobs = (
 const toAbsolute = (targetDir: string, relativePath: string): string =>
   join(targetDir, relativePath);
 
-const blueSpecOwnedJobs = (
-  provider: AgentProvider,
-  assets: BundledAssets
-): CommandWrite[] => [
+const sharedJobs = (assets: BundledAssets): CommandWrite[] => [
   ...templateJobs(assets.templates),
   ...hookJobs(assets.hooks),
   ...skillJobs(assets.skills),
-  ...provider.buildCommands(assets),
 ];
+
+const blueSpecOwnedJobs = (
+  provider: AgentProvider,
+  assets: BundledAssets
+): CommandWrite[] => [...sharedJobs(assets), ...provider.buildCommands(assets)];
 
 const userStateJobs = (): CommandWrite[] => [
   {
@@ -93,8 +91,11 @@ const ensureJobDirs = async (
 export const scaffold = async (
   options: ScaffoldOptions
 ): Promise<ScaffoldResult> => {
-  const { targetDir, provider, assets, version, now, categories } = options;
-  const jobs = [...blueSpecOwnedJobs(provider, assets), ...userStateJobs()];
+  const { targetDir, provider, assets } = options;
+  const ownedJobs = provider
+    ? blueSpecOwnedJobs(provider, assets)
+    : sharedJobs(assets);
+  const jobs = [...ownedJobs, ...userStateJobs()];
 
   await ensureDir(toAbsolute(targetDir, MEMORY_DIR));
   await ensureJobDirs(targetDir, jobs);
@@ -117,27 +118,28 @@ export const scaffold = async (
     .filter((outcome) => outcome.status === 'skipped')
     .map((outcome) => outcome.path);
 
-  const manifest = buildManifest({
-    version,
-    agent: provider.key,
-    now,
-    files: created,
-    categories,
-  });
-
-  await writeFileIfAbsent(
-    toAbsolute(targetDir, MANIFEST_PATH),
-    serializeManifest(manifest)
-  );
-
   return { created, skipped, manifestPath: MANIFEST_PATH };
 };
 
+const dedupeByPath = (jobs: CommandWrite[]): CommandWrite[] => {
+  const seen = new Set<string>();
+
+  return jobs.filter((job) => {
+    if (seen.has(job.relativePath)) return false;
+
+    seen.add(job.relativePath);
+    return true;
+  });
+};
+
 export const refresh = async (
-  options: ScaffoldOptions
+  options: RefreshOptions
 ): Promise<RefreshResult> => {
-  const { targetDir, provider, assets, version, now } = options;
-  const jobs = blueSpecOwnedJobs(provider, assets);
+  const { targetDir, providers, assets, version, now } = options;
+  const jobs = dedupeByPath([
+    ...sharedJobs(assets),
+    ...providers.flatMap((provider) => provider.buildCommands(assets)),
+  ]);
 
   await ensureJobDirs(targetDir, jobs);
 
