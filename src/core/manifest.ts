@@ -2,6 +2,7 @@ import type {
   ManifestChange,
   ManifestData,
   ManifestInput,
+  ManifestInstall,
 } from '../types/core.js';
 import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
@@ -24,28 +25,34 @@ export const serializeManifest = (data: ManifestData): string =>
 const isStringArray = (value: unknown): value is string[] =>
   Array.isArray(value) && value.every((item) => typeof item === 'string');
 
-/** The categories recorded in the project's manifest, failing closed to [] */
-export const readManifestCategories = async (
-  targetDir: string
-): Promise<string[]> => {
-  try {
-    const raw = await readFile(join(targetDir, MANIFEST_PATH), 'utf8');
-    const parsed: { categories?: unknown } = JSON.parse(raw);
-
-    return isStringArray(parsed.categories) ? parsed.categories : [];
-  } catch {
-    return [];
-  }
-};
-
 const readManifestFields = async (
   path: string
 ): Promise<Record<string, unknown>> => {
   try {
     return JSON.parse(await readFile(path, 'utf8'));
   } catch {
-    return {};
+    return Object.create(null);
   }
+};
+
+const fieldCategories = (fields: Record<string, unknown>): string[] =>
+  isStringArray(fields.categories) ? fields.categories : [];
+
+/** The categories recorded in the project's manifest, failing closed to [] */
+export const readManifestCategories = async (
+  targetDir: string
+): Promise<string[]> =>
+  fieldCategories(await readManifestFields(join(targetDir, MANIFEST_PATH)));
+
+export const readManifestInstall = async (
+  targetDir: string
+): Promise<ManifestInstall> => {
+  const fields = await readManifestFields(join(targetDir, MANIFEST_PATH));
+
+  return {
+    agent: typeof fields.agent === 'string' ? fields.agent : '',
+    categories: fieldCategories(fields),
+  };
 };
 
 const mergeFiles = (
@@ -61,34 +68,46 @@ const mergeFiles = (
   return [...current, ...addFiles.filter((file) => !current.includes(file))];
 };
 
-/**
- * Upserts the manifest after an add/remove. Updates `categories` and merges the changed skill files
- * into `files`, leaving every other field intact when the manifest exists, and creating a minimal
- * one (no agent yet) when it does not, so add/remove stay coherent in a project that never ran init.
- */
+const upsertManifest = async (
+  targetDir: string,
+  seed: { version: string; now: Date },
+  overrides: Partial<ManifestData>
+): Promise<void> => {
+  const path = join(targetDir, MANIFEST_PATH);
+  const existing = await readManifestFields(path);
+  const fresh = buildManifest({
+    version: seed.version,
+    agent: '',
+    now: seed.now,
+    files: [],
+    categories: [],
+  });
+
+  await ensureDir(dirname(path));
+  await writeFileOverwrite(
+    path,
+    `${JSON.stringify({ ...fresh, ...existing, ...overrides }, null, 2)}\n`
+  );
+};
+
 export const applyManifestChange = async (
   targetDir: string,
   change: ManifestChange,
   defaults: { version: string; now: Date }
 ): Promise<void> => {
-  const path = join(targetDir, MANIFEST_PATH);
-  const existing = await readManifestFields(path);
-  const base = buildManifest({
-    version: defaults.version,
-    agent: '',
-    now: defaults.now,
-    files: [],
-    categories: change.categories,
-  });
-  const files = mergeFiles(existing.files, change.addFiles, change.removeFiles);
+  const existing = await readManifestFields(join(targetDir, MANIFEST_PATH));
 
-  await ensureDir(dirname(path));
-  await writeFileOverwrite(
-    path,
-    `${JSON.stringify(
-      { ...base, ...existing, categories: change.categories, files },
-      null,
-      2
-    )}\n`
-  );
+  await upsertManifest(targetDir, defaults, {
+    categories: change.categories,
+    files: mergeFiles(existing.files, change.addFiles, change.removeFiles),
+  });
 };
+
+export const restampManifestVersion = async (
+  targetDir: string,
+  input: { version: string; now: Date; files: string[] }
+): Promise<void> =>
+  upsertManifest(targetDir, input, {
+    version: input.version,
+    files: input.files,
+  });

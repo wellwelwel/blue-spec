@@ -9,6 +9,7 @@ import { color } from './colors.js';
 
 const GLYPH = {
   added: color.blue('+'),
+  refreshed: color.blue('↻'),
   kept: color.dim('·'),
   removed: color.blue('-'),
 };
@@ -55,6 +56,7 @@ const agentsByInitial = (agents: AgentChoice[]): string[] => {
 
 const HELP_USAGE: string[] = [
   'npx blue-spec init <agent> [--skills <category...>]',
+  'npx blue-spec update',
   'npx blue-spec add --skills',
   'npx blue-spec remove --skills',
   'npx blue-spec list [--findings] [--skills]',
@@ -62,6 +64,7 @@ const HELP_USAGE: string[] = [
 
 const HELP_COMMANDS: [string, string][] = [
   ['init <agent>', 'Scaffold Blue Spec into the current project'],
+  ['update', 'Update Blue Spec files to their latest version'],
   ['add', 'Install security specializations, by category'],
   ['remove', 'Uninstall security specializations, by category'],
   ['list', 'List tracked findings or specialization categories (asks which)'],
@@ -130,6 +133,16 @@ export const noAgentSelected = (agentKeys: string[]): string => {
   ].join('\n');
 };
 
+export const updateNotInitialized = (agentKeys: string[]): string => {
+  const first = agentKeys[0];
+
+  return [
+    'No Blue Spec install found here.',
+    `Run npx blue-spec init <agent> first (available: ${agentKeys.join(', ')}).`,
+    `Example: npx blue-spec init ${first}`,
+  ].join('\n');
+};
+
 export const agentSelectTitle = (): string => 'Which agent are you using?';
 
 export const agentSelectHint = (): string =>
@@ -149,6 +162,9 @@ export const skillsSelectHint = (): string =>
   'Space to toggle, arrow keys to move, Enter to confirm, empty to skip.';
 
 const createdLine = (path: string): string => `  ${GLYPH.added} ${path}`;
+
+const refreshedLine = (path: string): string =>
+  `  ${GLYPH.refreshed} ${path} ${note('refreshed')}`;
 
 const skippedLine = (path: string): string =>
   `  ${GLYPH.kept} ${path} ${note('already exists')}`;
@@ -227,6 +243,7 @@ const relativeTo = (baseDir: string, path: string): string =>
 
 const lineFor = (outcome: FileOutcome, path: string): string => {
   if (outcome.status === 'created') return createdLine(path);
+  if (outcome.status === 'refreshed') return refreshedLine(path);
   if (outcome.status === 'removed') return removedLine(path);
   if (outcome.status === 'kept') return keptLine(path, outcome.keptBy ?? '');
   if (outcome.status === 'absent') return notInstalledLine(path);
@@ -255,6 +272,18 @@ export const summaryLine = (
 
   return done(
     `Initialized for ${agentDisplayName} ${color.dim('·')} ${result.created.length} created${restAt(result.skipped.length, 'skipped')}`
+  );
+};
+
+export const updateSummary = (
+  agentDisplayName: string,
+  refreshed: number
+): string => {
+  if (refreshed === 0)
+    return color.dim(`Nothing to update for ${agentDisplayName}.`);
+
+  return done(
+    `Updated for ${agentDisplayName} ${color.dim('·')} ${refreshed} refreshed`
   );
 };
 

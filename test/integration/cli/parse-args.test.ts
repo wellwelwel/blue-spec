@@ -33,6 +33,23 @@ describe('init parsing', () => {
   });
 });
 
+describe('update parsing', () => {
+  it('parses as a command with no agent and no skills', () => {
+    const parsed = parseCliArgs(['update']);
+    strict.strictEqual(parsed.command, 'update');
+    strict.strictEqual(parsed.agent, undefined);
+    strict.strictEqual(parsed.skillsRequested, false);
+    strict.deepStrictEqual(parsed.skills, []);
+  });
+
+  it('ignores positionals after update', () => {
+    const parsed = parseCliArgs(['update', 'claude']);
+    strict.strictEqual(parsed.command, 'update');
+    strict.strictEqual(parsed.agent, undefined);
+    strict.deepStrictEqual(parsed.skills, []);
+  });
+});
+
 describe('add/remove/list parsing', () => {
   it('has no agent and reads categories from the first positional for add', () => {
     const parsed = parseCliArgs(['add', '--skills', 'owasp']);

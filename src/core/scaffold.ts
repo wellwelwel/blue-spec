@@ -1,13 +1,24 @@
 import type {
+  AgentProvider,
+  BundledAssets,
   CommandWrite,
   FileOutcome,
+  RefreshResult,
   ScaffoldOptions,
   ScaffoldResult,
   TemplateKey,
 } from '../types/core.js';
 import { dirname, join } from 'node:path';
-import { ensureDir, writeFileIfAbsent } from './fs-actions.js';
-import { buildManifest, serializeManifest } from './manifest.js';
+import {
+  ensureDir,
+  writeFileIfAbsent,
+  writeFileOverwrite,
+} from './fs-actions.js';
+import {
+  buildManifest,
+  restampManifestVersion,
+  serializeManifest,
+} from './manifest.js';
 import {
   emptySkillsCatalog,
   serializeSkillsCatalog,
@@ -47,31 +58,46 @@ const skillJobs = (
 const toAbsolute = (targetDir: string, relativePath: string): string =>
   join(targetDir, relativePath);
 
-export const scaffold = async (
-  options: ScaffoldOptions
-): Promise<ScaffoldResult> => {
-  const { targetDir, provider, assets, version, now, categories } = options;
-  const jobs: CommandWrite[] = [
-    ...templateJobs(assets.templates),
-    ...hookJobs(assets.hooks),
-    ...skillJobs(assets.skills),
-    ...provider.buildCommands(assets),
-    {
-      relativePath: TRACKING_PATH,
-      contents: serializeTrackingMap(emptyTrackingMap()),
-    },
-    {
-      relativePath: SKILLS_CATALOG_PATH,
-      contents: serializeSkillsCatalog(emptySkillsCatalog()),
-    },
-  ];
+const blueSpecOwnedJobs = (
+  provider: AgentProvider,
+  assets: BundledAssets
+): CommandWrite[] => [
+  ...templateJobs(assets.templates),
+  ...hookJobs(assets.hooks),
+  ...skillJobs(assets.skills),
+  ...provider.buildCommands(assets),
+];
 
-  await ensureDir(toAbsolute(targetDir, MEMORY_DIR));
+const userStateJobs = (): CommandWrite[] => [
+  {
+    relativePath: TRACKING_PATH,
+    contents: serializeTrackingMap(emptyTrackingMap()),
+  },
+  {
+    relativePath: SKILLS_CATALOG_PATH,
+    contents: serializeSkillsCatalog(emptySkillsCatalog()),
+  },
+];
+
+const ensureJobDirs = async (
+  targetDir: string,
+  jobs: CommandWrite[]
+): Promise<void> => {
   await Promise.all(
     jobs.map((job) =>
       ensureDir(dirname(toAbsolute(targetDir, job.relativePath)))
     )
   );
+};
+
+export const scaffold = async (
+  options: ScaffoldOptions
+): Promise<ScaffoldResult> => {
+  const { targetDir, provider, assets, version, now, categories } = options;
+  const jobs = [...blueSpecOwnedJobs(provider, assets), ...userStateJobs()];
+
+  await ensureDir(toAbsolute(targetDir, MEMORY_DIR));
+  await ensureJobDirs(targetDir, jobs);
 
   const outcomes: FileOutcome[] = await Promise.all(
     jobs.map(async (job) => {
@@ -105,4 +131,28 @@ export const scaffold = async (
   );
 
   return { created, skipped, manifestPath: MANIFEST_PATH };
+};
+
+export const refresh = async (
+  options: ScaffoldOptions
+): Promise<RefreshResult> => {
+  const { targetDir, provider, assets, version, now } = options;
+  const jobs = blueSpecOwnedJobs(provider, assets);
+
+  await ensureJobDirs(targetDir, jobs);
+
+  const refreshed = await Promise.all(
+    jobs.map(async (job): Promise<string> => {
+      await writeFileOverwrite(
+        toAbsolute(targetDir, job.relativePath),
+        job.contents
+      );
+
+      return job.relativePath;
+    })
+  );
+
+  await restampManifestVersion(targetDir, { version, now, files: refreshed });
+
+  return { refreshed, manifestPath: MANIFEST_PATH };
 };

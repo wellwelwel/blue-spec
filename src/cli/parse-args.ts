@@ -1,7 +1,7 @@
 import type { CliCommand, ParsedCliArgs } from '../types/core.js';
 import { parseArgs } from 'node:util';
 
-const COMMANDS: CliCommand[] = ['init', 'add', 'remove', 'list'];
+const COMMANDS: CliCommand[] = ['init', 'update', 'add', 'remove', 'list'];
 
 const toCommand = (value: string | undefined): CliCommand | undefined =>
   COMMANDS.find((command) => command === value);

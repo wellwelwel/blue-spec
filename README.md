@@ -34,6 +34,20 @@ npx -y blue-spec@latest init
 
 - **Blue Spec** runs on **Node.js** under the hood, you use whatever language you want 🃏
 
+#### Update
+
+To update **Blue Spec**'s own files to their latest versions, run:
+
+```bash
+npx -y blue-spec@latest update
+```
+
+> [!TIP]
+>
+> Your charter, the phase artifacts, and any custom specializations stay untouched.
+
+---
+
 ### Commands
 
 Once **Blue Spec** is set up in your project, your **AI** agent unlocks a set of slash commands:

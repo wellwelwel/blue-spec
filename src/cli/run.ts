@@ -9,9 +9,13 @@ import { loadAssets, loadVersion } from '../core/assets.js';
 import {
   applyManifestChange,
   readManifestCategories,
+  readManifestInstall,
 } from '../core/manifest.js';
-import { groupScaffoldOutcomes } from '../core/scaffold-groups.js';
-import { scaffold } from '../core/scaffold.js';
+import {
+  groupOutcomes,
+  groupScaffoldOutcomes,
+} from '../core/scaffold-groups.js';
+import { refresh, scaffold } from '../core/scaffold.js';
 import { loadTrackingMap } from '../core/tracking.js';
 import { SKILLS_CATALOG } from '../hooks/skills/catalog.js';
 import { SKILL_GROUPS } from '../hooks/skills/groups.js';
@@ -22,7 +26,11 @@ import {
   skillNamesForGroups,
   unknownGroupKeys,
 } from '../hooks/skills/skills.js';
-import { listAgentChoices } from '../providers/registry.js';
+import {
+  getProvider,
+  listAgentChoices,
+  listAgentKeys,
+} from '../providers/registry.js';
 import { addSkills, removeSkills } from './manage-skills.js';
 import {
   addSummary,
@@ -37,6 +45,8 @@ import {
   removeUsage,
   summaryLine,
   unknownCategories,
+  updateNotInitialized,
+  updateSummary,
 } from './messages.js';
 import { promptForListTarget } from './prompt.js';
 import { selectAgent } from './select-agent.js';
@@ -127,6 +137,52 @@ const runInit = async (
   print(summaryLine(provider.displayName, result));
 
   if (result.created.length > 0) {
+    print('');
+    print(nextSteps(provider.displayName));
+    print('');
+  }
+};
+
+const runUpdate = async (cwd: string, packageRoot: URL): Promise<void> => {
+  const { agent, categories } = await readManifestInstall(cwd);
+
+  if (agent === '') {
+    print(updateNotInitialized(listAgentKeys()));
+    return;
+  }
+
+  const provider = getProvider(agent);
+  const keys = resolveCategoryKeys(categories);
+  const [assets, version] = await Promise.all([
+    loadAssets(packageRoot),
+    loadVersion(packageRoot),
+  ]);
+
+  const result = await refresh({
+    targetDir: cwd,
+    provider,
+    assets: { ...assets, skills: skillsForKeys(assets, keys) },
+    version,
+    now: new Date(),
+    categories: keys,
+  });
+
+  const groups = groupOutcomes(
+    result.refreshed.map((path) => ({ path, status: 'refreshed' })),
+    provider.displayName
+  );
+
+  print(banner());
+  print('');
+
+  if (groups.length > 0) {
+    print(groupedReport(groups));
+    print('');
+  }
+
+  print(updateSummary(provider.displayName, result.refreshed.length));
+
+  if (result.refreshed.length > 0) {
     print('');
     print(nextSteps(provider.displayName));
     print('');
@@ -291,6 +347,12 @@ export const run = async (
 
   if (args.command === 'init') {
     await runInit(args, cwd, packageRoot);
+
+    return;
+  }
+
+  if (args.command === 'update') {
+    await runUpdate(cwd, packageRoot);
 
     return;
   }

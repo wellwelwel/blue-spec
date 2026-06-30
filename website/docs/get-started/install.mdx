@@ -54,6 +54,18 @@ Running **Blue Spec** in your project creates two things:
 - **`.bluespec/`** holds Blue Spec's state in that project: the charter, the artifact each phase produces, the on-demand skills you installed, and the internal tracking. It is committed alongside your code, so the security work is versioned and reviewable like any other part of the project.
 - **Agent commands** are written into your agent's own location, in its native format, so the `/bluespec.*` commands are ready to run.
 
+## Update
+
+To update **Blue Spec**'s own files to their latest versions, run:
+
+```bash
+npx -y blue-spec@latest update
+```
+
+:::tip
+Your charter, the artifacts each phase produces, the internal tracking, and any _sub_-skill you authored with [`/bluespec.specialize`](/docs/commands/specialize) stay untouched.
+:::
+
 ## Specializations
 
 **Blue Spec** ships focused security [**_sub_-skills**](/docs/commands/skills) grouped into **categories**, from `owasp` to per-language ones like `python`, `go`, and `rust`. You install them by category with the `--skills` flag. The flag is the same everywhere, so what you learn for `init` works for `add` and `remove` too.

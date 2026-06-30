@@ -56,11 +56,10 @@ const commonDir = (paths: string[]): string => {
   return shared.length === 0 ? '' : `${shared.join('/')}/`;
 };
 
-export const groupScaffoldOutcomes = (
-  result: ScaffoldResult,
+export const groupOutcomes = (
+  outcomes: FileOutcome[],
   agentLabel: string
 ): ScaffoldGroup[] => {
-  const outcomes = toOutcomes(result);
   const fixed: ScaffoldGroup[] = FIXED_BUCKETS.map((bucket) => ({
     label: bucket.label,
     baseDir: bucket.baseDir,
@@ -78,3 +77,8 @@ export const groupScaffoldOutcomes = (
 
   return [...fixed, agentCommands].filter((group) => group.outcomes.length > 0);
 };
+
+export const groupScaffoldOutcomes = (
+  result: ScaffoldResult,
+  agentLabel: string
+): ScaffoldGroup[] => groupOutcomes(toOutcomes(result), agentLabel);

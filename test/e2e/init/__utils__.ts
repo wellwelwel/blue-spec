@@ -39,6 +39,9 @@ export const initInto = (workspace: string, args: InitArgs): Promise<void> =>
     packageRoot
   );
 
+export const updateInto = (workspace: string): Promise<void> =>
+  run({ ...baseArgs, command: 'update' }, workspace, packageRoot);
+
 const clear = async () => {
   await Promise.all(
     workspaces.map((workspace) =>

@@ -1,4 +1,4 @@
-export type CliCommand = 'init' | 'add' | 'remove' | 'list';
+export type CliCommand = 'init' | 'update' | 'add' | 'remove' | 'list';
 
 export type ParsedCliArgs = {
   command: CliCommand | undefined;
@@ -82,7 +82,13 @@ export type SpecTokenCount = {
   tokens: number;
 };
 
-export type FileStatus = 'created' | 'skipped' | 'removed' | 'absent' | 'kept';
+export type FileStatus =
+  | 'created'
+  | 'refreshed'
+  | 'skipped'
+  | 'removed'
+  | 'absent'
+  | 'kept';
 
 export type FileOutcome = {
   path: string;
@@ -204,6 +210,16 @@ export type ScaffoldResult = {
   created: string[];
   skipped: string[];
   manifestPath: string;
+};
+
+export type RefreshResult = {
+  refreshed: string[];
+  manifestPath: string;
+};
+
+export type ManifestInstall = {
+  agent: string;
+  categories: string[];
 };
 
 export type ManifestInput = {
