@@ -3,6 +3,7 @@ import type {
   BundledAssets,
   CommandWrite,
   FileOutcome,
+  ReconstructOptions,
   RefreshOptions,
   RefreshResult,
   ScaffoldOptions,
@@ -88,6 +89,35 @@ const ensureJobDirs = async (
   );
 };
 
+const writeJobsIfAbsent = (
+  targetDir: string,
+  jobs: CommandWrite[]
+): Promise<FileOutcome[]> =>
+  Promise.all(
+    jobs.map(async (job): Promise<FileOutcome> => {
+      const outcome = await writeFileIfAbsent(
+        toAbsolute(targetDir, job.relativePath),
+        job.contents
+      );
+
+      return { path: job.relativePath, status: outcome.status };
+    })
+  );
+
+const pathsWithStatus = (
+  outcomes: FileOutcome[],
+  status: FileOutcome['status']
+): string[] =>
+  outcomes
+    .filter((outcome) => outcome.status === status)
+    .map((outcome) => outcome.path);
+
+const toScaffoldResult = (outcomes: FileOutcome[]): ScaffoldResult => ({
+  created: pathsWithStatus(outcomes, 'created'),
+  skipped: pathsWithStatus(outcomes, 'skipped'),
+  manifestPath: MANIFEST_PATH,
+});
+
 export const scaffold = async (
   options: ScaffoldOptions
 ): Promise<ScaffoldResult> => {
@@ -100,25 +130,7 @@ export const scaffold = async (
   await ensureDir(toAbsolute(targetDir, MEMORY_DIR));
   await ensureJobDirs(targetDir, jobs);
 
-  const outcomes: FileOutcome[] = await Promise.all(
-    jobs.map(async (job) => {
-      const outcome = await writeFileIfAbsent(
-        toAbsolute(targetDir, job.relativePath),
-        job.contents
-      );
-
-      return { path: job.relativePath, status: outcome.status };
-    })
-  );
-
-  const created = outcomes
-    .filter((outcome) => outcome.status === 'created')
-    .map((outcome) => outcome.path);
-  const skipped = outcomes
-    .filter((outcome) => outcome.status === 'skipped')
-    .map((outcome) => outcome.path);
-
-  return { created, skipped, manifestPath: MANIFEST_PATH };
+  return toScaffoldResult(await writeJobsIfAbsent(targetDir, jobs));
 };
 
 const dedupeByPath = (jobs: CommandWrite[]): CommandWrite[] => {
@@ -157,4 +169,18 @@ export const refresh = async (
   await restampManifestVersion(targetDir, { version, now, files: refreshed });
 
   return { refreshed, manifestPath: MANIFEST_PATH };
+};
+
+export const reconstruct = async (
+  options: ReconstructOptions
+): Promise<ScaffoldResult> => {
+  const { targetDir, providers, assets } = options;
+  const jobs = dedupeByPath([
+    ...sharedJobs(assets),
+    ...providers.flatMap((provider) => provider.buildCommands(assets)),
+  ]);
+
+  await ensureJobDirs(targetDir, jobs);
+
+  return toScaffoldResult(await writeJobsIfAbsent(targetDir, jobs));
 };

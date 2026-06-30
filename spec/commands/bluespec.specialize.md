@@ -14,7 +14,7 @@ The User Input above decides how this command runs. Read it before proceeding.
 
 You are giving Blue Spec a new **specialty**: a focused, language-agnostic security sub-skill the detect and verify phases load on demand, listed by the `skills` hook and importable directly with `@.bluespec/skills/<name>.md`. You distill the user's source or topic into it. A sub-skill audits and explains a risk area, it never rewrites the user's code, and it never produces an attack input. The shape lives in `.bluespec/templates/specialize-template.md`, and the built-in sub-skills under `.bluespec/skills/` (`regex`, `javascript`, `browser`) are worked examples to mirror.
 
-The result is two files: the sub-skill at `.bluespec/skills/<name>.md`, and a one-line entry in the catalog `.bluespec/skills.json` so the dispatcher hook lists it. You write both. You never touch the user's source.
+The result is the sub-skill at `.bluespec/skills/<name>.md`, a one-line entry in the catalog `.bluespec/skills.json` so the dispatcher hook lists it, and a `.gitignore` re-include so the sub-skill stays version-controlled. You write all three. You never touch the user's source.
 
 ### Step 1: Read the input
 
@@ -60,10 +60,17 @@ On a refine, apply these to the existing file rather than a blank one. Write no 
 
 Derive 2 to 4 tags by the same terrain principle as the name (Step 3): the terrain or ecosystem the sub-skill lives in, an abbreviation, its variation, the plain name, never the vulnerability itself. The built-ins set the shallow style: `regex` carries `RegExp`, `Regular Expression`; `javascript` carries `JavaScript`, `Node.js`, `Deno`, `Bun`; `browser` carries `Browser`, `DOM`, `Navigator`. Propose a flat list of candidate tags and let the user add and drop any freely, never a fixed set to pick one from. On a refine, start from the existing entry's tags and reconcile them the same way.
 
-### Step 7: Write both files
+### Step 7: Write the files and keep the sub-skill tracked
 
 - Ensure `.bluespec/skills/` exists, then write `.bluespec/skills/<name>.md` with the authored or reconciled content. An existing name is reconciled from its current content first, so this never discards a built-in or an earlier version unseen.
 - Update `.bluespec/skills.json`. If it is absent, create it as `{ "name": "blue-spec", "entries": [] }`. Add the `{ "name": "<name>", "tags": [...] }` entry, or on a refine rewrite that one entry, preserving every other entry untouched. This is the catalog row the hook reads at runtime.
+- Keep the sub-skill under version control. Blue Spec ignores the built-in sub-skills by default (`.gitignore` carries `/.bluespec/skills/*`), so a sub-skill you author needs an explicit re-include or it stays invisible to git and is lost on the next clone. Run the hook from the project root:
+
+  ```bash
+  node ./.bluespec/hooks/git.mjs --keep-skill <name>
+  ```
+
+  This adds `!/.bluespec/skills/<name>.md` after the `/.bluespec/skills/*` line, idempotently. It is needed once per sub-skill, on a create. On a refine of a name already re-included, it is a no-op, so running it again is harmless.
 
 ### Step 8: Summarize
 

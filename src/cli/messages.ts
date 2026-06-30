@@ -1,6 +1,7 @@
 import type {
   AgentChoice,
   FileOutcome,
+  GitignoreOutcome,
   ScaffoldGroup,
   ScaffoldResult,
   SkillGroup,
@@ -57,6 +58,7 @@ const agentsByInitial = (agents: AgentChoice[]): string[] => {
 const HELP_USAGE: string[] = [
   'npx blue-spec init <agent> [--skills <category...>]',
   'npx blue-spec update',
+  'npx blue-spec pull',
   'npx blue-spec add --skills',
   'npx blue-spec remove --skills',
   'npx blue-spec list [--findings] [--skills]',
@@ -65,6 +67,7 @@ const HELP_USAGE: string[] = [
 const HELP_COMMANDS: [string, string][] = [
   ['init <agent>', 'Scaffold Blue Spec into the current project'],
   ['update', 'Update Blue Spec files to their latest version'],
+  ['pull', 'Rebuild Blue Spec from a committed manifest (after a clone)'],
   ['add', 'Install security specializations, by category'],
   ['remove', 'Uninstall security specializations, by category'],
   ['list', 'List tracked findings or specialization categories (asks which)'],
@@ -287,6 +290,14 @@ export const summaryLine = (
   );
 };
 
+export const gitignoreResult = (result: GitignoreOutcome): string => {
+  if (result === 'unchanged') return '';
+
+  const action = result === 'created' ? 'Created' : 'Updated';
+
+  return done(`${action} .gitignore with Blue Spec entries`);
+};
+
 export const updateSummary = (
   agentDisplayName: string,
   refreshed: number
@@ -296,6 +307,29 @@ export const updateSummary = (
 
   return done(
     `Updated for ${agentDisplayName} ${color.dim('·')} ${refreshed} refreshed`
+  );
+};
+
+export const pullNotInitialized = (agentKeys: string[]): string => {
+  const first = agentKeys[0];
+
+  return [
+    'No Blue Spec manifest found here.',
+    'pull reconstructs Blue Spec from a committed .bluespec/manifest.json.',
+    `If this is a fresh project, run npx blue-spec init <agent> first (available: ${agentKeys.join(', ')}).`,
+    `Example: npx blue-spec init ${first}`,
+  ].join('\n');
+};
+
+export const pullSummary = (
+  agentDisplayName: string,
+  result: ScaffoldResult
+): string => {
+  if (result.created.length === 0)
+    return color.dim(`Already up to date for ${agentDisplayName}.`);
+
+  return done(
+    `Reconstructed for ${agentDisplayName} ${color.dim('·')} ${result.created.length} restored${restAt(result.skipped.length, 'already present')}`
   );
 };
 

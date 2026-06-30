@@ -1,4 +1,4 @@
-export type CliCommand = 'init' | 'update' | 'add' | 'remove' | 'list';
+export type CliCommand = 'init' | 'update' | 'pull' | 'add' | 'remove' | 'list';
 
 export type ParsedCliArgs = {
   command: CliCommand | undefined;
@@ -102,6 +102,8 @@ export type FileOutcome = {
   status: FileStatus;
   keptBy?: string;
 };
+
+export type GitignoreOutcome = 'created' | 'updated' | 'unchanged';
 
 export type ScaffoldGroup = {
   label: string;
@@ -232,6 +234,12 @@ export type RefreshOptions = {
   assets: BundledAssets;
   version: string;
   now: Date;
+};
+
+export type ReconstructOptions = {
+  targetDir: string;
+  providers: AgentProvider[];
+  assets: BundledAssets;
 };
 
 export type ScaffoldResult = {

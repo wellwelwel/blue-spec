@@ -43,8 +43,8 @@ npx -y blue-spec@latest init claude --skills owasp
 
 See every key in [**Supported Agents**](/docs/supported-agents).
 
-:::info[Any language]
-**Blue Spec** runs on **Node.js** under the hood, you use whatever language you want 🃏
+:::tip[Any language]
+🃏 **Blue Spec** runs on **Node.js** under the hood, you use whatever language you want.
 :::
 
 ## What gets created
@@ -64,6 +64,18 @@ npx -y blue-spec@latest update
 
 :::tip
 Your charter, the artifacts each phase produces, the internal tracking, and any _sub_-skill you authored with [`/bluespec.specialize`](/docs/commands/specialize) stay untouched.
+:::
+
+## Pull
+
+When you clone or fork a project that already has **Blue Spec**, run pull to install its files from the manifest:
+
+```bash
+npx -y blue-spec@latest pull
+```
+
+:::tip
+💡 Think of it as the **Blue Spec** equivalent of `npm i`, `pip install -r requirements.txt`, and the like.
 :::
 
 ## Specializations

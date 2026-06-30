@@ -32,7 +32,7 @@
 npx -y blue-spec@latest init
 ```
 
-- **Blue Spec** runs on **Node.js** under the hood, you use whatever language you want 🃏
+- 🃏 **Blue Spec** runs on **Node.js** under the hood, you use whatever language you want.
 
 #### Update
 
@@ -45,6 +45,18 @@ npx -y blue-spec@latest update
 > [!TIP]
 >
 > Your charter, the phase artifacts, and any custom specializations stay untouched.
+
+#### Pull
+
+When you clone or fork a project that already has **Blue Spec**, run pull to install its files from the manifest:
+
+```bash
+npx -y blue-spec@latest pull
+```
+
+> [!TIP]
+>
+> 💡 Think of it as the **Blue Spec** equivalent of `npm i`, `pip install -r requirements.txt`, and the like.
 
 ---
 

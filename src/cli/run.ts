@@ -7,6 +7,7 @@ import type {
 } from '../types/core.js';
 import { stdout } from 'node:process';
 import { loadAssets, loadVersion } from '../core/assets.js';
+import { ensureGitignoreEntries } from '../core/gitignore.js';
 import {
   applyManifestChange,
   readManifestCategories,
@@ -17,7 +18,7 @@ import {
   groupOutcomes,
   groupScaffoldOutcomes,
 } from '../core/scaffold-groups.js';
-import { refresh, scaffold } from '../core/scaffold.js';
+import { reconstruct, refresh, scaffold } from '../core/scaffold.js';
 import { loadTrackingMap } from '../core/tracking.js';
 import { SKILLS_CATALOG } from '../hooks/skills/catalog.js';
 import { SKILL_GROUPS } from '../hooks/skills/groups.js';
@@ -40,9 +41,12 @@ import {
   banner,
   categoryList,
   findingsReport,
+  gitignoreResult,
   groupedReport,
   helpText,
   nextSteps,
+  pullNotInitialized,
+  pullSummary,
   removeSummary,
   removeUsage,
   summaryLine,
@@ -147,6 +151,8 @@ const runInit = async (
     addFiles: result.created,
   });
 
+  const gitignoreOutcome = await ensureGitignoreEntries(cwd);
+
   const { agents } = await readManifestInstall(cwd);
   const agentsLabel = getProviders(agents)
     .map((installedProvider) => installedProvider.displayName)
@@ -162,6 +168,13 @@ const runInit = async (
   }
 
   print(summaryLine(agentsLabel, result));
+
+  const gitignoreMessage = gitignoreResult(gitignoreOutcome);
+
+  if (gitignoreMessage) {
+    print('');
+    print(gitignoreMessage);
+  }
 
   if (result.created.length > 0) {
     print('');
@@ -210,6 +223,52 @@ const runUpdate = async (cwd: string, packageRoot: URL): Promise<void> => {
   print(updateSummary(label, result.refreshed.length));
 
   if (result.refreshed.length > 0) {
+    print('');
+    print(nextSteps(label));
+    print('');
+  }
+};
+
+const runPull = async (cwd: string, packageRoot: URL): Promise<void> => {
+  const { agents, categories } = await readManifestInstall(cwd);
+
+  if (agents.length === 0) {
+    print(pullNotInitialized(listAgentKeys()));
+    return;
+  }
+
+  const providers = getProviders(agents);
+  const label = providers.map((provider) => provider.displayName).join(', ');
+  const keys = resolveCategoryKeys(categories);
+  const assets = await loadAssets(packageRoot);
+
+  const result = await reconstruct({
+    targetDir: cwd,
+    providers,
+    assets: { ...assets, skills: skillsForKeys(assets, keys) },
+  });
+
+  const gitignoreOutcome = await ensureGitignoreEntries(cwd);
+  const groups = groupScaffoldOutcomes(result, label);
+
+  print(banner());
+  print('');
+
+  if (groups.length > 0) {
+    print(groupedReport(groups));
+    print('');
+  }
+
+  print(pullSummary(label, result));
+
+  const gitignoreMessage = gitignoreResult(gitignoreOutcome);
+
+  if (gitignoreMessage) {
+    print('');
+    print(gitignoreMessage);
+  }
+
+  if (result.created.length > 0) {
     print('');
     print(nextSteps(label));
     print('');
@@ -384,6 +443,12 @@ export const run = async (
 
   if (args.command === 'update') {
     await runUpdate(cwd, packageRoot);
+
+    return;
+  }
+
+  if (args.command === 'pull') {
+    await runPull(cwd, packageRoot);
 
     return;
   }
