@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.7.0](https://github.com/wellwelwel/blue-spec/compare/v0.6.0...v0.7.0) (2026-06-30)
+
+
+### Features
+
+* **cli:** add `update` command ([39fdac3](https://github.com/wellwelwel/blue-spec/commit/39fdac33a3a8db943c417180fda6aab3ec34931d))
+* mature the `detect` command ([9478325](https://github.com/wellwelwel/blue-spec/commit/9478325da5134f84d4635c3b5bc8f80031897f06))
+* mature the `plan` command ([d0493b5](https://github.com/wellwelwel/blue-spec/commit/d0493b568c27913ab060e0e11b2103c1ca25a77b))
+
+
+### Bug Fixes
+
+* align `harden` with the new `plan` apprach ([22e2c40](https://github.com/wellwelwel/blue-spec/commit/22e2c402c42184986320eda5a0b7e9f9bc425d0b))
+* **cli:** improve `init` DX ([db48e8d](https://github.com/wellwelwel/blue-spec/commit/db48e8dbf4cfa66eb86bbedb95029922c5c053c4))
+* **hooks:** improve output for agents and humans ([96de8e7](https://github.com/wellwelwel/blue-spec/commit/96de8e74f373254081212397f0e7925d2025c133))
+* improve templates overview ([c754613](https://github.com/wellwelwel/blue-spec/commit/c754613da39ad66b0bf88a1e95ad3d1189c87b34))
+
 ## [0.6.0](https://github.com/wellwelwel/blue-spec/compare/v0.5.0...v0.6.0) (2026-06-26)
 
 
