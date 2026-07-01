@@ -1,5 +1,5 @@
 ---
-description: Establish or update the project's security charter, the safe-by-default principles every later Blue Spec phase must respect. Reads the project's own files to learn what it is and uses, weighs any description you give against them, and asks when something important is unclear. Proposes a charter from the project when run with no input.
+description: Establish or update the project's security charter, the safe-by-default principles every later phase must respect. Reads the project's files to learn what it is and uses, weighs any description you give against them, and asks when something is unclear.
 ---
 
 ## User Input
@@ -56,13 +56,16 @@ This charter is reconciled, never append-only. If it was empty or freshly initia
 - **Changed:** rewrite the rule or the `Why:` line to match.
 - **No longer applies:** remove it. A principle about payments stays only while the project still takes payments. Do not keep a principle for history.
 
+This reconcile is for the project's own principles under `## Principles`. The `## Baseline discipline` section is universal, not a project principle: keep it verbatim, and if an existing charter predates it, add it from the template.
+
 The charter has no tracking map and is not part of the finding chain, so reconcile it here in prose only. Do not run repair and do not touch `.bluespec/tracking.json`.
 
 ### Step 6: Fill the template and set the version
 
 - Replace every placeholder with concrete text. Leave no bracket tokens behind.
-- Each principle MUST carry three things: a clear name, a non-negotiable rule, and a plain-language `Why:` line that states the risk it prevents. Explain the risk, not just the fix.
+- Each principle MUST carry three things: a clear name, an imperative and non-negotiable rule (write it with Never, Always, or MUST, in plain language a non-developer understands), and a plain-language `Why:` line that states the risk it prevents. Explain the risk, not just the fix.
 - The starters are a shape, not a quota. Write only the principles this project needs, and as many as it needs. A checklist of rules that do not apply to this project is a failure, not thoroughness.
+- The `## Baseline discipline` section carries no placeholders, so fill nothing into it. It does not affect the version, which tracks only the project principles and Governance.
 - Fill the Governance section with how the charter is upheld and amended, in plain language.
 - For a brand new charter, set `Version` to `1.0.0`. For an update, increment it: MAJOR for removing or redefining a principle, MINOR for adding a principle or materially expanding one, PATCH for wording and clarity fixes.
 - Set `Ratified` to today's date in ISO format `YYYY-MM-DD`. Keep the original ratification date on later updates.
@@ -73,8 +76,9 @@ Validate before writing:
 
 - No bracket tokens remain, and every principle has a name, a rule, and a `Why:` line.
 - The date is ISO `YYYY-MM-DD` and the version line is present.
-- Principles are declarative, specific, and free of vague language, and none is duplicated.
-- **Boundary check:** every principle states a rule the project must hold to, never an observation of what the code does. `All input is validated before use` is a principle. `The upload handler does not check file type` is a finding, so drop it or rewrite it as a rule.
+- Each principle's rule is imperative and non-negotiable (Never, Always, or MUST), specific, and free of vague language, and none is duplicated.
+- The `## Baseline discipline` section is present and verbatim, with its three blocks intact: only the controls the project needs, prefer the simplest vetted control, and when a control seems skippable.
+- **Boundary check:** every principle states a rule the project must hold to, never an observation of what the code does. `Always validate all input before use` is a principle. `The config value is read without validation` is a finding, so drop it or rewrite it as a rule. Likewise, `Always validate data against its schema before persisting it` is a principle, while `Unstructured data is written straight to the database` is a finding.
 
 Then write the completed charter to `.bluespec/memory/charter.md` and output a short summary:
 

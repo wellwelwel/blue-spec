@@ -1,5 +1,5 @@
 ---
-description: Prove each applied control holds by reading the code and confronting it with the hardening record, writing each verdict back into that record, then stand the findings proven closed down out of the chain. Reads the hardening record and the charter, then verifies every applied control, just the controls, files, or directories you name, or the priorities you choose. Read-only on your code, it only writes Blue Spec's own chain.
+description: Prove each applied control holds by confronting the hardening record with the code, writing each verdict back into that record, then standing the findings proven closed out of the chain. Read-only on your code, it writes only Blue Spec's own chain.
 ---
 
 ## User Input
@@ -56,7 +56,7 @@ If reconciling reveals the chain is inconsistent (for example the tracking map p
 
 For each in-scope control, read the code and judge whether the **risk** is closed. You only read: no edit, no test, no dependency, no running the system.
 
-- **Read where the control lives.** The record's `Where` names the area and the tracking map (`.bluespec/tracking.json`) holds its file paths. Open them and confront the record's `What changed` against the code: is the control actually present, complete, and correct, not merely named? Trust the code over the record, which can claim more than the code delivers.
+- **Read where the control lives, and trace the risk's path.** The record's `Where` names the area and the tracking map (`.bluespec/tracking.json`) holds its file paths. Open them and confront the record's `What changed` against the code: is the control actually present, complete, and correct, not merely named? Follow the path the risk takes end to end and confirm the control sits on it, not beside it. Where harden left a regression check, read it as evidence, but the verdict rests on the code you read, not the test's presence. Trust the code over the record, which can claim more than the code delivers.
 - **Judge the risk, not the control.** The question is whether the security risk is gone from the code now. A control can be present yet leave the risk reachable, for example a safe function added beside the unsafe one that still runs. Do not soften this to match the record: a control the record calls `Applied` whose risk is still reachable is open.
 - **A `Partial` or `Blocked` control is open** by definition: confirm only the part a `Partial` applied, and leave a `Blocked` control for harden.
 - **A new problem is not yours to map.** If you notice a risk the detect map never covered, do not record it as a verdict. Tell the user to run `/bluespec.detect` on that spot.
