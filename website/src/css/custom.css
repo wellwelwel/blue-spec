@@ -84,11 +84,6 @@
 }
 
 @theme {
-  --color-accent: #005eff;
-  --color-ink: #e9edf7;
-  --color-muted: rgba(233, 237, 247, 0.5);
-  --color-faint: rgba(233, 237, 247, 0.32);
-  --color-line: rgba(233, 237, 247, 0.08);
   --color-glass: rgba(20, 22, 25, 0.52);
   --color-card: rgba(4, 8, 22, 0.35);
   --color-card-hover: rgba(4, 8, 22, 0.52);
@@ -96,6 +91,64 @@
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Archivo', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'Ubuntu Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-jakarta:
+    'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --radius-card: 18px;
+  --radius-panel: 14px;
+  --radius-field: 10px;
+  --radius-chip: 8px;
+}
+
+/*
+ * Shared tokens resolve through CSS variables so one utility (text-ink,
+ * bg-surface…) themes per subtree: the landing page reads the :root values
+ * below, the docs shell re-declares the same variables under .bs-docs
+ * (see docs.css), with light and dark values ported from the dashboard.
+ */
+@theme inline {
+  --color-accent: var(--accent);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-line-2: var(--line-2);
+  --color-ink-2: var(--ink-2);
+  --color-accent-3: var(--accent-3);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-100: var(--accent-100);
+  --color-banner: var(--banner);
+  --color-dark: var(--dark);
+
+  --color-red: var(--red);
+  --color-red-soft: var(--red-soft);
+  --color-amber: var(--amber);
+  --color-amber-soft: var(--amber-soft);
+  --color-blue: var(--blue);
+  --color-blue-soft: var(--blue-soft);
+  --color-teal: var(--teal);
+  --color-teal-soft: var(--teal-soft);
+  --color-pink: var(--pink);
+  --color-pink-soft: var(--pink-soft);
+
+  --shadow-card: var(--shadow-card);
+  --shadow-card-half: var(--shadow-card-half);
+  --shadow-pop: var(--shadow-pop);
+}
+
+@custom-variant docs-dark (&:where(html[data-bs-docs-theme='dark'] *));
+
+:root {
+  --accent: #005eff;
+  --ink: #e9edf7;
+  --muted: rgba(233, 237, 247, 0.5);
+  --faint: rgba(233, 237, 247, 0.32);
+  --line: rgba(233, 237, 247, 0.08);
 }
 
 .bs-canvas {
@@ -290,6 +343,40 @@
   }
 }
 
+/* Two slightly off-balance hops for the little robot when its card is hovered. */
+.bs-robot-hop {
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+
+.group\/card:hover .bs-robot-hop {
+  animation: bs-robot-hop 0.7s cubic-bezier(0.3, 0.7, 0.4, 1) both;
+}
+
+@keyframes bs-robot-hop {
+  0% {
+    transform: translateY(0) rotate(0deg) scaleY(1);
+  }
+  12% {
+    transform: translateY(1px) rotate(-3deg) scaleY(0.9);
+  }
+  32% {
+    transform: translateY(-9px) rotate(4deg) scaleY(1.06);
+  }
+  48% {
+    transform: translateY(0) rotate(-2deg) scaleY(0.94);
+  }
+  60% {
+    transform: translateY(-6px) rotate(-5deg) scaleY(1.04);
+  }
+  80% {
+    transform: translateY(0) rotate(2deg) scaleY(0.97);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg) scaleY(1);
+  }
+}
+
 /* Mermaid edge labels: drop the default light/green pill, match the panel. */
 .bs-mermaid .edgeLabel,
 .bs-mermaid .edgeLabel p,
@@ -375,7 +462,7 @@
 
   --ifm-toc-border-color: var(--bs-line);
   --ifm-table-border-color: var(--bs-line);
-  --ifm-hr-border-color: var(--bs-panel-line);
+  --ifm-hr-background-color: var(--bs-panel-line);
 
   --ifm-navbar-background-color: rgba(5, 10, 24, 0.82);
   --ifm-navbar-shadow: inset 0 -1px 0 0 var(--bs-panel-line);
@@ -396,48 +483,11 @@
   --ifm-blockquote-border-color: rgba(0, 94, 255, 0.5);
 
   --docusaurus-highlighted-code-line-bg: rgba(0, 94, 255, 0.12);
-
-  --search-local-modal-background: var(--bs-bg-elevated);
-  --search-local-hit-background: var(--bs-card);
-  --search-local-hit-color: var(--ifm-font-color-base);
-  --search-local-highlight-color: var(--bs-accent-soft);
-  --search-local-modal-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.85);
-  --ifm-navbar-search-input-icon: url('data:image/svg+xml;utf8,<svg fill="rgba(233, 237, 247,0.62)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" height="16px" width="16px"><path d="M6.02945,10.20327a4.17382,4.17382,0,1,1,4.17382-4.17382A4.15609,4.15609,0,0,1,6.02945,10.20327Zm9.69195,4.2199L10.8989,9.59979A5.88021,5.88021,0,0,0,12.058,6.02856,6.00467,6.00467,0,1,0,9.59979,10.8989l4.82338,4.82338a.89729.89729,0,0,0,1.29912,0,.89749.89749,0,0,0-.00087-1.29909Z" /></svg>');
-}
-
-.navbar__search-input {
-  border: 1px solid var(--bs-line);
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-
-.navbar__search-input::placeholder {
-  font-weight: 600;
-  color: var(--bs-muted);
-}
-
-.navbar__search kbd {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 1.3rem;
-  height: 1.3rem;
-  padding: 0;
-  font-size: 0.7rem;
-  line-height: 1;
-  color: var(--bs-muted);
-  background-color: var(--bs-card);
-  border: 1px solid var(--bs-line);
-  border-radius: 6px;
-  box-shadow: none;
 }
 
 html[data-theme='dark'] {
   --ifm-background-color: var(--bs-bg);
   --ifm-background-surface-color: var(--bs-bg-elevated);
-  --ifm-navbar-search-input-background-color: var(--bs-card);
-  --ifm-navbar-search-input-color: var(--bs-ink);
-  --ifm-navbar-search-input-placeholder-color: var(--bs-muted);
 }
 
 html[data-theme='dark'] body {
@@ -457,7 +507,7 @@ html {
 
 html,
 body {
-  min-width: 340px;
+  min-width: 320px;
 }
 
 .navbar {
@@ -480,199 +530,6 @@ body {
 }
 
 .navbar__link--active {
-  color: var(--bs-accent-soft);
-}
-
-.theme-doc-sidebar-container {
-  border-right: 1px solid var(--bs-panel-line) !important;
-}
-
-.menu {
-  padding: 1rem 0.75rem;
-}
-
-.menu__link {
-  border-radius: 10px;
-  font-weight: 500;
-}
-
-.menu__link--active:not(.menu__link--sublist) {
-  font-weight: 600;
-}
-
-.menu__list-item-collapsible .menu__link {
-  font-weight: 600;
-}
-
-.markdown h1:first-child {
-  font-size: clamp(2rem, 3.4vw, 2.6rem);
-  letter-spacing: -0.02em;
-}
-
-.markdown h2 {
-  letter-spacing: -0.02em;
-  border-bottom: 1px solid var(--bs-line);
-  padding-bottom: 0.4rem;
-}
-
-.markdown :is(h1, h2, h3, h4) {
-  text-wrap: balance;
-}
-
-.markdown :is(p, li, blockquote, figcaption) {
-  text-wrap: pretty;
-}
-
-.markdown img {
-  outline: 1px solid rgba(0, 0, 0, 0.4);
-  outline-offset: -1px;
-}
-
-.markdown :not(pre) > code {
-  border: 1px solid var(--bs-line);
-  border-radius: 6px;
-  color: var(--bs-ink);
-}
-
-.theme-code-block,
-div[class*='codeBlockContainer'] {
-  border: 1px solid var(--bs-line);
-  border-radius: 14px;
-  box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.9);
-}
-
-/* Word wrap is always on; the toggle button is swizzled away. */
-.theme-code-block pre code {
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-
-.markdown table {
-  display: table;
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  border: 1px solid var(--bs-line);
-  border-radius: 14px;
-  overflow: hidden;
-}
-
-.markdown table th,
-.markdown table td {
-  border: 0;
-  border-bottom: 1px solid var(--bs-line);
-}
-
-.markdown table tr > *:not(:first-child) {
-  border-left: 1px solid var(--bs-line);
-}
-
-.markdown table tbody tr:last-child > * {
-  border-bottom: 0;
-}
-
-.markdown table thead {
-  background: rgba(255, 255, 255, 0.04);
-}
-
-.markdown table th {
-  color: var(--bs-ink);
-  font-weight: 600;
-}
-
-.markdown table tr {
-  background: transparent;
-}
-
-.markdown table tbody tr:nth-child(2n) {
-  background: rgba(255, 255, 255, 0.015);
-}
-
-/* Admonitions: each variant a shade of the brand blue, told apart by intensity. */
-.theme-admonition {
-  border-radius: 14px;
-  border-width: 1px;
-  --ifm-alert-foreground-color: var(--bs-ink);
-}
-
-.theme-admonition-tip,
-.alert--success {
-  --ifm-alert-background-color: rgba(0, 94, 255, 0.25);
-  --ifm-alert-background-color-highlight: rgba(0, 94, 255, 0.12);
-  --ifm-alert-border-color: rgba(0, 94, 255, 0.55);
-}
-
-.theme-admonition-info,
-.alert--info {
-  --ifm-alert-background-color: rgba(95, 180, 255, 0.08);
-  --ifm-alert-background-color-highlight: rgba(95, 180, 255, 0.12);
-  --ifm-alert-border-color: rgba(95, 180, 255, 0.5);
-}
-
-.theme-admonition-warning,
-.alert--warning {
-  --ifm-alert-background-color: rgba(95, 26, 209, 0.25);
-  --ifm-alert-background-color-highlight: rgba(95, 26, 209, 0.18);
-  --ifm-alert-border-color: rgba(95, 26, 209, 0.6);
-}
-
-.theme-admonition-note,
-.alert--secondary {
-  --ifm-alert-background-color: rgba(94, 108, 121, 0.25);
-  --ifm-alert-background-color-highlight: rgba(168, 187, 219, 0.1);
-  --ifm-alert-border-color: rgba(168, 187, 219, 0.32);
-}
-
-.theme-admonition-danger,
-.alert--danger {
-  --ifm-alert-background-color: rgba(3, 55, 145, 0.25);
-  --ifm-alert-background-color-highlight: rgba(3, 55, 145, 0.26);
-  --ifm-alert-border-color: rgba(31, 123, 255, 0.65);
-}
-
-.card,
-.pagination-nav__link {
-  background: var(--bs-card);
-  border: 1px solid var(--bs-line);
-  border-radius: 16px;
-}
-
-.pagination-nav__link:hover {
-  border-color: rgba(0, 94, 255, 0.45);
-}
-
-.pagination-nav__sublabel {
-  color: var(--bs-faint);
-}
-
-.table-of-contents__link {
-  color: var(--bs-muted);
-}
-
-.table-of-contents__link--active,
-.table-of-contents__link:hover {
-  color: var(--bs-accent-soft);
-}
-
-.table-of-contents {
-  border-left: 1px solid var(--bs-line);
-}
-
-.breadcrumbs__link {
-  background: transparent;
-  border: 0;
-  padding-inline: 0.25rem;
-  font-weight: 600;
-  color: var(--bs-muted);
-}
-
-.breadcrumbs__link:hover {
-  background: transparent;
-  color: var(--bs-accent-soft);
-}
-
-.breadcrumbs__item--active .breadcrumbs__link {
-  background: transparent;
   color: var(--bs-accent-soft);
 }
 
@@ -745,12 +602,4 @@ div[class*='codeBlockContainer'] {
 
 .footer__bottom {
   text-align: left;
-}
-
-mark,
-.search-result-match {
-  background: rgba(0, 94, 255, 0.535);
-  color: var(--bs-ink);
-  border-radius: 3px;
-  padding: 0 1px;
 }

@@ -32,10 +32,6 @@ For every finding the detect map carries, it writes a self-contained advisory an
 **Blue Spec** tests live isolated under `.bluespec/`, apart from your own suite.
 :::
 
-:::warning[Builds on detect]
-Prove reads the detect map from [`/bluespec.detect`](/docs/commands/detect), so run detect first.
-:::
-
 ## Run it
 
 <Tabs>
@@ -85,6 +81,10 @@ The proofs are always JavaScript, so they stay portable whatever language your p
 - A finding whose test does not reproduce the issue gets no proof, and it tells you to run [`/bluespec.detect`](/docs/commands/detect) on that spot to reconcile.
 - Running it again reconciles the proofs: a finding that is gone or no longer reproduces has its directory removed.
 
+:::
+
+:::warning[Builds on detect]
+Prove reads the detect map from [`/bluespec.detect`](/docs/commands/detect), so run detect first.
 :::
 
 ## Defense only, and authorized

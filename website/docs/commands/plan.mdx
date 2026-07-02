@@ -12,10 +12,6 @@ import Tabs from '@theme/Tabs';
 
 🛡️ Turn what detect found into a defense plan: for each finding, the fix to apply.
 
-:::warning[Depends on detect]
-Plan works only from what [`/bluespec.detect`](/docs/commands/detect) already mapped, so run detect first.
-:::
-
 ## Run it
 
 <Tabs>
@@ -58,6 +54,10 @@ From there, you have a prioritized list of fixes, each tied to a finding and rea
 - Running it again updates the plan: done fixes drop off, new ones come in.
 - The defense plan lives in `.bluespec/memory/plan.md`.
 
+:::
+
+:::warning[Depends on detect]
+Plan works only from what [`/bluespec.detect`](/docs/commands/detect) already mapped, so run detect first.
 :::
 
 ## Next

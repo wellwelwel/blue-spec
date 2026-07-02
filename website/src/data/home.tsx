@@ -127,7 +127,7 @@ export const PHASE_GROUPS: Group[] = [
         no: 'PHASE 4',
         title: 'Harden',
         command: '/bluespec.harden',
-        desc: 'Applies the plan’s fixes to your code, safely and one at a time.',
+        desc: "Applies the plan's fixes to your code, safely and one at a time.",
         modes: [
           {
             label: 'Recommended (Full)',

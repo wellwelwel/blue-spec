@@ -5,9 +5,19 @@ sidebar_label: Skills
 description: How sub-skills are loaded, by a phase on demand, and by you directly.
 ---
 
+import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
+import { SkillsOverview } from '@site/src/components/docs/SkillsOverview';
+
 # Skills (_sub_-skills)
 
 🧠 **Blue Spec**'s sub-skills are focused, language-agnostic security knowledge modules that load only on demand, never by default. They are not commands. The detect and verify phases reach for them while they run, and you can use one directly any time.
+
+<Tabs>
+  <TabItem value="overview" label="Overview" default>
+    <SkillsOverview />
+  </TabItem>
+  <TabItem value="how-it-works" label="How it Works">
 
 ## Run yourself
 
@@ -116,3 +126,6 @@ node ./.bluespec/hooks/skills.mjs
 :::note[_Sub_-Skills are not loaded by default]
 The relevant knowledge is pulled in for what the project actually is, instead of every check running by default.
 :::
+
+  </TabItem>
+</Tabs>

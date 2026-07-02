@@ -11,6 +11,10 @@
 
 ---
 
+Love **Blue Spec**? Give us a ⭐ on **GitHub**!
+
+---
+
 ## Table of Contents
 
 - 🌱 [**Get Started**](#get-started)
@@ -57,6 +61,16 @@ npx -y blue-spec@latest pull
 > [!TIP]
 >
 > 💡 Think of it as the **Blue Spec** equivalent of `npm i`, `pip install -r requirements.txt`, and the like.
+
+### Dashboard
+
+For an interative live, read-only view of your project's `.bluespec/` (charter, findings, hardening, verification, and the sub-skills applied), run:
+
+```bash
+npx -y blue-spec@latest dashboard
+```
+
+It serves the dashboard and opens it in your browser, reloading as `.bluespec/` changes. Press `Ctrl+C` to stop.
 
 ---
 

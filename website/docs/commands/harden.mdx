@@ -12,10 +12,6 @@ import Tabs from '@theme/Tabs';
 
 🔧 Apply the plan's fixes to your code, safely and one at a time.
 
-:::warning[Depends on plan, and changes your code]
-Harden builds on [`/bluespec.plan`](/docs/commands/plan). It is the one phase that changes your code.
-:::
-
 ## Run it
 
 <Tabs>
@@ -63,6 +59,10 @@ Applied does not mean proven yet. That is what [verify](/docs/commands/verify) i
 - Running it again reconciles the record: reverted changes drop off, newly applied fixes come in.
 - The hardening record lives in `.bluespec/memory/harden.md`.
 
+:::
+
+:::warning[Depends on plan, and changes your code]
+Harden builds on [`/bluespec.plan`](/docs/commands/plan). It is the one phase that changes your code.
 :::
 
 ## Next

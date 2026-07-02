@@ -1,0 +1,587 @@
+/*
+ * Docs skin: the dashboard's design system applied to the documentation.
+ * Tokens are a direct port of src/dashboard/client/styles/tokens.css, scoped
+ * under .bs-docs. The docs theme is independent from Docusaurus' color mode
+ * (locked to dark for the landing page): it keys off the html attribute
+ * data-bs-docs-theme, set pre-paint by a script the docs plugin injects.
+ */
+
+.bs-docs {
+  --canvas: #eaedf5;
+  --surface: #ffffff;
+  --surface-2: #f2f4f9;
+  --surface-3: #e7ebf3;
+
+  --line: #edf0f6;
+  --line-2: #e2e6ef;
+
+  --ink: #17182b;
+  --ink-2: #3d4058;
+  --muted: #83889c;
+  --faint: #a6abbd;
+
+  --accent: #005eff;
+  --accent-3: #0049c4;
+  --banner: #005eff;
+  --dark: #17161f;
+
+  --red: #e5484d;
+  --amber: #e0891a;
+  --blue: #3f8bf1;
+  --teal: #10b17d;
+  --pink: #e264a0;
+
+  --accent-soft: color-mix(in srgb, var(--accent) 11%, var(--surface));
+  --accent-100: color-mix(in srgb, var(--accent) 6%, var(--surface));
+  --red-soft: color-mix(in srgb, var(--red) 12%, var(--surface));
+  --amber-soft: color-mix(in srgb, var(--amber) 14%, var(--surface));
+  --blue-soft: color-mix(in srgb, var(--blue) 12%, var(--surface));
+  --teal-soft: color-mix(in srgb, var(--teal) 13%, var(--surface));
+  --pink-soft: color-mix(in srgb, var(--pink) 12%, var(--surface));
+
+  --shadow-card:
+    0 1px 2px rgba(18, 22, 45, 0.04), 0 4px 10px -6px rgba(18, 22, 45, 0.1);
+  --shadow-card-half:
+    0 0.5px 1px rgba(18, 22, 45, 0.04), 0 2px 6px -4px rgba(18, 22, 45, 0.1);
+  --shadow-pop:
+    0 2px 6px -3px rgba(18, 22, 45, 0.08),
+    0 8px 18px -10px rgba(18, 22, 45, 0.16);
+
+  font-family:
+    'Plus Jakarta Sans',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html[data-bs-docs-theme='dark'] .bs-docs {
+  --canvas: #0b0e17;
+  --surface: #151a26;
+  --surface-2: #1d2432;
+  --surface-3: #29313f;
+
+  --line: #222a38;
+  --line-2: #2d3648;
+
+  --ink: #eef1f8;
+  --ink-2: #c6ccdb;
+  --muted: #8b93a8;
+  --faint: #69718a;
+
+  --accent: #4f9bff;
+  --accent-3: #2f7bff;
+  --dark: #0a0b12;
+
+  --shadow-card:
+    0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 12px -7px rgba(0, 0, 0, 0.6);
+  --shadow-card-half:
+    0 0.5px 1px rgba(0, 0, 0, 0.4), 0 2px 7px -4px rgba(0, 0, 0, 0.6);
+  --shadow-pop:
+    0 2px 7px -4px rgba(0, 0, 0, 0.55), 0 9px 20px -11px rgba(0, 0, 0, 0.72);
+}
+
+.bs-docs :is(h1, h2, h3, h4) {
+  text-wrap: balance;
+}
+
+.bs-docs :is(p, li, figcaption, blockquote) {
+  text-wrap: pretty;
+}
+
+.bs-docs .bs-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--surface-3) transparent;
+}
+
+.bs-docs .bs-scroll::-webkit-scrollbar {
+  width: 11px;
+}
+
+.bs-docs .bs-scroll::-webkit-scrollbar-thumb {
+  background: var(--surface-3);
+  border-radius: 999px;
+  border: 3px solid var(--surface);
+}
+
+/* ---------------------------------------------------------------------------
+ * Markdown content, remapping Infima onto the dashboard tokens.
+ * ------------------------------------------------------------------------ */
+
+.bs-docs .markdown {
+  --ifm-font-color-base: var(--ink-2);
+  --ifm-heading-color: var(--ink);
+  --ifm-link-color: var(--accent);
+  --ifm-link-hover-color: var(--accent-3);
+  --ifm-code-background: var(--surface-2);
+  --ifm-code-border-radius: var(--radius-panel);
+  --ifm-pre-border-radius: var(--radius-panel);
+  --docusaurus-highlighted-code-line-bg: rgba(95, 161, 255, 0.12);
+  --ifm-blockquote-color: var(--ink-2);
+  --ifm-table-border-color: var(--line-2);
+  --ifm-hr-background-color: var(--line);
+  --ifm-heading-font-family:
+    'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --ifm-font-family-base: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --ifm-font-family-monospace:
+    'Fira Code', ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas,
+    monospace;
+  --ifm-code-font-size: 0.85em;
+
+  /* Jakarta carries the chrome and headings, Inter carries the long-form
+     reading text. */
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.925rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+
+.bs-docs .markdown :is(h1, h2, h3, h4, h5, h6) {
+  font-family:
+    'Plus Jakarta Sans',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+  scroll-margin-top: 96px;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+}
+
+/* The page banner already renders the title, so the leading Markdown h1
+   (which MDX wraps in a <header>, kept in the files for GitHub readers)
+   stays out of the page. */
+.bs-docs .markdown > header:first-child {
+  display: none;
+}
+
+.bs-docs .markdown h2 {
+  font-size: 1.25rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.5rem;
+}
+
+.bs-docs .markdown h3 {
+  font-size: 1.05rem;
+}
+
+.bs-docs .markdown a:not(.hash-link) {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.bs-docs .markdown a:not(.hash-link):hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.bs-docs .markdown .hash-link {
+  color: var(--faint);
+}
+
+.bs-docs .markdown .hash-link:hover {
+  color: var(--accent);
+}
+
+.bs-docs .markdown strong {
+  color: var(--ink);
+}
+
+.bs-docs .markdown li::marker {
+  color: var(--muted);
+}
+
+/* Task-list checkboxes: the native disabled control ignores the theme, so
+   it is redrawn on the tokens (opacity: 1 undoes the disabled graying). */
+.bs-docs .markdown input[type='checkbox'] {
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+  vertical-align: -0.1875rem;
+  border: 1.5px solid var(--faint);
+  border-radius: 5px;
+  background: var(--surface) center / 0.625rem no-repeat;
+  opacity: 1;
+}
+
+.bs-docs .markdown input[type='checkbox']:checked {
+  border-color: var(--accent);
+  background-color: var(--accent);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='m2.5 6.3 2.4 2.4 4.6-5.4'/%3E%3C/svg%3E");
+}
+
+.bs-docs .markdown :not(pre) > code {
+  border: 1px solid var(--line-2);
+  border-radius: 6px;
+  color: var(--ink);
+  padding: 0.1rem 0.35rem;
+  vertical-align: baseline;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.bs-docs .markdown blockquote {
+  border-left: 3px solid var(--accent);
+  background: var(--accent-100);
+  border-radius: 0 var(--radius-field) var(--radius-field) 0;
+  padding: 0.75rem 1.1rem;
+  margin-block: 1.25rem;
+}
+
+/* Code blocks stay dark in both docs themes, like the dashboard's
+   terminal previews, using the Blue Spec prism theme (src/prism). */
+.bs-docs .theme-code-block,
+.bs-docs div[class*='codeBlockContainer'] {
+  border-radius: var(--radius-panel);
+  box-shadow: var(--shadow-card);
+  margin-bottom: 1.25rem;
+}
+
+.bs-docs .theme-code-block pre,
+.bs-docs div[class*='codeBlockContainer'] pre {
+  border-radius: var(--radius-panel);
+}
+
+.bs-docs .theme-code-block pre code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+/* Code blocks live on a dark surface regardless of the docs theme, so their
+   selection keeps a light foreground instead of the page ink. */
+.bs-docs .theme-code-block ::selection,
+.bs-docs div[class*='codeBlockContainer'] ::selection {
+  background: color-mix(in srgb, var(--accent) 45%, transparent);
+  color: #ffffff;
+}
+
+/* Copy button: interruptible icon cross-fade (opacity, scale, blur) in
+   place of the theme's transition: all, plus a 40px hit area. */
+.bs-docs .theme-code-block [class*='buttonGroup'] {
+  column-gap: 0.5rem;
+}
+
+.bs-docs .theme-code-block [class*='buttonGroup'] button {
+  position: relative;
+  border: 0;
+  background: transparent;
+  opacity: 0;
+  transform: scale(0.85);
+  filter: blur(2px);
+  transition-property: opacity, transform, filter;
+  transition-duration: 0.2s;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+.bs-docs .theme-code-block:hover [class*='buttonGroup'] button {
+  opacity: 0.65;
+  transform: scale(1);
+  filter: blur(0);
+}
+
+.bs-docs .theme-code-block [class*='copyButtonIcons'] {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.bs-docs .theme-code-block [class*='buttonGroup'] button::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+}
+
+.bs-docs .theme-code-block svg[class*='copyButtonIcon_'],
+.bs-docs .theme-code-block svg[class*='copyButtonSuccessIcon_'] {
+  transition-property: opacity, transform, filter;
+  transition-duration: 0.2s;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+  transition-delay: 0s;
+}
+
+.bs-docs .theme-code-block svg[class*='copyButtonIcon_'] {
+  filter: blur(0);
+}
+
+.bs-docs
+  .theme-code-block
+  button[class*='copyButtonCopied']
+  svg[class*='copyButtonIcon_'] {
+  transform: scale(0.25);
+  opacity: 0;
+  filter: blur(4px);
+}
+
+.bs-docs .theme-code-block svg[class*='copyButtonSuccessIcon_'] {
+  transform: translate(-50%, -50%) scale(0.25);
+  filter: blur(4px);
+  color: var(--teal);
+}
+
+.bs-docs
+  .theme-code-block
+  button[class*='copyButtonCopied']
+  svg[class*='copyButtonSuccessIcon_'] {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  filter: blur(0);
+  transition-delay: 0s;
+}
+
+.bs-docs .markdown table {
+  display: table;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius-panel);
+  overflow: hidden;
+}
+
+/* Below the sidebar breakpoint a wide table scrolls inside the card
+   instead of bleeding past it. width: max-content keeps the border
+   hugging the content when the table is narrower than the card. */
+@media (max-width: 1023px) {
+  .bs-docs .markdown table {
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}
+
+.bs-docs .markdown table th,
+.bs-docs .markdown table td {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 0.6rem 0.9rem;
+  font-size: 0.85rem;
+}
+
+.bs-docs .markdown table tr > *:not(:first-child) {
+  border-left: 1px solid var(--line);
+}
+
+.bs-docs .markdown table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.bs-docs .markdown table thead {
+  background: var(--surface-2);
+}
+
+.bs-docs .markdown table th {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.bs-docs .markdown table tr {
+  background: transparent;
+}
+
+/* Admonitions: every internal color (surface, border, heading, icon, and
+   inline code) derives from one accent per variant, --bs-adm, following
+   the dashboard's soft chip palette. */
+.bs-docs .theme-admonition {
+  --bs-adm: var(--muted);
+  --ifm-alert-background-color: color-mix(
+    in srgb,
+    var(--bs-adm) 12%,
+    var(--surface)
+  );
+  --ifm-alert-background-color-highlight: transparent;
+  --ifm-alert-border-color: color-mix(in srgb, var(--bs-adm) 32%, transparent);
+  --ifm-alert-foreground-color: color-mix(
+    in srgb,
+    var(--bs-adm) 34%,
+    var(--ink-2)
+  );
+  border-radius: var(--radius-panel);
+  border: 1px solid var(--ifm-alert-border-color);
+  box-shadow: none;
+  margin-bottom: 1.25rem;
+}
+
+.bs-docs .theme-admonition-tip,
+.bs-docs .alert--success {
+  --bs-adm: var(--teal);
+}
+
+.bs-docs .theme-admonition-info,
+.bs-docs .alert--info {
+  --bs-adm: var(--blue);
+}
+
+.bs-docs :is(.theme-admonition-warning, .theme-admonition-caution),
+.bs-docs .alert--warning {
+  --bs-adm: var(--amber);
+}
+
+.bs-docs .theme-admonition-danger,
+.bs-docs .alert--danger {
+  --bs-adm: var(--red);
+}
+
+.bs-docs .theme-admonition [class*='admonitionHeading'] {
+  color: var(--bs-adm);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.bs-docs .theme-admonition [class*='admonitionIcon'] svg {
+  width: 1.2em;
+  height: 1.2em;
+  fill: currentColor;
+}
+
+.bs-docs .theme-admonition :not(pre) > code {
+  background: color-mix(in srgb, var(--bs-adm) 9%, var(--surface));
+  border-color: color-mix(in srgb, var(--bs-adm) 30%, transparent);
+  color: color-mix(in srgb, var(--bs-adm) 45%, var(--ink));
+}
+
+/* Text selection: a soft tint of the site accent, on-brand instead of the
+   browser default. Each admonition overrides it with its own accent, so a
+   highlight inside a note reads teal, a warning amber, and so on. */
+.bs-docs ::selection {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: var(--ink);
+}
+
+.bs-docs .theme-admonition ::selection {
+  background: color-mix(in srgb, var(--bs-adm) 24%, transparent);
+  color: color-mix(in srgb, var(--bs-adm) 55%, var(--ink));
+}
+
+/* Images are not text: keep them out of selections and drags. */
+.bs-docs img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Tabs as a segmented control: a recessed track where the active segment
+   rises as a small card. Track radius 11px = chip radius 8px + 3px padding,
+   keeping the corners concentric. */
+.bs-docs .tabs {
+  display: inline-flex;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 0;
+  gap: 2px;
+  padding: 3px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  margin-bottom: 0.5rem;
+}
+
+.bs-docs .tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.bs-docs .tabs__item {
+  border: 0;
+  border-radius: var(--radius-chip);
+  padding: 0.32rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--muted);
+  margin: 0;
+  white-space: nowrap;
+  transition-property: color, background-color, box-shadow;
+  transition-duration: 0.15s;
+}
+
+.bs-docs .tabs__item:not(.tabs__item--active):hover {
+  background: transparent;
+  color: var(--ink-2);
+}
+
+.bs-docs .tabs__item--active {
+  background: var(--surface);
+  color: var(--accent);
+  box-shadow: var(--shadow-card-half);
+}
+
+/* Re-runs whenever a panel stops being [hidden], so switching tabs enters
+   with the page rise at half the travel. */
+@keyframes bs-docs-tab-rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.bs-docs .markdown [role='tabpanel']:not([hidden]) {
+  animation: bs-docs-tab-rise 0.45s cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+/* ---------------------------------------------------------------------------
+ * Shell motion, ported from the dashboard.
+ * ------------------------------------------------------------------------ */
+
+@keyframes bs-docs-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bs-docs-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes bs-docs-drawer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.bs-docs-route-fade {
+  animation: bs-docs-fade 0.25s ease both;
+}
+
+.bs-docs-route-rise {
+  animation: bs-docs-fade-up 0.5s cubic-bezier(0.2, 0, 0, 1) 0.08s both;
+}
+
+.bs-docs-backdrop {
+  background: color-mix(in srgb, var(--dark) 62%, transparent);
+  animation: bs-docs-fade 0.18s ease both;
+}
+
+.bs-docs-drawer {
+  animation: bs-docs-drawer 0.28s cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+body.bs-docs-drawer-open {
+  overflow: hidden;
+}

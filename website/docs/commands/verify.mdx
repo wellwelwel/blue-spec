@@ -12,10 +12,6 @@ import Tabs from '@theme/Tabs';
 
 ⚖️ Prove each applied fix holds, by reading the code and confronting it with what harden recorded, then close out the ones that do.
 
-:::warning[Depends on harden]
-Verify builds on [`/bluespec.harden`](/docs/commands/harden).
-:::
-
 ## Run it
 
 <Tabs>
@@ -68,6 +64,10 @@ If the risk is not closed, verify says so plainly and sends you back to [`/blues
 - When a risk is proven closed, it asks once, then clears that finding from the whole chain (detect, plan, harden, verify, and tracking).
 - The verification report lives in `.bluespec/memory/verify.md`.
 
+:::
+
+:::warning[Depends on harden]
+Verify builds on [`/bluespec.harden`](/docs/commands/harden).
 :::
 
 ## The cycle closes

@@ -1,6 +1,7 @@
 import type * as Preset from '@docusaurus/preset-classic';
 import type { Config } from '@docusaurus/types';
-import { themes as prismThemes } from 'prism-react-renderer';
+import { docsContentPlugin } from './plugins/docs-content';
+import { blueSpecCode } from './src/prism/blue-spec';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -52,7 +53,7 @@ const config: Config = {
       tagName: 'link',
       attributes: {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=Ubuntu+Mono:wght@400;700&display=swap',
+        href: 'https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Ubuntu+Mono:wght@400;700&display=swap',
       },
     },
     {
@@ -84,6 +85,7 @@ const config: Config = {
   ],
 
   plugins: [
+    docsContentPlugin,
     function tailwindPlugin() {
       return {
         name: 'tailwind-plugin',
@@ -95,36 +97,14 @@ const config: Config = {
     },
   ],
 
-  themes: [
-    [
-      require.resolve('@easyops-cn/docusaurus-search-local'),
-      {
-        hashed: true,
-        indexDocs: true,
-        indexPages: false,
-        indexBlog: false,
-        docsRouteBasePath: '/docs',
-        highlightSearchTermsOnTargetPage: true,
-        searchResultLimits: 8,
-        searchBarShortcut: true,
-        searchBarShortcutHint: true,
-      },
-    ],
-  ],
-
   presets: [
     [
       'classic',
       {
-        docs: {
-          path: 'docs',
-          routeBasePath: 'docs',
-          sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/wellwelwel/blue-spec/edit/main/website/',
-        },
+        docs: false,
         blog: false,
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: ['./src/css/custom.css', './src/css/docs.css'],
         },
         sitemap: {
           changefreq: 'weekly',
@@ -178,10 +158,9 @@ const config: Config = {
       hideOnScroll: true,
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'docs',
-          position: 'left',
+          to: '/docs',
           label: 'Docs',
+          position: 'left',
         },
         {
           to: '/',
@@ -241,8 +220,8 @@ const config: Config = {
       copyright: `Copyright © 2026-present <a href="https://github.com/wellwelwel" target="_blank" rel="noopener">Weslley Araújo</a> and <a href="https://github.com/wellwelwel/blue-spec/graphs/contributors" target="_blank" rel="noopener">contributors</a>. Blue Spec is under the <a href="https://github.com/wellwelwel/blue-spec/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>.<br />Blue Spec is an independent open-source project and is not affiliated with, endorsed by, or associated with Bluespec, Inc. or the Bluespec Hardware Description Language (HDL) and its compiler (bsc).<br />The name "Blue Spec" comes from Blue Team (defensive security) and Spec-Driven Development. It refers to an AI-assisted security hardening tool for software projects, a different domain from Bluespec, Inc., which provides RISC-V processor IP and hardware design tools.<br>"Bluespec" is a trademark of Bluespec, Inc. All other product names, trademarks, and registered trademarks mentioned are the property of their respective owners and are used for identification purposes only.`,
     },
     prism: {
-      theme: prismThemes.dracula,
-      darkTheme: prismThemes.dracula,
+      theme: blueSpecCode,
+      darkTheme: blueSpecCode,
       additionalLanguages: [
         'javascript',
         'bash',
