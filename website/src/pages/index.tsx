@@ -1,12 +1,15 @@
+import type { TopBarLink } from '@site/src/components/home/TopBar';
 import type { WindowId } from '@site/src/data/home';
-import type { ComponentType, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import Head from '@docusaurus/Head';
 import Link from '@docusaurus/Link';
 import { AgentsModal } from '@site/src/components/AgentsModal';
+import { Brand } from '@site/src/components/home/Brand';
 import { InstallPanel } from '@site/src/components/home/InstallPanel';
 import { OverviewPanel } from '@site/src/components/home/OverviewPanel';
 import { RailTip } from '@site/src/components/home/RailTip';
+import { TopBar } from '@site/src/components/home/TopBar';
 import { UsagePanel } from '@site/src/components/home/UsagePanel';
 import { PaperModal } from '@site/src/components/PaperModal';
 import { ParticleWaveField } from '@site/src/components/ParticleWaveField';
@@ -141,12 +144,7 @@ const Home = (): ReactNode => {
 
   const feature = FEATURE[active];
 
-  const headerLinks: {
-    label: string;
-    Icon: ComponentType;
-    href?: string;
-    onClick?: () => void;
-  }[] = [
+  const headerLinks: TopBarLink[] = [
     { label: 'Docs', Icon: FaBook, href: '/docs' },
     {
       label: 'GitHub',
@@ -159,9 +157,6 @@ const Home = (): ReactNode => {
       onClick: () => setPartnersOpen(true),
     },
   ];
-
-  const headerLinkClass =
-    'inline-flex items-center gap-[9px] py-[9px] rounded-xl text-[#a1b1e7] text-[13px] font-bold tracking-[-0.01em] no-underline cursor-pointer [&>svg]:size-4 [&>svg]:text-[#0c3c9f] [&>svg]:transition-colors [&>svg]:duration-200 [&>svg]:ease-out hover:[&>svg]:text-accent';
 
   return (
     <div className='bs-canvas relative min-h-screen m-0 antialiased text-ink bg-[#050a18] font-sans'>
@@ -209,7 +204,7 @@ const Home = (): ReactNode => {
           crossOrigin='anonymous'
         />
         <link
-          href='https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=Ubuntu+Mono:wght@400;700&display=swap'
+          href='https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=Ubuntu+Mono:wght@400;700&display=swap'
           rel='stylesheet'
         />
         <script type='application/ld+json'>
@@ -246,7 +241,9 @@ const Home = (): ReactNode => {
         <div className='absolute inset-0 z-[2] [background:radial-gradient(120%_120%_at_50%_38%,transparent_48%,rgba(4,8,22,0.55)_100%)]' />
       </div>
 
-      <main className='relative z-[2] min-h-screen flex items-center justify-center p-[clamp(16px,4vw,64px)] max-[600px]:p-0 max-[600px]:items-stretch'>
+      <TopBar links={headerLinks} />
+
+      <main className='relative z-[2] min-h-screen flex items-center justify-center p-[clamp(16px,4vw,64px)] min-[921px]:pt-[calc(clamp(16px,4vw,64px)+64px)] max-[600px]:p-0 max-[600px]:items-stretch'>
         <section className='w-full max-w-[1240px] rounded-[28px] border border-[#0c155c] bg-glass overflow-hidden [backdrop-filter:blur(40px)_saturate(120%)] [-webkit-backdrop-filter:blur(40px)_saturate(120%)] [box-shadow:inset_0_1px_0_0_rgba(255,255,255,0.08),0_40px_120px_-40px_rgba(10,11,13,0.7)] max-[600px]:max-w-none max-[600px]:min-h-screen max-[600px]:[min-height:100dvh] max-[600px]:rounded-none max-[600px]:border-0 max-[600px]:flex max-[600px]:flex-col max-[600px]:overflow-visible max-[600px]:[backdrop-filter:none] max-[600px]:[-webkit-backdrop-filter:none]'>
           <header className='grid grid-cols-[1fr_auto_1fr] items-center gap-4 px-[clamp(22px,3vw,38px)] py-[clamp(18px,2.4vw,28px)] border-b border-[#0c155c] max-[920px]:flex max-[920px]:flex-wrap max-[920px]:justify-between max-[920px]:pb-3.5 max-[600px]:sticky max-[600px]:top-0 max-[600px]:z-30 max-[600px]:border-b max-[600px]:bg-[rgba(5,10,24,0.82)] max-[600px]:[backdrop-filter:blur(16px)_saturate(140%)] max-[600px]:[-webkit-backdrop-filter:blur(16px)_saturate(140%)]'>
             <div className='flex items-center gap-[18px] min-w-0'>
@@ -258,19 +255,10 @@ const Home = (): ReactNode => {
                 <span className='size-3 rounded-full bg-accent opacity-55' />
                 <span className='size-3 rounded-full bg-accent opacity-25' />
               </span>
-              <button
-                type='button'
+              <Brand
                 onClick={() => goToTab('overview')}
-                aria-label='Blue Spec, back to overview'
-                className='inline-flex items-center gap-2 font-["Fraunces"] font-bold text-[clamp(18px,1.8vw,23px)] font-extrabold tracking-[-0.035em] leading-none cursor-pointer rounded-md focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4'
-              >
-                <span>
-                  <span className='tracking-normal text-[1.04em] text-[#1168ff]'>
-                    SDH
-                  </span>
-                  <span className='px-0.5 text-[#2092ff]'>:</span> Blue Spec
-                </span>
-              </button>
+                className='min-[921px]:hidden'
+              />
             </div>
 
             <nav
@@ -311,27 +299,6 @@ const Home = (): ReactNode => {
               ref={menuRef}
               className='relative flex items-center justify-end gap-1.5 max-[920px]:justify-center'
             >
-              <div className='flex items-center gap-4 max-[920px]:hidden'>
-                {headerLinks.map(({ label, Icon, href, onClick }) =>
-                  href ? (
-                    <Link key={label} className={headerLinkClass} to={href}>
-                      <Icon aria-hidden />
-                      {label}
-                    </Link>
-                  ) : (
-                    <button
-                      key={label}
-                      type='button'
-                      onClick={onClick}
-                      className={headerLinkClass}
-                    >
-                      <Icon aria-hidden />
-                      {label}
-                    </button>
-                  )
-                )}
-              </div>
-
               <button
                 type='button'
                 aria-label='Menu'

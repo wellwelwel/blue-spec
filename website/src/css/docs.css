@@ -226,6 +226,13 @@ html[data-bs-docs-theme='dark'] .bs-docs {
   white-space: nowrap;
 }
 
+@media (max-width: 767px) {
+  .bs-docs .markdown :not(pre) > code {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
+
 .bs-docs .markdown blockquote {
   border-left: 3px solid var(--accent);
   background: var(--accent-100);

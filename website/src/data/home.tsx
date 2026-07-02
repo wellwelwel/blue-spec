@@ -34,6 +34,7 @@ export type Phase = {
   title: string;
   command: string;
   desc: string;
+  banner: string;
   modes: PromptMode[];
 };
 
@@ -51,6 +52,7 @@ export const PHASE_GROUPS: Group[] = [
         title: 'Charter',
         command: '/bluespec.charter',
         desc: "Sets your project's security rules, proposed for you or shaped by what you say.",
+        banner: '/img/docs/banner-1.png',
         modes: [
           {
             label: 'Recommended (Describe)',
@@ -73,6 +75,7 @@ export const PHASE_GROUPS: Group[] = [
         title: 'Detect',
         command: '/bluespec.detect',
         desc: 'Reads your code and maps what your system does and where the risks are.',
+        banner: '/img/docs/banner-5.png',
         modes: [
           {
             label: 'Recommended (Full)',
@@ -93,6 +96,7 @@ export const PHASE_GROUPS: Group[] = [
         title: 'Plan',
         command: '/bluespec.plan',
         desc: 'Turns what detect found into a defense plan, with a fix for each finding.',
+        banner: '/img/docs/banner-3.png',
         modes: [
           {
             label: 'Recommended (Full)',
@@ -114,6 +118,7 @@ export const PHASE_GROUPS: Group[] = [
         title: 'Harden',
         command: '/bluespec.harden',
         desc: "Applies the plan's fixes to your code, safely and one at a time.",
+        banner: '/img/docs/banner-2.png',
         modes: [
           {
             label: 'Recommended (Full)',
@@ -130,6 +135,7 @@ export const PHASE_GROUPS: Group[] = [
         title: 'Verify',
         command: '/bluespec.verify',
         desc: 'Proves each applied fix holds and closes out the ones that do.',
+        banner: '/img/docs/banner-4.png',
         modes: [
           {
             label: 'Recommended (Full)',
