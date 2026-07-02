@@ -4,6 +4,7 @@ import type {
   DocsSidebarLink,
 } from '@site/plugins/docs-content';
 import type { ReactNode } from 'react';
+import type { DocsIconName } from '../icons';
 import Link from '@docusaurus/Link';
 import { useLocation } from '@docusaurus/router';
 import LayoutProvider from '@theme/Layout/Provider';
@@ -27,6 +28,15 @@ const ICON_BTN =
 
 const PILL =
   'inline-flex h-11.5 flex-none items-center gap-2 rounded-full bg-surface px-4.5 text-[0.85rem] font-bold text-ink-2 no-underline shadow-card transition-[color,box-shadow] hover:text-accent hover:no-underline hover:shadow-pop';
+
+const GROUP_ICONS: Partial<Record<string, DocsIconName>> = {
+  'Get Started': 'play',
+  'The Blue Team Flow': 'activity',
+  Tools: 'grid',
+  Hooks: 'cpu',
+  'References & Sources': 'file',
+  Maintenance: 'refresh',
+};
 
 const isActive = (pathname: string, permalink: string): boolean =>
   pathname.replace(/\/+$/, '') === permalink.replace(/\/+$/, '') ||
@@ -87,6 +97,8 @@ const SidebarCategory = ({
     setOpen(next);
   };
 
+  const icon = GROUP_ICONS[category.label] ?? 'layers';
+
   return (
     <div className='flex flex-col'>
       <button
@@ -99,7 +111,12 @@ const SidebarCategory = ({
         aria-controls={listId}
         onClick={toggle}
       >
-        {category.label}
+        <span className='flex min-w-0 items-center gap-2'>
+          <span className='inline-flex text-[0.9rem] text-muted'>
+            <Icon name={icon} />
+          </span>
+          <span className='truncate'>{category.label}</span>
+        </span>
         <span
           className={clsx(
             'inline-flex text-[0.9rem] transition-transform duration-300 ease-[cubic-bezier(0.2,0,0,1)]',
@@ -116,7 +133,7 @@ const SidebarCategory = ({
           open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
         )}
       >
-        <div className='flex min-h-0 flex-col gap-0.75 overflow-hidden pl-2'>
+        <div className='ml-[calc(1.075rem-1px)] flex min-h-0 flex-col gap-0.75 overflow-hidden border-l border-line pl-2'>
           {category.items.map((item) => (
             <SidebarItem key={item.docId} item={item} pathname={pathname} />
           ))}
