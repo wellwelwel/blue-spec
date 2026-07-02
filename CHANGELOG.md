@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.8.0](https://github.com/wellwelwel/blue-spec/compare/v0.7.0...v0.8.0) (2026-07-02)
+
+
+### Features
+
+* **cli:** add `pull` command to reinstall Blue Spec from the manifest ([9d288b1](https://github.com/wellwelwel/blue-spec/commit/9d288b1c6888c7e2dbc70e5cd0384cfee4d3dc6d))
+* mature the `harden` command through charter's principles ([4e27678](https://github.com/wellwelwel/blue-spec/commit/4e27678f473f5257fa2d7d2da324b74f6bd6b4c3))
+* mature the `verify` command ([61583d1](https://github.com/wellwelwel/blue-spec/commit/61583d15b6a3027c9210240209aa18125c4bdf35))
+
+
+### Bug Fixes
+
+* condense Skills and commands descriptions ([0399b27](https://github.com/wellwelwel/blue-spec/commit/0399b27e57733888ef79de0d6b6d05e36c445a94))
+
 ## [0.7.0](https://github.com/wellwelwel/blue-spec/compare/v0.6.0...v0.7.0) (2026-06-30)
 
 
