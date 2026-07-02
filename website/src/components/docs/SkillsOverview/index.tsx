@@ -31,6 +31,7 @@ const HoverPopover = ({
 }): ReactNode => {
   const ref = useRef<HTMLSpanElement>(null);
   const panelRef = useRef<HTMLSpanElement>(null);
+  const lastPointerType = useRef<string>('');
   const [anchor, setAnchor] = useState<Anchor | null>(null);
   const [hovered, setHovered] = useState(false);
   const [open, setOpen] = useState(false);
@@ -96,17 +97,17 @@ const HoverPopover = ({
     <span
       ref={ref}
       className={triggerClassName}
+      onPointerDown={(event) => {
+        lastPointerType.current = event.pointerType;
+      }}
       onPointerEnter={(event) => {
         if (event.pointerType === 'mouse') show();
       }}
       onPointerLeave={(event) => {
         if (event.pointerType === 'mouse') hide();
       }}
-      onClick={(event) => {
-        if (
-          event.nativeEvent instanceof PointerEvent &&
-          event.nativeEvent.pointerType === 'mouse'
-        ) {
+      onClick={() => {
+        if (lastPointerType.current === 'mouse') {
           return;
         }
         hovered ? hide() : show();
@@ -311,10 +312,13 @@ const PromptPreview = ({
   useEffect(() => {
     const query = window.matchMedia('(hover: none)');
     const update = () => setIsTouch(query.matches);
+
     update();
     query.addEventListener('change', update);
+
     return () => query.removeEventListener('change', update);
   }, []);
+
   return (
     <HoverPopover
       width={344}
