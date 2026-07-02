@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import type { AgentTheme, CatalogSkill } from './data';
+import { MaskIcon } from '@site/src/components/MaskIcon';
 import clsx from 'clsx';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -12,28 +13,6 @@ import { agentThemeAt, skillsCatalog } from './data';
 const MONO = "[font-family:'Fira_Code',ui-monospace,'SF_Mono',Menlo,monospace]";
 
 const EASE = 'ease-[cubic-bezier(0.2,0,0,1)]';
-
-const MaskIcon = ({
-  src,
-  className,
-}: {
-  src: string;
-  className?: string;
-}): ReactNode => (
-  <span
-    className={className}
-    style={{
-      maskImage: `url(${src})`,
-      WebkitMaskImage: `url(${src})`,
-      maskRepeat: 'no-repeat',
-      WebkitMaskRepeat: 'no-repeat',
-      maskPosition: 'center',
-      WebkitMaskPosition: 'center',
-      maskSize: 'contain',
-      WebkitMaskSize: 'contain',
-    }}
-  />
-);
 
 type Anchor = { right: number; bottom: number };
 

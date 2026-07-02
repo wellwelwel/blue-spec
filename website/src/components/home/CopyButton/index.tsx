@@ -1,4 +1,4 @@
-import { IconSwap } from '@site/src/components/home/IconSwap';
+import { IconSwap } from '@site/src/components/IconSwap';
 import { useState } from 'react';
 import { LuCheck, LuCopy } from 'react-icons/lu';
 

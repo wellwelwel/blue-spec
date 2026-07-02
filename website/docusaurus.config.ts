@@ -1,5 +1,6 @@
 import type * as Preset from '@docusaurus/preset-classic';
 import type { Config } from '@docusaurus/types';
+import tailwindPostcss from '@tailwindcss/postcss';
 import { docsContentPlugin } from './plugins/docs-content';
 import { blueSpecCode } from './src/prism/blue-spec';
 
@@ -13,7 +14,6 @@ const config: Config = {
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
-    // faster: true,
   },
 
   url: 'https://bluespec.weslley.io',
@@ -90,7 +90,7 @@ const config: Config = {
       return {
         name: 'tailwind-plugin',
         configurePostCss(postcssOptions) {
-          postcssOptions.plugins.push(require('@tailwindcss/postcss'));
+          postcssOptions.plugins.push(tailwindPostcss);
           return postcssOptions;
         },
       };

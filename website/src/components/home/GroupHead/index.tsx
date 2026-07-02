@@ -1,4 +1,4 @@
-import { monoLabel } from '@site/src/data/home';
+const monoLabel = 'font-mono text-[11px] tracking-[0.1em] uppercase';
 
 export const GroupHead = ({
   title,

@@ -13,8 +13,6 @@ import { ParticleWaveField } from '@site/src/components/ParticleWaveField';
 import { PartnersModal } from '@site/src/components/PartnersModal';
 import { SpecializationsModal } from '@site/src/components/SpecializationsModal';
 import {
-  ALL_AGENTS,
-  ALL_CATEGORIES,
   BACKGROUNDS,
   FEATURE,
   PHASE_STEPS,
@@ -22,6 +20,7 @@ import {
   STEP_ICONS,
   TABS,
 } from '@site/src/data/home';
+import { ALL_AGENTS, ALL_CATEGORIES } from '@site/src/data/registry';
 import {
   useCallback,
   useEffect,

@@ -2,6 +2,7 @@ import type { MDXComponents } from 'mdx/types';
 import type { ReactElement, ReactNode } from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import { Mermaid } from '@site/src/components/Mermaid';
+import { Modal, ModalClose, ModalHeader } from '@site/src/components/Modal';
 import Paper from '@site/src/content/PAPER.mdx';
 import {
   Children,
@@ -14,7 +15,6 @@ import {
   useState,
 } from 'react';
 import { createPortal } from 'react-dom';
-import { LuX } from 'react-icons/lu';
 
 /*
  * The paper cross-references itself two ways: citations `[n]` (to the
@@ -312,30 +312,11 @@ export const PaperModal = ({
   open: boolean;
   onClose: () => void;
 }): ReactNode => {
-  const panelRef = useRef<HTMLDivElement>(null);
   const paperRef = useRef<HTMLDivElement>(null);
   const [refs, setRefs] = useState<RefMaps>({
     references: new Map(),
     sections: new Map(),
   });
-
-  useEffect(() => {
-    if (!open) return;
-
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onClose();
-    };
-
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    window.addEventListener('keydown', onKey);
-    panelRef.current?.focus();
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener('keydown', onKey);
-    };
-  }, [open, onClose]);
 
   useEffect(() => {
     if (!open || !paperRef.current) return;
@@ -362,48 +343,30 @@ export const PaperModal = ({
     setRefs({ references, sections });
   }, [open]);
 
-  if (!open) return null;
-
   return (
-    <div
-      className='bs-modal-backdrop fixed inset-0 z-[100] flex items-center justify-center p-[clamp(12px,4vw,48px)] bg-[rgba(2,4,12,0.72)] [backdrop-filter:blur(6px)] [-webkit-backdrop-filter:blur(6px)]'
-      onClick={onClose}
-      role='presentation'
+    <Modal
+      open={open}
+      onClose={onClose}
+      label='Security-Driven Hardening paper'
+      panelClassName='bs-modal-panel relative flex flex-col w-full max-w-[920px] max-h-full rounded-[20px] border border-[#0c155c] bg-[#0a0f1f] overflow-hidden [box-shadow:0_40px_120px_-30px_rgba(0,0,0,0.8)] outline-none'
     >
-      <div
-        ref={panelRef}
-        role='dialog'
-        aria-modal='true'
-        aria-label='Security-Driven Hardening paper'
-        tabIndex={-1}
-        onClick={(event) => event.stopPropagation()}
-        className='bs-modal-panel relative flex flex-col w-full max-w-[920px] max-h-full rounded-[20px] border border-[#0c155c] bg-[#0a0f1f] overflow-hidden [box-shadow:0_40px_120px_-30px_rgba(0,0,0,0.8)] outline-none'
-      >
-        <div className='flex items-center justify-between gap-4 shrink-0 px-[clamp(20px,3vw,32px)] py-4 border-b border-[#0c155c] bg-[#0a0f1f]'>
-          <span className='font-mono text-[11px] tracking-[0.14em] uppercase text-muted'>
-            The Concept
-          </span>
-          <button
-            type='button'
-            onClick={onClose}
-            aria-label='Close'
-            className='relative inline-flex items-center justify-center size-9 -mr-1.5 rounded-full text-[#9499a5] cursor-pointer transition-[color,background-color] duration-200 ease-out hover:bg-white/[0.08] hover:text-ink after:absolute after:top-1/2 after:left-1/2 after:size-10 after:-translate-x-1/2 after:-translate-y-1/2 [&>svg]:size-[18px]'
-          >
-            <LuX />
-          </button>
-        </div>
+      <ModalHeader>
+        <span className='font-mono text-[11px] tracking-[0.14em] uppercase text-muted'>
+          The Concept
+        </span>
+        <ModalClose onClose={onClose} />
+      </ModalHeader>
 
-        <div
-          ref={paperRef}
-          className='bs-paper grow overflow-y-auto px-[clamp(20px,3vw,32px)] py-[clamp(20px,3vw,30px)]'
-        >
-          <RefContext.Provider value={refs}>
-            <MDXProvider components={components}>
-              <Paper />
-            </MDXProvider>
-          </RefContext.Provider>
-        </div>
+      <div
+        ref={paperRef}
+        className='bs-paper grow overflow-y-auto px-[clamp(20px,3vw,32px)] py-[clamp(20px,3vw,30px)]'
+      >
+        <RefContext.Provider value={refs}>
+          <MDXProvider components={components}>
+            <Paper />
+          </MDXProvider>
+        </RefContext.Provider>
       </div>
-    </div>
+    </Modal>
   );
 };

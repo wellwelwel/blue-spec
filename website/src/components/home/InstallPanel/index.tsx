@@ -2,13 +2,17 @@ import { AgentButton } from '@site/src/components/home/AgentButton';
 import { CategoryCheckbox } from '@site/src/components/home/CategoryCheckbox';
 import { CopyButton } from '@site/src/components/home/CopyButton';
 import { GroupHead } from '@site/src/components/home/GroupHead';
-import { IconSwap } from '@site/src/components/home/IconSwap';
+import { IconSwap } from '@site/src/components/IconSwap';
+import {
+  selectableCard,
+  selectableTint,
+} from '@site/src/components/selectable';
 import {
   AGENTS,
   ALL_AGENTS,
   ALL_CATEGORIES,
   CATEGORIES,
-} from '@site/src/data/home';
+} from '@site/src/data/registry';
 import { memo, useMemo } from 'react';
 import { LuCircleCheckBig, LuLayoutGrid, LuPlus } from 'react-icons/lu';
 
@@ -72,16 +76,10 @@ const InstallPanelComponent = ({
         <button
           type='button'
           onClick={onOpenAgents}
-          className={`flex items-center gap-3 p-[13px_14px] rounded-[14px] border text-left cursor-pointer transition-[background-color,border-color,color] duration-200 ease-out focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 ${
-            selectedFromModal
-              ? 'text-ink border-accent/50 bg-accent/10'
-              : 'text-[rgba(233,237,247,0.78)] border-line bg-card hover:bg-card-hover hover:border-white/[0.16] hover:text-ink'
-          }`}
+          className={`flex items-center gap-3 p-[13px_14px] ${selectableCard(selectedFromModal)}`}
         >
           <span
-            className={`shrink-0 size-5 flex items-center justify-center [&>svg]:size-5 transition-colors duration-200 ease-out ${
-              selectedFromModal ? 'text-accent' : 'text-[#888c99]'
-            }`}
+            className={`shrink-0 size-5 flex items-center justify-center [&>svg]:size-5 transition-colors duration-200 ease-out ${selectableTint(selectedFromModal)}`}
           >
             <LuLayoutGrid aria-hidden />
           </span>
@@ -91,7 +89,7 @@ const InstallPanelComponent = ({
           </span>
           <IconSwap
             on={selectedFromModal}
-            className={`shrink-0 [&_svg]:size-[18px] ${selectedFromModal ? 'text-accent' : 'text-[#888c99]'}`}
+            className={`shrink-0 [&_svg]:size-[18px] ${selectableTint(selectedFromModal)}`}
             active={<LuCircleCheckBig />}
             inactive={<LuPlus />}
           />
@@ -116,16 +114,10 @@ const InstallPanelComponent = ({
         <button
           type='button'
           onClick={onOpenSpecs}
-          className={`flex items-center gap-3 p-[12px_14px] rounded-[14px] border text-left cursor-pointer transition-[background-color,border-color,color] duration-200 ease-out focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 ${
-            hiddenSelected
-              ? 'text-ink border-accent/50 bg-accent/10'
-              : 'text-[rgba(233,237,247,0.78)] border-line bg-card hover:bg-card-hover hover:border-white/[0.16] hover:text-ink'
-          }`}
+          className={`flex items-center gap-3 p-[12px_14px] ${selectableCard(hiddenSelected)}`}
         >
           <span
-            className={`shrink-0 size-5 flex items-center justify-center [&>svg]:size-5 transition-colors duration-200 ease-out ${
-              hiddenSelected ? 'text-accent' : 'text-[#888c99]'
-            }`}
+            className={`shrink-0 size-5 flex items-center justify-center [&>svg]:size-5 transition-colors duration-200 ease-out ${selectableTint(hiddenSelected)}`}
           >
             <LuLayoutGrid aria-hidden />
           </span>
@@ -134,7 +126,7 @@ const InstallPanelComponent = ({
           </span>
           <IconSwap
             on={hiddenSelected}
-            className={`shrink-0 [&_svg]:size-[18px] ${hiddenSelected ? 'text-accent' : 'text-[#888c99]'}`}
+            className={`shrink-0 [&_svg]:size-[18px] ${selectableTint(hiddenSelected)}`}
             active={<LuCircleCheckBig />}
             inactive={<LuPlus />}
           />

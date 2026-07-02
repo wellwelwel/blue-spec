@@ -104,7 +104,7 @@
  * Shared tokens resolve through CSS variables so one utility (text-ink,
  * bg-surface…) themes per subtree: the landing page reads the :root values
  * below, the docs shell re-declares the same variables under .bs-docs
- * (see docs.css), with light and dark values ported from the dashboard.
+ * (see docs.css), with its own light and dark values.
  */
 @theme inline {
   --color-accent: var(--accent);
@@ -308,22 +308,6 @@
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
-  }
-}
-
-.bs-pop-in {
-  display: inline-block;
-  animation: bs-pop-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@keyframes bs-pop-in {
-  from {
-    opacity: 0;
-    transform: translateX(-4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
   }
 }
 

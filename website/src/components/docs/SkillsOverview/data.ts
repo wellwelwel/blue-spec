@@ -1,9 +1,11 @@
 import type { DocsIconName } from '../icons';
 
 /*
- * Static port of the dashboard's skill catalog (src/types/dashboard/
- * skill-names.ts) with the groups already resolved per skill. The website
+ * Static mirror of the built-in skill catalog (SKILLS_CATALOG in
+ * ../../../../../src/hooks/skills/catalog.ts) with the groups already
+ * resolved per skill and the plain-language copy authored here. The website
  * has no environment to detect, so the whole catalog renders as one list.
+ * When a sub-skill is added or regrouped there, reconcile this list.
  */
 
 export type SkillGroupTag = {

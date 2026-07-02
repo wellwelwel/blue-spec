@@ -1,9 +1,9 @@
 /*
- * Docs skin: the dashboard's design system applied to the documentation.
- * Tokens are a direct port of src/dashboard/client/styles/tokens.css, scoped
- * under .bs-docs. The docs theme is independent from Docusaurus' color mode
- * (locked to dark for the landing page): it keys off the html attribute
- * data-bs-docs-theme, set pre-paint by a script the docs plugin injects.
+ * Docs skin: the documentation's own design system, scoped under .bs-docs
+ * as the token set every docs utility (bg-surface, text-ink…) resolves to.
+ * The docs theme is independent from Docusaurus' color mode (locked to dark
+ * for the landing page): it keys off the html attribute data-bs-docs-theme,
+ * set pre-paint by a script the docs plugin injects.
  */
 
 .bs-docs {
