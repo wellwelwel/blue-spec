@@ -19,7 +19,7 @@ Love **Blue Spec**? Give us a ⭐ on **GitHub**!
 
 - 🌊 [**Get Started**](#get-started)
   - 📦 [**Dashboard**](#dashboard) | [**CLI**](#cli)
-  - 💬 [**Prompt Commands**](#prompt-commands)
+  - 💬 [**Slash Commands**](#slash-commands)
 - 💽 [**Requirements**](#requirements)
 - 🔐 [**Security**](#security)
 - 🖖 [**Acknowledgements**](#acknowledgements)
@@ -102,9 +102,13 @@ npx -y blue-spec@latest pull
 
 ---
 
-### Prompt Commands
+### Slash Commands
 
 Once **Blue Spec** is set up in your project, your **AI** agent unlocks a set of slash commands:
+
+#### The Blue Team flow
+
+These five run in order. Each builds on the previous, so following the list top to bottom is all it takes:
 
 | #   | Command                                                                    | What it does for you                                                           |
 | --- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
@@ -120,9 +124,8 @@ Once **Blue Spec** is set up in your project, your **AI** agent unlocks a set of
 
 | Command                                                                          | What it does                                                                               |
 | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| [**/bluespec.prove**](https://bluespec.weslley.io/docs/commands/prove)           | Turns each detected finding into a runnable proof for responsible disclosure               |
 | [**/bluespec.specialize**](https://bluespec.weslley.io/docs/commands/specialize) | Specializes **Blue Spec** in a new security _sub_-skill from articles, exploits, or topics |
-| [**/bluespec.repair**](https://bluespec.weslley.io/docs/commands/repair)         | Repairs **Blue Spec**'s internal tracking                                                  |
+| [**/bluespec.prove**](https://bluespec.weslley.io/docs/commands/prove)           | Turns each detected finding into a runnable proof for responsible disclosure               |
 
 > [!TIP]
 >
