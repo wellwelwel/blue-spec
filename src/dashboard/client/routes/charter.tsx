@@ -7,7 +7,7 @@ import { Icon } from '../components/primitives/icons';
 import { Inline } from '../components/primitives/inline';
 import { PromptPreview } from '../components/prompt/preview';
 import { useData } from '../data/state';
-import { BADGE, EMPTY } from '../utils/tailwind-classes';
+import { BADGE_MUTED, EMPTY } from '../utils/tailwind-classes';
 
 const CHARTER_PROMPT: PromptSpec = {
   task: 'Create a login page.',
@@ -80,9 +80,7 @@ export const Charter = (): VNode => {
             <h2 class='text-[1rem] font-extrabold tracking-[-0.02em]'>
               Principles
             </h2>
-            <span class={`${BADGE} font-bold bg-surface-2 text-muted`}>
-              Project Scope
-            </span>
+            <span class={BADGE_MUTED}>Project Scope</span>
           </div>
         </div>
         <div class='mt-6 mb-6 grid grid-cols-2 gap-4 min-[1720px]:grid-cols-3'>
@@ -133,9 +131,7 @@ export const Charter = (): VNode => {
                 <h2 class='text-[1rem] font-extrabold tracking-[-0.02em]'>
                   Baseline discipline
                 </h2>
-                <span class={`${BADGE} font-bold bg-surface-2 text-muted`}>
-                  Universal
-                </span>
+                <span class={BADGE_MUTED}>Universal</span>
               </div>
             </div>
             {baseline.intro && (

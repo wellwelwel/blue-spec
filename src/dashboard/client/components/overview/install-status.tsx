@@ -1,7 +1,7 @@
 import type { InstallPresentation } from '@/types/dashboard/client';
 import type { Install } from '@/types/dashboard/dashboard';
 import type { VNode } from 'preact';
-import { BADGE } from '../../utils/tailwind-classes';
+import { BADGE_MUTED } from '../../utils/tailwind-classes';
 import { Icon } from '../primitives/icons';
 import { SectionHead } from './section-head';
 
@@ -67,11 +67,9 @@ export const InstallStatus = (props: { install: Install }): VNode => {
         ) : (
           <span class='flex flex-none items-center gap-2'>
             {install.version && (
-              <span class={`${BADGE} font-bold bg-surface-2 text-muted`}>
-                v{install.version}
-              </span>
+              <span class={BADGE_MUTED}>v{install.version}</span>
             )}
-            <span class={`${BADGE} font-bold bg-surface-2 text-muted`}>
+            <span class={BADGE_MUTED}>
               <span class='tabular-nums'>{install.agents.length}</span>
               {install.agents.length === 1 ? 'agent' : 'agents'}
             </span>

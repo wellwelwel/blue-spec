@@ -160,6 +160,13 @@ const NextSteps = (props: { defaultKey: string }): VNode => {
   );
 };
 
+const FileCount = (props: { value: number; verb: string }): VNode => (
+  <>
+    <span class='tabular-nums font-semibold text-ink-2'>{props.value}</span>{' '}
+    {props.value === 1 ? 'file' : 'files'} {props.verb}
+  </>
+);
+
 const InstallSummary = (props: { state: InstallModalState }): VNode => {
   const { state } = props;
   return (
@@ -167,10 +174,7 @@ const InstallSummary = (props: { state: InstallModalState }): VNode => {
       Initialized for{' '}
       <span class='font-semibold text-ink-2'>{state.agentName}</span>
       {' · '}
-      <span class='tabular-nums font-semibold text-ink-2'>
-        {state.created}
-      </span>{' '}
-      {state.created === 1 ? 'file' : 'files'} created
+      <FileCount value={state.created} verb='created' />
       {state.skipped > 0 && (
         <>
           {', '}
@@ -190,10 +194,7 @@ const PullSummary = (props: { state: PullModalState }): VNode => {
     <span class='text-[0.85rem] text-muted'>
       Rebuilt from the committed manifest
       {' · '}
-      <span class='tabular-nums font-semibold text-ink-2'>
-        {state.created}
-      </span>{' '}
-      {state.created === 1 ? 'file' : 'files'} restored
+      <FileCount value={state.created} verb='restored' />
       {state.skipped > 0 && (
         <>
           {', '}
@@ -213,10 +214,7 @@ const UpdateSummary = (props: { state: UpdateModalState }): VNode => {
     <span class='text-[0.85rem] text-muted'>
       Refreshed to the newest version
       {' · '}
-      <span class='tabular-nums font-semibold text-ink-2'>
-        {state.refreshed}
-      </span>{' '}
-      {state.refreshed === 1 ? 'file' : 'files'} updated
+      <FileCount value={state.refreshed} verb='updated' />
     </span>
   );
 };

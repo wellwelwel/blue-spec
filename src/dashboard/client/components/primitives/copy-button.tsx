@@ -1,10 +1,7 @@
 import type { VNode } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
-import { classes } from '../../utils/tailwind-classes';
+import { classes, GLYPH_SWAP } from '../../utils/tailwind-classes';
 import { Icon } from './icons';
-
-const GLYPH =
-  'col-start-1 row-start-1 inline-flex transition-[opacity,scale,filter] duration-300 ease-house';
 
 export const CopyButton = (props: {
   text: string;
@@ -40,12 +37,12 @@ export const CopyButton = (props: {
     >
       <span class='grid'>
         <span
-          class={`${GLYPH} ${copied ? 'scale-[0.25] opacity-0 blur-[4px]' : 'scale-100 opacity-100 blur-0'}`}
+          class={`${GLYPH_SWAP} ${copied ? 'scale-[0.25] opacity-0 blur-[4px]' : 'scale-100 opacity-100 blur-0'}`}
         >
           <Icon name='copy' />
         </span>
         <span
-          class={`${GLYPH} text-teal ${copied ? 'scale-100 opacity-100 blur-0' : 'scale-[0.25] opacity-0 blur-[4px]'}`}
+          class={`${GLYPH_SWAP} text-teal ${copied ? 'scale-100 opacity-100 blur-0' : 'scale-[0.25] opacity-0 blur-[4px]'}`}
         >
           <Icon name='check' />
         </span>

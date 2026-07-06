@@ -29,15 +29,16 @@ export const chainStep = (finding: Finding): ChainStep => {
   return { phase: 'Detect', next: 'Plan', kind };
 };
 
+const VERIFY_STEP_STATE: Record<VerdictKind, StepState> = {
+  pending: 'pending',
+  reproved: 'reproved',
+  passed: 'done',
+};
+
 export const pipeline = (finding: Finding): PipelineStep[] => {
   const harden = hardenState(finding.status);
   const verdict = verdictKind(finding.verdict);
-  const verifyState: StepState =
-    verdict === 'pending'
-      ? 'pending'
-      : verdict === 'reproved'
-        ? 'reproved'
-        : 'done';
+  const verifyState = VERIFY_STEP_STATE[verdict];
   return [
     { label: 'Detect', detail: 'Mapped', state: 'done' },
     {

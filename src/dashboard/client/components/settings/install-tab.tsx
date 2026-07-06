@@ -152,11 +152,9 @@ export const InstallTab = (): VNode => {
           {SUBTABS.map((item) => {
             const on = subtab === item.key;
             const count =
-              item.key === 'agent'
-                ? undefined
-                : selectedSkills.length > 0
-                  ? selectedSkills.length
-                  : undefined;
+              item.key === 'specializations' && selectedSkills.length > 0
+                ? selectedSkills.length
+                : undefined;
             return (
               <button
                 key={item.key}

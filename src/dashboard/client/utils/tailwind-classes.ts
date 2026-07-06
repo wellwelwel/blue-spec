@@ -7,6 +7,8 @@ export const classes = (
 export const BADGE =
   'inline-flex min-h-6.5 items-center gap-1.5 whitespace-nowrap rounded-sm px-2.75 text-[0.7rem] leading-none';
 
+export const BADGE_MUTED = `${BADGE} font-bold bg-surface-2 text-muted`;
+
 export const BADGE_IC = 'inline-flex text-[0.85rem]';
 
 export const EMPTY = 'py-16 text-center text-[0.85rem] text-faint';

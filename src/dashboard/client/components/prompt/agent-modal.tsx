@@ -2,6 +2,7 @@ import type { PromptModalContent, TypeSegment } from '@/types/dashboard/client';
 import type { VNode } from 'preact';
 import { AGENT_REPLY } from '@/dashboard/shared/skill-meta';
 import { useEffect, useState } from 'preact/hooks';
+import { GLYPH_SWAP } from '../../utils/tailwind-classes';
 import { agentThemeAt } from '../agent-themes';
 import { Icon } from '../primitives/icons';
 import { MaskIcon } from '../primitives/mask-icon';
@@ -13,11 +14,10 @@ const AGENT_CHIPS = [0, 1, 2, 3, 4]
   .filter((theme) => !theme.coloredIcon)
   .slice(0, 4);
 
-const GLYPH =
-  'col-start-1 row-start-1 inline-flex transition-[opacity,scale,filter] duration-300 ease-house';
-
 const HINT =
   'col-start-1 row-start-1 text-[0.72rem] font-semibold transition-opacity duration-300';
+
+const THINKING_DOTS_HOLD_MS = 700;
 
 const Segments = (props: { parts: TypeSegment[]; strong: string }): VNode => (
   <>
@@ -40,8 +40,7 @@ export const PromptAgentModal = (
       setReplying(false);
       return;
     }
-    /* Hold the thinking dots for a short beat, then hand off to the reply. */
-    const timer = setTimeout(() => setReplying(true), 700);
+    const timer = setTimeout(() => setReplying(true), THINKING_DOTS_HOLD_MS);
     return () => clearTimeout(timer);
   }, [promptDone]);
 
@@ -186,12 +185,12 @@ export const PromptAgentModal = (
           >
             <span class='grid [text-shadow:0_1px_1px_rgba(0,0,0,0.5)]'>
               <span
-                class={`${GLYPH} ${copied ? 'scale-[0.25] opacity-0 blur-xs' : 'scale-100 opacity-100 blur-0'}`}
+                class={`${GLYPH_SWAP} ${copied ? 'scale-[0.25] opacity-0 blur-xs' : 'scale-100 opacity-100 blur-0'}`}
               >
                 <Icon name='copy' />
               </span>
               <span
-                class={`${GLYPH} ${copied ? 'scale-100 opacity-100 blur-0' : 'scale-[0.25] opacity-0 blur-xs'}`}
+                class={`${GLYPH_SWAP} ${copied ? 'scale-100 opacity-100 blur-0' : 'scale-[0.25] opacity-0 blur-xs'}`}
               >
                 <Icon name='check' />
               </span>

@@ -1,5 +1,4 @@
 import type {
-  BundledAssets,
   PerformInitInput,
   PerformInitResult,
   PerformPullInput,
@@ -9,33 +8,18 @@ import type {
   PerformUpdateInput,
   PerformUpdateResult,
 } from '../types/core.js';
-import { SKILLS_CATALOG } from '../hooks/skills/catalog.js';
 import { SKILL_GROUPS } from '../hooks/skills/groups.js';
-import {
-  expandCategories,
-  skillNamesForGroups,
-} from '../hooks/skills/skills.js';
+import { expandCategories } from '../hooks/skills/skills.js';
 import { getProviders } from '../providers/registry.js';
 import { loadAssets, loadVersion } from './assets.js';
 import { ensureGitignoreEntries } from './gitignore.js';
-import { addSkills, removeSkills } from './manage-skills.js';
+import { addSkills, removeSkills, selectSkillAssets } from './manage-skills.js';
 import {
   applyManifestChange,
   readManifestInstall,
   recordManifestInstall,
 } from './manifest.js';
 import { reconstruct, refresh, scaffold } from './scaffold.js';
-
-export const skillsForKeys = (
-  assets: BundledAssets,
-  keys: string[]
-): BundledAssets['skills'] => {
-  const chosen = new Set(
-    skillNamesForGroups(SKILLS_CATALOG, keys).map((name) => `${name}.md`)
-  );
-
-  return assets.skills.filter((skill) => chosen.has(skill.fileName));
-};
 
 export const performInit = async (
   input: PerformInitInput
@@ -49,7 +33,7 @@ export const performInit = async (
   const result = await scaffold({
     targetDir: cwd,
     provider,
-    assets: { ...assets, skills: skillsForKeys(assets, categoryKeys) },
+    assets: { ...assets, skills: selectSkillAssets(assets, categoryKeys) },
   });
 
   await recordManifestInstall(cwd, {
@@ -81,7 +65,7 @@ export const performPull = async (
   const scaffold = await reconstruct({
     targetDir: cwd,
     providers,
-    assets: { ...assets, skills: skillsForKeys(assets, keys) },
+    assets: { ...assets, skills: selectSkillAssets(assets, keys) },
   });
 
   const gitignore = await ensureGitignoreEntries(cwd);
@@ -107,7 +91,7 @@ export const performUpdate = async (
   const result = await refresh({
     targetDir: cwd,
     providers,
-    assets: { ...assets, skills: skillsForKeys(assets, keys) },
+    assets: { ...assets, skills: selectSkillAssets(assets, keys) },
     version,
     now,
   });

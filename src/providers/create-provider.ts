@@ -10,8 +10,7 @@ import { transformCommand } from '../transform/command-template.js';
 const commandPath = (spec: AgentSpec, key: CommandKey): string => {
   const name = `bluespec.${key}`;
 
-  if ((spec.layout ?? 'file') === 'skill')
-    return `${spec.dir}/${name}/SKILL.md`;
+  if (spec.layout === 'skill') return `${spec.dir}/${name}/SKILL.md`;
 
   return `${spec.dir}/${name}${spec.extension ?? '.md'}`;
 };

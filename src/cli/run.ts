@@ -3,6 +3,7 @@ import type {
   FileOutcome,
   ListTarget,
   ParsedCliArgs,
+  ScaffoldGroup,
 } from '../types/core.js';
 import { join } from 'node:path';
 import { stdout } from 'node:process';
@@ -59,6 +60,24 @@ import { selectCategories } from './select-categories.js';
 
 const print = (line: string): void => {
   stdout.write(`${line}\n`);
+};
+
+const printReport = (groups: ScaffoldGroup[]): void => {
+  print(banner());
+  print('');
+
+  if (groups.length > 0) {
+    print(groupedReport(groups));
+    print('');
+  }
+};
+
+const printNextSteps = (count: number, label: string): void => {
+  if (count > 0) {
+    print('');
+    print(nextSteps(label));
+    print('');
+  }
 };
 
 const countStatus = (outcomes: FileOutcome[], status: string): number =>
@@ -137,13 +156,7 @@ const runInit = async (
     .join(', ');
   const groups = groupScaffoldOutcomes(result, agentsLabel);
 
-  print(banner());
-  print('');
-
-  if (groups.length > 0) {
-    print(groupedReport(groups));
-    print('');
-  }
+  printReport(groups);
 
   print(summaryLine(agentsLabel, result));
 
@@ -154,11 +167,7 @@ const runInit = async (
     print(gitignoreMessage);
   }
 
-  if (result.created.length > 0) {
-    print('');
-    print(nextSteps(agentsLabel));
-    print('');
-  }
+  printNextSteps(result.created.length, agentsLabel);
 };
 
 const runUpdate = async (cwd: string, packageRoot: URL): Promise<void> => {
@@ -177,21 +186,11 @@ const runUpdate = async (cwd: string, packageRoot: URL): Promise<void> => {
     label
   );
 
-  print(banner());
-  print('');
-
-  if (groups.length > 0) {
-    print(groupedReport(groups));
-    print('');
-  }
+  printReport(groups);
 
   print(updateSummary(label, updated.refresh.refreshed.length));
 
-  if (updated.refresh.refreshed.length > 0) {
-    print('');
-    print(nextSteps(label));
-    print('');
-  }
+  printNextSteps(updated.refresh.refreshed.length, label);
 };
 
 const runPull = async (cwd: string, packageRoot: URL): Promise<void> => {
@@ -207,13 +206,7 @@ const runPull = async (cwd: string, packageRoot: URL): Promise<void> => {
     .join(', ');
   const groups = groupScaffoldOutcomes(pulled.scaffold, label);
 
-  print(banner());
-  print('');
-
-  if (groups.length > 0) {
-    print(groupedReport(groups));
-    print('');
-  }
+  printReport(groups);
 
   print(pullSummary(label, pulled.scaffold));
 
@@ -224,11 +217,7 @@ const runPull = async (cwd: string, packageRoot: URL): Promise<void> => {
     print(gitignoreMessage);
   }
 
-  if (pulled.scaffold.created.length > 0) {
-    print('');
-    print(nextSteps(label));
-    print('');
-  }
+  printNextSteps(pulled.scaffold.created.length, label);
 };
 
 const runAdd = async (
@@ -273,13 +262,7 @@ const runAdd = async (
     resolveCategoryKeys(categories)
   );
 
-  print(banner());
-  print('');
-
-  if (groups.length > 0) {
-    print(groupedReport(groups));
-    print('');
-  }
+  printReport(groups);
 
   print(
     addSummary(
@@ -331,13 +314,7 @@ const runRemove = async (
     resolveCategoryKeys(categories)
   );
 
-  print(banner());
-  print('');
-
-  if (groups.length > 0) {
-    print(groupedReport(groups));
-    print('');
-  }
+  printReport(groups);
 
   print(
     removeSummary(

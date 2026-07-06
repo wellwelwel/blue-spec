@@ -6,15 +6,11 @@ export const hotspots = (findings: Finding[]): Hotspot[] => {
   const pairs = findings.flatMap((finding) =>
     finding.files.map((path) => ({ path, severity: finding.severity }))
   );
-  const grouped = pairs.reduce<Record<string, Severity[]>>(
-    (accumulated, pair) => ({
-      ...accumulated,
-      [pair.path]: [...(accumulated[pair.path] ?? []), pair.severity],
-    }),
-    Object.create(null)
-  );
+  const grouped = new Map<string, Severity[]>();
+  for (const { path, severity } of pairs)
+    grouped.set(path, [...(grouped.get(path) ?? []), severity]);
 
-  return Object.entries(grouped)
+  return [...grouped]
     .map(([path, severities]) => ({
       path,
       severities: [...severities].sort(

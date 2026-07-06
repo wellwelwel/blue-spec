@@ -70,6 +70,16 @@ const sendJson = (res: ServerResponse, status: number, body: string): void => {
   res.end(body);
 };
 
+const rejectCrossSite = (
+  req: IncomingMessage,
+  res: ServerResponse
+): boolean => {
+  if (!crossSiteFetch(req)) return false;
+
+  sendJson(res, 403, JSON.stringify({ error: 'Forbidden' }));
+  return true;
+};
+
 const sendMethodNotAllowed = (res: ServerResponse, allow: string): void => {
   res.setHeader('allow', allow);
   sendJson(res, 405, JSON.stringify({ error: 'Method not allowed' }));
@@ -183,20 +193,14 @@ export const createDashboardServer = (
     }
 
     if (url === '/api/session') {
-      if (crossSiteFetch(req)) {
-        sendJson(res, 403, JSON.stringify({ error: 'Forbidden' }));
-        return;
-      }
+      if (rejectCrossSite(req, res)) return;
 
       sendJson(res, 200, JSON.stringify({ token }));
       return;
     }
 
     if (url === '/api/data') {
-      if (crossSiteFetch(req)) {
-        sendJson(res, 403, JSON.stringify({ error: 'Forbidden' }));
-        return;
-      }
+      if (rejectCrossSite(req, res)) return;
 
       const { status, body } = await sendData(paths.bluespec, packageRoot);
       sendJson(res, status, body);

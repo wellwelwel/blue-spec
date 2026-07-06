@@ -12,8 +12,6 @@ const NODE_STATE: Record<StepState, string> = {
   pending: 'bg-surface text-faint',
 };
 
-const nodeTone = (state: StepState): string => NODE_STATE[state];
-
 export const Stepper = (props: { finding: Finding }): VNode => {
   const steps = pipeline(props.finding);
 
@@ -23,9 +21,7 @@ export const Stepper = (props: { finding: Finding }): VNode => {
         <>
           <div class='flex items-center gap-2.5'>
             <span
-              class={`grid size-8.5 place-items-center rounded-full text-[0.85rem] font-bold shadow-card ${nodeTone(
-                step.state
-              )}`}
+              class={`grid size-8.5 place-items-center rounded-full text-[0.85rem] font-bold shadow-card ${NODE_STATE[step.state]}`}
             >
               {step.state === 'done' ? <Icon name='check' /> : index + 1}
             </span>

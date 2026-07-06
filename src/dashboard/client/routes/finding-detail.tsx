@@ -92,18 +92,11 @@ const STEP_HINT: Partial<Record<PhaseName, StepHint>> = {
   },
 };
 
-const stepPrompt = (finding: Finding, hint: StepHint): TypeSegment[] =>
-  finding.dependsOn
-    ? [
-        { text: hint.command, bold: true },
-        { text: ` ${hint.verb} only "${finding.name}"` },
-        { text: ' and what it depends on.' },
-      ]
-    : [
-        { text: hint.command, bold: true },
-        { text: ` ${hint.verb} only "${finding.name}"` },
-        { text: '.' },
-      ];
+const stepPrompt = (finding: Finding, hint: StepHint): TypeSegment[] => [
+  { text: hint.command, bold: true },
+  { text: ` ${hint.verb} only "${finding.name}"` },
+  { text: finding.dependsOn ? ' and what it depends on.' : '.' },
+];
 
 const NextStepHint = (props: { finding: Finding }): VNode | null => {
   const hint = STEP_HINT[chainStep(props.finding).phase];
