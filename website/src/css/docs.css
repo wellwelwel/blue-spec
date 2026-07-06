@@ -241,6 +241,25 @@ html[data-bs-docs-theme='dark'] .bs-docs {
   margin-block: 1.25rem;
 }
 
+.bs-docs .markdown img {
+  border-radius: var(--radius-field);
+  box-shadow: var(--shadow-card);
+}
+
+.bs-docs .markdown .bs-docs-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-block: 1.25rem;
+}
+
+.bs-docs .markdown .bs-docs-gallery img {
+  flex: 1 1 240px;
+  min-width: 0;
+  aspect-ratio: 1920 / 1177;
+  object-fit: cover;
+}
+
 /* Code blocks stay dark in both docs themes, like the dashboard's
    terminal previews, using the Blue Spec prism theme (src/prism). */
 .bs-docs .theme-code-block,
