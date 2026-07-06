@@ -1,6 +1,7 @@
 ---
 name: specialize
 description: Author a new built-in Blue Spec sub-skill inside the Blue Spec source, not a scaffolded `.bluespec/` target. Use when adding or refining a security knowledge module that ships with Blue Spec, against the native layout (`spec/skills/*.md` plus the catalog).
+user-invocable: true
 metadata:
   internal: true
 ---

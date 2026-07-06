@@ -43,3 +43,5 @@ concurrently \
   "${commands[@]}"
 
 chmod +x lib/bin/index.js
+
+bash scripts/dashboard/build.sh

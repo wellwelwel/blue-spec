@@ -3,7 +3,8 @@ import { readFile, stat } from 'node:fs/promises';
 import { join } from 'node:path';
 import { describe, it, strict } from 'poku';
 import { loadAssets } from '../../../src/core/assets.js';
-import { AGENT_SPECS, getProvider } from '../../../src/providers/registry.js';
+import { getProvider } from '../../../src/providers/registry.js';
+import { AGENT_SPECS } from '../../../src/providers/specs.js';
 import { initInto, newWorkspace, packageRoot } from './__utils__.js';
 
 const assets = await loadAssets(packageRoot);

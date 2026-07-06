@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": [".", "../types/dashboard"],
+  "exclude": [],
+  "compilerOptions": {
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "types": ["node", "vite/client"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
+    "paths": {
+      "@/*": ["../*"],
+      "react": ["../../node_modules/preact/compat/"],
+      "react-dom": ["../../node_modules/preact/compat/"]
+    }
+  }
+}

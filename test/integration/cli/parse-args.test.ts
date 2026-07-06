@@ -122,9 +122,10 @@ describe('add/remove/list parsing', () => {
 });
 
 describe('flags', () => {
-  it('reports an unknown command as undefined', () => {
+  it('reports an unknown command as undefined and not bare', () => {
     const parsed = parseCliArgs(['bogus']);
     strict.strictEqual(parsed.command, undefined);
+    strict.strictEqual(parsed.bare, false);
   });
 
   it('reads --help', () => {
@@ -139,6 +140,63 @@ describe('flags', () => {
     strict.strictEqual(parseCliArgs(['--version']).version, true);
   });
 
+  it('leaves port undefined when --port is absent', () => {
+    strict.strictEqual(parseCliArgs(['dashboard']).port, undefined);
+  });
+
+  it('reads --port as a number', () => {
+    strict.strictEqual(
+      parseCliArgs(['dashboard', '--port', '3001']).port,
+      3001
+    );
+  });
+
+  it('reads the -p short alias for port', () => {
+    strict.strictEqual(parseCliArgs(['dashboard', '-p', '3001']).port, 3001);
+  });
+
+  it('stays bare when only --port is given, so the dashboard opens', () => {
+    const parsed = parseCliArgs(['--port', '5000']);
+    strict.strictEqual(parsed.command, undefined);
+    strict.strictEqual(parsed.bare, true);
+    strict.strictEqual(parsed.port, 5000);
+  });
+
+  it('stays bare with the -p short alias alone', () => {
+    const parsed = parseCliArgs(['-p', '5000']);
+    strict.strictEqual(parsed.bare, true);
+    strict.strictEqual(parsed.port, 5000);
+  });
+
+  it('is not bare when a flag routes elsewhere', () => {
+    strict.strictEqual(parseCliArgs(['--help']).bare, false);
+    strict.strictEqual(parseCliArgs(['--version']).bare, false);
+    strict.strictEqual(parseCliArgs(['--skills']).bare, false);
+  });
+
+  it('rejects a non-numeric --port', () => {
+    strict.throws(() => parseCliArgs(['dashboard', '--port', 'abc']));
+  });
+
+  it('rejects an out-of-range --port', () => {
+    strict.throws(() => parseCliArgs(['dashboard', '--port', '70000']));
+  });
+
+  it('rejects --port 0 (reserved for the random default)', () => {
+    strict.throws(() => parseCliArgs(['dashboard', '--port', '0']));
+  });
+
+  it('rejects a privileged --port below 1024', () => {
+    strict.throws(() => parseCliArgs(['dashboard', '--port', '80']));
+  });
+
+  it('accepts --port 1024 as the minimum', () => {
+    strict.strictEqual(
+      parseCliArgs(['dashboard', '--port', '1024']).port,
+      1024
+    );
+  });
+
   it('returns empty defaults for no arguments', () => {
     const parsed = parseCliArgs([]);
     strict.strictEqual(parsed.command, undefined);
@@ -148,5 +206,7 @@ describe('flags', () => {
     strict.strictEqual(parsed.findingsRequested, false);
     strict.strictEqual(parsed.help, false);
     strict.strictEqual(parsed.version, false);
+    strict.strictEqual(parsed.bare, true);
+    strict.strictEqual(parsed.port, undefined);
   });
 });

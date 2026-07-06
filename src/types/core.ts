@@ -1,4 +1,11 @@
-export type CliCommand = 'init' | 'update' | 'pull' | 'add' | 'remove' | 'list';
+export type CliCommand =
+  | 'init'
+  | 'update'
+  | 'pull'
+  | 'add'
+  | 'remove'
+  | 'list'
+  | 'dashboard';
 
 export type ParsedCliArgs = {
   command: CliCommand | undefined;
@@ -8,6 +15,8 @@ export type ParsedCliArgs = {
   findingsRequested: boolean;
   help: boolean;
   version: boolean;
+  bare: boolean;
+  port: number | undefined;
 };
 
 export type HookResult = {
@@ -248,10 +257,68 @@ export type ScaffoldResult = {
   manifestPath: string;
 };
 
+export type PerformInitInput = {
+  cwd: string;
+  packageRoot: URL;
+  provider?: AgentProvider;
+  categoryKeys: string[];
+  now: Date;
+};
+
+export type PerformInitResult = {
+  scaffold: ScaffoldResult;
+  gitignore: GitignoreOutcome;
+  installedAgents: string[];
+};
+
+export type PerformPullInput = {
+  cwd: string;
+  packageRoot: URL;
+};
+
+export type PerformPullResult =
+  | { initialized: false }
+  | {
+      initialized: true;
+      scaffold: ScaffoldResult;
+      gitignore: GitignoreOutcome;
+      agents: string[];
+    };
+
 export type RefreshResult = {
   refreshed: string[];
   manifestPath: string;
 };
+
+export type PerformUpdateInput = {
+  cwd: string;
+  packageRoot: URL;
+  now: Date;
+};
+
+export type PerformUpdateResult =
+  | { initialized: false }
+  | {
+      initialized: true;
+      refresh: RefreshResult;
+      agents: string[];
+    };
+
+export type PerformSpecializeInput = {
+  cwd: string;
+  packageRoot: URL;
+  categories: string[];
+  now: Date;
+};
+
+export type PerformSpecializeResult =
+  | { initialized: false }
+  | {
+      initialized: true;
+      added: number;
+      removed: number;
+      categories: string[];
+    };
 
 export type ManifestAgent = string | string[];
 

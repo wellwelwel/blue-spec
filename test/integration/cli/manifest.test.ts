@@ -225,8 +225,8 @@ await describe('recordManifestInstall', async () => {
 
   await it('is idempotent for an already recorded agent', async () => {
     const workspace = await newWorkspace();
-    await seedManifest(workspace, {});
 
+    await seedManifest(workspace, Object.create(null));
     await recordManifestInstall(workspace, {
       agent: 'claude',
       categories: ['owasp'],

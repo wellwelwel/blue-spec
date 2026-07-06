@@ -7,6 +7,7 @@ import type {
 } from '../types/core.js';
 import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
+import { appendUnique } from './collections.js';
 import { ensureDir, writeFileOverwrite } from './fs-actions.js';
 
 const MANIFEST_PATH = '.bluespec/manifest.json';
@@ -39,12 +40,15 @@ const readManifestFields = async (
 const fieldCategories = (fields: Record<string, unknown>): string[] =>
   isStringArray(fields.categories) ? fields.categories : [];
 
-const fieldAgents = (fields: Record<string, unknown>): string[] => {
-  if (typeof fields.agent === 'string') return [fields.agent];
-  if (isStringArray(fields.agent)) return fields.agent;
+export const manifestAgents = (value: unknown): string[] => {
+  if (typeof value === 'string') return value === '' ? [] : [value];
+  if (isStringArray(value)) return value.filter((agent) => agent !== '');
 
   return [];
 };
+
+const fieldAgents = (fields: Record<string, unknown>): string[] =>
+  manifestAgents(fields.agent);
 
 export const serializeAgents = (agents: string[]): ManifestAgent =>
   agents.length === 1 ? agents[0] : agents;
@@ -80,7 +84,7 @@ const mergeFiles = (
     ? existing.filter((file) => !dropped.has(file))
     : [];
 
-  return [...current, ...addFiles.filter((file) => !current.includes(file))];
+  return appendUnique(current, addFiles);
 };
 
 const upsertManifest = async (
@@ -127,11 +131,6 @@ export const restampManifestVersion = async (
     files: input.files,
   });
 
-const union = (current: string[], incoming: string[]): string[] => [
-  ...current,
-  ...incoming.filter((item) => !current.includes(item)),
-];
-
 export const recordManifestInstall = async (
   targetDir: string,
   input: {
@@ -144,7 +143,7 @@ export const recordManifestInstall = async (
 ): Promise<void> => {
   const existing = await readManifestFields(join(targetDir, MANIFEST_PATH));
   const agents = input.agent
-    ? union(fieldAgents(existing), [input.agent])
+    ? appendUnique(fieldAgents(existing), [input.agent])
     : fieldAgents(existing);
 
   await upsertManifest(
@@ -152,7 +151,7 @@ export const recordManifestInstall = async (
     { version: input.version, now: input.now },
     {
       agent: serializeAgents(agents),
-      categories: union(fieldCategories(existing), input.categories),
+      categories: appendUnique(fieldCategories(existing), input.categories),
       files: mergeFiles(existing.files, input.addFiles, []),
     }
   );

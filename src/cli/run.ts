@@ -1,32 +1,34 @@
 import type {
   AgentProvider,
-  BundledAssets,
   FileOutcome,
   ListTarget,
   ParsedCliArgs,
+  ScaffoldGroup,
 } from '../types/core.js';
+import { join } from 'node:path';
 import { stdout } from 'node:process';
+import { fileURLToPath } from 'node:url';
 import { loadAssets, loadVersion } from '../core/assets.js';
-import { ensureGitignoreEntries } from '../core/gitignore.js';
+import { performInit, performPull, performUpdate } from '../core/init.js';
+import { addSkills, removeSkills } from '../core/manage-skills.js';
 import {
   applyManifestChange,
   readManifestCategories,
   readManifestInstall,
-  recordManifestInstall,
 } from '../core/manifest.js';
 import {
   groupOutcomes,
   groupScaffoldOutcomes,
 } from '../core/scaffold-groups.js';
-import { reconstruct, refresh, scaffold } from '../core/scaffold.js';
 import { loadTrackingMap } from '../core/tracking.js';
+import { startDashboard } from '../dashboard/server/start.js';
 import { SKILLS_CATALOG } from '../hooks/skills/catalog.js';
 import { SKILL_GROUPS } from '../hooks/skills/groups.js';
 import {
   expandCategories,
   findGroup,
   groupOutcomesByCategory,
-  skillNamesForGroups,
+  unknownCategories,
   unknownGroupKeys,
 } from '../hooks/skills/skills.js';
 import {
@@ -34,7 +36,6 @@ import {
   listAgentChoices,
   listAgentKeys,
 } from '../providers/registry.js';
-import { addSkills, removeSkills } from './manage-skills.js';
 import {
   addSummary,
   addUsage,
@@ -50,16 +51,33 @@ import {
   removeSummary,
   removeUsage,
   summaryLine,
-  unknownCategories,
   updateNotInitialized,
   updateSummary,
 } from './messages.js';
-import { promptForListTarget } from './prompt.js';
+import { isInteractive, promptForListTarget } from './prompt.js';
 import { selectAgent } from './select-agent.js';
 import { selectCategories } from './select-categories.js';
 
 const print = (line: string): void => {
   stdout.write(`${line}\n`);
+};
+
+const printReport = (groups: ScaffoldGroup[]): void => {
+  print(banner());
+  print('');
+
+  if (groups.length > 0) {
+    print(groupedReport(groups));
+    print('');
+  }
+};
+
+const printNextSteps = (count: number, label: string): void => {
+  if (count > 0) {
+    print('');
+    print(nextSteps(label));
+    print('');
+  }
 };
 
 const countStatus = (outcomes: FileOutcome[], status: string): number =>
@@ -86,17 +104,6 @@ const resolveCategoryKeys = (categories: string[]): string[] => {
     );
 
   return keys;
-};
-
-const skillsForKeys = (
-  assets: BundledAssets,
-  keys: string[]
-): BundledAssets['skills'] => {
-  const chosen = new Set(
-    skillNamesForGroups(SKILLS_CATALOG, keys).map((name) => `${name}.md`)
-  );
-
-  return assets.skills.filter((skill) => chosen.has(skill.fileName));
 };
 
 const groupsForKeys = (keys: string[]): typeof SKILL_GROUPS =>
@@ -132,40 +139,24 @@ const runInit = async (
     locked: installed.categories,
   });
   const keys = resolveCategoryKeys(categories);
-  const [assets, version] = await Promise.all([
-    loadAssets(packageRoot),
-    loadVersion(packageRoot),
-  ]);
-
-  const result = await scaffold({
-    targetDir: cwd,
+  const {
+    scaffold: result,
+    gitignore: gitignoreOutcome,
+    installedAgents,
+  } = await performInit({
+    cwd,
+    packageRoot,
     provider,
-    assets: { ...assets, skills: skillsForKeys(assets, keys) },
-  });
-
-  await recordManifestInstall(cwd, {
-    agent: provider?.key,
-    categories: keys,
-    version,
+    categoryKeys: keys,
     now: new Date(),
-    addFiles: result.created,
   });
 
-  const gitignoreOutcome = await ensureGitignoreEntries(cwd);
-
-  const { agents } = await readManifestInstall(cwd);
-  const agentsLabel = getProviders(agents)
+  const agentsLabel = getProviders(installedAgents)
     .map((installedProvider) => installedProvider.displayName)
     .join(', ');
   const groups = groupScaffoldOutcomes(result, agentsLabel);
 
-  print(banner());
-  print('');
-
-  if (groups.length > 0) {
-    print(groupedReport(groups));
-    print('');
-  }
+  printReport(groups);
 
   print(summaryLine(agentsLabel, result));
 
@@ -176,103 +167,57 @@ const runInit = async (
     print(gitignoreMessage);
   }
 
-  if (result.created.length > 0) {
-    print('');
-    print(nextSteps(agentsLabel));
-    print('');
-  }
+  printNextSteps(result.created.length, agentsLabel);
 };
 
 const runUpdate = async (cwd: string, packageRoot: URL): Promise<void> => {
-  const { agents, categories } = await readManifestInstall(cwd);
+  const updated = await performUpdate({ cwd, packageRoot, now: new Date() });
 
-  if (agents.length === 0) {
+  if (!updated.initialized) {
     print(updateNotInitialized(listAgentKeys()));
     return;
   }
 
-  const providers = getProviders(agents);
-  const label = providers.map((provider) => provider.displayName).join(', ');
-  const keys = resolveCategoryKeys(categories);
-  const [assets, version] = await Promise.all([
-    loadAssets(packageRoot),
-    loadVersion(packageRoot),
-  ]);
-
-  const result = await refresh({
-    targetDir: cwd,
-    providers,
-    assets: { ...assets, skills: skillsForKeys(assets, keys) },
-    version,
-    now: new Date(),
-  });
-
+  const label = getProviders(updated.agents)
+    .map((provider) => provider.displayName)
+    .join(', ');
   const groups = groupOutcomes(
-    result.refreshed.map((path) => ({ path, status: 'refreshed' })),
+    updated.refresh.refreshed.map((path) => ({ path, status: 'refreshed' })),
     label
   );
 
-  print(banner());
-  print('');
+  printReport(groups);
 
-  if (groups.length > 0) {
-    print(groupedReport(groups));
-    print('');
-  }
+  print(updateSummary(label, updated.refresh.refreshed.length));
 
-  print(updateSummary(label, result.refreshed.length));
-
-  if (result.refreshed.length > 0) {
-    print('');
-    print(nextSteps(label));
-    print('');
-  }
+  printNextSteps(updated.refresh.refreshed.length, label);
 };
 
 const runPull = async (cwd: string, packageRoot: URL): Promise<void> => {
-  const { agents, categories } = await readManifestInstall(cwd);
+  const pulled = await performPull({ cwd, packageRoot });
 
-  if (agents.length === 0) {
+  if (!pulled.initialized) {
     print(pullNotInitialized(listAgentKeys()));
     return;
   }
 
-  const providers = getProviders(agents);
-  const label = providers.map((provider) => provider.displayName).join(', ');
-  const keys = resolveCategoryKeys(categories);
-  const assets = await loadAssets(packageRoot);
+  const label = getProviders(pulled.agents)
+    .map((provider) => provider.displayName)
+    .join(', ');
+  const groups = groupScaffoldOutcomes(pulled.scaffold, label);
 
-  const result = await reconstruct({
-    targetDir: cwd,
-    providers,
-    assets: { ...assets, skills: skillsForKeys(assets, keys) },
-  });
+  printReport(groups);
 
-  const gitignoreOutcome = await ensureGitignoreEntries(cwd);
-  const groups = groupScaffoldOutcomes(result, label);
+  print(pullSummary(label, pulled.scaffold));
 
-  print(banner());
-  print('');
-
-  if (groups.length > 0) {
-    print(groupedReport(groups));
-    print('');
-  }
-
-  print(pullSummary(label, result));
-
-  const gitignoreMessage = gitignoreResult(gitignoreOutcome);
+  const gitignoreMessage = gitignoreResult(pulled.gitignore);
 
   if (gitignoreMessage) {
     print('');
     print(gitignoreMessage);
   }
 
-  if (result.created.length > 0) {
-    print('');
-    print(nextSteps(label));
-    print('');
-  }
+  printNextSteps(pulled.scaffold.created.length, label);
 };
 
 const runAdd = async (
@@ -317,13 +262,7 @@ const runAdd = async (
     resolveCategoryKeys(categories)
   );
 
-  print(banner());
-  print('');
-
-  if (groups.length > 0) {
-    print(groupedReport(groups));
-    print('');
-  }
+  printReport(groups);
 
   print(
     addSummary(
@@ -375,13 +314,7 @@ const runRemove = async (
     resolveCategoryKeys(categories)
   );
 
-  print(banner());
-  print('');
-
-  if (groups.length > 0) {
-    print(groupedReport(groups));
-    print('');
-  }
+  printReport(groups);
 
   print(
     removeSummary(
@@ -422,6 +355,16 @@ const runList = async (args: ParsedCliArgs, cwd: string): Promise<void> => {
   print(banner());
   print('');
   print(await listBody(target, cwd));
+};
+
+const runDashboard = async (
+  cwd: string,
+  packageRoot: URL,
+  port: number | undefined
+): Promise<void> => {
+  const distDir = join(fileURLToPath(packageRoot), 'lib', 'dashboard');
+
+  await startDashboard({ cwd, distDir, packageRoot, port });
 };
 
 export const run = async (
@@ -465,6 +408,16 @@ export const run = async (
 
   if (args.command === 'list') {
     await runList(args, cwd);
+    return;
+  }
+
+  if (args.command === 'dashboard') {
+    await runDashboard(cwd, packageRoot, args.port);
+    return;
+  }
+
+  if (args.bare && isInteractive()) {
+    await runDashboard(cwd, packageRoot, args.port);
     return;
   }
 

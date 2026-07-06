@@ -3,7 +3,7 @@
 # 🌊 Security-Driven Hardening: Blue Spec
 
 [![Version](https://img.shields.io/npm/v/blue-spec?label=&color=2f7bff&logo=npm&logoColor=white)](https://www.npmjs.com/package/blue-spec)
-[![Docs](https://img.shields.io/badge/Documentation-005eff?logo=docusaurus&logoColor=white)](https://bluespec.weslley.io)
+[![Docs](https://img.shields.io/badge/Documentation-005eff?logo=docusaurus&logoColor=white)](https://bluespec.weslley.io/docs)
 
 **Blue Spec** helps your AI agent make a project more secure. You point it at your code, and the agent figures out what your system actually does, then guides you through the security work that matters for it.
 
@@ -17,20 +17,58 @@ Love **Blue Spec**? Give us a ⭐ on **GitHub**!
 
 ## Table of Contents
 
-- 🌱 [**Get Started**](#get-started)
-  - [**Install**](#install)
-  - [**Commands**](#commands)
-- 📦 [**Requirements**](#requirements)
+- 🌊 [**Get Started**](#get-started)
+  - 📦 [**Dashboard**](#dashboard) | [**CLI**](#cli)
+  - 💬 [**Slash Commands**](#slash-commands)
+- 💽 [**Requirements**](#requirements)
+- 🔐 [**Security**](#security)
 - 🖖 [**Acknowledgements**](#acknowledgements)
-- 🧑‍⚖️ [**License**](#license)
+- 🧑‍⚖️ [**License**](#license) (**MIT**)
 
 ---
 
-## Get Started
+### Get Started
 
-### Install
+**Blue Spec** adapts to your environment, whether it is a new project or an existing one.
 
-> **Blue Spec** adapts to your environment, whether it is a new project or an existing one.
+> [!TIP]
+>
+> No API keys are needed, it runs directly through your own agent [(**Claude**, **Codex**, and more)](https://bluespec.weslley.io/docs/supported-agents).
+
+---
+
+### Dashboard
+
+For an interactive live view, follow-up, and maintenance, run:
+
+```bash
+npx -y blue-spec@latest
+```
+
+It serves a dashboard and opens it in a random port:
+
+- [x] **Live Reload**
+- [x] **Private** and **Local**
+- [x] **Install**, **Pull**, **Update**, and **Manage** all **Blue Spec** features directly from your browser
+- [x] No `node_modules` or `package.json` is needed 📦
+
+> <img width="280" src="./website/static/img/dashboard/01.png" />
+> <img width="280" src="./website/static/img/dashboard/02.png" />
+> <img width="280" src="./website/static/img/dashboard/03.png" />
+> <img width="280" src="./website/static/img/dashboard/04.png" />
+> <img width="280" src="./website/static/img/dashboard/05.png" />
+> <img width="280" src="./website/static/img/dashboard/06.png" />
+
+> [!TIP]
+>
+> - 🚪 Use `--port` or `-p` to specify a custom port.
+> - ⏏️ Press `Ctrl+C` to stop.
+
+---
+
+### CLI
+
+#### Install
 
 ```bash
 npx -y blue-spec@latest init
@@ -62,21 +100,15 @@ npx -y blue-spec@latest pull
 >
 > 💡 Think of it as the **Blue Spec** equivalent of `npm i`, `pip install -r requirements.txt`, and the like.
 
-### Dashboard
-
-For an interative live, read-only view of your project's `.bluespec/` (charter, findings, hardening, verification, and the sub-skills applied), run:
-
-```bash
-npx -y blue-spec@latest dashboard
-```
-
-It serves the dashboard and opens it in your browser, reloading as `.bluespec/` changes. Press `Ctrl+C` to stop.
-
 ---
 
-### Commands
+### Slash Commands
 
 Once **Blue Spec** is set up in your project, your **AI** agent unlocks a set of slash commands:
+
+#### The Blue Team flow
+
+These five run in order. Each builds on the previous, so following the list top to bottom is all it takes:
 
 | #   | Command                                                                    | What it does for you                                                           |
 | --- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
@@ -92,9 +124,8 @@ Once **Blue Spec** is set up in your project, your **AI** agent unlocks a set of
 
 | Command                                                                          | What it does                                                                               |
 | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| [**/bluespec.prove**](https://bluespec.weslley.io/docs/commands/prove)           | Turns each detected finding into a runnable proof for responsible disclosure               |
 | [**/bluespec.specialize**](https://bluespec.weslley.io/docs/commands/specialize) | Specializes **Blue Spec** in a new security _sub_-skill from articles, exploits, or topics |
-| [**/bluespec.repair**](https://bluespec.weslley.io/docs/commands/repair)         | Repairs **Blue Spec**'s internal tracking                                                  |
+| [**/bluespec.prove**](https://bluespec.weslley.io/docs/commands/prove)           | Turns each detected finding into a runnable proof for responsible disclosure               |
 
 > [!TIP]
 >
@@ -115,9 +146,9 @@ You will need these tools installed on your system:
 
 ---
 
-## Security Policy
+## Security
 
-Please check the [**SECURITY.md**](https://github.com/wellwelwel/blue-spec/blob/main/SECURITY.md).
+To details, report a vulnerability, and see the supported versions, see the [**Security Policy**](https://github.com/wellwelwel/blue-spec/blob/main/SECURITY.md).
 
 ---
 
@@ -152,7 +183,7 @@ Copyright © 2026-present [**Weslley Araújo**](https://github.com/wellwelwel) a
 >
 > ### Disclaimer
 >
-> **Blue Spec** is an independent open-source project and is not affiliated with, endorsed by, or associated with **Bluespec, Inc.** or the **Bluespec Hardware Description Language (HDL)** and its compiler (`bsc`).
+> **Security-Driven Hardening: Blue Spec** is an independent open-source project and is not affiliated with, endorsed by, or associated with **Bluespec, Inc.** or the **Bluespec Hardware Description Language (HDL)** and its compiler (`bsc`).
 >
 > The project name "Blue Spec" comes from Blue Team (defensive security) and Spec-Driven Development. It refers to an AI-assisted security hardening tool for software projects, a different domain from Bluespec, Inc., which provides RISC-V processor IP and hardware design tools.
 >

@@ -6,3 +6,9 @@ node_modules
 .bluespec/
 /PLAN.md
 /.plans
+
+# Blue Spec
+/.bluespec/templates/
+/.bluespec/hooks/
+/.bluespec/skills/*
+/**/bluespec.*

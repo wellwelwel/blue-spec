@@ -14,7 +14,7 @@
 
 - Why: [PRINCIPLE_2_RISK] <!-- Example: Unchecked input is how injection attacks take over a system, whether it is SQL in a query, a command in a shell call, or a script in a page. -->
 
-## Baseline discipline <!-- Universal to every Blue Spec project -->
+## Baseline discipline
 
 Blue Spec holds this charter, every principle, every time. A principle is not suspended because a control looks small, familiar, or unlikely to be hit. This is not a judgement call.
 

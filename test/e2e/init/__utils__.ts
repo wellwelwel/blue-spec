@@ -29,6 +29,8 @@ const baseArgs: ParsedCliArgs = {
   findingsRequested: false,
   help: false,
   version: false,
+  bare: false,
+  port: undefined,
 };
 
 export const newWorkspace = async (): Promise<string> => {

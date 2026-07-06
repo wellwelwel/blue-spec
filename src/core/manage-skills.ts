@@ -4,24 +4,36 @@ import type {
   SkillsChange,
 } from '../types/core.js';
 import { join } from 'node:path';
-import {
-  ensureDir,
-  removeFileIfPresent,
-  writeFileIfAbsent,
-} from '../core/fs-actions.js';
 import { SKILLS_CATALOG } from '../hooks/skills/catalog.js';
 import { SKILL_GROUPS } from '../hooks/skills/groups.js';
 import {
   expandCategories,
   groupKeysForSkill,
   skillNamesForGroups,
+  unknownCategories,
   unknownGroupKeys,
 } from '../hooks/skills/skills.js';
-import { unknownCategories } from './messages.js';
+import { appendUnique } from './collections.js';
+import {
+  ensureDir,
+  removeFileIfPresent,
+  writeFileIfAbsent,
+} from './fs-actions.js';
 
 const SKILLS_DIR = '.bluespec/skills';
 
 const relativePath = (name: string): string => `${SKILLS_DIR}/${name}`;
+
+export const selectSkillAssets = (
+  assets: BundledAssets,
+  keys: string[]
+): BundledAssets['skills'] => {
+  const chosen = new Set(
+    skillNamesForGroups(SKILLS_CATALOG, keys).map((name) => `${name}.md`)
+  );
+
+  return assets.skills.filter((skill) => chosen.has(skill.fileName));
+};
 
 const resolveKeys = (categories: string[]): string[] => {
   const keys = expandCategories(SKILL_GROUPS, categories);
@@ -38,11 +50,6 @@ const resolveKeys = (categories: string[]): string[] => {
   return keys;
 };
 
-const union = (left: string[], right: string[]): string[] => [
-  ...left,
-  ...right.filter((key) => !left.includes(key)),
-];
-
 export const addSkills = async (
   targetDir: string,
   assets: BundledAssets,
@@ -50,11 +57,7 @@ export const addSkills = async (
   categories: string[]
 ): Promise<SkillsChange> => {
   const requested = resolveKeys(categories);
-  const wanted = new Set(
-    skillNamesForGroups(SKILLS_CATALOG, requested).map((name) => `${name}.md`)
-  );
-
-  const jobs = assets.skills.filter((skill) => wanted.has(skill.fileName));
+  const jobs = selectSkillAssets(assets, requested);
   if (jobs.length === 0) return { outcomes: [], categories: installed };
 
   await ensureDir(join(targetDir, SKILLS_DIR));
@@ -71,7 +74,7 @@ export const addSkills = async (
     })
   );
 
-  return { outcomes, categories: union(installed, requested) };
+  return { outcomes, categories: appendUnique(installed, requested) };
 };
 
 export const removeSkills = async (

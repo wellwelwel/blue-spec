@@ -263,10 +263,8 @@ const AgentReply = ({
         >
           {open && (
             <ReactTyped
-              strings={[
-                `On it. I'll build this and check it against the <b class="font-semibold ${theme.bodyStrong}">${skill.label}</b> skill as I go, so anything risky gets caught before you ship.`,
-              ]}
-              typeSpeed={14}
+              strings={[`On it!`]}
+              typeSpeed={45}
               startDelay={620}
               showCursor
               cursorChar='▍'

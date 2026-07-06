@@ -1,0 +1,80 @@
+:root {
+  --canvas: #eaedf5;
+  --surface: #ffffff;
+  --surface-2: #f2f4f9;
+  --surface-3: #e7ebf3;
+
+  --line: #edf0f6;
+  --line-2: #e2e6ef;
+
+  --ink: #17182b;
+  --ink-2: #3d4058;
+  --muted: #83889c;
+  --faint: #a6abbd;
+
+  --accent: #005eff;
+  --accent-3: #0049c4;
+  --banner: #005eff;
+  --dark: #17161f;
+
+  --red: #e5484d;
+  --amber: #e0891a;
+  --blue: #3f8bf1;
+  --teal: #10b17d;
+  --pink: #e264a0;
+
+  --accent-soft: color-mix(in srgb, var(--accent) 11%, var(--surface));
+  --accent-100: color-mix(in srgb, var(--accent) 6%, var(--surface));
+  --red-soft: color-mix(in srgb, var(--red) 12%, var(--surface));
+  --amber-soft: color-mix(in srgb, var(--amber) 14%, var(--surface));
+  --blue-soft: color-mix(in srgb, var(--blue) 12%, var(--surface));
+  --teal-soft: color-mix(in srgb, var(--teal) 13%, var(--surface));
+  --pink-soft: color-mix(in srgb, var(--pink) 12%, var(--surface));
+
+  --r-xl: 18px;
+  --r-lg: 14px;
+  --r-md: 10px;
+  --r-sm: 8px;
+
+  --shadow-card:
+    0 1px 2px rgba(18, 22, 45, 0.04), 0 4px 10px -6px rgba(18, 22, 45, 0.1);
+  --shadow-card-half:
+    0 0.5px 1px rgba(18, 22, 45, 0.04), 0 2px 6px -4px rgba(18, 22, 45, 0.1);
+  --shadow-pop:
+    0 2px 6px -3px rgba(18, 22, 45, 0.08),
+    0 8px 18px -10px rgba(18, 22, 45, 0.16);
+
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+
+  --font: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --mono:
+    'Fira Code', ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas,
+    monospace;
+}
+
+[data-theme='dark'] {
+  --canvas: #0b0e17;
+  --surface: #151a26;
+  --surface-2: #1d2432;
+  --surface-3: #29313f;
+
+  --line: #222a38;
+  --line-2: #2d3648;
+
+  --ink: #eef1f8;
+  --ink-2: #c6ccdb;
+  --muted: #8b93a8;
+  --faint: #69718a;
+
+  --accent: #4f9bff;
+  --accent-3: #2f7bff;
+  --dark: #0a0b12;
+
+  --shadow-card:
+    0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 12px -7px rgba(0, 0, 0, 0.6);
+  --shadow-card-half:
+    0 0.5px 1px rgba(0, 0, 0, 0.4), 0 2px 7px -4px rgba(0, 0, 0, 0.6);
+  --shadow-pop:
+    0 2px 7px -4px rgba(0, 0, 0, 0.55), 0 9px 20px -11px rgba(0, 0, 0, 0.72);
+}

@@ -22,7 +22,7 @@ Blue Spec's mission is to **put a defensive, security-first workflow within reac
 
 Blue Spec is **a collection of templates and agent commands**, not a heavy framework. Its value is the **workflow the AI agent runs**: detecting what the system actually does (login, uploads, payments, and so on), mapping the vulnerabilities that matter for that context, then proposing, applying, and validating the right fixes. The context detection is what makes the rest specific instead of generic.
 
-Concretely, the user runs Blue Spec via the AI agent (today, Claude Code) and the agent follows Blue Spec's templated, security-first process: scaffolded templates plus slash commands that an AI agent consumes, oriented toward defense rather than feature delivery.
+Concretely, the user runs Blue Spec via the AI agent and the agent follows Blue Spec's templated, security-first process: scaffolded templates plus slash commands that an AI agent consumes, oriented toward defense rather than feature delivery.
 
 ### Flexible by design
 
@@ -84,6 +84,7 @@ These are binding instructions for any agent or contributor working here.
 6. **TypeScript in, JavaScript out.** Author in strict TypeScript and ship compiled JavaScript. The end-user runtime is JavaScript via `npx`.
 7. **Spec-first, agent-driven, framed for security.** Build the workflow from a proven structure: templates, commands, a governing charter, and an agent that runs the phases. Reimplement that structure in our stack with a defensive purpose.
 8. **Structure and engineering live elsewhere.** Concrete repo structure and file layout belong in the internal `/architecture` skill, and the toolchain, code conventions, type rules, and build path belong in the `/engineering` skill. Both load automatically when an agent touches the relevant code. Keep this file focused on the _what_ and _why_, and keep structural and implementation decisions in those skills.
+9. **Never kill processes you did not start.** Only stop the processes you launched yourself (for example a headless browser you spawned for verification). Before starting a server, check whether the port is already serving what you need (for example the dashboard on its dev port) and reuse it instead of launching another.
 
 ---
 

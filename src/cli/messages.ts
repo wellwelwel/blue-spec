@@ -56,12 +56,14 @@ const agentsByInitial = (agents: AgentChoice[]): string[] => {
 };
 
 const HELP_USAGE: string[] = [
+  'npx blue-spec [--port <number>]',
   'npx blue-spec init <agent> [--skills <category...>]',
   'npx blue-spec update',
   'npx blue-spec pull',
   'npx blue-spec add --skills',
   'npx blue-spec remove --skills',
   'npx blue-spec list [--findings] [--skills]',
+  'npx blue-spec dashboard [-p, --port <number>]',
 ];
 
 const HELP_COMMANDS: [string, string][] = [
@@ -71,6 +73,7 @@ const HELP_COMMANDS: [string, string][] = [
   ['add', 'Install security specializations, by category'],
   ['remove', 'Uninstall security specializations, by category'],
   ['list', 'List tracked findings or specialization categories (asks which)'],
+  ['dashboard', 'Serve a live view of .bluespec/ and open it in the browser'],
 ];
 
 const HELP_OPTIONS: [string, string][] = [
@@ -79,6 +82,10 @@ const HELP_OPTIONS: [string, string][] = [
     'Security specializations, by category (no value to choose interactively)',
   ],
   ['--findings', 'With list, show the tracked findings'],
+  [
+    '-p, --port <1024-65535>',
+    'With dashboard, the port to serve on (default: random)',
+  ],
   ['-h, --help', 'Show this help'],
   ['-v, --version', 'Show the version'],
 ];
@@ -115,15 +122,6 @@ export const removeUsage = (): string =>
     'options:',
     '  --skills   security specializations to uninstall (run with no value to choose interactively)',
     'run `npx blue-spec list` to see available categories',
-  ].join('\n');
-
-export const unknownCategories = (
-  keys: string[],
-  availableKeys: string[]
-): string =>
-  [
-    `Unknown specialization ${keys.length === 1 ? 'category' : 'categories'}: ${keys.join(', ')}`,
-    `Available categories: ${availableKeys.join(', ')}`,
   ].join('\n');
 
 export const noAgentSelected = (agentKeys: string[]): string => {

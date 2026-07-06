@@ -47,6 +47,16 @@ export const unknownGroupKeys = (
   keys: string[]
 ): string[] => keys.filter((key) => findGroup(groups, key) === undefined);
 
+/** The error message for category keys that match no registered group */
+export const unknownCategories = (
+  keys: string[],
+  availableKeys: string[]
+): string =>
+  [
+    `Unknown specialization ${keys.length === 1 ? 'category' : 'categories'}: ${keys.join(', ')}`,
+    `Available categories: ${availableKeys.join(', ')}`,
+  ].join('\n');
+
 /** The distinct sub-skill names covered by the requested category keys, in catalog order */
 export const skillNamesForGroups = (
   catalog: SkillCatalogEntry[],

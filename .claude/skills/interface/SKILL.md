@@ -1,6 +1,7 @@
 ---
 name: interface
 description: Design engineering principles for making interfaces feel polished. Use when building UI, reviewing frontend code, or working on any visual detail, from animations, hover states, shadows, borders, and typography to optical alignment and tabular numbers.
+user-invocable: true
 metadata:
   internal: true
 ---
@@ -76,20 +77,42 @@ Only for `transform`, `opacity`, `filter` — properties the GPU can composite. 
 
 Interactive elements need at least 40×40px hit area. Extend with a pseudo-element if the visible element is smaller. Never let hit areas of two elements overlap.
 
+### 15. No Layout Shift
+
+Content must never reflow after it appears. Reserve space up front for anything that loads or changes: fix dimensions on images and media (`width`/`height` or `aspect-ratio`), give async content a placeholder or skeleton of the same size, and keep dynamic numbers on `tabular-nums`. Toggling state (loading, error, expanded) must not resize the surrounding layout, and late-loading fonts must not shift text. Animate only compositor properties (`transform`, `opacity`), never geometry like `width`, `height`, `top`, or `margin`.
+
+### 16. Canonical Tailwind Classes
+
+Prefer a scale class over an arbitrary value when one exists: `size-8.5` over `size-[34px]`, `duration-220` over `duration-[220ms]`. Every `px` on the spacing scale maps by `N / 4`. Reserve `[...]` for values with no canonical form (breakpoints, `color-mix`, `cubic-bezier`, `rounded-[…]`).
+
 ## Common Mistakes
 
-| Mistake                                | Fix                                               |
-| -------------------------------------- | ------------------------------------------------- |
-| Same border radius on parent and child | Calculate `outerRadius = innerRadius + padding`   |
-| Icons look off-center                  | Adjust optically with padding or fix SVG directly |
-| Hard borders between sections          | Use layered `box-shadow` with transparency        |
-| Jarring enter/exit animations          | Split, stagger, and keep exits subtle             |
-| Numbers cause layout shift             | Apply `tabular-nums`                              |
-| Heavy text on macOS                    | Apply `antialiased` to root                       |
-| Animation plays on page load           | Add `initial={false}` to `AnimatePresence`        |
-| `transition: all` on elements          | Specify exact properties                          |
-| First-frame animation stutter          | Add `will-change: transform` (sparingly)          |
-| Tiny hit areas on small controls       | Extend with pseudo-element to 40×40px             |
+| Mistake                                  | Fix                                                                 |
+| ---------------------------------------- | ------------------------------------------------------------------- |
+| Same border radius on parent and child   | Calculate `outerRadius = innerRadius + padding`                     |
+| Icons look off-center                    | Adjust optically with padding or fix SVG directly                   |
+| Hard borders between sections            | Use layered `box-shadow` with transparency                          |
+| Jarring enter/exit animations            | Split, stagger, and keep exits subtle                               |
+| Numbers cause layout shift               | Apply `tabular-nums`                                                |
+| Heavy text on macOS                      | Apply `antialiased` to root                                         |
+| Animation plays on page load             | Add `initial={false}` to `AnimatePresence`                          |
+| `transition: all` on elements            | Specify exact properties                                            |
+| First-frame animation stutter            | Add `will-change: transform` (sparingly)                            |
+| Tiny hit areas on small controls         | Extend with pseudo-element to 40×40px                               |
+| Content reflows after load or on toggle  | Reserve space up front (fixed dimensions, `aspect-ratio`, skeleton) |
+| Arbitrary value where a scale class fits | Use the canonical class (`size-8.5`, not `size-[34px]`)             |
+
+## Verifying the rendered result
+
+Verify by measuring, not by eyeballing. For any spacing or alignment claim, measure the rendered DOM (`getBoundingClientRect` between an element and its container's edges) and report the numbers. A screenshot that looks aligned is not evidence.
+
+For complex visual changes, or whenever seeing the rendered result matters, drive the running page through Chrome's built-in DevTools Protocol (CDP) to inspect the DOM, computed styles, and layout, and to capture screenshots. It works against any URL, whatever app or domain is serving it. The `tools/cdp.ts` helper does exactly this:
+
+```sh
+npx tsx tools/cdp.ts --out ./temp/shots --shot 'label|<url>'
+```
+
+Pass an optional `--measure` snippet to read geometry off the rendered DOM. Put any query params the page supports (a forced theme, a route, a flag) straight in the URL. Reach for it when a change is hard to verify from the source alone: layout, spacing, alignment, overflow, theme tokens, or anything that only shows up once rendered. Skip it for simple, self-evident edits (for example, adding a shadow) where the result is obvious from the diff.
 
 ## Review Output Format
 
@@ -127,6 +150,8 @@ Rows should cite the specific file and the specific property that changed when i
 - [ ] No `transition: all` — only specific properties
 - [ ] `will-change` only on transform/opacity/filter, never `all`
 - [ ] Interactive elements have at least 40×40px hit area
+- [ ] No layout shift: space is reserved for loading/async/media content, toggles don't resize the layout
+- [ ] Scale classes used over arbitrary values where a canonical form exists
 
 ## Reference Files
 

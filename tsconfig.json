@@ -1,5 +1,6 @@
 {
-  "include": ["src", "scripts", "test", "tools"],
+  "include": ["src", "scripts", "test", ".claude/skills"],
+  "exclude": ["src/dashboard/client"],
   "compilerOptions": {
     "target": "ES2023",
     "module": "ESNext",

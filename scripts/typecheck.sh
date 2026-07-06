@@ -7,6 +7,7 @@ typeViolations="$(
   grep -rE '^(export )?(type|interface) [A-Z]' \
     "$repositoryRoot/src" \
     --include='*.ts' \
+    --include='*.tsx' \
     | grep -v '/types/' \
     || true
 )"
@@ -33,3 +34,5 @@ if [[ -n "$doubleCastHits" ]]; then
 fi
 
 tsc --noEmit
+tsc --noEmit -p "$repositoryRoot/src/dashboard/tsconfig.json"
+tsc --noEmit -p "$repositoryRoot/tools/tsconfig.json"
