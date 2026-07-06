@@ -143,23 +143,7 @@ You will need these tools installed on your system:
 
 ## Security
 
-**Blue Spec** practices what it preaches.
-
-The dashboard is the one part of **Blue Spec** that both reads your project and takes a command from the browser, so its surface is hardened end to end:
-
-- **Private and local-only**: binds to `127.0.0.1`, never your network.
-- **No shell, no eval, no subprocess**: actions run in-process through the same pure file-system core as the CLI.
-- **Deny by default**: every value is rejected unless it matches **Blue Spec**'s own registries exactly, then it is rebuilt into a fresh object.
-- **Forgery-proof**: each action needs a per-session token and a same-origin check, so cross-site requests fail closed.
-- **Contained by default**: DNS rebinding, clickjacking, path traversal, oversized bodies, and slow-loris connections are all blocked up front.
-
-> [!IMPORTANT]
->
-> To report a vulnerability and see the supported versions, see the [**Security Policy**](https://github.com/wellwelwel/blue-spec/blob/main/SECURITY.md).
-
-> [!WARNING]
->
-> Run the dashboard only on a machine you trust and control, never on a shared, unknown, multi-user, or compromised host.
+To details, report a vulnerability, and see the supported versions, see the [**Security Policy**](https://github.com/wellwelwel/blue-spec/blob/main/SECURITY.md).
 
 ---
 
