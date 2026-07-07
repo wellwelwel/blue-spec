@@ -366,9 +366,13 @@ export const DocsShell = ({
                 </a>
                 <span className='h-7.5 w-px bg-line-2 max-md:hidden' />
                 <Link className={clsx(PILL, 'max-md:hidden')} to='/'>
-                  <span className='inline-flex text-[1.1rem]'>
-                    <Icon name='grid' />
-                  </span>
+                  <img
+                    className='size-4.5 flex-none object-contain'
+                    src='/img/icons/wave.svg'
+                    alt=''
+                    width={18}
+                    height={18}
+                  />
                   Home
                 </Link>
                 <Link
@@ -376,7 +380,13 @@ export const DocsShell = ({
                   to='/'
                   aria-label='Back to the home page'
                 >
-                  <Icon name='grid' />
+                  <img
+                    className='size-4.75 object-contain'
+                    src='/img/icons/wave.svg'
+                    alt=''
+                    width={19}
+                    height={19}
+                  />
                 </Link>
               </div>
             </header>
