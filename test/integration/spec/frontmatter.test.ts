@@ -3,14 +3,15 @@ import { describe, it, strict } from 'poku';
 import { parse } from 'yaml.min';
 import { listFrontmatterSources, packageRoot } from './__utils__.js';
 
-const CORE_KEYS: Record<keyof Required<Frontmatter>, true> = {
+const SKILL_KEYS: Record<keyof Required<Frontmatter>, true> = {
   name: true,
   description: true,
   'argument-hint': true,
   'user-invocable': true,
+  metadata: true,
 };
 
-const SKILL_KEYS: Record<string, true> = { ...CORE_KEYS, metadata: true };
+const { metadata, ...CORE_KEYS } = SKILL_KEYS;
 
 const specSources = await listFrontmatterSources(new URL('spec/', packageRoot));
 
@@ -48,6 +49,13 @@ const assertValid = (
       typeof parsed['user-invocable'],
       'boolean',
       'user-invocable must be a boolean when present'
+    );
+
+  if ('metadata' in parsed)
+    strict.deepStrictEqual(
+      parsed.metadata,
+      { internal: true },
+      'metadata carries only the skills.sh internal marker'
     );
 
   const unknownKeys = Object.keys(parsed).filter((key) => !(key in allowed));

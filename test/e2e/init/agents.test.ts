@@ -54,17 +54,31 @@ const placeholderExpectations: Record<
   { present: string[]; absent: string[] }
 > = {
   skill: {
-    present: ['$ARGUMENTS', 'name: bluespec.charter', 'user-invocable: true'],
+    present: [
+      '$ARGUMENTS',
+      'name: bluespec.charter',
+      'user-invocable: true',
+      'internal: true',
+    ],
     absent: [],
   },
   'copilot-prompt': {
     present: ['$ARGUMENTS', 'name: bluespec.charter'],
-    absent: ['user-invocable'],
+    absent: ['user-invocable', 'internal: true'],
   },
-  markdown: { present: ['$ARGUMENTS'], absent: [] },
-  forge: { present: ['{{parameters}}'], absent: ['$ARGUMENTS'] },
-  'gemini-toml': { present: ['{{args}}'], absent: ['$ARGUMENTS'] },
-  'goose-yaml': { present: ['{{ args }}'], absent: ['$ARGUMENTS'] },
+  markdown: { present: ['$ARGUMENTS'], absent: ['internal: true'] },
+  forge: {
+    present: ['{{parameters}}'],
+    absent: ['$ARGUMENTS', 'internal: true'],
+  },
+  'gemini-toml': {
+    present: ['{{args}}'],
+    absent: ['$ARGUMENTS', 'internal: true'],
+  },
+  'goose-yaml': {
+    present: ['{{ args }}'],
+    absent: ['$ARGUMENTS', 'internal: true'],
+  },
 };
 
 for (const spec of AGENT_SPECS) {

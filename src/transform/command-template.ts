@@ -63,7 +63,10 @@ const assemble = (frontmatterLines: string[], body: string): string =>
 const injectSkillFrontmatter = (
   asset: BundledAsset,
   key: CommandKey,
-  { withUserInvocable }: { withUserInvocable: boolean }
+  {
+    withUserInvocable,
+    withInternalMetadata,
+  }: { withUserInvocable: boolean; withInternalMetadata: boolean }
 ): string => {
   const { frontmatter, body } = parseFrontmatter(asset, key);
 
@@ -77,14 +80,23 @@ const injectSkillFrontmatter = (
   if (withUserInvocable && !hasField(frontmatter, 'user-invocable'))
     lines.push('user-invocable: true');
 
+  if (withInternalMetadata && !hasField(frontmatter, 'metadata'))
+    lines.push('metadata:', '  internal: true');
+
   return assemble(lines, body);
 };
 
 const transformSkill = (asset: BundledAsset, key: CommandKey): string =>
-  injectSkillFrontmatter(asset, key, { withUserInvocable: true });
+  injectSkillFrontmatter(asset, key, {
+    withUserInvocable: true,
+    withInternalMetadata: true,
+  });
 
 const transformCopilotPrompt = (asset: BundledAsset, key: CommandKey): string =>
-  injectSkillFrontmatter(asset, key, { withUserInvocable: false });
+  injectSkillFrontmatter(asset, key, {
+    withUserInvocable: false,
+    withInternalMetadata: false,
+  });
 
 const validateFrontmatter = (asset: BundledAsset, key: CommandKey): string => {
   parseFrontmatter(asset, key);

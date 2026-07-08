@@ -18,6 +18,7 @@ export type Frontmatter = {
   description: string;
   'argument-hint'?: string;
   'user-invocable'?: boolean;
+  metadata?: { internal: boolean };
 };
 
 export type SpecLimits = {
