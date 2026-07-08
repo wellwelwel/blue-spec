@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.9.1](https://github.com/wellwelwel/blue-spec/compare/v0.9.0...v0.9.1) (2026-07-08)
+
+
+### Bug Fixes
+
+* ensure `/.bluespec/proofs` is git ignored on init ([9a36756](https://github.com/wellwelwel/blue-spec/commit/9a3675695efd6665f4e348e9116fc2132f657fc0))
+* mark scaffolded commands as internal (skills.sh convention) ([735369e](https://github.com/wellwelwel/blue-spec/commit/735369ed1ae71133c66fd6ce5ad19efc9b021454))
+* remove `all` skill management ([db47814](https://github.com/wellwelwel/blue-spec/commit/db4781443b57d408c925dad89a010f7b8ee022ef))
+
 ## [0.9.0](https://github.com/wellwelwel/blue-spec/compare/v0.8.0...v0.9.0) (2026-07-06)
 
 
