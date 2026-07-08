@@ -8,6 +8,7 @@ const SKILLS_EXCLUDE = '/.bluespec/skills/*';
 const BLUESPEC_ENTRIES = [
   '/.bluespec/templates/',
   '/.bluespec/hooks/',
+  '/.bluespec/proofs/',
   '/.bluespec/specializations.md',
   SKILLS_EXCLUDE,
   '/**/bluespec.*',

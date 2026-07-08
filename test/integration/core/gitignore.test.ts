@@ -8,6 +8,7 @@ import { newWorkspace, readGitignore, writeGitignore } from './__utils__.js';
 const BLUESPEC_ENTRIES = [
   '/.bluespec/templates/',
   '/.bluespec/hooks/',
+  '/.bluespec/proofs/',
   '/.bluespec/specializations.md',
   '/.bluespec/skills/*',
   '/**/bluespec.*',
