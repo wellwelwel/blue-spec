@@ -3,7 +3,8 @@
 # 🌊 Security-Driven Hardening: Blue Spec
 
 [![Version](https://img.shields.io/npm/v/blue-spec?label=&color=2f7bff&logo=npm&logoColor=white)](https://www.npmjs.com/package/blue-spec)
-[![Docs](https://img.shields.io/badge/Documentation-005eff?logo=docusaurus&logoColor=white)](https://bluespec.weslley.io/docs)
+[![Docs](https://img.shields.io/badge/Documentation-2f7bff?logo=docusaurus&logoColor=white)](https://bluespec.weslley.io/docs)
+[![No API Key Needed](https://img.shields.io/badge/No%20API%20Key%20Needed-2f7bff?logo=claudecode&logoColor=white)](https://bluespec.weslley.io/docs/supported-agents)
 
 **Blue Spec** helps your AI agent make a project more secure. You point it at your code, and the agent figures out what your system actually does, then guides you through the security work that matters for it.
 
