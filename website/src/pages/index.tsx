@@ -12,7 +12,6 @@ import { RailTip } from '@site/src/components/home/RailTip';
 import { TopBar } from '@site/src/components/home/TopBar';
 import { UsagePanel } from '@site/src/components/home/UsagePanel';
 import { MaskIcon } from '@site/src/components/MaskIcon';
-import { PaperModal } from '@site/src/components/PaperModal';
 import { PartnersModal } from '@site/src/components/PartnersModal';
 import { SpecializationsModal } from '@site/src/components/SpecializationsModal';
 import { WaterField } from '@site/src/components/WaterField';
@@ -32,7 +31,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { FaBook, FaStar } from 'react-icons/fa6';
+import { FaStar } from 'react-icons/fa6';
 import { GoHeartFill } from 'react-icons/go';
 import { LuMenu, LuX } from 'react-icons/lu';
 
@@ -58,7 +57,6 @@ const Home = (): ReactNode => {
   const [usageStep, setUsageStep] = useState(0);
   const [modeIndex, setModeIndex] = useState(0);
   const [typedDone, setTypedDone] = useState(false);
-  const [paperOpen, setPaperOpen] = useState(false);
   const [agentsOpen, setAgentsOpen] = useState(false);
   const [specsOpen, setSpecsOpen] = useState(false);
   const [partnersOpen, setPartnersOpen] = useState(false);
@@ -168,11 +166,6 @@ const Home = (): ReactNode => {
 
   const headerLinks: TopBarLink[] = [
     { label: 'Docs', Icon: WaveIcon, href: '/docs' },
-    {
-      label: 'What is Security-Driven Hardening',
-      Icon: FaBook,
-      onClick: () => setPaperOpen(true),
-    },
     {
       label: 'Star on GitHub',
       Icon: FaStar,
@@ -537,7 +530,6 @@ const Home = (): ReactNode => {
         </section>
       </main>
 
-      <PaperModal open={paperOpen} onClose={() => setPaperOpen(false)} />
       <AgentsModal
         open={agentsOpen}
         agents={ALL_AGENTS}

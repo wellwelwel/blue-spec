@@ -241,6 +241,14 @@ html[data-bs-docs-theme='dark'] .bs-docs {
   margin-block: 1.25rem;
 }
 
+.bs-docs .markdown .bs-callout-body > :first-child {
+  margin-top: 0;
+}
+
+.bs-docs .markdown .bs-callout-body > :last-child {
+  margin-bottom: 0;
+}
+
 .bs-docs .markdown img {
   border-radius: var(--radius-field);
   box-shadow: var(--shadow-card);

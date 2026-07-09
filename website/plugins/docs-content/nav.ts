@@ -40,7 +40,7 @@ export const docsNav: DocsNavEntry[] = [
   },
   {
     label: 'References & Sources',
-    items: ['references/skills-sources'],
+    items: ['references/paper', 'references/skills-sources'],
   },
   {
     label: 'Maintenance',

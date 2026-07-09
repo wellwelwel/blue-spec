@@ -103,8 +103,7 @@
     -webkit-user-drag: none;
   }
 
-  .bs-docs .markdown a:not(.hash-link),
-  .bs-paper a {
+  .bs-docs .markdown a:not(.hash-link) {
     user-select: text;
   }
 }
@@ -391,18 +390,20 @@ html.bs-canvas-html body.bs-canvas-body {
   }
 }
 
-/* Mermaid edge labels: drop the default light/green pill, match the panel. */
+/* Mermaid edge labels: drop the default pill, match the panel, and follow the
+   docs ink so they stay legible in both docs themes. */
 .bs-mermaid .edgeLabel,
 .bs-mermaid .edgeLabel p,
 .bs-mermaid .edgeLabel rect,
 .bs-mermaid .labelBkg {
   background-color: transparent !important;
   fill: transparent !important;
-  color: rgba(233, 237, 247, 0.82) !important;
 }
 
+.bs-mermaid .edgeLabel,
+.bs-mermaid .edgeLabel p,
 .bs-mermaid .edgeLabel .label {
-  color: rgba(233, 237, 247, 0.82) !important;
+  color: var(--ink-2) !important;
 }
 
 .bs-token-in {
