@@ -31,7 +31,7 @@ const exists = (workspace: string, relativePath: string): Promise<boolean> =>
 
 const manifestCategories = async (workspace: string): Promise<string[]> => {
   const parsed: { categories?: string[] } = JSON.parse(
-    await readFile(join(workspace, '.bluespec/manifest.json'), 'utf8')
+    await readFile(join(workspace, '.lagune/manifest.json'), 'utf8')
   );
 
   return parsed.categories ?? [];
@@ -44,9 +44,9 @@ await describe('add installs specializations by category', async () => {
     await initInto(workspace, { init: true, agent: 'claude' });
     await runCli(workspace, ['add', '--skills', 'owasp']);
 
-    strict(await exists(workspace, '.bluespec/skills/regex.md'));
-    strict(await exists(workspace, '.bluespec/skills/network.md'));
-    strict(!(await exists(workspace, '.bluespec/skills/javascript.md')));
+    strict(await exists(workspace, '.lagune/skills/regex.md'));
+    strict(await exists(workspace, '.lagune/skills/network.md'));
+    strict(!(await exists(workspace, '.lagune/skills/javascript.md')));
     strict.deepStrictEqual(await manifestCategories(workspace), ['owasp']);
   });
 
@@ -74,7 +74,7 @@ await describe('add installs specializations by category', async () => {
     await runCli(workspace, ['add', '--skills', ...everyCategory]);
 
     for (const entry of SKILLS_CATALOG)
-      strict(await exists(workspace, `.bluespec/skills/${entry.name}.md`));
+      strict(await exists(workspace, `.lagune/skills/${entry.name}.md`));
 
     strict.deepStrictEqual(
       (await manifestCategories(workspace)).slice().sort(),
@@ -87,8 +87,8 @@ await describe('add installs specializations by category', async () => {
 
     const output = await runCli(workspace, ['add']);
 
-    strict(output.includes('usage: npx blue-spec add --skills'));
-    strict(!(await exists(workspace, '.bluespec')));
+    strict(output.includes('usage: npx lagune add --skills'));
+    strict(!(await exists(workspace, '.lagune')));
   });
 
   await it('rejects an unknown category', async () => {
@@ -112,9 +112,9 @@ await describe('remove uninstalls specializations by category', async () => {
     });
     await runCli(workspace, ['remove', '--skills', 'owasp']);
 
-    strict(!(await exists(workspace, '.bluespec/skills/regex.md')));
-    strict(!(await exists(workspace, '.bluespec/skills/network.md')));
-    strict(await exists(workspace, '.bluespec/skills/javascript.md'));
+    strict(!(await exists(workspace, '.lagune/skills/regex.md')));
+    strict(!(await exists(workspace, '.lagune/skills/network.md')));
+    strict(await exists(workspace, '.lagune/skills/javascript.md'));
     strict.deepStrictEqual(
       await manifestCategories(workspace),
       everyCategory.filter((key) => key !== 'owasp')
@@ -129,9 +129,9 @@ await describe('remove uninstalls specializations by category', async () => {
       agent: 'claude',
       skills: everyCategory,
     });
-    await mkdir(join(workspace, '.bluespec/skills'), { recursive: true });
+    await mkdir(join(workspace, '.lagune/skills'), { recursive: true });
     await writeFile(
-      join(workspace, '.bluespec/skills/graphql.md'),
+      join(workspace, '.lagune/skills/graphql.md'),
       '# graphql\n',
       'utf8'
     );
@@ -139,10 +139,10 @@ await describe('remove uninstalls specializations by category', async () => {
     await runCli(workspace, ['remove', '--skills', ...everyCategory]);
 
     strict(
-      await exists(workspace, '.bluespec/skills/graphql.md'),
+      await exists(workspace, '.lagune/skills/graphql.md'),
       'the user sub-skill survives a category remove'
     );
-    strict(!(await exists(workspace, '.bluespec/skills/regex.md')));
+    strict(!(await exists(workspace, '.lagune/skills/regex.md')));
   });
 
   await it('reports a not installed category', async () => {
@@ -167,7 +167,7 @@ await describe('remove uninstalls specializations by category', async () => {
 
     const output = await runCli(workspace, ['remove']);
 
-    strict(output.includes('usage: npx blue-spec remove --skills'));
+    strict(output.includes('usage: npx lagune remove --skills'));
   });
 });
 

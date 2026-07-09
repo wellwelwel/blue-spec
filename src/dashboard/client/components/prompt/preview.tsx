@@ -133,7 +133,7 @@ export const PromptPreview = ({
             TRIGGER_TONES[spec.tone ?? 'neutral']
           )}
         >
-          <span class='bs-robot-hop inline-flex text-[1.25rem]'>
+          <span class='lagune-robot-hop inline-flex text-[1.25rem]'>
             <Icon name='messageAi' />
           </span>
           Hover me

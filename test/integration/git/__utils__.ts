@@ -6,7 +6,7 @@ import { afterEach } from 'poku';
 const workspaces: string[] = [];
 
 export const newWorkspace = async (): Promise<string> => {
-  const workspace = await mkdtemp(join(tmpdir(), 'blue-spec-git-'));
+  const workspace = await mkdtemp(join(tmpdir(), 'lagune-git-'));
 
   workspaces.push(workspace);
   return workspace;

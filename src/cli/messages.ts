@@ -17,8 +17,7 @@ const GLYPH = {
 
 const note = (text: string): string => color.dim(`(${text})`);
 
-export const banner = (): string =>
-  `\n🌊 ${color.bold(color.blue('Blue Spec'))}`;
+export const banner = (): string => `\n🌊 ${color.bold(color.blue('Lagune'))}`;
 
 const done = (text: string): string => `${color.blue('✓')} ${text}`;
 
@@ -56,24 +55,24 @@ const agentsByInitial = (agents: AgentChoice[]): string[] => {
 };
 
 const HELP_USAGE: string[] = [
-  'npx blue-spec [--port <number>]',
-  'npx blue-spec init <agent> [--skills <category...>]',
-  'npx blue-spec update',
-  'npx blue-spec pull',
-  'npx blue-spec add --skills',
-  'npx blue-spec remove --skills',
-  'npx blue-spec list [--findings] [--skills]',
-  'npx blue-spec dashboard [-p, --port <number>]',
+  'npx lagune [--port <number>]',
+  'npx lagune init <agent> [--skills <category...>]',
+  'npx lagune update',
+  'npx lagune pull',
+  'npx lagune add --skills',
+  'npx lagune remove --skills',
+  'npx lagune list [--findings] [--skills]',
+  'npx lagune dashboard [-p, --port <number>]',
 ];
 
 const HELP_COMMANDS: [string, string][] = [
-  ['init <agent>', 'Scaffold Blue Spec into the current project'],
-  ['update', 'Update Blue Spec files to their latest version'],
-  ['pull', 'Rebuild Blue Spec from a committed manifest (after a clone)'],
+  ['init <agent>', 'Scaffold Lagune into the current project'],
+  ['update', 'Update Lagune files to their latest version'],
+  ['pull', 'Rebuild Lagune from a committed manifest (after a clone)'],
   ['add', 'Install security specializations, by category'],
   ['remove', 'Uninstall security specializations, by category'],
   ['list', 'List tracked findings or specialization categories (asks which)'],
-  ['dashboard', 'Serve a live view of .bluespec/ and open it in the browser'],
+  ['dashboard', 'Serve a live view of .lagune/ and open it in the browser'],
 ];
 
 const HELP_OPTIONS: [string, string][] = [
@@ -110,18 +109,18 @@ export const helpText = (agents: AgentChoice[]): string =>
 
 export const addUsage = (): string =>
   [
-    'usage: npx blue-spec add --skills',
+    'usage: npx lagune add --skills',
     'options:',
     '  --skills   security specializations to install (run with no value to choose interactively)',
-    'run `npx blue-spec list` to see available categories',
+    'run `npx lagune list` to see available categories',
   ].join('\n');
 
 export const removeUsage = (): string =>
   [
-    'usage: npx blue-spec remove --skills',
+    'usage: npx lagune remove --skills',
     'options:',
     '  --skills   security specializations to uninstall (run with no value to choose interactively)',
-    'run `npx blue-spec list` to see available categories',
+    'run `npx lagune list` to see available categories',
   ].join('\n');
 
 export const noAgentSelected = (agentKeys: string[]): string => {
@@ -130,7 +129,7 @@ export const noAgentSelected = (agentKeys: string[]): string => {
   return [
     'No agent selected.',
     `Pass an agent (available: ${agentKeys.join(', ')}).`,
-    `Example: npx blue-spec init ${first}`,
+    `Example: npx lagune init ${first}`,
   ].join('\n');
 };
 
@@ -138,9 +137,9 @@ export const updateNotInitialized = (agentKeys: string[]): string => {
   const first = agentKeys[0];
 
   return [
-    'No Blue Spec install found here.',
-    `Run npx blue-spec init <agent> first (available: ${agentKeys.join(', ')}).`,
-    `Example: npx blue-spec init ${first}`,
+    'No Lagune install found here.',
+    `Run npx lagune init <agent> first (available: ${agentKeys.join(', ')}).`,
+    `Example: npx lagune init ${first}`,
   ].join('\n');
 };
 
@@ -210,7 +209,7 @@ export const categoryList = (
   });
 
   return [
-    `${heading('Specializations')} ${color.dim('.bluespec/skills/')}`,
+    `${heading('Specializations')} ${color.dim('.lagune/skills/')}`,
     ...rows,
   ].join('\n');
 };
@@ -293,7 +292,7 @@ export const gitignoreResult = (result: GitignoreOutcome): string => {
 
   const action = result === 'created' ? 'Created' : 'Updated';
 
-  return done(`${action} .gitignore with Blue Spec entries`);
+  return done(`${action} .gitignore with Lagune entries`);
 };
 
 export const updateSummary = (
@@ -312,10 +311,10 @@ export const pullNotInitialized = (agentKeys: string[]): string => {
   const first = agentKeys[0];
 
   return [
-    'No Blue Spec manifest found here.',
-    'pull reconstructs Blue Spec from a committed .bluespec/manifest.json.',
-    `If this is a fresh project, run npx blue-spec init <agent> first (available: ${agentKeys.join(', ')}).`,
-    `Example: npx blue-spec init ${first}`,
+    'No Lagune manifest found here.',
+    'pull reconstructs Lagune from a committed .lagune/manifest.json.',
+    `If this is a fresh project, run npx lagune init <agent> first (available: ${agentKeys.join(', ')}).`,
+    `Example: npx lagune init ${first}`,
   ].join('\n');
 };
 
@@ -333,10 +332,10 @@ export const pullSummary = (
 
 const STEPS: string[] = [
   `Open ${color.bold('{{agent}}')} in this project`,
-  `Run ${color.blue('/bluespec.charter')} to set your security rules`,
-  `Run ${color.blue('/bluespec.detect')} to map what your project does and where the risks are`,
-  `Run ${color.blue('/bluespec.plan')} to turn those findings into a prioritized fix plan`,
-  `Run ${color.blue('/bluespec.harden')} to apply the fixes, then ${color.blue('/bluespec.verify')} to prove they hold`,
+  `Run ${color.blue('/lagune.charter')} to set your security rules`,
+  `Run ${color.blue('/lagune.detect')} to map what your project does and where the risks are`,
+  `Run ${color.blue('/lagune.plan')} to turn those findings into a prioritized fix plan`,
+  `Run ${color.blue('/lagune.harden')} to apply the fixes, then ${color.blue('/lagune.verify')} to prove they hold`,
 ];
 
 export const nextSteps = (agentDisplayName: string): string =>

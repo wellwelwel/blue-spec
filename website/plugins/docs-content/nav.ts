@@ -16,7 +16,7 @@ export const docsNav: DocsNavEntry[] = [
   {
     label: 'Development Flow',
     collapsed: false,
-    items: ['commands/bluespec'],
+    items: ['commands/lagune'],
   },
   {
     label: 'The Blue Team Flow',

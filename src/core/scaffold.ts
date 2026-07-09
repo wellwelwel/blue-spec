@@ -25,10 +25,10 @@ import {
 import { renderSpecializations } from './specializations.js';
 import { emptyTrackingMap, serializeTrackingMap } from './tracking.js';
 
-const MEMORY_DIR = '.bluespec/memory';
-const MANIFEST_PATH = '.bluespec/manifest.json';
-const TRACKING_PATH = '.bluespec/tracking.json';
-const SKILLS_CATALOG_PATH = '.bluespec/skills.json';
+const MEMORY_DIR = '.lagune/memory';
+const MANIFEST_PATH = '.lagune/manifest.json';
+const TRACKING_PATH = '.lagune/tracking.json';
+const SKILLS_CATALOG_PATH = '.lagune/skills.json';
 
 const templateJobs = (
   templates: ScaffoldOptions['assets']['templates']
@@ -36,14 +36,14 @@ const templateJobs = (
   const keys = Object.keys(templates) as TemplateKey[];
 
   return keys.map((key) => ({
-    relativePath: `.bluespec/templates/${templates[key].fileName}`,
+    relativePath: `.lagune/templates/${templates[key].fileName}`,
     contents: templates[key].contents,
   }));
 };
 
 const hookJobs = (hooks: ScaffoldOptions['assets']['hooks']): CommandWrite[] =>
   hooks.map((hook) => ({
-    relativePath: `.bluespec/hooks/${hook.fileName}`,
+    relativePath: `.lagune/hooks/${hook.fileName}`,
     contents: hook.contents,
   }));
 
@@ -51,7 +51,7 @@ const skillJobs = (
   skills: ScaffoldOptions['assets']['skills']
 ): CommandWrite[] =>
   skills.map((skill) => ({
-    relativePath: `.bluespec/skills/${skill.fileName}`,
+    relativePath: `.lagune/skills/${skill.fileName}`,
     contents: skill.contents,
   }));
 
@@ -64,7 +64,7 @@ const sharedJobs = (assets: BundledAssets): CommandWrite[] => [
   ...skillJobs(assets.skills),
 ];
 
-const blueSpecOwnedJobs = (
+const laguneOwnedJobs = (
   provider: AgentProvider,
   assets: BundledAssets
 ): CommandWrite[] => [...sharedJobs(assets), ...provider.buildCommands(assets)];
@@ -120,7 +120,7 @@ const renderSpecializationsOutcome = async (
   targetDir: string
 ): Promise<FileOutcome> => {
   const existed = await pathExists(
-    toAbsolute(targetDir, '.bluespec/specializations.md')
+    toAbsolute(targetDir, '.lagune/specializations.md')
   );
   const path = await renderSpecializations(targetDir);
 
@@ -146,7 +146,7 @@ export const scaffold = async (
 ): Promise<ScaffoldResult> => {
   const { targetDir, provider, assets } = options;
   const ownedJobs = provider
-    ? blueSpecOwnedJobs(provider, assets)
+    ? laguneOwnedJobs(provider, assets)
     : sharedJobs(assets);
   const jobs = [...ownedJobs, ...userStateJobs()];
 

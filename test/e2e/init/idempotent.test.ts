@@ -6,10 +6,7 @@ import { initInto, newWorkspace } from './__utils__.js';
 await describe('init is idempotent', async () => {
   await it('preserves user edits on a re-run', async () => {
     const workspace = await newWorkspace();
-    const skillPath = join(
-      workspace,
-      '.claude/skills/bluespec.charter/SKILL.md'
-    );
+    const skillPath = join(workspace, '.claude/skills/lagune.charter/SKILL.md');
 
     await initInto(workspace, { init: true, agent: 'claude' });
     await writeFile(skillPath, 'user edited this', 'utf8');

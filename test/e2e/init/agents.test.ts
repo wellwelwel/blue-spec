@@ -11,26 +11,24 @@ import { initInto, newWorkspace, packageRoot } from './__utils__.js';
 const assets = await loadAssets(packageRoot);
 
 const stateFiles = [
-  '.bluespec/tracking.json',
-  '.bluespec/skills.json',
-  '.bluespec/specializations.md',
+  '.lagune/tracking.json',
+  '.lagune/skills.json',
+  '.lagune/specializations.md',
 ];
 
 const templateFiles = [
-  '.bluespec/templates/charter-template.md',
-  '.bluespec/templates/detect-template.md',
-  '.bluespec/templates/plan-template.md',
-  '.bluespec/templates/harden-template.md',
-  '.bluespec/templates/specialize-template.md',
-  '.bluespec/templates/proof-template.md',
+  '.lagune/templates/charter-template.md',
+  '.lagune/templates/detect-template.md',
+  '.lagune/templates/plan-template.md',
+  '.lagune/templates/harden-template.md',
+  '.lagune/templates/specialize-template.md',
+  '.lagune/templates/proof-template.md',
 ];
 
-const hookFiles = assets.hooks.map(
-  (hook) => `.bluespec/hooks/${hook.fileName}`
-);
+const hookFiles = assets.hooks.map((hook) => `.lagune/hooks/${hook.fileName}`);
 
 const skillFiles = assets.skills.map(
-  (skill) => `.bluespec/skills/${skill.fileName}`
+  (skill) => `.lagune/skills/${skill.fileName}`
 );
 
 const commandPathsOf = (key: string): string[] =>
@@ -56,14 +54,14 @@ const placeholderExpectations: Record<
   skill: {
     present: [
       '$ARGUMENTS',
-      'name: bluespec.charter',
+      'name: lagune.charter',
       'user-invocable: true',
       'internal: true',
     ],
     absent: [],
   },
   'copilot-prompt': {
-    present: ['$ARGUMENTS', 'name: bluespec.charter'],
+    present: ['$ARGUMENTS', 'name: lagune.charter'],
     absent: ['user-invocable', 'internal: true'],
   },
   markdown: { present: ['$ARGUMENTS'], absent: ['internal: true'] },
@@ -107,7 +105,7 @@ for (const spec of AGENT_SPECS) {
       }
 
       const manifest: { agent: string; files: string[] } = JSON.parse(
-        await readFile(join(workspace, '.bluespec/manifest.json'), 'utf8')
+        await readFile(join(workspace, '.lagune/manifest.json'), 'utf8')
       );
 
       strict.strictEqual(manifest.agent, spec.key, 'the agent is recorded');
@@ -124,13 +122,13 @@ for (const spec of AGENT_SPECS) {
       await initInto(workspace, { init: true, agent: spec.key });
 
       const command = await readFile(
-        join(workspace, commandPathFor(spec.key, 'bluespec.charter')),
+        join(workspace, commandPathFor(spec.key, 'lagune.charter')),
         'utf8'
       );
 
       strict(
-        command.includes('.bluespec/templates/charter-template.md'),
-        'the template path points into .bluespec'
+        command.includes('.lagune/templates/charter-template.md'),
+        'the template path points into .lagune'
       );
       strict(
         !command.includes('`templates/charter-template.md`'),
@@ -144,13 +142,13 @@ for (const spec of AGENT_SPECS) {
       await initInto(workspace, { init: true, agent: spec.key });
 
       const command = await readFile(
-        join(workspace, commandPathFor(spec.key, 'bluespec.detect')),
+        join(workspace, commandPathFor(spec.key, 'lagune.detect')),
         'utf8'
       );
 
       strict(
-        command.includes('.bluespec/templates/detect-template.md'),
-        'the detect template path points into .bluespec'
+        command.includes('.lagune/templates/detect-template.md'),
+        'the detect template path points into .lagune'
       );
       strict(
         !command.includes('`templates/detect-template.md`'),
@@ -164,13 +162,13 @@ for (const spec of AGENT_SPECS) {
       await initInto(workspace, { init: true, agent: spec.key });
 
       const command = await readFile(
-        join(workspace, commandPathFor(spec.key, 'bluespec.plan')),
+        join(workspace, commandPathFor(spec.key, 'lagune.plan')),
         'utf8'
       );
 
       strict(
-        command.includes('.bluespec/templates/plan-template.md'),
-        'the plan template path points into .bluespec'
+        command.includes('.lagune/templates/plan-template.md'),
+        'the plan template path points into .lagune'
       );
       strict(
         !command.includes('`templates/plan-template.md`'),
@@ -184,13 +182,13 @@ for (const spec of AGENT_SPECS) {
       await initInto(workspace, { init: true, agent: spec.key });
 
       const command = await readFile(
-        join(workspace, commandPathFor(spec.key, 'bluespec.harden')),
+        join(workspace, commandPathFor(spec.key, 'lagune.harden')),
         'utf8'
       );
 
       strict(
-        command.includes('.bluespec/templates/harden-template.md'),
-        'the harden template path points into .bluespec'
+        command.includes('.lagune/templates/harden-template.md'),
+        'the harden template path points into .lagune'
       );
       strict(
         !command.includes('`templates/harden-template.md`'),
@@ -204,7 +202,7 @@ for (const spec of AGENT_SPECS) {
       await initInto(workspace, { init: true, agent: spec.key });
 
       const command = await readFile(
-        join(workspace, commandPathFor(spec.key, 'bluespec.verify')),
+        join(workspace, commandPathFor(spec.key, 'lagune.verify')),
         'utf8'
       );
 
@@ -220,7 +218,7 @@ for (const spec of AGENT_SPECS) {
       await initInto(workspace, { init: true, agent: spec.key });
 
       const command = await readFile(
-        join(workspace, commandPathFor(spec.key, 'bluespec.charter')),
+        join(workspace, commandPathFor(spec.key, 'lagune.charter')),
         'utf8'
       );
 

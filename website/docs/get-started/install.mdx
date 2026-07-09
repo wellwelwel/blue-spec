@@ -2,10 +2,10 @@
 id: install
 title: Install
 sidebar_label: Install
-description: Set Blue Spec up in any project, new or existing, with a single command via npx, and choose the security specializations that fit it.
+description: Set Lagune up in any project, new or existing, with a single command via npx, and choose the security specializations that fit it.
 keywords:
-  - install blue spec
-  - npx blue-spec
+  - install lagune
+  - npx lagune
   - setup
   - getting started
   - specializations
@@ -18,7 +18,7 @@ import Tabs from '@theme/Tabs';
 
 # Install
 
-**Blue Spec** adapts to your environment, whether it is a new project or an existing one.
+**Lagune** adapts to your environment, whether it is a new project or an existing one.
 
 :::info[No keys]
 No API keys are needed, it runs directly through your own agent ([**Claude**, **Codex**, and more](/docs/supported-agents)).
@@ -27,53 +27,53 @@ No API keys are needed, it runs directly through your own agent ([**Claude**, **
 <Tabs>
   <TabItem value="dashboard" label="Dashboard" default>
 
-Run **Blue Spec** directly with no subcommand for an interactive live view, follow-up, and maintenance. It serves a dashboard and opens it on a random port:
+Run **Lagune** directly with no subcommand for an interactive live view, follow-up, and maintenance. It serves a dashboard and opens it on a random port:
 
 ```bash
-npx -y blue-spec@latest
+npx -y lagune@latest
 ```
 
 - [x] **Live Reload**
 - [x] **Private** and **Local**
-- [x] **Install**, **Pull**, **Update**, and **Manage** all **Blue Spec** features directly from your browser
+- [x] **Install**, **Pull**, **Update**, and **Manage** all **Lagune** features directly from your browser
 - [x] No `node_modules` or `package.json` is needed 📦
 
-<div className='bs-docs-gallery'>
+<div className='lagune-docs-gallery'>
   <img
     loading='lazy'
     decoding='async'
     src='/img/dashboard/01.png'
-    alt='Blue Spec dashboard overview'
+    alt='Lagune dashboard overview'
   />
   <img
     loading='lazy'
     decoding='async'
     src='/img/dashboard/02.png'
-    alt='Blue Spec dashboard charter'
+    alt='Lagune dashboard charter'
   />
   <img
     loading='lazy'
     decoding='async'
     src='/img/dashboard/03.png'
-    alt='Blue Spec dashboard findings'
+    alt='Lagune dashboard findings'
   />
   <img
     loading='lazy'
     decoding='async'
     src='/img/dashboard/04.png'
-    alt='Blue Spec dashboard side quests'
+    alt='Lagune dashboard side quests'
   />
   <img
     loading='lazy'
     decoding='async'
     src='/img/dashboard/05.png'
-    alt='Blue Spec dashboard finding detail'
+    alt='Lagune dashboard finding detail'
   />
   <img
     loading='lazy'
     decoding='async'
     src='/img/dashboard/06.png'
-    alt='Blue Spec dashboard skills'
+    alt='Lagune dashboard skills'
   />
 </div>
 
@@ -87,13 +87,13 @@ npx -y blue-spec@latest
   </TabItem>
   <TabItem value="prompt" label="CLI">
 
-Run without an agent key and **Blue Spec** asks you to choose one, then which specializations to install:
+Run without an agent key and **Lagune** asks you to choose one, then which specializations to install:
 
 ```bash
-npx -y blue-spec@latest init
+npx -y lagune@latest init
 
-# Example using Blue Spec with Claude and OWASP specializations
-npx -y blue-spec@latest init claude --skills owasp
+# Example using Lagune with Claude and OWASP specializations
+npx -y lagune@latest init claude --skills owasp
 ```
 
 See every key in [**Supported Agents**](/docs/supported-agents).
@@ -102,45 +102,45 @@ See every key in [**Supported Agents**](/docs/supported-agents).
 </Tabs>
 
 :::info[Any language]
-🃏 **Blue Spec** runs on **Node.js** under the hood, you use whatever language you want.
+🃏 **Lagune** runs on **Node.js** under the hood, you use whatever language you want.
 :::
 
 ## What gets created
 
-Running **Blue Spec** in your project creates two things:
+Running **Lagune** in your project creates two things:
 
-- **`.bluespec/`** holds Blue Spec's state in that project: the charter, the artifact each phase produces, the on-demand skills you installed, and the internal tracking.
-- **Agent commands** are written into your agent's own location, in its native format, so the `/bluespec.*` commands are ready to run.
+- **`.lagune/`** holds Lagune's state in that project: the charter, the artifact each phase produces, the on-demand skills you installed, and the internal tracking.
+- **Agent commands** are written into your agent's own location, in its native format, so the `/lagune.*` commands are ready to run.
 
-Your security work is committed alongside your code, versioned and reviewable like any other part of the project. **Blue Spec**'s own files are gitignored by default, since [`pull`](#pull) brings them back from the manifest.
+Your security work is committed alongside your code, versioned and reviewable like any other part of the project. **Lagune**'s own files are gitignored by default, since [`pull`](#pull) brings them back from the manifest.
 
 ## Update
 
-To update **Blue Spec**'s own files and its commands to their latest versions, run:
+To update **Lagune**'s own files and its commands to their latest versions, run:
 
 ```bash
-npx -y blue-spec@latest update
+npx -y lagune@latest update
 ```
 
 :::tip
-Your charter, the artifacts each phase produces, the internal tracking, and any _sub_-skill you authored with [`/bluespec.specialize`](/docs/commands/specialize) stay untouched.
+Your charter, the artifacts each phase produces, the internal tracking, and any _sub_-skill you authored with [`/lagune.specialize`](/docs/commands/specialize) stay untouched.
 :::
 
 ## Pull
 
-When you clone or fork a project that already has **Blue Spec**, run pull to install its files from the manifest:
+When you clone or fork a project that already has **Lagune**, run pull to install its files from the manifest:
 
 ```bash
-npx -y blue-spec@latest pull
+npx -y lagune@latest pull
 ```
 
 :::tip
-💡 Think of it as the **Blue Spec** equivalent of `npm i`, `pip install -r requirements.txt`, and the like.
+💡 Think of it as the **Lagune** equivalent of `npm i`, `pip install -r requirements.txt`, and the like.
 :::
 
 ## Specializations
 
-**Blue Spec** ships focused security [**_sub_-skills**](/docs/commands/skills) grouped into **categories**, from `owasp` to per-language ones like `python`, `go`, and `rust`. You install them by category with the `--skills` flag. The flag is the same everywhere, so what you learn for `init` works for `add` and `remove` too.
+**Lagune** ships focused security [**_sub_-skills**](/docs/commands/skills) grouped into **categories**, from `owasp` to per-language ones like `python`, `go`, and `rust`. You install them by category with the `--skills` flag. The flag is the same everywhere, so what you learn for `init` works for `add` and `remove` too.
 
 The agent commands are always set up. Specializations are what you choose on top.
 
@@ -152,7 +152,7 @@ The agent commands are always set up. Specializations are what you choose on top
 `--skills` with no category opens an interactive picker (space to toggle, enter to confirm, empty to skip):
 
 ```bash
-npx -y blue-spec@latest init claude --skills
+npx -y lagune@latest init claude --skills
 ```
 
   </TabItem>
@@ -161,8 +161,8 @@ npx -y blue-spec@latest init claude --skills
 Pass the categories after `--skills`, on the same line as the agent:
 
 ```bash
-npx -y blue-spec@latest init claude --skills owasp
-npx -y blue-spec@latest init claude --skills owasp javascript
+npx -y lagune@latest init claude --skills owasp
+npx -y lagune@latest init claude --skills owasp javascript
 ```
 
   </TabItem>
@@ -171,7 +171,7 @@ npx -y blue-spec@latest init claude --skills owasp javascript
 Without `--skills`, the agent is set up and no specialization is installed. You can always add them later:
 
 ```bash
-npx -y blue-spec@latest init claude
+npx -y lagune@latest init claude
 ```
 
   </TabItem>
@@ -185,18 +185,18 @@ The same `--skills` flag, without touching the agent.
   <TabItem value="add" label="Add" default>
 
 ```bash
-npx -y blue-spec@latest add --skills # interactive
-npx -y blue-spec@latest add --skills owasp
-npx -y blue-spec@latest add --skills owasp rust
+npx -y lagune@latest add --skills # interactive
+npx -y lagune@latest add --skills owasp
+npx -y lagune@latest add --skills owasp rust
 ```
 
   </TabItem>
   <TabItem value="remove" label="Remove">
 
 ```bash
-npx -y blue-spec@latest remove --skills # interactive
-npx -y blue-spec@latest remove --skills owasp
-npx -y blue-spec@latest remove --skills owasp rust
+npx -y lagune@latest remove --skills # interactive
+npx -y lagune@latest remove --skills owasp
+npx -y lagune@latest remove --skills owasp rust
 ```
 
   </TabItem>
@@ -204,11 +204,11 @@ npx -y blue-spec@latest remove --skills owasp rust
 
 ### See what exists
 
-`list` on its own asks what you want to see, the findings Blue Spec is tracking or the specialization categories, then prints that. Skip the prompt with a flag: `--findings` for the tracked findings, `--skills` for the categories.
+`list` on its own asks what you want to see, the findings Lagune is tracking or the specialization categories, then prints that. Skip the prompt with a flag: `--findings` for the tracked findings, `--skills` for the categories.
 
 ```bash
-npx -y blue-spec@latest list --skills
-# Specializations .bluespec/skills/
+npx -y lagune@latest list --skills
+# Specializations .lagune/skills/
 #   • owasp       [installed]  Harden against the application security risks OWASP tracks
 #   • javascript  [available]  JavaScript and its runtimes
 #   • php         [available]  PHP and its language-specific risks
@@ -225,4 +225,4 @@ You will need these tools installed on your system:
 
 ## Next
 
-Once **Blue Spec** is set up, your agent unlocks a set of slash commands. See [**Commands**](/docs/get-started/commands).
+Once **Lagune** is set up, your agent unlocks a set of slash commands. See [**Commands**](/docs/get-started/commands).

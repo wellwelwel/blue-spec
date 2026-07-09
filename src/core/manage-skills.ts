@@ -18,7 +18,7 @@ import {
   writeFileIfAbsent,
 } from './fs-actions.js';
 
-const SKILLS_DIR = '.bluespec/skills';
+const SKILLS_DIR = '.lagune/skills';
 
 const relativePath = (name: string): string => `${SKILLS_DIR}/${name}`;
 

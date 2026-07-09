@@ -12,13 +12,13 @@ The User Input above decides how this command runs. Read it before proceeding.
 
 ## Outline
 
-You are creating or updating the project's **security charter** at `.bluespec/memory/charter.md`: the set of safe-by-default principles that every later phase (detect, plan, harden, verify) must respect. This file is a TEMPLATE of placeholder tokens in square brackets (for example `[PROJECT_NAME]`, `[PRINCIPLE_1_NAME]`). Fill it with concrete values and write it back.
+You are creating or updating the project's **security charter** at `.lagune/memory/charter.md`: the set of safe-by-default principles that every later phase (detect, plan, harden, verify) must respect. This file is a TEMPLATE of placeholder tokens in square brackets (for example `[PROJECT_NAME]`, `[PRINCIPLE_1_NAME]`). Fill it with concrete values and write it back.
 
 This phase reads the project to decide **which principles it needs**, never to map what the code does with evidence. That mapping is the detect phase. The boundary is purpose, not depth: even when you read code here, you read it to derive a rule, not to record a finding.
 
 ### Step 1: Load the charter and pick the mode
 
-Load the charter at `.bluespec/memory/charter.md`. If it does not exist, initialize it from the template at `.bluespec/templates/charter-template.md` first, and identify every placeholder token of the form `[ALL_CAPS_IDENTIFIER]`.
+Load the charter at `.lagune/memory/charter.md`. If it does not exist, initialize it from the template at `.lagune/templates/charter-template.md` first, and identify every placeholder token of the form `[ALL_CAPS_IDENTIFIER]`.
 
 The User Input above selects one of two modes. The mode sets where the direction comes from, not how deep the reading goes (Step 2 governs that):
 
@@ -58,7 +58,7 @@ This charter is reconciled, never append-only. If it was empty or freshly initia
 
 This reconcile is for the project's own principles under `## Principles`. The `## Baseline discipline` section is universal, not a project principle: keep it verbatim, and if an existing charter predates it, add it from the template.
 
-The charter has no tracking map and is not part of the finding chain, so reconcile it here in prose only. Do not run repair and do not touch `.bluespec/tracking.json`.
+The charter has no tracking map and is not part of the finding chain, so reconcile it here in prose only. Do not run repair and do not touch `.lagune/tracking.json`.
 
 ### Step 6: Fill the template and set the version
 
@@ -80,12 +80,12 @@ Validate before writing:
 - The `## Baseline discipline` section is present and verbatim, with its three blocks intact: only the controls the project needs, prefer the simplest vetted control, and when a control seems skippable.
 - **Boundary check:** every principle states a rule the project must hold to, never an observation of what the code does. `Always validate all input before use` is a principle. `The config value is read without validation` is a finding, so drop it or rewrite it as a rule. Likewise, `Always validate data against its schema before persisting it` is a principle, while `Unstructured data is written straight to the database` is a finding.
 
-Then write the completed charter to `.bluespec/memory/charter.md` and output a short summary:
+Then write the completed charter to `.lagune/memory/charter.md` and output a short summary:
 
 - The principles now in the charter, each with its one-line risk.
 - The version and, for an update, why it changed and what reconciled (kept, rewritten, removed).
 - Anything you had to assume, or any question still open.
 - A suggested commit message, for example `docs: establish security charter v1.0.0`.
-- **Next step:** point the user to `/bluespec.detect`, the phase that reads the code to map what the system actually does, so the later phases work from real context. Note they can rerun `/bluespec.charter` any time the principles need to change.
+- **Next step:** point the user to `/lagune.detect`, the phase that reads the code to map what the system actually does, so the later phases work from real context. Note they can rerun `/lagune.charter` any time the principles need to change.
 
 Keep the charter in plain language throughout. A non-developer should be able to read it and understand both the rule and the risk it prevents.

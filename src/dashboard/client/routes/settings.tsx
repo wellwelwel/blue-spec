@@ -29,10 +29,10 @@ export const Settings = (): VNode => {
   return (
     <>
       <PageHeader
-        background='https://bluespec.weslley.io/img/docs/banner-5.png'
+        background='https://lagune.weslley.io/img/docs/banner-5.png'
         eyebrow='Configuration'
         title='Settings'
-        description='Install, update, and shape Blue Spec for this project.'
+        description='Install, update, and shape Lagune for this project.'
         actions={
           <span class={BANNER_CHIP}>
             <span class='inline-flex text-white/80'>

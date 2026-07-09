@@ -11,11 +11,11 @@ import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { ensureDir, writeFileOverwrite } from './fs-actions.js';
 
-const TRACKING_DIR = '.bluespec';
-const TRACKING_PATH = '.bluespec/tracking.json';
+const TRACKING_DIR = '.lagune';
+const TRACKING_PATH = '.lagune/tracking.json';
 
 export const emptyTrackingMap = (): TrackingMap => ({
-  name: 'blue-spec',
+  name: 'lagune',
   entries: [],
 });
 
@@ -68,7 +68,7 @@ export const foldEntries = (
 
       return {
         map: {
-          name: 'blue-spec',
+          name: 'lagune',
           entries: upsert(state.map.entries, match.entry),
         },
         classifications: [...state.classifications, match.classification],
@@ -91,7 +91,7 @@ export const removeEntries = (
   );
 
   return {
-    updatedMap: { name: 'blue-spec', entries: kept },
+    updatedMap: { name: 'lagune', entries: kept },
     removed,
     notFound,
   };
@@ -156,7 +156,7 @@ const parseTrackingMap = (raw: string): TrackingMap => {
     .map(normalizeEntry)
     .filter((entry): entry is TrackingEntry => entry !== undefined);
 
-  return { name: 'blue-spec', entries };
+  return { name: 'lagune', entries };
 };
 
 export const loadTrackingMap = async (

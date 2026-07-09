@@ -10,7 +10,7 @@ import {
 const workspaces: string[] = [];
 
 const newWorkspace = async (): Promise<string> => {
-  const workspace = await mkdtemp(join(tmpdir(), 'blue-spec-discover-'));
+  const workspace = await mkdtemp(join(tmpdir(), 'lagune-discover-'));
 
   workspaces.push(workspace);
   return workspace;
@@ -23,9 +23,9 @@ export const withWorkspace = async (
   const workspace = await newWorkspace();
 
   if (contents !== null) {
-    await mkdir(join(workspace, '.bluespec'), { recursive: true });
+    await mkdir(join(workspace, '.lagune'), { recursive: true });
     await writeFile(
-      join(workspace, '.bluespec', 'skills.json'),
+      join(workspace, '.lagune', 'skills.json'),
       contents,
       'utf8'
     );
@@ -41,11 +41,11 @@ export const withSkillsDir = async (
   const workspace = await newWorkspace();
 
   if (files !== null) {
-    await mkdir(join(workspace, '.bluespec', 'skills'), { recursive: true });
+    await mkdir(join(workspace, '.lagune', 'skills'), { recursive: true });
 
     for (const file of files)
       await writeFile(
-        join(workspace, '.bluespec', 'skills', file),
+        join(workspace, '.lagune', 'skills', file),
         '# x\n',
         'utf8'
       );

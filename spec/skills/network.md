@@ -26,7 +26,7 @@ These safer shapes are the baseline the later blocks build on:
 
 - **Allowlist the destination**, never blocklist. Deny by default.
 - **Take a host or IP field, not a full URL,** and build the request yourself, so no user string can make two parsers disagree.
-- **Validate with a tested address parser** that resolves hex, octal, dotless, and IPv6-mapped forms (Blue Spec's checker is one), not raw-text comparison.
+- **Validate with a tested address parser** that resolves hex, octal, dotless, and IPv6-mapped forms (Lagune's checker is one), not raw-text comparison.
 - **Restrict the client's schemes** to `http` and `https`.
 - **Do not follow redirects blindly**, or re-validate every hop, since a validated host can redirect inward.
 - **Keep a second barrier:** authenticate internal services and restrict egress.
@@ -52,10 +52,10 @@ A blocklist cannot win, there is always one more form. Allow only what is known-
 
 ##### How to check a destination
 
-Blue Spec ships a deterministic checker for the textual-form bypasses above. Pass each destination with `-u`, quoting it so quotes or backticks cannot break the command. Repeat `-u` to score in one call every host an allowlist or denylist names, and every literal the validation compares against, one verdict per line, in order:
+Lagune ships a deterministic checker for the textual-form bypasses above. Pass each destination with `-u`, quoting it so quotes or backticks cannot break the command. Repeat `-u` to score in one call every host an allowlist or denylist names, and every literal the validation compares against, one verdict per line, in order:
 
 ```bash
-node ./.bluespec/hooks/network.mjs -u '<URL-OR-HOST>' -u '<URL-OR-HOST>'
+node ./.lagune/hooks/network.mjs -u '<URL-OR-HOST>' -u '<URL-OR-HOST>'
 ```
 
 It resolves the host the way the network does (hex, octal, dotless, shorthand, IPv6, IPv4-mapped, trailing dots) with no DNS lookup, and prints one of four words:

@@ -37,12 +37,12 @@ const IGNORED_DIRS = new Set([
   '__fixtures__',
 ]);
 
-const IGNORED_DIR_PATTERNS = [/^bluespec\./, /\.egg-info$/];
+const IGNORED_DIR_PATTERNS = [/^lagune\./, /\.egg-info$/];
 
 const isIgnoredDir = (scanRoot: string, path: string, name: string): boolean =>
   IGNORED_DIRS.has(name) ||
   IGNORED_DIR_PATTERNS.some((pattern) => pattern.test(name)) ||
-  path === join(scanRoot, '.bluespec');
+  path === join(scanRoot, '.lagune');
 
 const IGNORED_EXTENSIONS = new Set([
   '.gif',

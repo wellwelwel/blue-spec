@@ -8,7 +8,7 @@ import { untrack } from '../../../src/hooks/untrack/untrack.js';
 import { newWorkspace, seedMemoryFile } from './__utils__.js';
 
 const NOW = new Date('2026-07-06T00:00:00.000Z');
-const HISTORY = '.bluespec/memory/history.md';
+const HISTORY = '.lagune/memory/history.md';
 
 const detect = (...findings: { name: string; what: string }[]): string =>
   [
@@ -49,12 +49,12 @@ await describe('appendClosedFindings distills each closed finding', async () => 
     const workspace = await newWorkspace();
     await seedMemoryFile(
       workspace,
-      '.bluespec/memory/detect.md',
+      '.lagune/memory/detect.md',
       detect({ name: 'Leaked secret', what: 'A token sits in source.' })
     );
     await seedMemoryFile(
       workspace,
-      '.bluespec/memory/plan.md',
+      '.lagune/memory/plan.md',
       plan({
         name: 'Leaked secret',
         priority: 'Critical',
@@ -85,12 +85,12 @@ await describe('appendClosedFindings distills each closed finding', async () => 
     const workspace = await newWorkspace();
     await seedMemoryFile(
       workspace,
-      '.bluespec/memory/detect.md',
+      '.lagune/memory/detect.md',
       detect({ name: 'Open redirect', what: 'A path is trusted verbatim.' })
     );
     await seedMemoryFile(
       workspace,
-      '.bluespec/memory/plan.md',
+      '.lagune/memory/plan.md',
       plan({ name: 'Open redirect', priority: 'Medium' })
     );
 
@@ -108,7 +108,7 @@ await describe('appendClosedFindings distills each closed finding', async () => 
     const workspace = await newWorkspace();
     await seedMemoryFile(
       workspace,
-      '.bluespec/memory/detect.md',
+      '.lagune/memory/detect.md',
       detect({ name: 'Open redirect', what: 'A path is trusted verbatim.' })
     );
 
@@ -122,7 +122,7 @@ await describe('appendClosedFindings distills each closed finding', async () => 
     const workspace = await newWorkspace();
     await seedMemoryFile(
       workspace,
-      '.bluespec/memory/detect.md',
+      '.lagune/memory/detect.md',
       detect({ name: 'Leaked secret', what: 'A token sits in source.' })
     );
 
@@ -140,7 +140,7 @@ await describe('appendClosedFindings distills each closed finding', async () => 
     const workspace = await newWorkspace();
     await seedMemoryFile(
       workspace,
-      '.bluespec/memory/detect.md',
+      '.lagune/memory/detect.md',
       detect(
         { name: 'Leaked secret', what: 'A token sits in source.' },
         { name: 'Open redirect', what: 'A path is trusted verbatim.' }
@@ -166,10 +166,10 @@ await describe('untrack writes history before it erases the memory', async () =>
       name: 'Leaked secret',
       what: 'A token sits in source.',
     });
-    await seedMemoryFile(workspace, '.bluespec/memory/detect.md', body);
+    await seedMemoryFile(workspace, '.lagune/memory/detect.md', body);
     await seedMemoryFile(
       workspace,
-      '.bluespec/memory/plan.md',
+      '.lagune/memory/plan.md',
       plan({ name: 'Leaked secret', priority: 'High' })
     );
 
@@ -188,7 +188,7 @@ await describe('untrack writes history before it erases the memory', async () =>
       'the emptied live memory file is deleted'
     );
     await strict.rejects(
-      readFile(join(workspace, '.bluespec/memory/detect.md'), 'utf8'),
+      readFile(join(workspace, '.lagune/memory/detect.md'), 'utf8'),
       'the live section is gone with its file'
     );
 

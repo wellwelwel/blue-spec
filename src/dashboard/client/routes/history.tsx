@@ -13,7 +13,7 @@ export const History = (): VNode => {
   return (
     <>
       <PageHeader
-        background='https://bluespec.weslley.io/img/docs/banner-2.png'
+        background='https://lagune.weslley.io/img/docs/banner-2.png'
         eyebrow='History'
         title='What the chain has closed'
         description='Findings verify proved closed and stood down. Their live memory is gone, this is the trace they left behind.'

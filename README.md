@@ -1,18 +1,18 @@
 <img src="./website/static/img/banner.png" />
 
-# 🌊 Security-Driven Hardening: Blue Spec
+# 🌊 Security-Driven Hardening: Lagune
 
-[![Version](https://img.shields.io/npm/v/blue-spec?label=&color=2f7bff&logo=npm&logoColor=white)](https://www.npmjs.com/package/blue-spec)
-[![Docs](https://img.shields.io/badge/Documentation-2f7bff?logo=docusaurus&logoColor=white)](https://bluespec.weslley.io/docs)
-[![No API Key Needed](https://img.shields.io/badge/No%20API%20Key%20Needed-2f7bff?logo=claudecode&logoColor=white)](https://bluespec.weslley.io/docs/supported-agents)
+[![Version](https://img.shields.io/npm/v/lagune?label=&color=2f7bff&logo=npm&logoColor=white)](https://www.npmjs.com/package/lagune)
+[![Docs](https://img.shields.io/badge/Documentation-2f7bff?logo=docusaurus&logoColor=white)](https://lagune.weslley.io/docs)
+[![No API Key Needed](https://img.shields.io/badge/No%20API%20Key%20Needed-2f7bff?logo=claudecode&logoColor=white)](https://lagune.weslley.io/docs/supported-agents)
 
-**Blue Spec** helps your AI agent make a project more secure. You point it at your code, and the agent figures out what your system actually does, then guides you through the security work that matters for it.
+**Lagune** helps your AI agent make a project more secure. You point it at your code, and the agent figures out what your system actually does, then guides you through the security work that matters for it.
 
-- **Blue Spec** works with projects in **any programming language** and supports [**37 agents**](https://bluespec.weslley.io/docs/supported-agents) ✨
+- **Lagune** works with projects in **any programming language** and supports [**37 agents**](https://lagune.weslley.io/docs/supported-agents) ✨
 
 ---
 
-Love **Blue Spec**? Give us a ⭐ on **GitHub**!
+Love **Lagune**? Give us a ⭐ on **GitHub**!
 
 ---
 
@@ -30,11 +30,11 @@ Love **Blue Spec**? Give us a ⭐ on **GitHub**!
 
 ## Get Started
 
-**Blue Spec** adapts to your environment, whether it is a new project or an existing one.
+**Lagune** adapts to your environment, whether it is a new project or an existing one.
 
 > [!TIP]
 >
-> No API keys are needed, it runs directly through your own agent [(**Claude**, **Codex**, and more)](https://bluespec.weslley.io/docs/supported-agents).
+> No API keys are needed, it runs directly through your own agent [(**Claude**, **Codex**, and more)](https://lagune.weslley.io/docs/supported-agents).
 
 ---
 
@@ -43,14 +43,14 @@ Love **Blue Spec**? Give us a ⭐ on **GitHub**!
 For an interactive live view, follow-up, and maintenance, run:
 
 ```bash
-npx -y blue-spec@latest
+npx -y lagune@latest
 ```
 
 It serves a dashboard and opens it in a random port:
 
 - [x] **Live Reload**
 - [x] **Private** and **Local**
-- [x] **Install**, **Pull**, **Update**, and **Manage** all **Blue Spec** features directly from your browser
+- [x] **Install**, **Pull**, **Update**, and **Manage** all **Lagune** features directly from your browser
 - [x] No `node_modules` or `package.json` is needed 📦
 
 > <img width="260" src="./website/static/img/dashboard/01.png" />
@@ -72,17 +72,17 @@ It serves a dashboard and opens it in a random port:
 #### › Install
 
 ```bash
-npx -y blue-spec@latest init
+npx -y lagune@latest init
 ```
 
-- 🃏 **Blue Spec** runs on **Node.js** under the hood, you use whatever language you want.
+- 🃏 **Lagune** runs on **Node.js** under the hood, you use whatever language you want.
 
 #### › Update
 
-To update **Blue Spec**'s own files and its commands to their latest versions, run:
+To update **Lagune**'s own files and its commands to their latest versions, run:
 
 ```bash
-npx -y blue-spec@latest update
+npx -y lagune@latest update
 ```
 
 > [!TIP]
@@ -91,51 +91,51 @@ npx -y blue-spec@latest update
 
 #### › Pull
 
-When you clone or fork a project that already has **Blue Spec**, run pull to install its files from the manifest:
+When you clone or fork a project that already has **Lagune**, run pull to install its files from the manifest:
 
 ```bash
-npx -y blue-spec@latest pull
+npx -y lagune@latest pull
 ```
 
 > [!TIP]
 >
-> 💡 Think of it as the **Blue Spec** equivalent of `npm i`, `pip install -r requirements.txt`, and the like.
+> 💡 Think of it as the **Lagune** equivalent of `npm i`, `pip install -r requirements.txt`, and the like.
 
 ---
 
 ### Slash Commands
 
-Once **Blue Spec** is set up in your project, your **AI** agent unlocks a set of slash commands:
+Once **Lagune** is set up in your project, your **AI** agent unlocks a set of slash commands:
 
 #### › Development flow
 
 Secure the work as you build it, guided by the charter, with no flow to follow:
 
-| Command                                                             | What it does for you                                                      |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| [**/bluespec**](https://bluespec.weslley.io/docs/commands/bluespec) | Enforces security along with your development, on any prompt, at any time |
+| Command                                                       | What it does for you                                                      |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| [**/lagune**](https://lagune.weslley.io/docs/commands/lagune) | Enforces security along with your development, on any prompt, at any time |
 
 - Pull in the on-demand specializations in real time while your agent works.
-- Combine it with the [**/bluespec.charter**](https://bluespec.weslley.io/docs/commands/charter) command to shape every build around your project's own security rules.
+- Combine it with the [**/lagune.charter**](https://lagune.weslley.io/docs/commands/charter) command to shape every build around your project's own security rules.
 
 #### › The Blue Team flow
 
 These five run in order. Each builds on the previous, so following the list top to bottom is all it takes:
 
-| #   | Command                                                                    | What it does for you                                                           |
-| --- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| 1   | [**/bluespec.charter**](https://bluespec.weslley.io/docs/commands/charter) | Sets your project's security rules, proposed for you or shaped by what you say |
-| 2   | [**/bluespec.detect**](https://bluespec.weslley.io/docs/commands/detect)   | Reads your code and maps what your system does and where the risks are         |
-| 3   | [**/bluespec.plan**](https://bluespec.weslley.io/docs/commands/plan)       | Turns what detect found into a defense plan, with a fix for each finding       |
-| 4   | [**/bluespec.harden**](https://bluespec.weslley.io/docs/commands/harden)   | Applies the plan's fixes to your code, safely and one at a time                |
-| 5   | [**/bluespec.verify**](https://bluespec.weslley.io/docs/commands/verify)   | Proves each applied fix holds and closes out the ones that do                  |
+| #   | Command                                                                | What it does for you                                                           |
+| --- | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| 1   | [**/lagune.charter**](https://lagune.weslley.io/docs/commands/charter) | Sets your project's security rules, proposed for you or shaped by what you say |
+| 2   | [**/lagune.detect**](https://lagune.weslley.io/docs/commands/detect)   | Reads your code and maps what your system does and where the risks are         |
+| 3   | [**/lagune.plan**](https://lagune.weslley.io/docs/commands/plan)       | Turns what detect found into a defense plan, with a fix for each finding       |
+| 4   | [**/lagune.harden**](https://lagune.weslley.io/docs/commands/harden)   | Applies the plan's fixes to your code, safely and one at a time                |
+| 5   | [**/lagune.verify**](https://lagune.weslley.io/docs/commands/verify)   | Proves each applied fix holds and closes out the ones that do                  |
 
 #### › Special commands
 
-| Command                                                                          | What it does                                                                               |
-| -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| [**/bluespec.specialize**](https://bluespec.weslley.io/docs/commands/specialize) | Specializes **Blue Spec** in a new security _sub_-skill from articles, exploits, or topics |
-| [**/bluespec.prove**](https://bluespec.weslley.io/docs/commands/prove)           | Turns each detected finding into a runnable proof for responsible disclosure               |
+| Command                                                                      | What it does                                                                            |
+| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| [**/lagune.specialize**](https://lagune.weslley.io/docs/commands/specialize) | Specializes **Lagune** in a new security _sub_-skill from articles, exploits, or topics |
+| [**/lagune.prove**](https://lagune.weslley.io/docs/commands/prove)           | Turns each detected finding into a runnable proof for responsible disclosure            |
 
 > [!TIP]
 >
@@ -143,7 +143,7 @@ These five run in order. Each builds on the previous, so following the list top 
 
 > [!IMPORTANT]
 >
-> See the full [**documentation**](https://bluespec.weslley.io/) for usage examples and more.
+> See the full [**documentation**](https://lagune.weslley.io/) for usage examples and more.
 
 ---
 
@@ -152,13 +152,13 @@ These five run in order. Each builds on the previous, so following the list top 
 You will need these tools installed on your system:
 
 - [**Node.js (LTS)**](https://nodejs.org/en/download/package-manager)
-- At least one of the [**Supported Agents**](https://bluespec.weslley.io/docs/supported-agents)
+- At least one of the [**Supported Agents**](https://lagune.weslley.io/docs/supported-agents)
 
 ---
 
 ## Security
 
-To details, report a vulnerability, and see the supported versions, see the [**Security Policy**](https://github.com/wellwelwel/blue-spec/blob/main/SECURITY.md).
+To details, report a vulnerability, and see the supported versions, see the [**Security Policy**](https://github.com/wellwelwel/lagune/blob/main/SECURITY.md).
 
 ---
 
@@ -174,7 +174,7 @@ To details, report a vulnerability, and see the supported versions, see the [**S
 
 Partners get an exclusive logo across the repositories and landing pages, plus a spot on a dedicated partners page.
 
-> Help my work grow by [**becoming a partner**](https://bluespec.weslley.io/docs?partners) 🖖
+> Help my work grow by [**becoming a partner**](https://lagune.weslley.io/docs?partners) 🖖
 
 ### Supporters
 
@@ -188,15 +188,11 @@ Really thanks to everyone who has supported and keeps supporting my work.
 
 ## License
 
-**Blue Spec** is under the [**MIT License**](https://github.com/wellwelwel/blue-spec/blob/main/LICENSE).<br />
-Copyright © 2026-present [**Weslley Araújo**](https://github.com/wellwelwel) and [**contributors**](https://github.com/wellwelwel/blue-spec/graphs/contributors).
+**Lagune** is under the [**MIT License**](https://github.com/wellwelwel/lagune/blob/main/LICENSE).<br />
+Copyright © 2026-present [**Weslley Araújo**](https://github.com/wellwelwel) and [**contributors**](https://github.com/wellwelwel/lagune/graphs/contributors).
 
 > [!IMPORTANT]
 >
 > ### Disclaimer
 >
-> **Security-Driven Hardening: Blue Spec** is an independent open-source project and is not affiliated with, endorsed by, or associated with **Bluespec, Inc.** or the **Bluespec Hardware Description Language (HDL)** and its compiler (`bsc`).
->
-> The project name "Blue Spec" comes from Blue Team (defensive security) and Spec-Driven Development. It refers to an AI-assisted security hardening tool for software projects, a different domain from Bluespec, Inc., which provides RISC-V processor IP and hardware design tools.
->
-> "Bluespec" is a trademark of Bluespec, Inc. All other product names, trademarks, and registered trademarks mentioned are the property of their respective owners and are used for identification purposes only.
+> All product names, trademarks, and registered trademarks mentioned are the property of their respective owners and are used for identification purposes only.

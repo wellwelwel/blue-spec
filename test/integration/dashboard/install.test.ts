@@ -8,7 +8,7 @@ import { buildData } from '../../../src/dashboard/server/data/build/data.js';
 const packageRoot = new URL('../../../', import.meta.url);
 
 const installOf = async (manifest: string | null) => {
-  const dir = await mkdtemp(join(tmpdir(), 'bluespec-dashboard-'));
+  const dir = await mkdtemp(join(tmpdir(), 'lagune-dashboard-'));
 
   try {
     if (manifest !== null)
@@ -21,13 +21,13 @@ const installOf = async (manifest: string | null) => {
 };
 
 const installWithFiles = async (manifestFiles: string[], onDisk: string[]) => {
-  const workspace = await mkdtemp(join(tmpdir(), 'bluespec-workspace-'));
-  const bluespecDir = join(workspace, '.bluespec');
+  const workspace = await mkdtemp(join(tmpdir(), 'lagune-workspace-'));
+  const laguneDir = join(workspace, '.lagune');
 
   try {
-    await mkdir(bluespecDir, { recursive: true });
+    await mkdir(laguneDir, { recursive: true });
     await writeFile(
-      join(bluespecDir, 'manifest.json'),
+      join(laguneDir, 'manifest.json'),
       JSON.stringify({
         agent: 'claude',
         version: '0.7.0',
@@ -41,7 +41,7 @@ const installWithFiles = async (manifestFiles: string[], onDisk: string[]) => {
       await writeFile(full, 'x');
     }
 
-    return (await buildData(bluespecDir, packageRoot)).install;
+    return (await buildData(laguneDir, packageRoot)).install;
   } finally {
     await rm(workspace, { recursive: true, force: true });
   }
@@ -106,7 +106,7 @@ describe('install parsing accepts both manifest agent shapes', () => {
 });
 
 describe('the internal specializations listing is tracked like any manifest file', () => {
-  const files = ['.bluespec/tracking.json', '.bluespec/specializations.md'];
+  const files = ['.lagune/tracking.json', '.lagune/specializations.md'];
 
   it('counts it in the total and reports none missing when it is present', async () => {
     const install = await installWithFiles(files, files);
@@ -120,12 +120,12 @@ describe('the internal specializations listing is tracked like any manifest file
   });
 
   it('reports it missing when the file is absent, so Pull can rebuild it', async () => {
-    const install = await installWithFiles(files, ['.bluespec/tracking.json']);
+    const install = await installWithFiles(files, ['.lagune/tracking.json']);
 
     strict.strictEqual(install.filesTotal, 2);
     strict.deepStrictEqual(
       install.missing,
-      ['.bluespec/specializations.md'],
+      ['.lagune/specializations.md'],
       'an absent listing surfaces as missing'
     );
   });

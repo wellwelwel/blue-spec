@@ -43,7 +43,7 @@ export type DocsGlobalData = {
   docs: DocEntry[];
 };
 
-const pluginName = 'bluespec-docs-content';
+const pluginName = 'lagune-docs-content';
 const docPageComponent = '@site/src/components/docs/DocPage/index.tsx';
 
 const asString = (value: unknown): string | undefined =>

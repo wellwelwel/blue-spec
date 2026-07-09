@@ -61,8 +61,8 @@ export const PullTab = (): VNode => {
       }
       body={
         inPlace
-          ? `All ${install.filesTotal} manifest files from .bluespec/manifest.json are already in place, so there is nothing to rebuild. Pull anyway to restore any file that has drifted from the committed manifest.`
-          : 'After cloning a repo that already uses Blue Spec, pull reconstructs everything from the committed .bluespec/manifest.json, so a fresh checkout is ready without a full re-install.'
+          ? `All ${install.filesTotal} manifest files from .lagune/manifest.json are already in place, so there is nothing to rebuild. Pull anyway to restore any file that has drifted from the committed manifest.`
+          : 'After cloning a repo that already uses Lagune, pull reconstructs everything from the committed .lagune/manifest.json, so a fresh checkout is ready without a full re-install.'
       }
       action={inPlace ? 'Pull anyway' : 'Run pull'}
       run={run}

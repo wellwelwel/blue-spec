@@ -1,9 +1,9 @@
 import type { BundledAsset, CommandFormat, CommandKey } from '../types/core.js';
 
 const ARGUMENT_HINTS: Record<CommandKey, string> = {
-  bluespec: 'Describe the work to do, and Blue Spec builds it safely',
+  lagune: 'Describe the work to do, and Lagune builds it safely',
   charter:
-    'Optionally describe your project, or leave empty to let Blue Spec propose',
+    'Optionally describe your project, or leave empty to let Lagune propose',
   detect:
     'Optionally name files/dirs or a focus, or leave empty for a full scan',
   plan: 'Optionally name files/dirs or a concern, or leave empty to plan every finding',
@@ -22,7 +22,7 @@ const ARGUMENT_HINTS: Record<CommandKey, string> = {
 const FRONTMATTER_PATTERN = /^---\n([\s\S]*?)\n---\n/;
 
 export const commandName = (key: CommandKey): string =>
-  key === 'bluespec' ? 'bluespec' : `bluespec.${key}`;
+  key === 'lagune' ? 'lagune' : `lagune.${key}`;
 
 const hasField = (frontmatter: string, field: string): boolean =>
   frontmatter

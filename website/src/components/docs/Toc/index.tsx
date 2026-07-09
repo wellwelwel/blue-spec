@@ -50,7 +50,7 @@ export const DocsToc = ({ toc }: { toc: DocTocItem[] }): ReactNode => {
 
   return (
     <nav
-      className='bs-docs-route-rise rounded-card bg-surface px-5 pt-5 pb-1.5 shadow-card'
+      className='lagune-docs-route-rise rounded-card bg-surface px-5 pt-5 pb-1.5 shadow-card'
       aria-label='Table of contents'
     >
       <span className='px-2.5 text-[0.7rem] font-bold uppercase tracking-[0.09em] text-faint'>

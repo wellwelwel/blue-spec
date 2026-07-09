@@ -48,8 +48,8 @@ const InstallPanelComponent = ({
   const installCommand = useMemo(
     () =>
       orderedSkills.length
-        ? `npx blue-spec@latest init ${selected} --skills ${orderedSkills.map((category) => category.key).join(' ')}`
-        : `npx blue-spec@latest init ${selected}`,
+        ? `npx lagune@latest init ${selected} --skills ${orderedSkills.map((category) => category.key).join(' ')}`
+        : `npx lagune@latest init ${selected}`,
     [selected, orderedSkills]
   );
 
@@ -140,18 +140,18 @@ const InstallPanelComponent = ({
           $
         </span>
         <code className='flex-1 min-w-0 text-ink overflow-x-auto whitespace-nowrap [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'>
-          npx blue-spec@latest init{' '}
-          <span key={selected} className='bs-token-in text-[#5191ff]'>
+          npx lagune@latest init{' '}
+          <span key={selected} className='lagune-token-in text-[#5191ff]'>
             {selected}
           </span>
           {orderedSkills.length > 0 && (
             <>
               {' '}
-              <span className='bs-token-in text-muted'>--skills</span>
+              <span className='lagune-token-in text-muted'>--skills</span>
               {orderedSkills.map((category) => (
                 <span key={category.key}>
                   {' '}
-                  <span className='bs-token-in text-[#5191ff]'>
+                  <span className='lagune-token-in text-[#5191ff]'>
                     {category.key}
                   </span>
                 </span>
@@ -164,7 +164,7 @@ const InstallPanelComponent = ({
 
       <p className='mx-1 mt-4 text-[13px] leading-[1.6] text-muted'>
         Pick the agent you use, and any security specializations you want. Run
-        it once and Blue Spec sets it all up in your project.
+        it once and Lagune sets it all up in your project.
       </p>
     </div>
   );

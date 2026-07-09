@@ -23,7 +23,7 @@ const UsagePanelComponent = ({
   const next = PHASE_STEPS[usageStep + 1];
 
   return (
-    <div key={usageStep} className='bs-fade-in flex flex-col min-w-0'>
+    <div key={usageStep} className='lagune-fade-in flex flex-col min-w-0'>
       <PhaseCard
         phase={step.phase}
         stage={step.group}
@@ -41,7 +41,7 @@ const UsagePanelComponent = ({
           <button
             type='button'
             onClick={() => onStep(usageStep + 1)}
-            className='bs-fade-in group inline-flex items-center gap-2 self-start mt-5 mx-1 font-mono text-[12px] tracking-[0.04em] uppercase text-muted cursor-pointer transition-colors duration-200 hover:text-ink [&>svg]:size-4 [&>svg]:text-accent'
+            className='lagune-fade-in group inline-flex items-center gap-2 self-start mt-5 mx-1 font-mono text-[12px] tracking-[0.04em] uppercase text-muted cursor-pointer transition-colors duration-200 hover:text-ink [&>svg]:size-4 [&>svg]:text-accent'
             aria-label={`Next: ${next.phase.title}`}
           >
             Next:{' '}
@@ -51,7 +51,7 @@ const UsagePanelComponent = ({
             <LuArrowDown className='transition-transform duration-200 group-hover:translate-y-0.5' />
           </button>
         ) : (
-          <span className='bs-fade-in inline-flex items-center gap-2 self-start mt-5 mx-1 font-mono text-[12px] tracking-[0.04em] uppercase text-muted [&>svg]:size-4 [&>svg]:text-accent'>
+          <span className='lagune-fade-in inline-flex items-center gap-2 self-start mt-5 mx-1 font-mono text-[12px] tracking-[0.04em] uppercase text-muted [&>svg]:size-4 [&>svg]:text-accent'>
             <LuCircleCheckBig />
             After all proven, the cycle is settled
           </span>

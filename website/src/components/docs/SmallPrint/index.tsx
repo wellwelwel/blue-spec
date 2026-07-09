@@ -17,16 +17,16 @@ export const DocsSmallPrint = (): ReactNode => (
       and{' '}
       <a
         className={SMALL_PRINT_LINK}
-        href='https://github.com/wellwelwel/blue-spec/graphs/contributors'
+        href='https://github.com/wellwelwel/lagune/graphs/contributors'
         target='_blank'
         rel='noreferrer'
       >
         contributors
       </a>
-      . SDH: Blue Spec is under the{' '}
+      . SDH: Lagune is under the{' '}
       <a
         className={SMALL_PRINT_LINK}
-        href='https://github.com/wellwelwel/blue-spec/blob/main/LICENSE'
+        href='https://github.com/wellwelwel/lagune/blob/main/LICENSE'
         target='_blank'
         rel='noreferrer'
       >
@@ -35,7 +35,7 @@ export const DocsSmallPrint = (): ReactNode => (
       . Please check the{' '}
       <a
         className={SMALL_PRINT_LINK}
-        href='https://github.com/wellwelwel/blue-spec/blob/main/SECURITY.md'
+        href='https://github.com/wellwelwel/lagune/blob/main/SECURITY.md'
         target='_blank'
         rel='noreferrer'
       >
@@ -44,12 +44,9 @@ export const DocsSmallPrint = (): ReactNode => (
       .
     </p>
     <p className='m-0'>
-      SDH: Blue Spec is an independent open-source project and is not affiliated
-      with, endorsed by, or associated with Bluespec, Inc. or the Bluespec
-      Hardware Description Language (HDL) and its compiler (bsc). "Bluespec" is
-      a trademark of Bluespec, Inc. All other product names, trademarks, and
-      registered trademarks mentioned are the property of their respective
-      owners and are used for identification purposes only.
+      All product names, trademarks, and registered trademarks mentioned are the
+      property of their respective owners and are used for identification
+      purposes only.
     </p>
   </footer>
 );

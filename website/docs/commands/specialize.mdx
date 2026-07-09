@@ -1,6 +1,6 @@
 ---
 id: specialize
-title: /bluespec.specialize
+title: /lagune.specialize
 sidebar_label: Specialize
 description: Distill a security source or topic you give it into a new on-demand sub-skill.
 ---
@@ -8,9 +8,9 @@ description: Distill a security source or topic you give it into a new on-demand
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
 
-# /bluespec.specialize
+# /lagune.specialize
 
-🎓 Specialize **Blue Spec** in a specific security area, from a source or topic you give it.
+🎓 Specialize **Lagune** in a specific security area, from a source or topic you give it.
 
 It reads the material and distills it into a focused, defense-only [sub-skill](/docs/commands/skills), shaped exactly like the built-in ones, so the detect and verify phases load it afterwards like any other. It only audits and explains: it never writes attack inputs or exploits, and it never touches your code.
 
@@ -18,8 +18,8 @@ It reads the material and distills it into a focused, defense-only [sub-skill](/
   <TabItem value="article" label="From an article" default>
 
 ```prompt
-# A link or reference: Blue Spec distills it into the defense
-/bluespec.specialize https://owasp.org/www-community/attacks/SQL_Injection
+# A link or reference: Lagune distills it into the defense
+/lagune.specialize https://owasp.org/www-community/attacks/SQL_Injection
 ```
 
   </TabItem>
@@ -27,7 +27,7 @@ It reads the material and distills it into a focused, defense-only [sub-skill](/
 
 ```prompt
 # An attack as the source: the sub-skill is still the defense
-/bluespec.specialize "' OR 1=1 -- splices SQL into the query text"
+/lagune.specialize "' OR 1=1 -- splices SQL into the query text"
 ```
 
   </TabItem>
@@ -35,7 +35,7 @@ It reads the material and distills it into a focused, defense-only [sub-skill](/
 
 ```prompt
 # Or just name the area to cover
-/bluespec.specialize SQL injection
+/lagune.specialize SQL injection
 ```
 
   </TabItem>
@@ -47,10 +47,10 @@ Pointing it at an attack is fine when the goal is to defend against it: an explo
 
 ## What it writes
 
-The result is two files in your project, committed and reviewable alongside your code. Blue Spec ignores the built-in sub-skills by default, so it re-includes yours in `.gitignore` to keep it versioned:
+The result is two files in your project, committed and reviewable alongside your code. Lagune ignores the built-in sub-skills by default, so it re-includes yours in `.gitignore` to keep it versioned:
 
-- The sub-skill at `.bluespec/skills/<name>.md`, following the [sub-skill shape](/docs/commands/skills).
-- One entry in `.bluespec/skills.json`, the catalog the dispatcher reads at runtime to list and match it.
+- The sub-skill at `.lagune/skills/<name>.md`, following the [sub-skill shape](/docs/commands/skills).
+- One entry in `.lagune/skills.json`, the catalog the dispatcher reads at runtime to list and match it.
 
 You never add a command or touch the package: a new specialty is one knowledge file plus one catalog row, written into your own project.
 
@@ -60,7 +60,7 @@ Specializing a name that already exists, whether a built-in like `regex` or one 
 
 :::tip
 
-- The new _sub_-skill loads exactly like a built-in: the detect and verify phases pick it up on demand, or import it yourself with `@.bluespec/skills/<name>.md` and give it a task.
+- The new _sub_-skill loads exactly like a built-in: the detect and verify phases pick it up on demand, or import it yourself with `@.lagune/skills/<name>.md` and give it a task.
 - When the material has an identifiable origin (an article, an author, a link, a standard), the sub-skill credits it. A bare topic carries no source.
 
 :::

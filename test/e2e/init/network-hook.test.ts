@@ -10,7 +10,7 @@ const runNetworkRaw = (
   ...args: string[]
 ): Promise<NetworkRun> =>
   new Promise((resolve, reject) => {
-    const child = spawn(execPath, ['.bluespec/hooks/network.mjs', ...args], {
+    const child = spawn(execPath, ['.lagune/hooks/network.mjs', ...args], {
       cwd: workspace,
     });
     const out: string[] = [];

@@ -20,10 +20,10 @@ Pass each destination with `-u`. The hook prints one word per destination, read 
   <TabItem value="one" label="One destination" default>
 
 ```bash
-node ./.bluespec/hooks/network.mjs -u 'http://example.com/'
+node ./.lagune/hooks/network.mjs -u 'http://example.com/'
 # => safe
 
-node ./.bluespec/hooks/network.mjs -u 'http://0x7f000001/'
+node ./.lagune/hooks/network.mjs -u 'http://0x7f000001/'
 # => private-target
 ```
 
@@ -33,7 +33,7 @@ node ./.bluespec/hooks/network.mjs -u 'http://0x7f000001/'
 Repeat `-u` to score a whole allowlist or denylist in one call, one verdict per line, in order.
 
 ```bash
-node ./.bluespec/hooks/network.mjs \
+node ./.lagune/hooks/network.mjs \
   -u 'http://example.com/' \
   -u 'http://[::1]/' \
   -u 'http://allowed.com@evil.example/'

@@ -204,7 +204,7 @@ export const AGENT_REPLY: TypeSegment[] = [{ text: 'On it!' }];
 
 export const skillPromptSpec = (skill: Skill): PromptSpec => ({
   task: `${skillPromptTask(skill.name)}.`,
-  mention: `@.bluespec/skills/${skill.name}.md`,
+  mention: `@.lagune/skills/${skill.name}.md`,
   readPath: `${skill.name}.md`,
   reply: AGENT_REPLY,
 });

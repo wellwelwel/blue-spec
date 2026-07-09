@@ -74,7 +74,7 @@ export const QuickSearch = (): ReactNode => {
           role='combobox'
           aria-expanded={open}
           aria-label='Search the docs'
-          aria-controls='bs-docs-search-results'
+          aria-controls='lagune-docs-search-results'
           value={query}
           onInput={(event) => {
             setQuery(event.currentTarget.value);
@@ -87,9 +87,9 @@ export const QuickSearch = (): ReactNode => {
       </label>
       {open && (
         <div
-          id='bs-docs-search-results'
+          id='lagune-docs-search-results'
           role='listbox'
-          className='bs-docs-route-fade absolute top-full right-0 left-0 z-40 mt-2 flex flex-col gap-0.5 rounded-panel border border-line bg-surface p-1.5 shadow-pop'
+          className='lagune-docs-route-fade absolute top-full right-0 left-0 z-40 mt-2 flex flex-col gap-0.5 rounded-panel border border-line bg-surface p-1.5 shadow-pop'
         >
           {results.length === 0 && (
             <span className='px-3 py-2.5 text-[0.85rem] font-semibold text-muted'>

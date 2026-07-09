@@ -10,9 +10,7 @@ await describe('the git hook', async () => {
 
     strict(output.includes('graphql'), 'reports the kept sub-skill');
     strict(
-      (await readGitignore(workspace)).includes(
-        '!/.bluespec/skills/graphql.md'
-      ),
+      (await readGitignore(workspace)).includes('!/.lagune/skills/graphql.md'),
       'the sub-skill is re-included'
     );
   });

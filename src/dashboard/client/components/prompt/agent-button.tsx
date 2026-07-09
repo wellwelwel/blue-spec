@@ -5,7 +5,7 @@ import { Icon } from '../primitives/icons';
 import { PromptAgentModal } from './agent-modal';
 
 const SIDE_QUEST_PROMPT: TypeSegment[] = [
-  { text: 'Build a plan to address this recommendation made by Blue Spec:' },
+  { text: 'Build a plan to address this recommendation made by Lagune:' },
   { text: '\n\n' },
   {
     text: 'The /api/orders/{id} endpoint returns an order to any signed-in user without checking who owns it, so anyone can read orders that belong to other customers by changing the ID in the URL. Add an ownership check before returning the order.',
@@ -18,7 +18,7 @@ const SIDE_QUEST_MODAL: PromptModalContent = {
   eyebrowIcon: 'compass',
   title: 'One side quest at a time',
   subtitle: 'Copy this prompt to your agent:',
-  banner: 'https://bluespec.weslley.io/img/docs/banner-5.png',
+  banner: 'https://lagune.weslley.io/img/docs/banner-5.png',
   hint: 'Works with any coding agent',
   prompt: SIDE_QUEST_PROMPT,
 };
@@ -38,7 +38,9 @@ export const PromptAgentButton = (props: {
         onClick={() => setOpen(true)}
         class='group/eg-host inline-flex h-8 cursor-pointer items-center gap-2.5 border-0 bg-transparent p-0'
       >
-        <span class={`bs-robot-hop inline-flex text-[1.75rem] ${robotClass}`}>
+        <span
+          class={`lagune-robot-hop inline-flex text-[1.75rem] ${robotClass}`}
+        >
           <Icon name='messageAi' />
         </span>
         <span class='relative inline-flex items-center gap-1.5 rounded-md border border-line-2 bg-surface-2 px-4 py-1.5 text-[0.7rem] font-bold text-ink-2 transition-colors before:absolute before:top-1/2 before:-left-1.25 before:size-2.5 before:-translate-y-1/2 before:rotate-45 before:rounded-bl-xs before:border-b before:border-l before:border-line-2 before:bg-surface-2 before:transition-colors'>

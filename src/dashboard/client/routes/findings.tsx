@@ -129,7 +129,7 @@ export const Findings = (): VNode => {
   return (
     <>
       <PageHeader
-        background='https://bluespec.weslley.io/img/docs/banner-2.png'
+        background='https://lagune.weslley.io/img/docs/banner-2.png'
         eyebrow='The chain'
         title='Findings'
         description='Detect → plan → harden → verify · one tracked item each.'
@@ -177,8 +177,7 @@ export const Findings = (): VNode => {
         <div class='mt-4'>
           <Admonition kind='tip' title='Know the terms'>
             <p class='text-pretty'>
-              <strong>Blue Spec</strong> tracks what each finding here
-              represents:
+              <strong>Lagune</strong> tracks what each finding here represents:
             </p>
             <ul>
               <li>

@@ -329,7 +329,7 @@ const PromptPreview = ({
       )}
       trigger={
         <span className='inline-flex h-8 cursor-help items-center gap-1.5'>
-          <span className='bs-robot-hop inline-flex text-[1.5rem]'>
+          <span className='lagune-robot-hop inline-flex text-[1.5rem]'>
             <Icon name='messageAi' />
           </span>
           <span className='relative rounded-chip border border-line-2 bg-surface-2 px-3 py-1 text-[.9rem]! font-mono font-extrabold text-gray-800 transition-colors before:absolute before:top-1/2 before:-left-1 before:size-2.5 before:-translate-y-1/2 before:rotate-45 before:rounded-[2px] before:border-b before:border-l before:border-line-2 before:bg-surface-2 before:transition-colors docs-dark:text-white group-hover/eg:bg-accent-soft group-hover/eg:text-accent group-hover/eg:before:bg-accent-soft'>
@@ -360,7 +360,7 @@ const PromptPreview = ({
                 <span>
                   Use{' '}
                   <span className={clsx('font-bold', theme.mention)}>
-                    @.bluespec/skills/{skill.name}.md
+                    @.lagune/skills/{skill.name}.md
                   </span>
                 </span>
               </span>
@@ -432,10 +432,10 @@ const SkillCard = ({
             MONO
           )}
         >
-          @.bluespec/skills/{skill.name}.md
+          @.lagune/skills/{skill.name}.md
         </code>
         <CopyButton
-          text={`@.bluespec/skills/${skill.name}.md`}
+          text={`@.lagune/skills/${skill.name}.md`}
           label={`Copy path for ${skill.label}`}
         />
       </div>

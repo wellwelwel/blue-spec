@@ -34,7 +34,7 @@ await describe('readManifestCategories', async () => {
     const workspace = await newWorkspace();
     await writeManifest(
       workspace,
-      JSON.stringify({ name: 'blue-spec', files: [] })
+      JSON.stringify({ name: 'lagune', files: [] })
     );
 
     strict.deepStrictEqual(await readManifestCategories(workspace), []);
@@ -44,7 +44,7 @@ await describe('readManifestCategories', async () => {
     const workspace = await newWorkspace();
     await writeManifest(
       workspace,
-      JSON.stringify({ name: 'blue-spec', categories: [1, 2, 3] })
+      JSON.stringify({ name: 'lagune', categories: [1, 2, 3] })
     );
 
     strict.deepStrictEqual(await readManifestCategories(workspace), []);
@@ -66,7 +66,7 @@ await describe('applyManifestChange', async () => {
       workspace,
       {
         categories: ['owasp'],
-        addFiles: ['.bluespec/skills/regex.md', '.bluespec/skills/network.md'],
+        addFiles: ['.lagune/skills/regex.md', '.lagune/skills/network.md'],
         removeFiles: [],
       },
       { version: '9.9.9', now }
@@ -74,21 +74,21 @@ await describe('applyManifestChange', async () => {
 
     const manifest = await readManifest(workspace);
 
-    strict.strictEqual(manifest.name, 'blue-spec');
+    strict.strictEqual(manifest.name, 'lagune');
     strict.strictEqual(manifest.version, '9.9.9');
     strict.strictEqual(manifest.agent, '');
     strict.strictEqual(manifest.createdAt, '2026-01-01T00:00:00.000Z');
     strict.deepStrictEqual(manifest.categories, ['owasp']);
     strict.deepStrictEqual(manifest.files, [
-      '.bluespec/skills/regex.md',
-      '.bluespec/skills/network.md',
+      '.lagune/skills/regex.md',
+      '.lagune/skills/network.md',
     ]);
   });
 
   await it('preserves other fields when the manifest exists', async () => {
     const workspace = await newWorkspace();
     await seedManifest(workspace, {
-      files: ['.bluespec/templates/x.md', '.bluespec/skills/regex.md'],
+      files: ['.lagune/templates/x.md', '.lagune/skills/regex.md'],
     });
 
     await applyManifestChange(
@@ -96,7 +96,7 @@ await describe('applyManifestChange', async () => {
       {
         categories: [],
         addFiles: [],
-        removeFiles: ['.bluespec/skills/regex.md'],
+        removeFiles: ['.lagune/skills/regex.md'],
       },
       { version: '9.9.9', now }
     );
@@ -107,26 +107,26 @@ await describe('applyManifestChange', async () => {
     strict.strictEqual(manifest.version, '1.0.0');
     strict.strictEqual(manifest.createdAt, '2020-01-01T00:00:00.000Z');
     strict.deepStrictEqual(manifest.categories, []);
-    strict.deepStrictEqual(manifest.files, ['.bluespec/templates/x.md']);
+    strict.deepStrictEqual(manifest.files, ['.lagune/templates/x.md']);
   });
 
   await it('merges addFiles without duplicating', async () => {
     const workspace = await newWorkspace();
-    await seedManifest(workspace, { files: ['.bluespec/skills/regex.md'] });
+    await seedManifest(workspace, { files: ['.lagune/skills/regex.md'] });
 
     await applyManifestChange(
       workspace,
       {
         categories: ['owasp'],
-        addFiles: ['.bluespec/skills/regex.md', '.bluespec/skills/network.md'],
+        addFiles: ['.lagune/skills/regex.md', '.lagune/skills/network.md'],
         removeFiles: [],
       },
       { version: '9.9.9', now }
     );
 
     strict.deepStrictEqual((await readManifest(workspace)).files, [
-      '.bluespec/skills/regex.md',
-      '.bluespec/skills/network.md',
+      '.lagune/skills/regex.md',
+      '.lagune/skills/network.md',
     ]);
   });
 });
@@ -170,7 +170,7 @@ await describe('readManifestAgents', async () => {
     const workspace = await newWorkspace();
     await writeManifest(
       workspace,
-      JSON.stringify({ name: 'blue-spec', agent: [1, 2] })
+      JSON.stringify({ name: 'lagune', agent: [1, 2] })
     );
 
     strict.deepStrictEqual(await readManifestAgents(workspace), []);
@@ -186,7 +186,7 @@ await describe('recordManifestInstall', async () => {
       categories: ['owasp'],
       version: '9.9.9',
       now,
-      addFiles: ['.claude/skills/bluespec.charter/SKILL.md'],
+      addFiles: ['.claude/skills/lagune.charter/SKILL.md'],
     });
 
     const manifest = await readManifest(workspace);
@@ -194,14 +194,14 @@ await describe('recordManifestInstall', async () => {
     strict.strictEqual(manifest.agent, 'claude');
     strict.deepStrictEqual(manifest.categories, ['owasp']);
     strict.deepStrictEqual(manifest.files, [
-      '.claude/skills/bluespec.charter/SKILL.md',
+      '.claude/skills/lagune.charter/SKILL.md',
     ]);
   });
 
   await it('migrates string to array and unions categories on a second agent', async () => {
     const workspace = await newWorkspace();
     await seedManifest(workspace, {
-      files: ['.claude/skills/bluespec.charter/SKILL.md'],
+      files: ['.claude/skills/lagune.charter/SKILL.md'],
     });
 
     await recordManifestInstall(workspace, {
@@ -209,7 +209,7 @@ await describe('recordManifestInstall', async () => {
       categories: ['python'],
       version: '9.9.9',
       now,
-      addFiles: ['.github/prompts/bluespec.charter.prompt.md'],
+      addFiles: ['.github/prompts/lagune.charter.prompt.md'],
     });
 
     const manifest = await readManifest(workspace);
@@ -249,7 +249,7 @@ await describe('recordManifestInstall', async () => {
       categories: ['python'],
       version: '9.9.9',
       now,
-      addFiles: ['.bluespec/skills/python.md'],
+      addFiles: ['.lagune/skills/python.md'],
     });
 
     const manifest = await readManifest(workspace);
@@ -260,6 +260,6 @@ await describe('recordManifestInstall', async () => {
       'the agent list is preserved when no agent is recorded'
     );
     strict.deepStrictEqual(manifest.categories, ['owasp', 'python']);
-    strict.deepStrictEqual(manifest.files, ['.bluespec/skills/python.md']);
+    strict.deepStrictEqual(manifest.files, ['.lagune/skills/python.md']);
   });
 });

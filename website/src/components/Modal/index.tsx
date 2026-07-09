@@ -50,7 +50,7 @@ export const Modal = ({
 
   return createPortal(
     <div
-      className={`bs-modal-backdrop fixed inset-0 z-[100] flex items-center justify-center ${padding} bg-[rgba(2,4,12,0.72)] [backdrop-filter:blur(6px)] [-webkit-backdrop-filter:blur(6px)]`}
+      className={`lagune-modal-backdrop fixed inset-0 z-[100] flex items-center justify-center ${padding} bg-[rgba(2,4,12,0.72)] [backdrop-filter:blur(6px)] [-webkit-backdrop-filter:blur(6px)]`}
       onClick={onClose}
       role='presentation'
     >

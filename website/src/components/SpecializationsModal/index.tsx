@@ -87,7 +87,7 @@ export const SpecializationsModal = ({
       open={open}
       onClose={onClose}
       label='All specializations'
-      panelClassName='bs-modal-panel relative flex flex-col w-full max-w-[680px] h-[860px] max-h-full rounded-[20px] border border-[#0c155c] bg-[#0a0f1f] overflow-hidden [box-shadow:0_40px_120px_-30px_rgba(0,0,0,0.8)] outline-none'
+      panelClassName='lagune-modal-panel relative flex flex-col w-full max-w-[680px] h-[860px] max-h-full rounded-[20px] border border-[#0c155c] bg-[#0a0f1f] overflow-hidden [box-shadow:0_40px_120px_-30px_rgba(0,0,0,0.8)] outline-none'
     >
       <ModalHeader>
         <button
@@ -114,7 +114,7 @@ export const SpecializationsModal = ({
 
       <ScrollFade
         className='grow'
-        scrollClassName='bs-paper h-full overflow-y-auto px-[clamp(20px,3vw,32px)] py-[clamp(20px,3vw,28px)]'
+        scrollClassName='lagune-paper h-full overflow-y-auto px-[clamp(20px,3vw,32px)] py-[clamp(20px,3vw,28px)]'
         role='group'
         aria-label='Add security specializations'
       >

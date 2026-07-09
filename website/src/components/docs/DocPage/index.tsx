@@ -31,9 +31,9 @@ export default function DocPage({ content: Content }: DocPageProps): ReactNode {
         description={metadata.description}
         keywords={frontMatter.keywords}
       />
-      <section className='bs-docs-route-fade relative mb-5 flex-none overflow-hidden rounded-card bg-banner px-5 py-6 text-white shadow-card sm:px-9 sm:py-7.5'>
+      <section className='lagune-docs-route-fade relative mb-5 flex-none overflow-hidden rounded-card bg-banner px-5 py-6 text-white shadow-card sm:px-9 sm:py-7.5'>
         <img
-          className='bs-docs-route-rise pointer-events-none absolute inset-0 z-0 size-full object-cover mask-[linear-gradient(to_right,transparent,rgba(0,0,0,0.35)_38%,black)]'
+          className='lagune-docs-route-rise pointer-events-none absolute inset-0 z-0 size-full object-cover mask-[linear-gradient(to_right,transparent,rgba(0,0,0,0.35)_38%,black)]'
           src={context.banner}
           alt=''
           aria-hidden='true'
@@ -53,7 +53,7 @@ export default function DocPage({ content: Content }: DocPageProps): ReactNode {
           )}
         </div>
       </section>
-      <article className='bs-docs-route-rise markdown rounded-card bg-surface px-5 py-6 shadow-card sm:px-9 sm:py-8'>
+      <article className='lagune-docs-route-rise markdown rounded-card bg-surface px-5 py-6 shadow-card sm:px-9 sm:py-8'>
         <MDXContent>
           <Content />
         </MDXContent>

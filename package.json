@@ -1,19 +1,19 @@
 {
-  "name": "blue-spec",
+  "name": "lagune",
   "version": "0.9.1",
-  "description": "🌊 Blue Spec is a toolkit for Security-Driven Hardening, a defensive workflow to help AI agents detect what a system does and harden the defenses that matter.",
+  "description": "🌊 Lagune is a toolkit for Security-Driven Hardening, a defensive workflow to help AI agents detect what a system does and harden the defenses that matter.",
   "license": "MIT",
   "type": "module",
   "bin": {
-    "blue-spec": "lib/bin/index.js"
+    "lagune": "lib/bin/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wellwelwel/blue-spec.git"
+    "url": "git+https://github.com/wellwelwel/lagune.git"
   },
-  "homepage": "https://bluespec.weslley.io",
+  "homepage": "https://lagune.weslley.io",
   "bugs": {
-    "url": "https://github.com/wellwelwel/blue-spec/issues"
+    "url": "https://github.com/wellwelwel/lagune/issues"
   },
   "author": "https://github.com/wellwelwel",
   "funding": {

@@ -4,7 +4,7 @@ import { discoverSkills, presentSkillNames } from '../hooks/skills/discover.js';
 import { keepPresent, list, merge } from '../hooks/skills/skills.js';
 import { writeFileOverwrite } from './fs-actions.js';
 
-export const SPECIALIZATIONS_PATH = '.bluespec/specializations.md';
+export const SPECIALIZATIONS_PATH = '.lagune/specializations.md';
 
 export const renderSpecializations = async (
   targetDir: string

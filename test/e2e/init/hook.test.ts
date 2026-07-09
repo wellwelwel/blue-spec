@@ -7,7 +7,7 @@ import { initInto, newWorkspace } from './__utils__.js';
 
 const runHook = (workspace: string, payload: string): Promise<string> =>
   new Promise((resolve, reject) => {
-    const child = spawn(execPath, ['.bluespec/hooks/repair.mjs', payload], {
+    const child = spawn(execPath, ['.lagune/hooks/repair.mjs', payload], {
       cwd: workspace,
     });
     const chunks: string[] = [];
@@ -42,7 +42,7 @@ await describe('the scaffolded repair hook runs without install', async () => {
     strict.strictEqual(parsed.classifications[0].classification, 'new');
 
     const tracking: { entries: { name: string }[] } = JSON.parse(
-      await readFile(join(workspace, '.bluespec/tracking.json'), 'utf8')
+      await readFile(join(workspace, '.lagune/tracking.json'), 'utf8')
     );
     strict.strictEqual(tracking.entries.length, 1);
     strict.strictEqual(tracking.entries[0].name, 'Leaked secret');

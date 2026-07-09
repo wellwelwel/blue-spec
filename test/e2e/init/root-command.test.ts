@@ -22,25 +22,25 @@ const rootCommandPath = (spec: AgentSpec): string => {
         ? basename(relativePath.slice(0, relativePath.lastIndexOf('/')))
         : basename(relativePath, spec.extension ?? '.md');
 
-    return name === 'bluespec';
+    return name === 'lagune';
   });
 
   strict.strictEqual(
     roots.length,
     1,
-    `${spec.key} should declare exactly one root /bluespec command, found ${roots.length}`
+    `${spec.key} should declare exactly one root /lagune command, found ${roots.length}`
   );
 
   return roots[0];
 };
 
 const rootNameToken: Record<CommandFormat, string> = {
-  skill: 'name: bluespec\n',
-  'copilot-prompt': 'name: bluespec\n',
+  skill: 'name: lagune\n',
+  'copilot-prompt': 'name: lagune\n',
   markdown: '',
   forge: '',
   'gemini-toml': '',
-  'goose-yaml': 'title: "bluespec"',
+  'goose-yaml': 'title: "lagune"',
 };
 
 const placeholderToken: Record<CommandFormat, string> = {
@@ -53,12 +53,12 @@ const placeholderToken: Record<CommandFormat, string> = {
 };
 
 for (const spec of AGENT_SPECS) {
-  await describe(`the root /bluespec command (${spec.key})`, async () => {
-    await it('renders with the bare name, never bluespec.bluespec', () => {
+  await describe(`the root /lagune command (${spec.key})`, async () => {
+    await it('renders with the bare name, never lagune.lagune', () => {
       const path = rootCommandPath(spec);
 
       strict(
-        !path.includes('bluespec.bluespec'),
+        !path.includes('lagune.lagune'),
         `${path} must not double the prefix`
       );
     });
@@ -89,7 +89,7 @@ for (const spec of AGENT_SPECS) {
       strict(file.isFile(), `${rootPath} should be a file`);
 
       const manifest: { files: string[] } = JSON.parse(
-        await readFile(join(workspace, '.bluespec/manifest.json'), 'utf8')
+        await readFile(join(workspace, '.lagune/manifest.json'), 'utf8')
       );
 
       strict(
@@ -116,7 +116,7 @@ for (const spec of AGENT_SPECS) {
           `${spec.key} should render the bare name (${nameToken.trim()})`
         );
         strict(
-          !contents.includes('bluespec.bluespec'),
+          !contents.includes('lagune.lagune'),
           'the doubled name must not appear in the rendered command'
         );
       }

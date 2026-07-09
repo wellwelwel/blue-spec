@@ -21,7 +21,7 @@ const postAction = async (
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        'x-bluespec-token': session.token,
+        'x-lagune-token': session.token,
       },
       body: JSON.stringify(payload),
     });

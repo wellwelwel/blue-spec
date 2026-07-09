@@ -20,7 +20,7 @@ The shape is three movements around the work: load the defense, build with it, t
 
 ### Step 1: Load the charter
 
-Read the charter at `.bluespec/memory/charter.md`. It carries the project's security principles, the rules every part of this work must respect.
+Read the charter at `.lagune/memory/charter.md`. It carries the project's security principles, the rules every part of this work must respect.
 
 - **It exists:** load it. Its principles bind the whole build.
 - **It does not exist:** proceed anyway. Fall back to the safe-by-default baseline the sub-skills carry, and tell the user in one line that you are working without a charter.
@@ -40,7 +40,7 @@ Sub-skills are focused, language-agnostic security knowledge modules that load o
 First, list the catalog once:
 
 ```text
-@.bluespec/specializations.md
+@.lagune/specializations.md
 ```
 
 It prints each sub-skill as `name: tags`, suffixing ` [required]` on any the catalog flags. The tags say what each one covers. Reach a verdict on every entry, one at a time:
@@ -49,7 +49,7 @@ It prints each sub-skill as `name: tags`, suffixing ` [required]` on any the cat
 - **Its context is in the work:** the thing its tags name is part of what you are about to build (its tags say uploads and you are building an upload). It applies.
 - **Its context is not in the work:** nothing you are building touches what its tags name. Skip it. Most entries will not apply to a given piece of work, and that is normal.
 
-Judge from what the work actually involves, read off your Step 2 reasoning, not from how relevant an entry feels. For every entry that applies, read `.bluespec/skills/<name>.md` directly, one at a time, and follow it. Each carries the defense knowledge for its class of work (uploads, shell, sessions, and so on): let it shape how you build that part, in line with the charter.
+Judge from what the work actually involves, read off your Step 2 reasoning, not from how relevant an entry feels. For every entry that applies, read `.lagune/skills/<name>.md` directly, one at a time, and follow it. Each carries the defense knowledge for its class of work (uploads, shell, sessions, and so on): let it shape how you build that part, in line with the charter.
 
 Keep the list of sub-skills you applied. Step 5 reuses it to check your own work.
 

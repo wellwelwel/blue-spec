@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs';
 
 # Skills (_sub_-skills)
 
-🧠 **Blue Spec**'s sub-skills are focused, language-agnostic security knowledge modules that load only on demand, never by default. They are not commands. The detect and verify phases reach for them while they run, and you can use one directly any time.
+🧠 **Lagune**'s sub-skills are focused, language-agnostic security knowledge modules that load only on demand, never by default. They are not commands. The detect and verify phases reach for them while they run, and you can use one directly any time.
 
 <Tabs>
   <TabItem value="overview" label="Overview" default>
@@ -21,14 +21,14 @@ import Tabs from '@theme/Tabs';
 
 ## Run yourself
 
-To use a sub-skill directly, import its file with `@` and write the task in the same prompt. The knowledge then acts on what you asked for. This works in any prompt, even one unrelated to the **Blue Spec** flow.
+To use a sub-skill directly, import its file with `@` and write the task in the same prompt. The knowledge then acts on what you asked for. This works in any prompt, even one unrelated to the **Lagune** flow.
 
-They all live in `.bluespec/skills/`, so the file to import is always `@.bluespec/skills/<name>.md`.
+They all live in `.lagune/skills/`, so the file to import is always `@.lagune/skills/<name>.md`.
 
 For example, a direct free-form prompt to generate a safe **RegExp** collection with **Python**:
 
 ```prompt
-@.bluespec/skills/regex.md
+@.lagune/skills/regex.md
 Create a collection of regular expressions in @src/utils/regex.py to validate emails and usernames.
 ```
 
@@ -53,7 +53,7 @@ Test a pattern yourself at [**devina.io/redos-checker**](https://devina.io/redos
 
 ## The catalog
 
-The built-in sub-skills are grouped into **categories** you install on demand. This is the set that ships with **Blue Spec**:
+The built-in sub-skills are grouped into **categories** you install on demand. This is the set that ships with **Lagune**:
 
 | _Sub_-Skill           | Category                    | Focus                                                                          |
 | --------------------- | --------------------------- | ------------------------------------------------------------------------------ |
@@ -87,15 +87,15 @@ The built-in sub-skills are grouped into **categories** you install on demand. T
 | `c-cpp`               | `c-cpp`                     | **Format strings:** `printf(user_input)`, `%n` write-what-where.               |
 | `dotnet`              | `dotnet`                    | **Platform-level risks:** `BinaryFormatter` RCE, `@Html.Raw`, enum gaps.       |
 
-You choose which categories to install when you set up **Blue Spec**, and change them any time with `add` and `remove`. See [**Install**](/docs/get-started/install#specializations) for the `--skills` flag. Each installed sub-skill is a file under `.bluespec/skills/`.
+You choose which categories to install when you set up **Lagune**, and change them any time with `add` and `remove`. See [**Install**](/docs/get-started/install#specializations) for the `--skills` flag. Each installed sub-skill is a file under `.lagune/skills/`.
 
 Most built-in knowledge is distilled from OWASP. See [**OWASP Sources**](/docs/references/skills-sources) for the full mapping of each sub-skill to its canonical OWASP attack and Cheat Sheet pages. A few stack-specific modules draw from the vendor's own guidance instead: `supabase`, for instance, comes from the Supabase docs and CVE-2025-48757.
 
-The catalog grows by adding one knowledge file plus one catalog row, never a new command. You add your own the same way, with [`/bluespec.specialize`](/docs/commands/specialize): point it at an article or a topic and it distills a new sub-skill into the project's own catalog (the file under `.bluespec/skills/`, the row in `.bluespec/skills.json`), loaded exactly like the built-ins.
+The catalog grows by adding one knowledge file plus one catalog row, never a new command. You add your own the same way, with [`/lagune.specialize`](/docs/commands/specialize): point it at an article or a topic and it distills a new sub-skill into the project's own catalog (the file under `.lagune/skills/`, the row in `.lagune/skills.json`), loaded exactly like the built-ins.
 
-:::note[Internally, Blue Spec loads sub-skills automatically, on demand]
+:::note[Internally, Lagune loads sub-skills automatically, on demand]
 
-When the detect or verify phase hits a context a sub-skill covers, it finds the installed sub-skill and reads the matching `.bluespec/skills/<name>.md` itself. This happens automatically, as part of the phase. You do not do it by hand for this to work.
+When the detect or verify phase hits a context a sub-skill covers, it finds the installed sub-skill and reads the matching `.lagune/skills/<name>.md` itself. This happens automatically, as part of the phase. You do not do it by hand for this to work.
 
 :::
 
@@ -104,8 +104,8 @@ When the detect or verify phase hits a context a sub-skill covers, it finds the 
 To see every **category** and whether it is installed, from the terminal:
 
 ```bash
-npx -y blue-spec@latest list --skills
-# Specializations .bluespec/skills/
+npx -y lagune@latest list --skills
+# Specializations .lagune/skills/
 #   • owasp       [installed]  Harden against the application security risks OWASP tracks
 #   • ai          [available]  AI and LLM integrations: prompts, tools, agents, retrieval, and MCP
 #   • lovable     [available]  AI-generated Supabase apps (Lovable and similar): RLS and key model, plus the defaults that ship insecure

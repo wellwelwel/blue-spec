@@ -18,7 +18,7 @@ export const Overview = (): VNode => {
   return (
     <>
       <PageHeader
-        background='https://bluespec.weslley.io/img/docs/banner-1.png'
+        background='https://lagune.weslley.io/img/docs/banner-1.png'
         eyebrow='Security posture'
         title={posture.headline}
         description={posture.subline}

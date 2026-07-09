@@ -1,7 +1,7 @@
 import type { Theme } from '@/types/dashboard/client';
 import { signal } from '@preact/signals';
 
-const STORAGE_KEY = 'bluespec-theme';
+const STORAGE_KEY = 'lagune-theme';
 
 const readStored = (): Theme | null => {
   try {

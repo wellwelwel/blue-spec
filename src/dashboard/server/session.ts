@@ -5,7 +5,7 @@ import { join } from 'node:path';
 
 export const createSessionToken = (): string => randomBytes(32).toString('hex');
 
-const sessionDir = (): string => join(tmpdir(), 'blue-spec');
+const sessionDir = (): string => join(tmpdir(), 'lagune');
 
 export const sessionTokenPath = (pid: number): string =>
   join(sessionDir(), `session-${pid}.token`);

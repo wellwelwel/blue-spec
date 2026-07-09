@@ -7,10 +7,10 @@ import { bulletField } from '../../core/markdown/fields.js';
 import { inlineText } from '../../core/markdown/lines.js';
 import { sectionBlocks } from '../../core/markdown/sections.js';
 
-const HISTORY_DIR = '.bluespec/memory';
-const HISTORY_PATH = '.bluespec/memory/history.md';
+const HISTORY_DIR = '.lagune/memory';
+const HISTORY_PATH = '.lagune/memory/history.md';
 const HISTORY_SECTION = 'Closed findings';
-const HISTORY_HEADER = `# Blue Spec History\n\n## ${HISTORY_SECTION}\n`;
+const HISTORY_HEADER = `# Lagune History\n\n## ${HISTORY_SECTION}\n`;
 const UNRANKED = 'Unranked';
 
 const readMarkdown = async (path: string): Promise<string | null> => {
@@ -73,8 +73,8 @@ export const appendClosedFindings = async (
   now: Date
 ): Promise<HistoryAppend> => {
   const [detect, plan] = await Promise.all([
-    readMarkdown(join(targetDir, '.bluespec/memory/detect.md')),
-    readMarkdown(join(targetDir, '.bluespec/memory/plan.md')),
+    readMarkdown(join(targetDir, '.lagune/memory/detect.md')),
+    readMarkdown(join(targetDir, '.lagune/memory/plan.md')),
   ]);
 
   const entries = distill(names, detect, plan, toIsoDate(now));

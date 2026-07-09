@@ -3,19 +3,19 @@ import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { writeFileOverwrite } from './fs-actions.js';
 
-const SKILLS_EXCLUDE = '/.bluespec/skills/*';
+const SKILLS_EXCLUDE = '/.lagune/skills/*';
 
-const BLUESPEC_ENTRIES = [
-  '/.bluespec/templates/',
-  '/.bluespec/hooks/',
-  '/.bluespec/proofs/',
-  '/.bluespec/specializations.md',
+const LAGUNE_ENTRIES = [
+  '/.lagune/templates/',
+  '/.lagune/hooks/',
+  '/.lagune/proofs/',
+  '/.lagune/specializations.md',
   SKILLS_EXCLUDE,
-  '/**/bluespec.*',
-  '/**/bluespec/',
+  '/**/lagune.*',
+  '/**/lagune/',
 ];
 
-const SECTION_HEADER = '# Blue Spec';
+const SECTION_HEADER = '# Lagune';
 
 const gitignorePathOf = (cwd: string): string => join(cwd, '.gitignore');
 
@@ -27,18 +27,15 @@ const readGitignore = async (path: string): Promise<string> => {
   }
 };
 
-const isBlueSpecLine = (line: string): boolean =>
-  BLUESPEC_ENTRIES.includes(line) || line.startsWith('!/.bluespec/skills/');
+const isLaguneLine = (line: string): boolean =>
+  LAGUNE_ENTRIES.includes(line) || line.startsWith('!/.lagune/skills/');
 
-const lastBlueSpecIndex = (lines: string[]): number =>
-  lines.reduce(
-    (last, line, index) => (isBlueSpecLine(line) ? index : last),
-    -1
-  );
+const lastLaguneIndex = (lines: string[]): number =>
+  lines.reduce((last, line, index) => (isLaguneLine(line) ? index : last), -1);
 
 const insertMissingInBlock = (existing: string, missing: string[]): string => {
   const lines = existing.trimEnd().split('\n');
-  const at = lastBlueSpecIndex(lines);
+  const at = lastLaguneIndex(lines);
   const merged = [
     ...lines.slice(0, at + 1),
     ...missing,
@@ -61,7 +58,7 @@ export const ensureGitignoreEntries = async (
 ): Promise<GitignoreOutcome> => {
   const gitignorePath = gitignorePathOf(cwd);
   const existing = await readGitignore(gitignorePath);
-  const missing = BLUESPEC_ENTRIES.filter((entry) => !existing.includes(entry));
+  const missing = LAGUNE_ENTRIES.filter((entry) => !existing.includes(entry));
 
   if (missing.length === 0) return 'unchanged';
 
@@ -74,7 +71,7 @@ export const ensureGitignoreEntries = async (
   return existing.length === 0 ? 'created' : 'updated';
 };
 
-const negationFor = (skill: string): string => `!/.bluespec/skills/${skill}.md`;
+const negationFor = (skill: string): string => `!/.lagune/skills/${skill}.md`;
 
 const insertAfterExclude = (lines: string[], negation: string): string[] => {
   const at = lines.indexOf(SKILLS_EXCLUDE);

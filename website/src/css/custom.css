@@ -8,77 +8,77 @@
 
 /*
  * Tailwind's preflight reset, scoped to the Tailwind subtrees only. Imported
- * globally it would strip Infima's docs styling. `.bs-canvas` is the landing
- * page; `.bs-modal-backdrop` is its modals, portaled to <body>.
+ * globally it would strip Infima's docs styling. `.lagune-canvas` is the landing
+ * page; `.lagune-modal-backdrop` is its modals, portaled to <body>.
  */
 @layer base {
-  .bs-canvas,
-  .bs-canvas *,
-  .bs-canvas ::after,
-  .bs-canvas ::before,
-  .bs-canvas ::backdrop,
-  .bs-canvas ::file-selector-button,
-  .bs-modal-backdrop,
-  .bs-modal-backdrop *,
-  .bs-modal-backdrop ::after,
-  .bs-modal-backdrop ::before,
-  .bs-modal-backdrop ::backdrop,
-  .bs-modal-backdrop ::file-selector-button {
+  .lagune-canvas,
+  .lagune-canvas *,
+  .lagune-canvas ::after,
+  .lagune-canvas ::before,
+  .lagune-canvas ::backdrop,
+  .lagune-canvas ::file-selector-button,
+  .lagune-modal-backdrop,
+  .lagune-modal-backdrop *,
+  .lagune-modal-backdrop ::after,
+  .lagune-modal-backdrop ::before,
+  .lagune-modal-backdrop ::backdrop,
+  .lagune-modal-backdrop ::file-selector-button {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     border: 0 solid;
   }
 
-  .bs-canvas :is(h1, h2, h3, h4, h5, h6),
-  .bs-modal-backdrop :is(h1, h2, h3, h4, h5, h6) {
+  .lagune-canvas :is(h1, h2, h3, h4, h5, h6),
+  .lagune-modal-backdrop :is(h1, h2, h3, h4, h5, h6) {
     font-size: inherit;
     font-weight: inherit;
   }
 
-  .bs-canvas a,
-  .bs-modal-backdrop a {
+  .lagune-canvas a,
+  .lagune-modal-backdrop a {
     color: inherit;
     text-decoration: inherit;
   }
 
-  .bs-canvas :is(button, input, select, textarea),
-  .bs-modal-backdrop :is(button, input, select, textarea) {
+  .lagune-canvas :is(button, input, select, textarea),
+  .lagune-modal-backdrop :is(button, input, select, textarea) {
     font: inherit;
     color: inherit;
     letter-spacing: inherit;
     background: transparent;
   }
 
-  .bs-canvas button,
-  .bs-modal-backdrop button {
+  .lagune-canvas button,
+  .lagune-modal-backdrop button {
     cursor: pointer;
   }
 
-  .bs-canvas :is(ol, ul),
-  .bs-modal-backdrop :is(ol, ul) {
+  .lagune-canvas :is(ol, ul),
+  .lagune-modal-backdrop :is(ol, ul) {
     list-style: none;
   }
 
-  .bs-canvas :is(img, svg),
-  .bs-modal-backdrop :is(img, svg) {
+  .lagune-canvas :is(img, svg),
+  .lagune-modal-backdrop :is(img, svg) {
     display: block;
     vertical-align: middle;
   }
 
-  .bs-canvas img,
-  .bs-modal-backdrop img {
+  .lagune-canvas img,
+  .lagune-modal-backdrop img {
     max-width: 100%;
     height: auto;
   }
 
-  .bs-canvas :is(h1, h2, h3),
-  .bs-modal-backdrop :is(h1, h2, h3) {
+  .lagune-canvas :is(h1, h2, h3),
+  .lagune-modal-backdrop :is(h1, h2, h3) {
     text-wrap: balance;
   }
 
-  .bs-canvas :is(p, li, figcaption, blockquote),
-  .bs-modal-backdrop :is(p, li, figcaption, blockquote) {
+  .lagune-canvas :is(p, li, figcaption, blockquote),
+  .lagune-modal-backdrop :is(p, li, figcaption, blockquote) {
     text-wrap: pretty;
   }
 }
@@ -95,7 +95,7 @@
   img,
   [role='button'],
   [role='tab'],
-  .bs-mermaid {
+  .lagune-mermaid {
     user-select: none;
   }
 
@@ -103,7 +103,7 @@
     -webkit-user-drag: none;
   }
 
-  .bs-docs .markdown a:not(.hash-link) {
+  .lagune-docs .markdown a:not(.hash-link) {
     user-select: text;
   }
 }
@@ -128,7 +128,7 @@
 /*
  * Shared tokens resolve through CSS variables so one utility (text-ink,
  * bg-surface…) themes per subtree: the landing page reads the :root values
- * below, the docs shell re-declares the same variables under .bs-docs
+ * below, the docs shell re-declares the same variables under .lagune-docs
  * (see docs.css), with its own light and dark values.
  */
 @theme inline {
@@ -166,7 +166,7 @@
   --shadow-pop: var(--shadow-pop);
 }
 
-@custom-variant docs-dark (&:where(html[data-bs-docs-theme='dark'] *));
+@custom-variant docs-dark (&:where(html[data-lagune-docs-theme='dark'] *));
 
 :root {
   --accent: #005eff;
@@ -176,16 +176,16 @@
   --line: rgba(233, 237, 247, 0.08);
 }
 
-.bs-canvas {
-  --bs-window-h: 580px;
+.lagune-canvas {
+  --lagune-window-h: 580px;
 }
 
-html.bs-canvas-html body.bs-canvas-body {
+html.lagune-canvas-html body.lagune-canvas-body {
   background: #050a18;
 }
 
 /* Infima styles every <code> with a light pill; neutralize it on this page. */
-.bs-canvas code {
+.lagune-canvas code {
   background: transparent;
   border: 0;
   padding: 0;
@@ -200,39 +200,39 @@ html.bs-canvas-html body.bs-canvas-body {
   font-size: 1.01em;
 }
 
-.bs-flow {
+.lagune-flow {
   scrollbar-width: thin;
   scrollbar-color: rgba(233, 237, 247, 0.18) transparent;
 }
 
-.bs-flow::-webkit-scrollbar {
+.lagune-flow::-webkit-scrollbar {
   width: 6px;
 }
 
-.bs-flow::-webkit-scrollbar-thumb {
+.lagune-flow::-webkit-scrollbar-thumb {
   background: rgba(233, 237, 247, 0.18);
   border-radius: 6px;
 }
 
-.bs-paper {
+.lagune-paper {
   scrollbar-width: thin;
   scrollbar-color: rgba(233, 237, 247, 0.18) transparent;
 }
 
-.bs-paper::-webkit-scrollbar {
+.lagune-paper::-webkit-scrollbar {
   width: 8px;
 }
 
-.bs-paper::-webkit-scrollbar-thumb {
+.lagune-paper::-webkit-scrollbar-thumb {
   background: rgba(233, 237, 247, 0.18);
   border-radius: 8px;
 }
 
-.bs-rail__item--active {
+.lagune-rail__item--active {
   position: relative;
 }
 
-.bs-rail__item--active::before {
+.lagune-rail__item--active::before {
   content: '';
   position: absolute;
   left: -18px;
@@ -245,7 +245,7 @@ html.bs-canvas-html body.bs-canvas-body {
 }
 
 @media (max-width: 600px) {
-  .bs-rail__item--active::before {
+  .lagune-rail__item--active::before {
     left: 50%;
     top: auto;
     bottom: -14px;
@@ -255,12 +255,12 @@ html.bs-canvas-html body.bs-canvas-body {
   }
 }
 
-.bs-img-outline {
+.lagune-img-outline {
   outline: 1px solid rgba(0, 0, 0, 0.4);
   outline-offset: -1px;
 }
 
-.bs-cta::after {
+.lagune-cta::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -275,17 +275,17 @@ html.bs-canvas-html body.bs-canvas-body {
   will-change: transform;
 }
 
-.bs-cta:hover::after {
+.lagune-cta:hover::after {
   transform: translateX(120%);
 }
 
-.bs-fade-in {
+.lagune-fade-in {
   opacity: 0;
   transform: translateY(8px);
-  animation: bs-fade-in 0.36s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: lagune-fade-in 0.36s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-@keyframes bs-fade-in {
+@keyframes lagune-fade-in {
   from {
     opacity: 0;
     transform: translateY(8px);
@@ -298,12 +298,12 @@ html.bs-canvas-html body.bs-canvas-body {
 
 /* Opacity-only variant for full-height containers, where a translateY would
    extend past a fixed-height scroller and trigger a phantom scrollbar. */
-.bs-fade-in-soft {
+.lagune-fade-in-soft {
   opacity: 0;
-  animation: bs-fade-in-soft 0.36s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: lagune-fade-in-soft 0.36s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-@keyframes bs-fade-in-soft {
+@keyframes lagune-fade-in-soft {
   from {
     opacity: 0;
   }
@@ -312,15 +312,15 @@ html.bs-canvas-html body.bs-canvas-body {
   }
 }
 
-.bs-modal-backdrop {
-  animation: bs-modal-backdrop 0.24s ease both;
+.lagune-modal-backdrop {
+  animation: lagune-modal-backdrop 0.24s ease both;
 }
 
-.bs-modal-panel {
-  animation: bs-modal-panel 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+.lagune-modal-panel {
+  animation: lagune-modal-panel 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-@keyframes bs-modal-backdrop {
+@keyframes lagune-modal-backdrop {
   from {
     opacity: 0;
   }
@@ -329,7 +329,7 @@ html.bs-canvas-html body.bs-canvas-body {
   }
 }
 
-@keyframes bs-modal-panel {
+@keyframes lagune-modal-panel {
   from {
     opacity: 0;
     transform: translateY(12px) scale(0.985);
@@ -340,12 +340,12 @@ html.bs-canvas-html body.bs-canvas-body {
   }
 }
 
-.bs-menu-pop {
+.lagune-menu-pop {
   transform-origin: top right;
-  animation: bs-menu-pop 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: lagune-menu-pop 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-@keyframes bs-menu-pop {
+@keyframes lagune-menu-pop {
   from {
     opacity: 0;
     transform: translateY(-6px) scale(0.97);
@@ -357,16 +357,16 @@ html.bs-canvas-html body.bs-canvas-body {
 }
 
 /* Two slightly off-balance hops for the little robot when its card is hovered. */
-.bs-robot-hop {
+.lagune-robot-hop {
   transform-origin: 50% 100%;
   will-change: transform;
 }
 
-.group\/card:hover .bs-robot-hop {
-  animation: bs-robot-hop 0.7s cubic-bezier(0.3, 0.7, 0.4, 1) both;
+.group\/card:hover .lagune-robot-hop {
+  animation: lagune-robot-hop 0.7s cubic-bezier(0.3, 0.7, 0.4, 1) both;
 }
 
-@keyframes bs-robot-hop {
+@keyframes lagune-robot-hop {
   0% {
     transform: translateY(0) rotate(0deg) scaleY(1);
   }
@@ -392,26 +392,26 @@ html.bs-canvas-html body.bs-canvas-body {
 
 /* Mermaid edge labels: drop the default pill, match the panel, and follow the
    docs ink so they stay legible in both docs themes. */
-.bs-mermaid .edgeLabel,
-.bs-mermaid .edgeLabel p,
-.bs-mermaid .edgeLabel rect,
-.bs-mermaid .labelBkg {
+.lagune-mermaid .edgeLabel,
+.lagune-mermaid .edgeLabel p,
+.lagune-mermaid .edgeLabel rect,
+.lagune-mermaid .labelBkg {
   background-color: transparent !important;
   fill: transparent !important;
 }
 
-.bs-mermaid .edgeLabel,
-.bs-mermaid .edgeLabel p,
-.bs-mermaid .edgeLabel .label {
+.lagune-mermaid .edgeLabel,
+.lagune-mermaid .edgeLabel p,
+.lagune-mermaid .edgeLabel .label {
   color: var(--ink-2) !important;
 }
 
-.bs-token-in {
+.lagune-token-in {
   display: inline-block;
-  animation: bs-token-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: lagune-token-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-@keyframes bs-token-in {
+@keyframes lagune-token-in {
   from {
     opacity: 0;
     transform: translateX(-4px);
@@ -422,12 +422,12 @@ html.bs-canvas-html body.bs-canvas-body {
   }
 }
 
-.bs-cite-pop {
+.lagune-cite-pop {
   transform-origin: bottom center;
-  animation: bs-cite-pop 0.18s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: lagune-cite-pop 0.18s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-@keyframes bs-cite-pop {
+@keyframes lagune-cite-pop {
   from {
     opacity: 0;
     transform: translate(-50%, -100%) translateY(5px) scale(0.97);
@@ -440,19 +440,19 @@ html.bs-canvas-html body.bs-canvas-body {
 
 /* Docs theme: maps the landing page's identity onto Infima's variables. */
 :root {
-  --bs-bg: #050a18;
-  --bs-bg-elevated: #0a0f1f;
-  --bs-accent: #005eff;
-  --bs-accent-soft: #5fb4ff;
-  --bs-ink: #e9edf7;
-  --bs-muted: rgba(233, 237, 247, 0.62);
-  --bs-faint: rgba(233, 237, 247, 0.4);
-  --bs-line: rgba(233, 237, 247, 0.1);
-  --bs-panel-line: #0c155c;
-  --bs-card: rgba(255, 255, 255, 0.03);
+  --lagune-bg: #050a18;
+  --lagune-bg-elevated: #0a0f1f;
+  --lagune-accent: #005eff;
+  --lagune-accent-soft: #5fb4ff;
+  --lagune-ink: #e9edf7;
+  --lagune-muted: rgba(233, 237, 247, 0.62);
+  --lagune-faint: rgba(233, 237, 247, 0.4);
+  --lagune-line: rgba(233, 237, 247, 0.1);
+  --lagune-panel-line: #0c155c;
+  --lagune-card: rgba(255, 255, 255, 0.03);
 
-  --ifm-background-color: var(--bs-bg);
-  --ifm-background-surface-color: var(--bs-bg-elevated);
+  --ifm-background-color: var(--lagune-bg);
+  --ifm-background-surface-color: var(--lagune-bg-elevated);
 
   --ifm-color-primary: #2f7bff;
   --ifm-color-primary-dark: #0f63ff;
@@ -461,7 +461,7 @@ html.bs-canvas-html body.bs-canvas-body {
   --ifm-color-primary-light: #5093ff;
   --ifm-color-primary-lighter: #6aa3ff;
   --ifm-color-primary-lightest: #94bdff;
-  --ifm-link-color: var(--bs-accent-soft);
+  --ifm-link-color: var(--lagune-accent-soft);
   --ifm-link-hover-color: #8ec8ff;
 
   --ifm-font-family-base: 'Inter', ui-sans-serif, system-ui, sans-serif;
@@ -472,37 +472,37 @@ html.bs-canvas-html body.bs-canvas-body {
   --ifm-heading-letter-spacing: -0.02em;
 
   --ifm-font-color-base: rgba(233, 237, 247, 0.82);
-  --ifm-heading-color: var(--bs-ink);
-  --ifm-color-content-secondary: var(--bs-muted);
+  --ifm-heading-color: var(--lagune-ink);
+  --ifm-color-content-secondary: var(--lagune-muted);
 
-  --ifm-toc-border-color: var(--bs-line);
-  --ifm-table-border-color: var(--bs-line);
-  --ifm-hr-background-color: var(--bs-panel-line);
+  --ifm-toc-border-color: var(--lagune-line);
+  --ifm-table-border-color: var(--lagune-line);
+  --ifm-hr-background-color: var(--lagune-panel-line);
 
   --ifm-navbar-background-color: rgba(5, 10, 24, 0.82);
-  --ifm-navbar-shadow: inset 0 -1px 0 0 var(--bs-panel-line);
-  --ifm-footer-background-color: var(--bs-bg-elevated);
-  --ifm-footer-color: var(--bs-muted);
-  --ifm-footer-link-color: var(--bs-muted);
-  --ifm-footer-title-color: var(--bs-ink);
+  --ifm-navbar-shadow: inset 0 -1px 0 0 var(--lagune-panel-line);
+  --ifm-footer-background-color: var(--lagune-bg-elevated);
+  --ifm-footer-color: var(--lagune-muted);
+  --ifm-footer-link-color: var(--lagune-muted);
+  --ifm-footer-title-color: var(--lagune-ink);
 
-  --ifm-menu-color: var(--bs-muted);
-  --ifm-menu-color-active: var(--bs-ink);
+  --ifm-menu-color: var(--lagune-muted);
+  --ifm-menu-color-active: var(--lagune-ink);
   --ifm-menu-color-background-active: rgba(0, 94, 255, 0.12);
   --ifm-menu-color-background-hover: rgba(255, 255, 255, 0.04);
 
   --ifm-code-font-size: 0.92em;
   --ifm-code-background: rgba(255, 255, 255, 0.07);
   --ifm-pre-background: rgba(6, 7, 9, 0.6);
-  --ifm-blockquote-color: var(--bs-muted);
+  --ifm-blockquote-color: var(--lagune-muted);
   --ifm-blockquote-border-color: rgba(0, 94, 255, 0.5);
 
   --docusaurus-highlighted-code-line-bg: rgba(0, 94, 255, 0.12);
 }
 
 html[data-theme='dark'] {
-  --ifm-background-color: var(--bs-bg);
-  --ifm-background-surface-color: var(--bs-bg-elevated);
+  --ifm-background-color: var(--lagune-bg);
+  --ifm-background-surface-color: var(--lagune-bg-elevated);
 }
 
 html[data-theme='dark'] body {
@@ -512,7 +512,7 @@ html[data-theme='dark'] body {
       rgba(10, 26, 74, 0.4) 0%,
       transparent 55%
     ),
-    var(--bs-bg);
+    var(--lagune-bg);
 }
 
 html {
@@ -528,7 +528,7 @@ body {
 .navbar {
   backdrop-filter: blur(12px) saturate(120%);
   -webkit-backdrop-filter: blur(12px) saturate(120%);
-  border-bottom: 1px solid var(--bs-panel-line);
+  border-bottom: 1px solid var(--lagune-panel-line);
 }
 
 .navbar.navbar-sidebar--show {
@@ -545,43 +545,43 @@ body {
 }
 
 .navbar__link--active {
-  color: var(--bs-accent-soft);
+  color: var(--lagune-accent-soft);
 }
 
 .footer,
 .footer--dark {
-  --ifm-footer-background-color: var(--bs-bg-elevated);
-  --ifm-footer-color: var(--bs-muted);
-  --ifm-footer-link-color: var(--bs-muted);
-  --ifm-footer-title-color: var(--bs-ink);
-  --ifm-footer-link-hover-color: var(--bs-accent-soft);
-  background: var(--bs-bg-elevated);
-  border-top: 1px solid var(--bs-panel-line);
+  --ifm-footer-background-color: var(--lagune-bg-elevated);
+  --ifm-footer-color: var(--lagune-muted);
+  --ifm-footer-link-color: var(--lagune-muted);
+  --ifm-footer-title-color: var(--lagune-ink);
+  --ifm-footer-link-hover-color: var(--lagune-accent-soft);
+  background: var(--lagune-bg-elevated);
+  border-top: 1px solid var(--lagune-panel-line);
 }
 
 .footer__title {
   font-family: var(--ifm-heading-font-family);
   font-weight: 700;
   letter-spacing: -0.01em;
-  color: var(--bs-ink);
+  color: var(--lagune-ink);
 }
 
 .footer__link-item {
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--bs-muted);
+  color: var(--lagune-muted);
   transition: color 0.2s ease;
 }
 
 .footer__link-item:hover {
-  color: var(--bs-accent-soft);
+  color: var(--lagune-accent-soft);
   text-decoration: none;
 }
 
 .footer__copyright {
   margin-top: 1.5rem;
   font-size: 0.8125rem;
-  color: var(--bs-faint);
+  color: var(--lagune-faint);
 }
 
 .footer .container {

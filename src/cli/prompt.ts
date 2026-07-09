@@ -30,7 +30,7 @@ const lockedFirst = <Item>(
 const LIST_TARGETS: { value: ListTarget; label: string }[] = [
   {
     value: 'findings',
-    label: 'Findings: the security findings Blue Spec tracks',
+    label: 'Findings: the security findings Lagune tracks',
   },
   {
     value: 'skills',

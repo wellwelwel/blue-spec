@@ -23,7 +23,7 @@ const EMPTY_DRAFT: Draft = {
   message: '',
 };
 
-const DRAFT_KEY = 'bluespec:partners-draft';
+const DRAFT_KEY = 'lagune:partners-draft';
 const WEB3FORMS_PUBLIC_KEY = '0e430072-493e-4eba-9991-9879134fe5ef';
 const SUBMIT_COOLDOWN_MS = 8000;
 const STATS_URL = 'https://wellwelwel.github.io/wellwelwel/stats.json';
@@ -218,7 +218,7 @@ const TypeChips = ({
 };
 
 const SuccessState = ({ onReset }: { onReset: () => void }): ReactNode => (
-  <div className='bs-fade-in flex flex-col items-center text-center gap-4 py-8'>
+  <div className='lagune-fade-in flex flex-col items-center text-center gap-4 py-8'>
     <span className='flex items-center justify-center size-14 rounded-full bg-accent/15 text-accent [&>svg]:size-7'>
       <LuCheck aria-hidden />
     </span>
@@ -328,7 +328,7 @@ export const PartnersModal = ({
         body: JSON.stringify({
           access_key: WEB3FORMS_PUBLIC_KEY,
           botcheck: false,
-          subject: 'New partnership request — Blue Spec',
+          subject: 'New partnership request — Lagune',
           from_name: draft.name,
           name: draft.name,
           email: draft.email,
@@ -361,7 +361,7 @@ export const PartnersModal = ({
       onClose={onClose}
       label='Partner with Weslley Araújo'
       padding='p-[clamp(12px,2.5vw,28px)]'
-      panelClassName='bs-modal-panel relative flex flex-col w-full max-w-[1240px] max-h-full rounded-[28px] bg-[#0a0f1f75] overflow-hidden [box-shadow:0_40px_120px_-30px_rgba(0,0,0,0.8)] outline-none'
+      panelClassName='lagune-modal-panel relative flex flex-col w-full max-w-[1240px] max-h-full rounded-[28px] bg-[#0a0f1f75] overflow-hidden [box-shadow:0_40px_120px_-30px_rgba(0,0,0,0.8)] outline-none'
     >
       <div
         className='pointer-events-none absolute inset-0 bg-cover bg-center'
@@ -388,7 +388,7 @@ export const PartnersModal = ({
           <div className='grid flex-1 gap-7 p-[clamp(24px,4vw,56px)] md:grid-cols-[minmax(0,1fr)_auto]'>
             <form
               onSubmit={onSubmit}
-              className='bs-fade-in relative isolate flex w-full max-w-[480px] flex-col gap-4 self-start overflow-hidden rounded-[18px] border border-white/[0.12] bg-[rgba(10,15,31,0.55)] px-[clamp(18px,2.5vw,26px)] py-[clamp(18px,2.5vw,24px)] [backdrop-filter:blur(24px)_saturate(150%)] [-webkit-backdrop-filter:blur(24px)_saturate(150%)] [box-shadow:inset_0_1px_0_rgba(255,255,255,0.08),0_8px_32px_-12px_rgba(0,0,0,0.5)] [animation-delay:0.08s]'
+              className='lagune-fade-in relative isolate flex w-full max-w-[480px] flex-col gap-4 self-start overflow-hidden rounded-[18px] border border-white/[0.12] bg-[rgba(10,15,31,0.55)] px-[clamp(18px,2.5vw,26px)] py-[clamp(18px,2.5vw,24px)] [backdrop-filter:blur(24px)_saturate(150%)] [-webkit-backdrop-filter:blur(24px)_saturate(150%)] [box-shadow:inset_0_1px_0_rgba(255,255,255,0.08),0_8px_32px_-12px_rgba(0,0,0,0.5)] [animation-delay:0.08s]'
             >
               <div
                 className='pointer-events-none absolute inset-0 -z-10 bg-cover bg-center opacity-[0.025] mix-blend-screen'
@@ -500,7 +500,7 @@ export const PartnersModal = ({
               <button
                 type='submit'
                 disabled={status === 'sending'}
-                className='bs-cta group relative mt-1 inline-flex items-center justify-center gap-2.5 pl-5 pr-[22px] py-[13px] rounded-[13px] overflow-hidden font-sans text-[14px] font-bold tracking-[-0.01em] text-white cursor-pointer transition-[box-shadow] duration-300 ease-out [background:linear-gradient(180deg,#1f7bff_0%,var(--color-accent)_100%)] [box-shadow:inset_0_1px_0_rgba(0,0,0,0.35),0_2px_6px_-2px_rgba(0,0,0,0.35)] hover:[box-shadow:inset_0_1px_0_rgba(0,0,0,0.45),0_6px_14px_-4px_rgba(0,0,0,0.4)] focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-70'
+                className='lagune-cta group relative mt-1 inline-flex items-center justify-center gap-2.5 pl-5 pr-[22px] py-[13px] rounded-[13px] overflow-hidden font-sans text-[14px] font-bold tracking-[-0.01em] text-white cursor-pointer transition-[box-shadow] duration-300 ease-out [background:linear-gradient(180deg,#1f7bff_0%,var(--color-accent)_100%)] [box-shadow:inset_0_1px_0_rgba(0,0,0,0.35),0_2px_6px_-2px_rgba(0,0,0,0.35)] hover:[box-shadow:inset_0_1px_0_rgba(0,0,0,0.45),0_6px_14px_-4px_rgba(0,0,0,0.4)] focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-70'
               >
                 <LuSend className='size-[17px] shrink-0' aria-hidden />
                 <span className='[text-shadow:0_1px_1px_rgba(0,0,0,.5)]'>
@@ -509,7 +509,7 @@ export const PartnersModal = ({
               </button>
             </form>
 
-            <aside className='bs-fade-in relative isolate flex flex-col items-center gap-4 overflow-hidden rounded-[18px] border border-white/[0.12] text-center md:rounded-none md:border-0 md:border-l md:border-white/[0.12] md:max-w-[300px] bg-[rgba(10,15,31,0.55)] px-[clamp(18px,2.5vw,28px)] py-[clamp(20px,2.5vw,24px)] [backdrop-filter:blur(20px)_saturate(150%)] [-webkit-backdrop-filter:blur(20px)_saturate(150%)] md:-mt-[clamp(24px,4vw,56px)] md:-mb-[clamp(24px,4vw,56px)] md:-mr-[clamp(24px,4vw,56px)] md:py-[clamp(24px,4vw,56px)] [animation-delay:0.16s]'>
+            <aside className='lagune-fade-in relative isolate flex flex-col items-center gap-4 overflow-hidden rounded-[18px] border border-white/[0.12] text-center md:rounded-none md:border-0 md:border-l md:border-white/[0.12] md:max-w-[300px] bg-[rgba(10,15,31,0.55)] px-[clamp(18px,2.5vw,28px)] py-[clamp(20px,2.5vw,24px)] [backdrop-filter:blur(20px)_saturate(150%)] [-webkit-backdrop-filter:blur(20px)_saturate(150%)] md:-mt-[clamp(24px,4vw,56px)] md:-mb-[clamp(24px,4vw,56px)] md:-mr-[clamp(24px,4vw,56px)] md:py-[clamp(24px,4vw,56px)] [animation-delay:0.16s]'>
               <div
                 className='pointer-events-none absolute inset-0 -z-10 bg-cover bg-center opacity-[0.025] mix-blend-screen'
                 style={{

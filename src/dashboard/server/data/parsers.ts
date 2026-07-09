@@ -4,7 +4,7 @@ import { bulletText, inlineText } from '../../../core/markdown/lines';
 import { withinSection } from '../../../core/markdown/sections';
 import { skillLabel } from '../../shared/skill-meta';
 
-const SKILL_PATH_PREFIX = '.bluespec/skills/';
+const SKILL_PATH_PREFIX = '.lagune/skills/';
 const SKILL_PATH_EXTENSION = '.md';
 const BOLD_MARKS = ['**', '__'];
 const CODE_MARK = '`';

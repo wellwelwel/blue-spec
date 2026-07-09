@@ -7,14 +7,14 @@ import { afterEach } from 'poku';
 const workspaces: string[] = [];
 
 export const newWorkspace = async (): Promise<string> => {
-  const workspace = await mkdtemp(join(tmpdir(), 'blue-spec-track-'));
+  const workspace = await mkdtemp(join(tmpdir(), 'lagune-track-'));
 
   workspaces.push(workspace);
   return workspace;
 };
 
 export const mapOf = (entries: TrackingEntry[]): TrackingMap => ({
-  name: 'blue-spec',
+  name: 'lagune',
   entries,
 });
 

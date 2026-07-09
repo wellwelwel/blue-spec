@@ -21,7 +21,7 @@ export type LiveReload = {
 };
 
 export type DashboardPaths = {
-  bluespec: string;
+  lagune: string;
   dist: string;
 };
 

@@ -6,7 +6,7 @@
 ## Applied
 
 <!--
-  One block per detect finding this phase acted on, taken from the defense plan (.bluespec/memory/plan.md). The block's title is the finding's name, copied verbatim, the same title the plan used, so it is the same item, traced by its title alone with no separate pointer line. The plan decided the WHAT, this record captures the WHAT WAS DONE: the control applied to the code, where it landed, and whether it is fully in place. The Where note says the area the change landed in, not the file path: the path lives in Blue Spec's tracking map.
+  One block per detect finding this phase acted on, taken from the defense plan (.lagune/memory/plan.md). The block's title is the finding's name, copied verbatim, the same title the plan used, so it is the same item, traced by its title alone with no separate pointer line. The plan decided the WHAT, this record captures the WHAT WAS DONE: the control applied to the code, where it landed, and whether it is fully in place. The Where note says the area the change landed in, not the file path: the path lives in Lagune's tracking map.
 
   Each block carries a Status owned by harden, and a Verdict and Reason owned by verify:
     - Status (harden): Applied (the control is fully in place), Partial (some of it is in place, the rest under Remaining), or Blocked (it could not be applied, with the reason under Blocker, and the plan fix stays open).

@@ -20,28 +20,28 @@ With no flag it scans the whole project. `-d` scopes the scan to a directory, `-
   <TabItem value="all" label="Whole project" default>
 
 ```bash
-node ./.bluespec/hooks/regex.mjs
+node ./.lagune/hooks/regex.mjs
 ```
 
   </TabItem>
   <TabItem value="dir" label="A directory">
 
 ```bash
-node ./.bluespec/hooks/regex.mjs -d src/services
+node ./.lagune/hooks/regex.mjs -d src/services
 ```
 
   </TabItem>
   <TabItem value="file" label="A single file">
 
 ```bash
-node ./.bluespec/hooks/regex.mjs -f bin/import.pl
+node ./.lagune/hooks/regex.mjs -f bin/import.pl
 ```
 
   </TabItem>
   <TabItem value="many" label="Several targets">
 
 ```bash
-node ./.bluespec/hooks/regex.mjs -d core -d workers -f Sources/App/Router.swift
+node ./.lagune/hooks/regex.mjs -d core -d workers -f Sources/App/Router.swift
 ```
 
   </TabItem>
@@ -50,7 +50,7 @@ node ./.bluespec/hooks/regex.mjs -d core -d workers -f Sources/App/Router.swift
 `-l` sets the ReDoS threshold for the sweep (default 25), the same limit the check mode takes. A lower limit is stricter.
 
 ```bash
-node ./.bluespec/hooks/regex.mjs -d src/services -l 15
+node ./.lagune/hooks/regex.mjs -d src/services -l 15
 ```
 
   </TabItem>
@@ -78,7 +78,7 @@ config/token.rb
 When nothing is found, it prints a single line.
 
 ```bash
-node ./.bluespec/hooks/regex.mjs -d src/clean
+node ./.lagune/hooks/regex.mjs -d src/clean
 # => no unsafe patterns found
 ```
 
@@ -147,10 +147,10 @@ Pass `-p` with the pattern's source to score it. The hook prints one word: `safe
   <TabItem value="one" label="One pattern" default>
 
 ```bash
-node ./.bluespec/hooks/regex.mjs -p '(a+)+$'
+node ./.lagune/hooks/regex.mjs -p '(a+)+$'
 # => unsafe
 
-node ./.bluespec/hooks/regex.mjs -p '^[a-z0-9_]{3,20}$'
+node ./.lagune/hooks/regex.mjs -p '^[a-z0-9_]{3,20}$'
 # => safe
 ```
 
@@ -158,7 +158,7 @@ node ./.bluespec/hooks/regex.mjs -p '^[a-z0-9_]{3,20}$'
   <TabItem value="many" label="Several patterns">
 
 ```bash
-node ./.bluespec/hooks/regex.mjs -p '(a+)+$' -p '^[a-z]+$'
+node ./.lagune/hooks/regex.mjs -p '(a+)+$' -p '^[a-z]+$'
 # => unsafe
 # => safe
 ```
@@ -169,7 +169,7 @@ node ./.bluespec/hooks/regex.mjs -p '(a+)+$' -p '^[a-z]+$'
 `-l` sets the repetition limit (default 25) and applies to every `-p` in the call. A lower limit is stricter.
 
 ```bash
-node ./.bluespec/hooks/regex.mjs -p 'a?a?a?' -l 2
+node ./.lagune/hooks/regex.mjs -p 'a?a?a?' -l 2
 # => unsafe
 ```
 

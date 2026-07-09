@@ -3,7 +3,7 @@
     ".": {
       "changelog-path": "CHANGELOG.md",
       "include-component-in-tag": false,
-      "package-name": "blue-spec",
+      "package-name": "lagune",
       "release-type": "node"
     }
   }

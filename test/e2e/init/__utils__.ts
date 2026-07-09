@@ -34,7 +34,7 @@ const baseArgs: ParsedCliArgs = {
 };
 
 export const newWorkspace = async (): Promise<string> => {
-  const workspace = await mkdtemp(join(tmpdir(), 'blue-spec-'));
+  const workspace = await mkdtemp(join(tmpdir(), 'lagune-'));
 
   workspaces.push(workspace);
   return workspace;
@@ -43,9 +43,7 @@ export const newWorkspace = async (): Promise<string> => {
 export const readManifest = async (
   workspace: string
 ): Promise<Record<string, unknown>> =>
-  JSON.parse(
-    await readFile(join(workspace, '.bluespec/manifest.json'), 'utf8')
-  );
+  JSON.parse(await readFile(join(workspace, '.lagune/manifest.json'), 'utf8'));
 
 export const initInto = (workspace: string, args: InitArgs): Promise<void> =>
   runHeadless(

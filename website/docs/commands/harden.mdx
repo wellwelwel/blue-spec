@@ -1,6 +1,6 @@
 ---
 id: harden
-title: /bluespec.harden
+title: /lagune.harden
 sidebar_label: 4. Harden
 description: Apply the plan's fixes to your code, safely and one at a time.
 ---
@@ -8,7 +8,7 @@ description: Apply the plan's fixes to your code, safely and one at a time.
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
 
-# /bluespec.harden
+# /lagune.harden
 
 🔧 Apply the plan's fixes to your code, safely and one at a time.
 
@@ -18,21 +18,21 @@ import Tabs from '@theme/Tabs';
   <TabItem value="full" label="Apply everything" default>
 
 ```prompt
-/bluespec.harden
+/lagune.harden
 ```
 
   </TabItem>
   <TabItem value="paths" label="Point at paths">
 
 ```prompt
-/bluespec.harden src/routes/upload.ts
+/lagune.harden src/routes/upload.ts
 ```
 
   </TabItem>
   <TabItem value="priority" label="By priority">
 
 ```prompt
-/bluespec.harden Critical and High
+/lagune.harden Critical and High
 ```
 
   </TabItem>
@@ -54,17 +54,17 @@ Applied does not mean proven yet. That is what [verify](/docs/commands/verify) i
 
 :::tip
 
-- It builds entirely on the plan. If a fix or file was never planned, it tells you to run `/bluespec.plan` on it first.
+- It builds entirely on the plan. If a fix or file was never planned, it tells you to run `/lagune.plan` on it first.
 - It confirms before changing anything and never makes a destructive change without asking.
 - Running it again reconciles the record: reverted changes drop off, newly applied fixes come in.
-- The hardening record lives in `.bluespec/memory/harden.md`.
+- The hardening record lives in `.lagune/memory/harden.md`.
 
 :::
 
 :::warning[Depends on plan, and changes your code]
-Harden builds on [`/bluespec.plan`](/docs/commands/plan). It is the one phase that changes your code.
+Harden builds on [`/lagune.plan`](/docs/commands/plan). It is the one phase that changes your code.
 :::
 
 ## Next
 
-Prove each fix holds: [`/bluespec.verify`](/docs/commands/verify).
+Prove each fix holds: [`/lagune.verify`](/docs/commands/verify).

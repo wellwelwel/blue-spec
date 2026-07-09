@@ -14,7 +14,7 @@ import { buildSideQuests } from './sidequests';
 import { buildSkills } from './skills';
 
 export const buildData = async (
-  bluespecDir: string,
+  laguneDir: string,
   packageRoot: URL
 ): Promise<DashboardData> => {
   const [
@@ -28,14 +28,14 @@ export const buildData = async (
     manifest,
     running,
   ] = await Promise.all([
-    readMarkdown(join(bluespecDir, 'memory/detect.md')),
-    readMarkdown(join(bluespecDir, 'memory/plan.md')),
-    readMarkdown(join(bluespecDir, 'memory/harden.md')),
-    readMarkdown(join(bluespecDir, 'memory/charter.md')),
-    readMarkdown(join(bluespecDir, 'memory/history.md')),
-    readText(join(bluespecDir, 'tracking.json')),
-    readSkillNames(join(bluespecDir, 'skills')),
-    readText(join(bluespecDir, 'manifest.json')),
+    readMarkdown(join(laguneDir, 'memory/detect.md')),
+    readMarkdown(join(laguneDir, 'memory/plan.md')),
+    readMarkdown(join(laguneDir, 'memory/harden.md')),
+    readMarkdown(join(laguneDir, 'memory/charter.md')),
+    readMarkdown(join(laguneDir, 'memory/history.md')),
+    readText(join(laguneDir, 'tracking.json')),
+    readSkillNames(join(laguneDir, 'skills')),
+    readText(join(laguneDir, 'manifest.json')),
     loadVersion(packageRoot).catch(() => null),
   ]);
 
@@ -51,7 +51,7 @@ export const buildData = async (
   return {
     project: matchProject(detect, charter),
     version: matchVersion(charter),
-    tagline: 'Read-only view of .bluespec/ · live',
+    tagline: 'Read-only view of .lagune/ · live',
     scope: bulletField(detect, 'Scope'),
     dates: {
       mapped: bulletField(detect, 'Mapped'),
@@ -67,7 +67,7 @@ export const buildData = async (
     install: {
       ...install,
       running,
-      missing: await missingFiles(resolve(bluespecDir, '..'), files),
+      missing: await missingFiles(resolve(laguneDir, '..'), files),
     },
   };
 };

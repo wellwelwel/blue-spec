@@ -73,7 +73,7 @@ export const Topbar = (): VNode => {
           href={LINKS.sponsor}
           target='_blank'
           rel='noreferrer'
-          aria-label='Sponsor Blue Spec'
+          aria-label='Sponsor Lagune'
         >
           <span class='inline-flex text-pink'>
             <Icon name='heart' />

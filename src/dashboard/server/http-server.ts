@@ -16,13 +16,13 @@ import { tokenMatches } from './session';
 import { serveStatic } from './static-files';
 
 const sendData = async (
-  bluespecDir: string,
+  laguneDir: string,
   packageRoot: URL
 ): Promise<{ status: number; body: string }> => {
   try {
     return {
       status: 200,
-      body: JSON.stringify(await buildData(bluespecDir, packageRoot)),
+      body: JSON.stringify(await buildData(laguneDir, packageRoot)),
     };
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
@@ -35,7 +35,7 @@ const CONTENT_SECURITY_POLICY = [
   "script-src 'self'",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
-  "img-src 'self' https://bluespec.weslley.io data:",
+  "img-src 'self' https://lagune.weslley.io data:",
   "connect-src 'self'",
   "object-src 'none'",
   "base-uri 'none'",
@@ -113,7 +113,7 @@ export const createDashboardServer = (
   live: LiveReload;
 } => {
   const { paths, cwd, packageRoot, token } = options;
-  const live = createLiveReload(paths.bluespec);
+  const live = createLiveReload(paths.lagune);
   const guards = createRequestGuards(options.allowedOrigins);
   let actionBusy = false;
 
@@ -125,7 +125,7 @@ export const createDashboardServer = (
     if (
       crossSiteFetch(req) ||
       !guards.originAllowed(req) ||
-      !tokenMatches(token, req.headers['x-bluespec-token'])
+      !tokenMatches(token, req.headers['x-lagune-token'])
     ) {
       sendJson(res, 403, JSON.stringify({ ok: false, error: 'Forbidden' }));
       return;
@@ -202,7 +202,7 @@ export const createDashboardServer = (
     if (url === '/api/data') {
       if (rejectCrossSite(req, res)) return;
 
-      const { status, body } = await sendData(paths.bluespec, packageRoot);
+      const { status, body } = await sendData(paths.lagune, packageRoot);
       sendJson(res, status, body);
       return;
     }

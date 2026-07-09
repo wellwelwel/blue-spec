@@ -140,9 +140,9 @@ export const PromptAgentModal = (
                 </span>
               ) : (
                 <>
-                  <span class='size-1.5 rounded-full bg-muted animate-[bs-typing_1.1s_ease-in-out_infinite]' />
-                  <span class='size-1.5 rounded-full bg-muted animate-[bs-typing_1.1s_ease-in-out_0.15s_infinite]' />
-                  <span class='size-1.5 rounded-full bg-muted animate-[bs-typing_1.1s_ease-in-out_0.3s_infinite]' />
+                  <span class='size-1.5 rounded-full bg-muted animate-[lagune-typing_1.1s_ease-in-out_infinite]' />
+                  <span class='size-1.5 rounded-full bg-muted animate-[lagune-typing_1.1s_ease-in-out_0.15s_infinite]' />
+                  <span class='size-1.5 rounded-full bg-muted animate-[lagune-typing_1.1s_ease-in-out_0.3s_infinite]' />
                 </>
               )}
             </span>
@@ -178,7 +178,7 @@ export const PromptAgentModal = (
         </span>
         <span class='group/copy relative flex-none'>
           <button
-            class='bs-cta relative grid size-10 cursor-pointer place-items-center overflow-hidden rounded-md text-[1rem] text-white transition-shadow duration-300 ease-out [background:linear-gradient(180deg,#1f7bff_0%,var(--color-accent)_100%)] [box-shadow:inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.35)] hover:[box-shadow:inset_0_1px_0_rgba(255,255,255,0.45),0_6px_14px_-4px_rgba(0,0,0,0.4)] focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2'
+            class='lagune-cta relative grid size-10 cursor-pointer place-items-center overflow-hidden rounded-md text-[1rem] text-white transition-shadow duration-300 ease-out [background:linear-gradient(180deg,#1f7bff_0%,var(--color-accent)_100%)] [box-shadow:inset_0_1px_0_rgba(255,255,255,0.35),0_2px_6px_-2px_rgba(0,0,0,0.35)] hover:[box-shadow:inset_0_1px_0_rgba(255,255,255,0.45),0_6px_14px_-4px_rgba(0,0,0,0.4)] focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2'
             type='button'
             aria-label={copied ? 'Copied' : 'Copy prompt'}
             onClick={copy}

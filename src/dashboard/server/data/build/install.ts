@@ -3,7 +3,7 @@ import { access } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import { manifestAgents } from '../../../../core/manifest';
 
-const BLUESPEC_DIR = '.bluespec';
+const LAGUNE_DIR = '.lagune';
 
 const EMPTY_INSTALL: Install & { files: string[] } = {
   agents: [],
@@ -64,7 +64,7 @@ export const installWatchRoots = (files: string[]): string[] => [
   ...new Set(
     files
       .map(topSegment)
-      .filter((segment) => segment !== '' && segment !== BLUESPEC_DIR)
+      .filter((segment) => segment !== '' && segment !== LAGUNE_DIR)
   ),
 ];
 

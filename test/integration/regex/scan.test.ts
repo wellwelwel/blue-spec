@@ -254,12 +254,12 @@ await describe('scan maps unsafe regex across a path, language-gated', async () 
     ]);
   });
 
-  await it('ignores the root .bluespec dir and any bluespec.* dir', async () => {
+  await it('ignores the root .lagune dir and any lagune.* dir', async () => {
     const workspace = await newWorkspace();
     const pattern = 'const re = /(a+)+$/;';
     const files: Record<string, string> = { 'kept.js': pattern };
 
-    for (const dir of ['.bluespec', 'bluespec.detect', 'src/bluespec.cache'])
+    for (const dir of ['.lagune', 'lagune.detect', 'src/lagune.cache'])
       files[join(dir, 'noise.js')] = pattern;
 
     await writeFiles(workspace, files);
@@ -272,18 +272,18 @@ await describe('scan maps unsafe regex across a path, language-gated', async () 
     );
   });
 
-  await it('scans a .bluespec dir that is not at the project root', async () => {
+  await it('scans a .lagune dir that is not at the project root', async () => {
     const workspace = await newWorkspace();
 
     await writeFiles(workspace, {
-      'pkg/.bluespec/r.js': 'const re = /(a+)+$/;',
+      'pkg/.lagune/r.js': 'const re = /(a+)+$/;',
     });
 
     const { unsafe } = await scan(workspace, [workspace]);
 
     strict.deepStrictEqual(
       unsafe.map((f) => f.file),
-      [join('pkg', '.bluespec', 'r.js')]
+      [join('pkg', '.lagune', 'r.js')]
     );
   });
 });

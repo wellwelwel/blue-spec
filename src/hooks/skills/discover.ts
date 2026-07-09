@@ -2,8 +2,8 @@ import type { SkillCatalogEntry, SkillsCatalogFile } from '../../types/core.js';
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
-const USER_CATALOG_PATH = '.bluespec/skills.json';
-const SKILLS_DIR = '.bluespec/skills';
+const USER_CATALOG_PATH = '.lagune/skills.json';
+const SKILLS_DIR = '.lagune/skills';
 
 const isStringArray = (value: unknown): value is string[] =>
   Array.isArray(value) && value.every((item) => typeof item === 'string');
@@ -33,7 +33,7 @@ const parseUserCatalog = (raw: string): SkillCatalogEntry[] => {
   return asRecords(parsed.entries).filter(isValidEntry).map(toEntry);
 };
 
-/** Reads the user's own sub-skills from .bluespec/skills.json, failing closed to [] */
+/** Reads the user's own sub-skills from .lagune/skills.json, failing closed to [] */
 export const discoverSkills = async (
   targetDir: string
 ): Promise<SkillCatalogEntry[]> => {
@@ -46,7 +46,7 @@ export const discoverSkills = async (
   }
 };
 
-/** The sub-skill names whose .bluespec/skills/<name>.md file is present, failing closed to [] */
+/** The sub-skill names whose .lagune/skills/<name>.md file is present, failing closed to [] */
 export const presentSkillNames = async (
   targetDir: string
 ): Promise<string[]> => {

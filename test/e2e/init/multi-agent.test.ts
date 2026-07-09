@@ -9,8 +9,8 @@ import {
   updateInto,
 } from './__utils__.js';
 
-const claudeCharter = '.claude/skills/bluespec.charter/SKILL.md';
-const copilotCharter = '.github/prompts/bluespec.charter.prompt.md';
+const claudeCharter = '.claude/skills/lagune.charter/SKILL.md';
+const copilotCharter = '.github/prompts/lagune.charter.prompt.md';
 
 await describe('the manifest records every agent installed', async () => {
   await it('keeps a single agent as a string', async () => {
@@ -97,7 +97,7 @@ await describe('re-running init when everything is already installed', async () 
       agent: listAgentKeys(),
     };
     await writeFile(
-      join(workspace, '.bluespec/manifest.json'),
+      join(workspace, '.lagune/manifest.json'),
       `${JSON.stringify(seeded, null, 2)}\n`,
       'utf8'
     );

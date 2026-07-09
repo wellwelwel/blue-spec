@@ -6,7 +6,7 @@
 ## Findings
 
 <!--
-  One block per thing the system actually does that carries security weight. What carries weight depends on what the project is: a web service (login, uploads, payments, database access), a library or package (the public API surface, deserialization, command execution), a CLI or script (the arguments and files it reads, the commands it shells out to), a desktop or mobile app (local storage, update channel, device permissions). Detect from the project at hand, not from a fixed list. Each finding has three parts, in plain language for any reader, plus an Evidence note that says where the finding lives without naming the file path. The finding's name (this block's title) is its identity: plan, harden, and verify each reuse it verbatim as their own section title, so the same item is traced by that one name across every phase. Keep each finding's name unique in the map. The file path is not written here: it lives in Blue Spec's tracking map, which keeps it current through a rename. This is detection, not invention. Only record what the code actually supports.
+  One block per thing the system actually does that carries security weight. What carries weight depends on what the project is: a web service (login, uploads, payments, database access), a library or package (the public API surface, deserialization, command execution), a CLI or script (the arguments and files it reads, the commands it shells out to), a desktop or mobile app (local storage, update channel, device permissions). Detect from the project at hand, not from a fixed list. Each finding has three parts, in plain language for any reader, plus an Evidence note that says where the finding lives without naming the file path. The finding's name (this block's title) is its identity: plan, harden, and verify each reuse it verbatim as their own section title, so the same item is traced by that one name across every phase. Keep each finding's name unique in the map. The file path is not written here: it lives in Lagune's tracking map, which keeps it current through a rename. This is detection, not invention. Only record what the code actually supports.
 
   This map is reconciled, never append-only. On a re-run, re-check each existing finding against the current code: keep it if it still holds, rewrite it if it changed, and remove it if the code shows it is resolved or no longer applies. Then add blocks only for what is genuinely new.
 -->
@@ -31,7 +31,7 @@
 
 ## Applied sub-skills <!-- Optional. The sub-skills you applied this run, each with the finding(s) it surfaced. List only the ones that applied. Reconcile with the findings: a sub-skill drops off when every finding it produced is gone. Remove this section if none applied. -->
 
-- [SUBSKILL_NAME]: [SUBSKILL_CONTRIBUTION] <!-- Example: ".bluespec/skills/regex.md: the ReDoS-prone validator under 'Email validation'". Use the sub-skill's file path, and name the findings by their titles above. -->
+- [SUBSKILL_NAME]: [SUBSKILL_CONTRIBUTION] <!-- Example: ".lagune/skills/regex.md: the ReDoS-prone validator under 'Email validation'". Use the sub-skill's file path, and name the findings by their titles above. -->
 
 ## Not determined <!-- Optional. List anything the scope asked about that the code did not make clear, so a later pass or the user can resolve it. Remove this section if everything in scope was determined. -->
 

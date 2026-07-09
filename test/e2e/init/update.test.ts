@@ -12,9 +12,9 @@ import {
 const read = (workspace: string, relativePath: string): Promise<string> =>
   readFile(join(workspace, relativePath), 'utf8');
 
-const charterCommand = '.claude/skills/bluespec.charter/SKILL.md';
-const charterMemory = '.bluespec/memory/charter.md';
-const tracking = '.bluespec/tracking.json';
+const charterCommand = '.claude/skills/lagune.charter/SKILL.md';
+const charterMemory = '.lagune/memory/charter.md';
+const tracking = '.lagune/tracking.json';
 
 await describe('update refreshes managed files to the installed version', async () => {
   await it('overwrites a hand-edited managed command file', async () => {
@@ -45,9 +45,9 @@ await describe('update refreshes managed files to the installed version', async 
       agent: 'claude',
       skills: ['owasp'],
     });
-    const shipped = await read(workspace, '.bluespec/skills/regex.md');
+    const shipped = await read(workspace, '.lagune/skills/regex.md');
     await writeFile(
-      join(workspace, '.bluespec/skills/regex.md'),
+      join(workspace, '.lagune/skills/regex.md'),
       'edited',
       'utf8'
     );
@@ -55,7 +55,7 @@ await describe('update refreshes managed files to the installed version', async 
     await updateInto(workspace);
 
     strict.strictEqual(
-      await read(workspace, '.bluespec/skills/regex.md'),
+      await read(workspace, '.lagune/skills/regex.md'),
       shipped,
       'an installed built-in sub-skill should be refreshed'
     );
@@ -91,7 +91,7 @@ await describe('update refreshes managed files to the installed version', async 
       skills: ['owasp'],
     });
     await writeFile(
-      join(workspace, '.bluespec/skills/graphql.md'),
+      join(workspace, '.lagune/skills/graphql.md'),
       'my own sub-skill',
       'utf8'
     );
@@ -99,7 +99,7 @@ await describe('update refreshes managed files to the installed version', async 
     await updateInto(workspace);
 
     strict.strictEqual(
-      await read(workspace, '.bluespec/skills/graphql.md'),
+      await read(workspace, '.lagune/skills/graphql.md'),
       'my own sub-skill',
       'a self-authored sub-skill should never be touched'
     );
@@ -115,10 +115,10 @@ await describe('update refreshes managed files to the installed version', async 
     });
 
     const before: { createdAt: string } = JSON.parse(
-      await read(workspace, '.bluespec/manifest.json')
+      await read(workspace, '.lagune/manifest.json')
     );
     await writeFile(
-      join(workspace, '.bluespec/manifest.json'),
+      join(workspace, '.lagune/manifest.json'),
       JSON.stringify({ ...before, version: '0.0.0-old' }, null, 2),
       'utf8'
     );
@@ -126,7 +126,7 @@ await describe('update refreshes managed files to the installed version', async 
     await updateInto(workspace);
 
     const after: { version: string; createdAt: string; agent: string } =
-      JSON.parse(await read(workspace, '.bluespec/manifest.json'));
+      JSON.parse(await read(workspace, '.lagune/manifest.json'));
     const version = await loadVersion(packageRoot);
 
     strict.strictEqual(after.version, version, 'version is restamped');
@@ -144,7 +144,7 @@ await describe('update refreshes managed files to the installed version', async 
     await updateInto(workspace);
 
     await strict.rejects(
-      stat(join(workspace, '.bluespec/manifest.json')),
+      stat(join(workspace, '.lagune/manifest.json')),
       'no manifest should be written without a prior init'
     );
   });

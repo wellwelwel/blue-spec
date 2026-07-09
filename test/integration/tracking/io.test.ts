@@ -14,21 +14,21 @@ await describe('tracking map I/O', async () => {
     const workspace = await newWorkspace();
     const map = await loadTrackingMap(workspace);
 
-    strict.deepStrictEqual(map, { name: 'blue-spec', entries: [] });
+    strict.deepStrictEqual(map, { name: 'lagune', entries: [] });
   });
 
   await it('rebuilds from the empty map when the file is corrupt', async () => {
     const workspace = await newWorkspace();
-    await ensureDir(join(workspace, '.bluespec'));
+    await ensureDir(join(workspace, '.lagune'));
     await writeFile(
-      join(workspace, '.bluespec/tracking.json'),
+      join(workspace, '.lagune/tracking.json'),
       'not json{',
       'utf8'
     );
 
     const map = await loadTrackingMap(workspace);
 
-    strict.deepStrictEqual(map, { name: 'blue-spec', entries: [] });
+    strict.deepStrictEqual(map, { name: 'lagune', entries: [] });
   });
 
   await it('round-trips a written map byte-for-byte', async () => {
@@ -45,11 +45,11 @@ await describe('tracking map I/O', async () => {
 
   await it('normalizes an old-shape entry on load, dropping its id, phase, and prose', async () => {
     const workspace = await newWorkspace();
-    await ensureDir(join(workspace, '.bluespec'));
+    await ensureDir(join(workspace, '.lagune'));
     await writeFile(
-      join(workspace, '.bluespec/tracking.json'),
+      join(workspace, '.lagune/tracking.json'),
       JSON.stringify({
-        name: 'blue-spec',
+        name: 'lagune',
         entries: [
           {
             id: 'old-1',
@@ -72,7 +72,7 @@ await describe('tracking map I/O', async () => {
 
     strict.strictEqual(
       serialized,
-      `${JSON.stringify({ name: 'blue-spec', entries: [] }, null, 2)}\n`
+      `${JSON.stringify({ name: 'lagune', entries: [] }, null, 2)}\n`
     );
     strict(serialized.endsWith('\n'), 'should end with a newline');
   });

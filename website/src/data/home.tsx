@@ -64,7 +64,7 @@ export const PHASE_GROUPS: Group[] = [
       {
         no: 'PHASE 1',
         title: 'Charter',
-        command: '/bluespec.charter',
+        command: '/lagune.charter',
         desc: "Sets your project's security rules, proposed for you or shaped by what you say.",
         banner: '/img/docs/banner-1.png',
         modes: [
@@ -87,7 +87,7 @@ export const PHASE_GROUPS: Group[] = [
       {
         no: 'PHASE 2',
         title: 'Detect',
-        command: '/bluespec.detect',
+        command: '/lagune.detect',
         desc: 'Reads your code and maps what your system does and where the risks are.',
         banner: '/img/docs/banner-5.png',
         modes: [
@@ -108,7 +108,7 @@ export const PHASE_GROUPS: Group[] = [
       {
         no: 'PHASE 3',
         title: 'Plan',
-        command: '/bluespec.plan',
+        command: '/lagune.plan',
         desc: 'Turns what detect found into a defense plan, with a fix for each finding.',
         banner: '/img/docs/banner-3.png',
         modes: [
@@ -130,7 +130,7 @@ export const PHASE_GROUPS: Group[] = [
       {
         no: 'PHASE 4',
         title: 'Harden',
-        command: '/bluespec.harden',
+        command: '/lagune.harden',
         desc: "Applies the plan's fixes to your code, safely and one at a time.",
         banner: '/img/docs/banner-2.png',
         modes: [
@@ -147,7 +147,7 @@ export const PHASE_GROUPS: Group[] = [
       {
         no: 'PHASE 5',
         title: 'Verify',
-        command: '/bluespec.verify',
+        command: '/lagune.verify',
         desc: 'Proves each applied fix holds and closes out the ones that do.',
         banner: '/img/docs/banner-4.png',
         modes: [
@@ -224,7 +224,7 @@ export const HIGHLIGHTS: {
     ),
     body: (
       <>
-        Initialize Blue Spec with your agent of choice and it sets up the right
+        Initialize Lagune with your agent of choice and it sets up the right
         command files and conventions, ready to run in your project.
       </>
     ),
@@ -293,7 +293,7 @@ export const RAILS: Record<'overview' | 'install', RailItem[]> = {
       tip: 'Star on GitHub',
       active: false,
       Icon: LuStar,
-      href: 'https://github.com/wellwelwel/blue-spec',
+      href: 'https://github.com/wellwelwel/lagune',
     },
   ],
   install: [
@@ -334,15 +334,7 @@ export const FEATURE: Record<
   overview: {
     kicker: (
       <>
-        Blue{' '}
-        <span className='relative -top-[0.4em] align-baseline font-mono !text-[0.75em] font-semibold text-[#2092ff]'>
-          {'[Team]'}
-        </span>{' '}
-        Spec{' '}
-        <span className='relative -top-[0.4em] align-baseline font-mono !text-[0.75em] font-semibold text-[#2092ff]'>
-          {'[Driven]'}
-        </span>{' '}
-        is the practice of{' '}
+        Lagune is the practice of{' '}
         <strong className='text-ink font-semibold'>
           Security-Driven Hardening
         </strong>

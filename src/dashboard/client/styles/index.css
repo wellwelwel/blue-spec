@@ -218,7 +218,7 @@
     --fade-end 0.3s var(--ease);
 }
 
-@keyframes bs-rise {
+@keyframes lagune-rise {
   from {
     opacity: 0;
     transform: translateY(10px);
@@ -229,7 +229,7 @@
   }
 }
 
-@keyframes bs-fade {
+@keyframes lagune-fade {
   from {
     opacity: 0;
   }
@@ -238,7 +238,7 @@
   }
 }
 
-@keyframes bs-fade-up {
+@keyframes lagune-fade-up {
   from {
     opacity: 0;
     transform: translateY(12px);
@@ -249,7 +249,7 @@
   }
 }
 
-@keyframes bs-pop {
+@keyframes lagune-pop {
   from {
     opacity: 0;
     transform: translateY(8px) scale(0.985);
@@ -260,7 +260,7 @@
   }
 }
 
-@keyframes bs-typing {
+@keyframes lagune-typing {
   0%,
   60%,
   100% {
@@ -273,16 +273,16 @@
   }
 }
 
-.bs-backdrop {
+.lagune-backdrop {
   background: color-mix(in srgb, var(--dark) 62%, transparent);
-  animation: bs-fade 0.18s ease both;
+  animation: lagune-fade 0.18s ease both;
 }
 
-.bs-panel {
-  animation: bs-pop 0.28s var(--ease) both;
+.lagune-panel {
+  animation: lagune-pop 0.28s var(--ease) both;
 }
 
-.bs-cta::after {
+.lagune-cta::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -297,15 +297,15 @@
   will-change: transform;
 }
 
-.bs-cta:hover::after {
+.lagune-cta:hover::after {
   transform: translateX(120%);
 }
 
 .route-fade {
-  animation: bs-fade 0.25s ease both;
+  animation: lagune-fade 0.25s ease both;
 }
 
-@keyframes bs-icon-in {
+@keyframes lagune-icon-in {
   from {
     opacity: 0;
     scale: 0.25;
@@ -319,15 +319,15 @@
 }
 
 .icon-in {
-  animation: bs-icon-in 0.3s var(--ease) both;
+  animation: lagune-icon-in 0.3s var(--ease) both;
 }
 
 .route-rise {
-  animation: bs-fade-up 0.5s var(--ease) 0.08s both;
+  animation: lagune-fade-up 0.5s var(--ease) 0.08s both;
 }
 
 .rise > * {
-  animation: bs-rise 0.5s var(--ease) both;
+  animation: lagune-rise 0.5s var(--ease) both;
 }
 .rise > *:nth-child(2) {
   animation-delay: 0.06s;
@@ -342,16 +342,16 @@
   animation-delay: 0.24s;
 }
 
-.bs-robot-hop {
+.lagune-robot-hop {
   transform-origin: 50% 100%;
   will-change: transform;
 }
 
-.group\/eg-host:hover .bs-robot-hop {
-  animation: bs-robot-hop 0.7s cubic-bezier(0.3, 0.7, 0.4, 1) both;
+.group\/eg-host:hover .lagune-robot-hop {
+  animation: lagune-robot-hop 0.7s cubic-bezier(0.3, 0.7, 0.4, 1) both;
 }
 
-@keyframes bs-robot-hop {
+@keyframes lagune-robot-hop {
   0% {
     transform: translateY(0) rotate(0deg) scaleY(1);
   }

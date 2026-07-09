@@ -7,15 +7,15 @@ import type {
 import { readdir, readFile } from 'node:fs/promises';
 
 const COMMAND_FILES: Record<CommandKey, string> = {
-  bluespec: 'spec/commands/bluespec.md',
-  charter: 'spec/commands/bluespec.charter.md',
-  detect: 'spec/commands/bluespec.detect.md',
-  plan: 'spec/commands/bluespec.plan.md',
-  harden: 'spec/commands/bluespec.harden.md',
-  verify: 'spec/commands/bluespec.verify.md',
-  repair: 'spec/commands/bluespec.repair.md',
-  specialize: 'spec/commands/bluespec.specialize.md',
-  prove: 'spec/commands/bluespec.prove.md',
+  lagune: 'spec/commands/lagune.md',
+  charter: 'spec/commands/lagune.charter.md',
+  detect: 'spec/commands/lagune.detect.md',
+  plan: 'spec/commands/lagune.plan.md',
+  harden: 'spec/commands/lagune.harden.md',
+  verify: 'spec/commands/lagune.verify.md',
+  repair: 'spec/commands/lagune.repair.md',
+  specialize: 'spec/commands/lagune.specialize.md',
+  prove: 'spec/commands/lagune.prove.md',
 };
 
 const TEMPLATE_FILES: Record<TemplateKey, string> = {

@@ -3,14 +3,16 @@ node_modules
 /temp/
 /draft/
 .DS_Store
-.bluespec/
+.lagune/
 /PLAN.md
 /.plans
 
-# Blue Spec
-/.bluespec/templates/
-/.bluespec/hooks/
-/.bluespec/skills/*
-/**/bluespec.*
-/**/bluespec/
-!/spec/commands/bluespec.*
+# Lagune
+/.lagune/templates/
+/.lagune/hooks/
+/.lagune/skills/*
+/**/lagune.*
+/**/lagune/
+!/spec/commands/lagune.*
+!/website/docs/commands/lagune.*
+!/website/src/prism/lagune.*

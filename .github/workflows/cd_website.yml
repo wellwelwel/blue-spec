@@ -46,6 +46,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./website/build
-          cname: bluespec.weslley.io
+          cname: lagune.weslley.io
           publish_branch: 'website'
           allow_empty_commit: false

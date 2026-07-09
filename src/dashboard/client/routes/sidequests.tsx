@@ -45,10 +45,10 @@ export const SideQuests = (): VNode => {
   return (
     <>
       <PageHeader
-        background='https://bluespec.weslley.io/img/docs/banner-2.png'
+        background='https://lagune.weslley.io/img/docs/banner-2.png'
         eyebrow='Side Quests'
         title='Optional runs that level up the chain'
-        description="Objectives outside Blue Spec's main quest. It won't clear them for you, but completing one makes the phase it feeds land better."
+        description="Objectives outside Lagune's main quest. It won't clear them for you, but completing one makes the phase it feeds land better."
         actions={
           <span class={BANNER_CHIP}>
             Quests
@@ -61,12 +61,12 @@ export const SideQuests = (): VNode => {
         <Admonition kind='info' title='What is this?'>
           <p class='text-pretty'>
             These are optional objectives it spotted while reading your project,
-            outside Blue Spec's scope by nature.
+            outside Lagune's scope by nature.
           </p>
           <p class='text-pretty'>
-            For example: Blue Spec doesn't write your tests, but when they
-            exist, Harden applies fixes with far more confidence and less
-            regression risk.
+            For example: Lagune doesn't write your tests, but when they exist,
+            Harden applies fixes with far more confidence and less regression
+            risk.
           </p>
         </Admonition>
 

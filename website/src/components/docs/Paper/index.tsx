@@ -40,7 +40,7 @@ const RefContext = createContext<RefMaps>({
 const CITATION = /^\[(\d+)\]$/;
 const SECTION = /^§([IVXLC]+)$/;
 
-/* The popover is portaled to <body>, outside the .bs-docs token scope, so its
+/* The popover is portaled to <body>, outside the .lagune-docs token scope, so its
    two-color surface is resolved per mode here instead of from CSS variables. */
 const POPOVER_THEME: Record<
   DocsTheme,
@@ -124,7 +124,7 @@ const RefPopover = ({
         createPortal(
           <span
             role='tooltip'
-            className='bs-cite-pop fixed z-[110] -mt-2.5 block w-[min(420px,calc(100vw-32px))] rounded-xl border p-3.5 text-[12.5px] leading-[1.55]'
+            className='lagune-cite-pop fixed z-[110] -mt-2.5 block w-[min(420px,calc(100vw-32px))] rounded-xl border p-3.5 text-[12.5px] leading-[1.55]'
             style={{
               left: pos.left,
               top: pos.top,
@@ -248,7 +248,7 @@ const Callout = ({ children }: { children: ReactNode }): ReactNode => {
       <div className='border-b border-accent/25 bg-accent/10 px-4 py-2.5 font-jakarta text-[14px] font-bold tracking-[-0.01em] text-ink'>
         {titleNode.props.children}
       </div>
-      <div className='bs-callout-body px-4 py-3.5'>{body}</div>
+      <div className='lagune-callout-body px-4 py-3.5'>{body}</div>
     </div>
   );
 };

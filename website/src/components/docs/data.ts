@@ -14,7 +14,7 @@ export type DocContext = {
 };
 
 export const useDocsData = (): DocsGlobalData => {
-  const data = usePluginData('bluespec-docs-content');
+  const data = usePluginData('lagune-docs-content');
   return data as DocsGlobalData;
 };
 

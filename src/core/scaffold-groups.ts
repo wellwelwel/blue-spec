@@ -8,25 +8,25 @@ import type {
 const FIXED_BUCKETS: ScaffoldBucket[] = [
   {
     label: 'Templates',
-    baseDir: '.bluespec/templates/',
-    owns: (path) => path.startsWith('.bluespec/templates/'),
+    baseDir: '.lagune/templates/',
+    owns: (path) => path.startsWith('.lagune/templates/'),
   },
   {
     label: 'Hooks',
-    baseDir: '.bluespec/hooks/',
-    owns: (path) => path.startsWith('.bluespec/hooks/'),
+    baseDir: '.lagune/hooks/',
+    owns: (path) => path.startsWith('.lagune/hooks/'),
   },
   {
     label: 'Sub-skills',
-    baseDir: '.bluespec/skills/',
-    owns: (path) => path.startsWith('.bluespec/skills/'),
+    baseDir: '.lagune/skills/',
+    owns: (path) => path.startsWith('.lagune/skills/'),
   },
   {
     label: 'State',
-    baseDir: '.bluespec/',
+    baseDir: '.lagune/',
     owns: (path) =>
-      path.startsWith('.bluespec/') &&
-      !path.slice('.bluespec/'.length).includes('/'),
+      path.startsWith('.lagune/') &&
+      !path.slice('.lagune/'.length).includes('/'),
   },
 ];
 

@@ -270,9 +270,9 @@ describe('parseSkills reads only structural rows', () => {
   it('ignores a fenced example row', () => {
     const text = lines(
       '## Applied sub-skills',
-      '- `.bluespec/skills/authentication.md`: surfaced Weak cookie.',
+      '- `.lagune/skills/authentication.md`: surfaced Weak cookie.',
       '```markdown',
-      '- `.bluespec/skills/file-uploads.md`: example row.',
+      '- `.lagune/skills/file-uploads.md`: example row.',
       '```'
     );
 
@@ -356,9 +356,9 @@ describe('list markers tolerate drift beyond the dash', () => {
   it('parseSkills accepts a drifted separator and marker', () => {
     const text = lines(
       '## Applied sub-skills',
-      '- `.bluespec/skills/authentication.md` — surfaced Weak cookie.',
-      '* `.bluespec/skills/injection.md`: surfaced SQL injection.',
-      '- `.bluespec/skills/uploads.md` no separator at all'
+      '- `.lagune/skills/authentication.md` — surfaced Weak cookie.',
+      '* `.lagune/skills/injection.md`: surfaced SQL injection.',
+      '- `.lagune/skills/uploads.md` no separator at all'
     );
 
     strict.deepStrictEqual(
@@ -373,9 +373,9 @@ describe('list markers tolerate drift beyond the dash', () => {
   it('parseSkills reads a path a weaker agent left without backticks', () => {
     const text = lines(
       '## Applied sub-skills',
-      '- .bluespec/skills/regex.md: Multipart boundary regex',
-      '- .bluespec/skills/network.md: Remote import fetches user URLs',
-      '- .bluespec/skills/interpreter.md: Thumbnail command interpolates request input'
+      '- .lagune/skills/regex.md: Multipart boundary regex',
+      '- .lagune/skills/network.md: Remote import fetches user URLs',
+      '- .lagune/skills/interpreter.md: Thumbnail command interpolates request input'
     );
 
     strict.deepStrictEqual(
@@ -391,9 +391,9 @@ describe('list markers tolerate drift beyond the dash', () => {
   it('parseSkills accepts bold and half-quoted paths alike', () => {
     const text = lines(
       '## Applied sub-skills',
-      '- **`.bluespec/skills/crypto.md`**: Weak key derivation',
-      '- **.bluespec/skills/upload.md** — Avatar keeps the filename',
-      '- .bluespec/skills/path.md`: Download trusts the path'
+      '- **`.lagune/skills/crypto.md`**: Weak key derivation',
+      '- **.lagune/skills/upload.md** — Avatar keeps the filename',
+      '- .lagune/skills/path.md`: Download trusts the path'
     );
 
     strict.deepStrictEqual(
@@ -409,7 +409,7 @@ describe('list markers tolerate drift beyond the dash', () => {
   it('parseSkills still rejects a non-skill bullet', () => {
     const text = lines(
       '## Applied sub-skills',
-      '- .bluespec/memory/detect.md: not a sub-skill path',
+      '- .lagune/memory/detect.md: not a sub-skill path',
       '- just some prose about skills'
     );
 

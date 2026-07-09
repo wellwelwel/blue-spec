@@ -9,8 +9,8 @@ const writeUserCatalog = (
   entries: { name: string; tags: string[] }[]
 ): Promise<void> =>
   writeFile(
-    join(workspace, '.bluespec', 'skills.json'),
-    `${JSON.stringify({ name: 'blue-spec', entries }, null, 2)}\n`,
+    join(workspace, '.lagune', 'skills.json'),
+    `${JSON.stringify({ name: 'lagune', entries }, null, 2)}\n`,
     'utf8'
   );
 
@@ -18,7 +18,7 @@ const writeUserSkillFile = async (
   workspace: string,
   name: string
 ): Promise<void> => {
-  const dir = join(workspace, '.bluespec', 'skills');
+  const dir = join(workspace, '.lagune', 'skills');
 
   await mkdir(dir, { recursive: true });
   await writeFile(join(dir, `${name}.md`), `# ${name}\n`, 'utf8');
@@ -28,7 +28,7 @@ const readSpecializations = async (workspace: string): Promise<string> => {
   await renderSpecializations(workspace);
 
   const raw = await readFile(
-    join(workspace, '.bluespec', 'specializations.md'),
+    join(workspace, '.lagune', 'specializations.md'),
     'utf8'
   );
 

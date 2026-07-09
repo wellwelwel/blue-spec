@@ -86,7 +86,7 @@ const SidebarCategory = ({
       : containsActive ||
           (persistedOpenGroups.get(category.label) ?? !category.collapsed)
   );
-  const listId = `bs-docs-group-${category.label.toLowerCase().replace(/[^a-z]+/g, '-')}`;
+  const listId = `lagune-docs-group-${category.label.toLowerCase().replace(/[^a-z]+/g, '-')}`;
 
   useEffect(() => {
     if (!startCollapsed && containsActive) setOpen(true);
@@ -166,7 +166,7 @@ const SidebarNav = ({
         height={38}
       />
       <span className='flex flex-col gap-1 text-[1.25rem] font-extrabold leading-none tracking-[-0.02em] text-ink'>
-        Blue Spec
+        Lagune
         <span className='sr-only'>Documentation</span>
         <span
           aria-hidden
@@ -194,7 +194,7 @@ const SidebarNav = ({
     </nav>
     <a
       className='group mt-auto mb-4 flex items-center gap-2 pt-8 no-underline hover:no-underline'
-      href='https://github.com/wellwelwel/blue-spec'
+      href='https://github.com/wellwelwel/lagune'
       target='_blank'
       rel='noreferrer'
     >
@@ -222,7 +222,7 @@ const SidebarNav = ({
           Star on GitHub
         </span>
         <span className='relative z-10 text-[0.75rem] font-semibold leading-tight text-muted'>
-          Support Blue Spec
+          Support Lagune
         </span>
       </span>
       <span className='relative grid size-[0.85rem] flex-none place-items-center overflow-hidden text-[0.85rem] text-accent'>
@@ -237,7 +237,7 @@ const SidebarNav = ({
     <div className='flex flex-col gap-0.5 border-t border-line pt-3'>
       <a
         className={FOOT_LINK}
-        href='https://github.com/wellwelwel/blue-spec'
+        href='https://github.com/wellwelwel/lagune'
         target='_blank'
         rel='noreferrer'
       >
@@ -283,22 +283,22 @@ export const DocsShell = ({
   }, [pathname]);
 
   useEffect(() => {
-    document.body.classList.toggle('bs-docs-drawer-open', drawerOpen);
-    return () => document.body.classList.remove('bs-docs-drawer-open');
+    document.body.classList.toggle('lagune-docs-drawer-open', drawerOpen);
+    return () => document.body.classList.remove('lagune-docs-drawer-open');
   }, [drawerOpen]);
 
   return (
     <LayoutProvider>
-      <div className='bs-docs min-h-screen'>
+      <div className='lagune-docs min-h-screen'>
         {drawerOpen && (
           <div className='fixed inset-0 z-50 min-[1024px]:hidden'>
             <button
-              className='bs-docs-backdrop absolute inset-0 size-full cursor-pointer border-0'
+              className='lagune-docs-backdrop absolute inset-0 size-full cursor-pointer border-0'
               type='button'
               aria-label='Close navigation'
               onClick={() => setDrawerOpen(false)}
             />
-            <aside className='bs-docs-drawer bs-scroll absolute inset-y-0 left-0 flex w-72 max-w-[85vw] flex-col overflow-y-auto bg-surface px-4 py-6 shadow-pop'>
+            <aside className='lagune-docs-drawer lagune-scroll absolute inset-y-0 left-0 flex w-72 max-w-[85vw] flex-col overflow-y-auto bg-surface px-4 py-6 shadow-pop'>
               <button
                 className='absolute top-4 right-3 grid size-10 cursor-pointer place-items-center rounded-full border-0 bg-transparent text-[1.2rem] text-muted transition-colors hover:text-ink'
                 type='button'
@@ -316,7 +316,7 @@ export const DocsShell = ({
           </div>
         )}
         <div className='min-[1024px]:grid min-[1024px]:grid-cols-[250px_minmax(0,1fr)] min-[1440px]:grid-cols-[270px_minmax(0,1fr)]'>
-          <aside className='bs-scroll sticky top-0 hidden h-screen flex-col overflow-y-auto bg-surface px-4 py-6 min-[1024px]:flex'>
+          <aside className='lagune-scroll sticky top-0 hidden h-screen flex-col overflow-y-auto bg-surface px-4 py-6 min-[1024px]:flex'>
             <SidebarNav sidebar={sidebar} pathname={pathname} />
           </aside>
           <div className='flex min-w-0 flex-col'>
@@ -346,7 +346,7 @@ export const DocsShell = ({
                 </button>
                 <a
                   className={clsx(ICON_BTN, 'max-sm:hidden')}
-                  href='https://github.com/wellwelwel/blue-spec'
+                  href='https://github.com/wellwelwel/lagune'
                   target='_blank'
                   rel='noreferrer'
                   aria-label='GitHub repository'
@@ -358,7 +358,7 @@ export const DocsShell = ({
                   href='https://github.com/sponsors/wellwelwel'
                   target='_blank'
                   rel='noreferrer'
-                  aria-label='Sponsor Blue Spec'
+                  aria-label='Sponsor Lagune'
                 >
                   <span className='inline-flex text-pink'>
                     <Icon name='heart' />

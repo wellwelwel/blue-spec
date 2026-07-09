@@ -32,7 +32,7 @@ await describe('the repair hook logic', async () => {
 
   await it('never touches the memory artifacts', async () => {
     const workspace = await newWorkspace();
-    await mkdir(join(workspace, '.bluespec/memory'), { recursive: true });
+    await mkdir(join(workspace, '.lagune/memory'), { recursive: true });
 
     await repair(
       workspace,
@@ -41,7 +41,7 @@ await describe('the repair hook logic', async () => {
       })
     );
 
-    const memory = await readdir(join(workspace, '.bluespec/memory'));
+    const memory = await readdir(join(workspace, '.lagune/memory'));
     strict.strictEqual(memory.length, 0, 'memory must stay untouched');
   });
 
@@ -99,7 +99,7 @@ await describe('the repair hook logic', async () => {
     const payload = JSON.stringify({
       entries: [{ name: 'Leaked secret', paths: ['src/config.ts'] }],
     });
-    const trackingPath = join(workspace, '.bluespec/tracking.json');
+    const trackingPath = join(workspace, '.lagune/tracking.json');
 
     await repair(workspace, payload);
     const firstWrite = await stat(trackingPath);

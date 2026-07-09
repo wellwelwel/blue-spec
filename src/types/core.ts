@@ -59,12 +59,12 @@ export type SkillCatalogEntry = {
 export type ListableSkillEntry = SkillCatalogEntry & { required?: boolean };
 
 export type SkillsCatalogFile = {
-  name: 'blue-spec';
+  name: 'lagune';
   entries: SkillCatalogEntry[];
 };
 
 export type CommandKey =
-  | 'bluespec'
+  | 'lagune'
   | 'charter'
   | 'detect'
   | 'plan'
@@ -74,7 +74,7 @@ export type CommandKey =
   | 'specialize'
   | 'prove';
 
-export type TemplateKey = Exclude<CommandKey, 'bluespec' | 'repair' | 'verify'>;
+export type TemplateKey = Exclude<CommandKey, 'lagune' | 'repair' | 'verify'>;
 
 export type BundledAsset = {
   fileName: string;
@@ -326,7 +326,7 @@ export type ManifestInput = {
 };
 
 export type ManifestData = {
-  name: 'blue-spec';
+  name: 'lagune';
   version: string;
   agent: ManifestAgent;
   createdAt: string;
@@ -340,7 +340,7 @@ export type TrackingEntry = {
 };
 
 export type TrackingMap = {
-  name: 'blue-spec';
+  name: 'lagune';
   entries: TrackingEntry[];
 };
 

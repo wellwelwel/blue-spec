@@ -88,7 +88,7 @@ export const Sidebar = (): VNode => {
           height={38}
         />
         <span class='flex flex-col gap-1 text-[1.25rem] font-extrabold leading-none tracking-[-0.02em]'>
-          Blue Spec
+          Lagune
           <span class='text-[0.75rem] font-semibold leading-none tracking-wide text-muted'>
             Dashboard Preview
           </span>
@@ -140,14 +140,14 @@ export const Sidebar = (): VNode => {
         <span class='grid size-19 flex-none transition-transform duration-300 ease-out group-hover:scale-102'>
           <img
             class='col-start-1 row-start-1 size-19 object-contain mix-blend-multiply transition-[opacity,scale,filter] duration-200 ease-house scale-100 opacity-100 [filter:blur(0)] dark:scale-[0.25] dark:opacity-0 dark:[filter:blur(4px)]'
-            src='https://bluespec.weslley.io/img/docs/octocat.gif'
+            src='https://lagune.weslley.io/img/docs/octocat.gif'
             alt=''
             width={76}
             height={76}
           />
           <img
             class='col-start-1 row-start-1 size-19 object-contain transition-[opacity,scale,filter] duration-200 ease-house scale-[0.25] opacity-0 [filter:drop-shadow(0_2px_6px_rgba(0,0,0,0.55))_blur(4px)] dark:scale-[0.85] dark:opacity-100 dark:[filter:drop-shadow(0_2px_6px_rgba(0,0,0,0.55))_blur(0)]'
-            src='https://bluespec.weslley.io/img/docs/octocat-2.png'
+            src='https://lagune.weslley.io/img/docs/octocat-2.png'
             alt=''
             width={76}
             height={76}
@@ -161,7 +161,7 @@ export const Sidebar = (): VNode => {
             Star on GitHub
           </span>
           <span class='relative z-10 text-[0.75rem] font-semibold leading-tight text-muted'>
-            Support Blue Spec
+            Support Lagune
           </span>
         </span>
         <span class='relative grid size-[0.85rem] flex-none place-items-center overflow-hidden text-[0.85rem] text-accent'>

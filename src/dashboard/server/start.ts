@@ -8,10 +8,8 @@ import { createSessionToken, persistSessionToken } from './session';
 
 const announce = (port: number): void => {
   const url = `http://${host}:${port}`;
-  process.stdout.write(`\n  🌊 Blue Spec dashboard → ${url}\n`);
-  process.stdout.write(
-    '\n  Watching .bluespec/ — changes reload the browser.\n'
-  );
+  process.stdout.write(`\n  🌊 Lagune dashboard → ${url}\n`);
+  process.stdout.write('\n  Watching .lagune/ — changes reload the browser.\n');
   process.stdout.write('  Press Ctrl+C to stop.\n\n');
 };
 

@@ -12,7 +12,7 @@ The User Input above decides how this command runs. Read it before proceeding.
 
 ## Outline
 
-You are producing a **defense plan** at `.bluespec/memory/plan.md`: a prioritized set of fixes for what detect found, each one pointing at a detect finding, rated with a category and a CVSS v4.0 score, paired with the charter principle it upholds, and the control to apply. This phase **continues from detect**. Detect already detected what the system does and recorded the risk each thing carries, so the plan does not restate the risk: it rates how serious it is and decides what to do about it. Every fix must point at something detect actually detected, never a generic checklist. The fixes are the WHAT to do. Applying them is the next phase, harden, not this one.
+You are producing a **defense plan** at `.lagune/memory/plan.md`: a prioritized set of fixes for what detect found, each one pointing at a detect finding, rated with a category and a CVSS v4.0 score, paired with the charter principle it upholds, and the control to apply. This phase **continues from detect**. Detect already detected what the system does and recorded the risk each thing carries, so the plan does not restate the risk: it rates how serious it is and decides what to do about it. Every fix must point at something detect actually detected, never a generic checklist. The fixes are the WHAT to do. Applying them is the next phase, harden, not this one.
 
 The detect map is the primary input: the fixes follow from what detect found. The charter is the governing context: it tells you which fixes matter most for this project, gives each fix a principle to uphold, and supplies the exposure and stakes that adjust each rating. The rating follows the CVSS v4.0 Base-and-Environmental method, so a finding earns a realistic, sourced band with a named category, reasoned from the detect map and the charter alone.
 
@@ -21,7 +21,7 @@ The detect map is the primary input: the fixes follow from what detect found. Th
 This phase is built entirely on the detect map. It never reads the code directly: it only knows the system through what detect already detected. Every fix it plans must point at a finding that is really in the detect map. The User Input above selects one of three modes, and each one is answered from the detect map, never from the code:
 
 - **No input** (the User Input is empty): plan the fixes for **every finding** in the detect map. This is the full defense plan across the detected context.
-- **Files or directories given** (the input names one or more paths in the project): plan the fixes for the detect findings whose **evidence** points at those paths. Match paths to findings through the tracking map (`.bluespec/tracking.json`), which records each finding's paths, do not open the files yourself. Leave the rest of the plan untouched.
+- **Files or directories given** (the input names one or more paths in the project): plan the fixes for the detect findings whose **evidence** points at those paths. Match paths to findings through the tracking map (`.lagune/tracking.json`), which records each finding's paths, do not open the files yourself. Leave the rest of the plan untouched.
 - **A concern described** (the input describes a worry, for example "where sensitive data could leak"): plan the fixes **for that specific concern**, drawing on the detect findings that relate to it. The plan covers what the user asked about, not the whole context.
 
 If the input is ambiguous between a path and a described concern, prefer the most literal reading (an existing path is a path), and state which mode you chose before continuing.
@@ -30,16 +30,16 @@ When the scope points somewhere detect has not mapped, follow the coverage rules
 
 ### Step 2: Load context
 
-- Load the detect map at `.bluespec/memory/detect.md`. This is the **required primary input**.
-  - If it does not exist, **stop and tell the user to run `/bluespec.detect` first**. The defense plan is built from detected findings, so there is nothing to plan without it. Do not invent findings to work around a missing detect map.
+- Load the detect map at `.lagune/memory/detect.md`. This is the **required primary input**.
+  - If it does not exist, **stop and tell the user to run `/lagune.detect` first**. The defense plan is built from detected findings, so there is nothing to plan without it. Do not invent findings to work around a missing detect map.
   - If it exists, read its findings. Each finding's name and recorded risk is what a fix points at, and the tracking map holds the paths that finding lives at. Fixes only ever point at findings that are really in the map.
   - **Check that the scope is covered by detect** before planning:
-    - If **nothing** in the scope you chose is in the detect map (the named paths match no finding's tracked paths, or no finding relates to the described concern), **stop and tell the user to run `/bluespec.detect` on that scope first**, then run the plan phase again. Do not read the code to fill the gap.
+    - If **nothing** in the scope you chose is in the detect map (the named paths match no finding's tracked paths, or no finding relates to the described concern), **stop and tell the user to run `/lagune.detect` on that scope first**, then run the plan phase again. Do not read the code to fill the gap.
     - If the scope is **partly** covered (some findings are in the map, but the paths or concern also reach things detect has not mapped), plan the fixes for what is covered, and record each uncovered part under **Open questions** (naming the uncovered path and noting the detect map does not cover it yet). Do not stop, and do not read the code for the uncovered part.
-- Load the defense plan at `.bluespec/memory/plan.md`.
-  - If it does not exist, initialize it from the template at `.bluespec/templates/plan-template.md` first, and identify every placeholder token of the form `[ALL_CAPS_IDENTIFIER]`.
+- Load the defense plan at `.lagune/memory/plan.md`.
+  - If it does not exist, initialize it from the template at `.lagune/templates/plan-template.md` first, and identify every placeholder token of the form `[ALL_CAPS_IDENTIFIER]`.
   - If it already exists, read the fixes already in it. You will reconcile them in Step 3 before adding anything new. Each fix's identity is the finding it points at plus the fix itself.
-- Load the charter at `.bluespec/memory/charter.md` for the governing principles, **if it exists**. Use it to judge which fixes matter most for this project, to give each fix the principle it upholds, and to supply the stakes side of the Environmental adjustment. The charter guides priority, it does not box you in: plan a real fix even if no principle names it, and let the user rescope. If the charter does not exist, plan the fixes from the findings alone and set each `Upholds` to `None directly`. The rating still stands: rate each finding on its CVSS Base score with only the exposure detect gives, since the charter's absence removes the stakes input to the Environmental adjustment, not the rating itself.
+- Load the charter at `.lagune/memory/charter.md` for the governing principles, **if it exists**. Use it to judge which fixes matter most for this project, to give each fix the principle it upholds, and to supply the stakes side of the Environmental adjustment. The charter guides priority, it does not box you in: plan a real fix even if no principle names it, and let the user rescope. If the charter does not exist, plan the fixes from the findings alone and set each `Upholds` to `None directly`. The rating still stands: rate each finding on its CVSS Base score with only the exposure detect gives, since the charter's absence removes the stakes input to the Environmental adjustment, not the rating itself.
 
 ### Step 3: Reconcile the existing plan
 
@@ -51,7 +51,7 @@ This plan is reconciled, never append-only. If the plan was empty or freshly ini
 
 A fix whose finding `verify` already proved closed was stood down out of the whole chain, so it is simply absent here. That absence is expected, not a broken chain, and is no reason to run repair.
 
-If reconciling reveals the chain is inconsistent (for example the tracking map points a finding at a file that was renamed or moved, so the path on record no longer exists), run `/bluespec.repair` and then continue. Repair fixes Blue Spec's internal tracking across every phase at once, so the chain stays coherent. Do not try to repair the tracking yourself: this phase reconciles its own plan in prose, repair owns the tracking.
+If reconciling reveals the chain is inconsistent (for example the tracking map points a finding at a file that was renamed or moved, so the path on record no longer exists), run `/lagune.repair` and then continue. Repair fixes Lagune's internal tracking across every phase at once, so the chain stays coherent. Do not try to repair the tracking yourself: this phase reconciles its own plan in prose, repair owns the tracking.
 
 ### Step 4: Plan the fixes
 
@@ -103,14 +103,14 @@ One finding is one item, with one rating. When a finding needs more than one fix
 
 ### Step 7: Write and summarize
 
-- Write the reconciled plan to `.bluespec/memory/plan.md`.
+- Write the reconciled plan to `.lagune/memory/plan.md`.
 - Register the items you planned so the tracking map keeps each one current. This is registration, not reconciliation: hand the track hook only the findings this run planned, as the `entries` list of `{name, paths}`, named by the finding's name (your section title, the same name detect used). The hook finds that same item by name and updates its `paths`. It does not create a second entry: one finding is one item. `name` is the finding's name, and `paths` holds the file paths the fix touches. The path lives here, in tracking, never in the prose. Run it from the project root, passing the payload as the single argument:
 
 ```bash
-node ./.bluespec/hooks/track.mjs '{"entries":[{"name":"<FINDING NAME>","paths":["<PATH>"]}]}'
+node ./.lagune/hooks/track.mjs '{"entries":[{"name":"<FINDING NAME>","paths":["<PATH>"]}]}'
 ```
 
-Do not edit `.bluespec/tracking.json` yourself, and do not reconcile here. Track only advances what this phase planned. Repairing the map across the conveyor stays with `/bluespec.repair`.
+Do not edit `.lagune/tracking.json` yourself, and do not reconcile here. Track only advances what this phase planned. Repairing the map across the conveyor stays with `/lagune.repair`.
 
 - Output a short summary to the user:
   - The scope you ran (all findings, named files or directories, or concern).
@@ -118,6 +118,6 @@ Do not edit `.bluespec/tracking.json` yourself, and do not reconcile here. Track
   - What changed since the last run: fixes added, fixes removed because they are now done, and fixes updated (including a rating that moved band).
   - Anything left under Open questions, including any part of the scope the detect map did not cover.
   - A suggested commit message, for example `docs: update defense plan`.
-  - **Next step:** point the user to `/bluespec.harden`, the phase that applies these fixes to the code, safely and one at a time, highest priority first. Frame it as the recommended next step. If anything is left under Open questions, point them instead to `/bluespec.detect` on that uncovered scope first, so the plan can cover it before harden runs.
+  - **Next step:** point the user to `/lagune.harden`, the phase that applies these fixes to the code, safely and one at a time, highest priority first. Frame it as the recommended next step. If anything is left under Open questions, point them instead to `/lagune.detect` on that uncovered scope first, so the plan can cover it before harden runs.
 
 Keep the plan in plain language throughout. A non-developer should understand what each fix does and why it is prioritized: the CVSS vector and category are the precise, reproducible anchor, and the `Priority` band with its `Why this priority` line is that rating in words anyone can follow. The finding name in each title stays precise enough for harden to act on.

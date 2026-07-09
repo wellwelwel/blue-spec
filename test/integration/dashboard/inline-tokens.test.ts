@@ -18,9 +18,9 @@ describe('tokenize interprets inline markdown', () => {
   });
 
   it('reads inline code literally', () => {
-    strict.deepStrictEqual(tokenize('run `npx blue-spec`'), [
+    strict.deepStrictEqual(tokenize('run `npx lagune`'), [
       { kind: 'text', value: 'run ' },
-      { kind: 'code', value: 'npx blue-spec' },
+      { kind: 'code', value: 'npx lagune' },
     ]);
   });
 

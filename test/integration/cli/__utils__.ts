@@ -4,12 +4,12 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach } from 'poku';
 
-const MANIFEST_PATH = '.bluespec/manifest.json';
+const MANIFEST_PATH = '.lagune/manifest.json';
 
 const workspaces: string[] = [];
 
 export const newWorkspace = async (): Promise<string> => {
-  const workspace = await mkdtemp(join(tmpdir(), 'blue-spec-manifest-'));
+  const workspace = await mkdtemp(join(tmpdir(), 'lagune-manifest-'));
 
   workspaces.push(workspace);
   return workspace;
@@ -24,7 +24,7 @@ export const writeManifest = async (
   workspace: string,
   contents: string
 ): Promise<void> => {
-  await mkdir(join(workspace, '.bluespec'), { recursive: true });
+  await mkdir(join(workspace, '.lagune'), { recursive: true });
   await writeFile(join(workspace, MANIFEST_PATH), contents, 'utf8');
 };
 
@@ -35,7 +35,7 @@ export const seedManifest = (
   writeManifest(
     workspace,
     JSON.stringify({
-      name: 'blue-spec',
+      name: 'lagune',
       version: '1.0.0',
       agent: 'claude',
       createdAt: '2020-01-01T00:00:00.000Z',

@@ -12,7 +12,7 @@ The User Input above decides how this command runs. Read it before proceeding.
 
 ## Outline
 
-You are producing a **detect map** at `.bluespec/memory/detect.md`: a record of what the system actually does that carries security weight, based on reading the code. This is detection, not invention. Record only what the code supports, with the evidence (files, routes) that later phases need to act on. Each finding is also explained in plain language with its risk, so any reader understands it.
+You are producing a **detect map** at `.lagune/memory/detect.md`: a record of what the system actually does that carries security weight, based on reading the code. This is detection, not invention. Record only what the code supports, with the evidence (files, routes) that later phases need to act on. Each finding is also explained in plain language with its risk, so any reader understands it.
 
 This phase works the same way whether the project is brand new or already exists. You map whatever code is present, even if there is very little.
 
@@ -28,10 +28,10 @@ If the input is ambiguous between a path and a focus, prefer the most literal re
 
 ### Step 2: Load context
 
-- Load the detect map at `.bluespec/memory/detect.md`.
-  - If it does not exist, initialize it from the template at `.bluespec/templates/detect-template.md` first, and identify every placeholder token of the form `[ALL_CAPS_IDENTIFIER]`.
+- Load the detect map at `.lagune/memory/detect.md`.
+  - If it does not exist, initialize it from the template at `.lagune/templates/detect-template.md` first, and identify every placeholder token of the form `[ALL_CAPS_IDENTIFIER]`.
   - If it already exists, read the findings already in it. You will reconcile them in Step 3 before adding anything new. Each finding's identity is its name (the section title), which the later phases reuse verbatim. The prose carries the wording, never the file path: the path lives only in the tracking map, where reconcile keeps it current.
-- Load the charter at `.bluespec/memory/charter.md` for context only, **if it exists**. Do not force the findings to fit the charter. Matching risks against the charter's rules is the plan phase, not this one. This phase stays a neutral detection of what the system does.
+- Load the charter at `.lagune/memory/charter.md` for context only, **if it exists**. Do not force the findings to fit the charter. Matching risks against the charter's rules is the plan phase, not this one. This phase stays a neutral detection of what the system does.
 
 ### Step 3: Reconcile the existing map
 
@@ -43,14 +43,14 @@ This map is reconciled, never append-only. If the map was empty or freshly initi
 
 A finding that `verify` already proved closed was stood down out of the whole chain, so it is simply absent here. That absence is expected, not a broken chain, and is no reason to run repair.
 
-If reconciling reveals the chain is inconsistent (for example the tracking map points a finding at a file that was renamed or moved, so the path on record no longer exists), run `/bluespec.repair` and then continue. Repair fixes Blue Spec's internal tracking across every phase at once, so the chain stays coherent. Do not try to repair the tracking yourself: this phase reconciles its own map in prose, repair owns the tracking.
+If reconciling reveals the chain is inconsistent (for example the tracking map points a finding at a file that was renamed or moved, so the path on record no longer exists), run `/lagune.repair` and then continue. Repair fixes Lagune's internal tracking across every phase at once, so the chain stays coherent. Do not try to repair the tracking yourself: this phase reconciles its own map in prose, repair owns the tracking.
 
 ### Step 4: List the sub-skills and widen the read
 
 Before you read the code, list the sub-skill catalog once. This is the only read of the catalog in this phase:
 
 ```text
-@.bluespec/specializations.md
+@.lagune/specializations.md
 ```
 
 It prints each sub-skill as `name: tags`. The list does two jobs. Its tags are search targets: each one sends you looking for that context in the code, widening the detection in Step 5. The list itself is the work list Step 6 carries forward to give every entry a verdict, so keep it whole and do not read the catalog again.
@@ -69,7 +69,7 @@ Work from the list Step 4 printed, the authoritative work list. The **tags are t
 
 **Reach a verdict on every entry on that list, one at a time, before you write any finding.** An entry marked `[required]` is always applied: when it ships a deterministic checker, you run that checker over the whole project and its output is the verdict, never a skip. For every other entry, the only question is whether the code you read in Step 5 contains the context its tags name, read off the code, not estimated from how relevant the entry feels:
 
-- **The context is present.** Apply the sub-skill. Read `.bluespec/skills/<name>.md` directly and follow it, scoped to the paths in question: do what it says, do not improvise beyond it, and do not edit the user's code. The verdict is whatever its checker prints over each pattern, destination, or value the code contains, or where it ships no checker, what its reasoning concludes against the actual code. A guard the code already applies is judged here, never waved through for being present.
+- **The context is present.** Apply the sub-skill. Read `.lagune/skills/<name>.md` directly and follow it, scoped to the paths in question: do what it says, do not improvise beyond it, and do not edit the user's code. The verdict is whatever its checker prints over each pattern, destination, or value the code contains, or where it ships no checker, what its reasoning concludes against the actual code. A guard the code already applies is judged here, never waved through for being present.
 - **The context is absent.** The code contains nothing the tags name, so there is nothing to apply. Skip it. Finding that many entries do not apply is a normal outcome.
 
 Anything a sub-skill surfaces is recorded as a finding through the steps below, like any other. Hold each entry's verdict for the table Step 9 emits.
@@ -84,7 +84,7 @@ Anything a sub-skill surfaces is recorded as a finding through the steps below, 
   - **Why it matters:** the risk it carries, in plain language. Explain the risk, not just the fact.
   - **Evidence:** a short, plain-language note of where the finding lives (the function or route, what the code does there) so later phases know what to act on. Do not write the file path here. The path goes to the tracking map in Step 9, where reconcile keeps it current through a rename, so the prose never carries a path that can go stale.
 - The template ships with three starter findings. This is a starting point, not a limit. Add or remove findings to match what the code actually shows.
-- Fill **Applied sub-skills** from the sub-skills you applied in Step 6, naming each sub-skill by its file path (`.bluespec/skills/<name>.md`) and listing under it the finding(s) it surfaced or confirmed. Remove the section if none applied.
+- Fill **Applied sub-skills** from the sub-skills you applied in Step 6, naming each sub-skill by its file path (`.lagune/skills/<name>.md`) and listing under it the finding(s) it surfaced or confirmed. Remove the section if none applied.
 - If the scope asked about something the code did not make clear, record it under **Not determined**. Do not guess to fill a gap. Remove that section if everything in scope was determined.
 - Set `Mapped` to today's date in ISO format `YYYY-MM-DD`.
 
@@ -100,14 +100,14 @@ Anything a sub-skill surfaces is recorded as a finding through the steps below, 
 
 ### Step 9: Write and summarize
 
-- Write the reconciled map to `.bluespec/memory/detect.md`.
+- Write the reconciled map to `.lagune/memory/detect.md`.
 - Register the findings you wrote so the tracking map keeps each one's identity. This is registration, not reconciliation: hand the track hook only the findings this run wrote, as the `entries` list of `{name, paths}`, and it records the new ones and follows a renamed path for the rest. It never removes anything you did not report. `name` is the finding's name (this section's title), and `paths` holds the file paths the finding points at (one or more). The path lives here, in tracking, never in the prose. The tracking map holds no note: the prose carries the wording, the map carries only identity and paths. Run it from the project root, passing the payload as the single argument (a name with quotes or backticks stays intact) and reading the JSON result from standard output:
 
 ```bash
-node ./.bluespec/hooks/track.mjs '{"entries":[{"name":"<FINDING NAME>","paths":["<PATH>"]}]}'
+node ./.lagune/hooks/track.mjs '{"entries":[{"name":"<FINDING NAME>","paths":["<PATH>"]}]}'
 ```
 
-Do not edit `.bluespec/tracking.json` yourself, and do not reconcile here. Track only registers what this phase wrote. Repairing the chain across phases stays with `/bluespec.repair`.
+Do not edit `.lagune/tracking.json` yourself, and do not reconcile here. Track only registers what this phase wrote. Repairing the chain across phases stays with `/lagune.repair`.
 
 - Output a short summary to the user:
   - The scope you ran (full scan, paths, or focus).
@@ -123,6 +123,6 @@ Do not edit `.bluespec/tracking.json` yourself, and do not reconcile here. Track
   - What changed since the last run: findings added, findings removed because they are now resolved, and findings updated.
   - Anything left under Not determined.
   - A suggested commit message, for example `docs: update detect map`.
-  - **Next step:** point the user to `/bluespec.plan`, the phase that turns these findings into prioritized fixes, each tied to a charter principle. Frame it as the recommended next step, and note they can rerun `/bluespec.detect` (on the whole project or a narrower scope) whenever the code changes.
+  - **Next step:** point the user to `/lagune.plan`, the phase that turns these findings into prioritized fixes, each tied to a charter principle. Frame it as the recommended next step, and note they can rerun `/lagune.detect` (on the whole project or a narrower scope) whenever the code changes.
 
 Keep the map in plain language throughout. A non-developer should understand what each finding is and the risk it carries, while the evidence stays precise enough for the next phases to use.

@@ -1,6 +1,6 @@
 ---
 id: plan
-title: /bluespec.plan
+title: /lagune.plan
 sidebar_label: 3. Plan
 description: Turn what detect found into a defense plan, rating each finding with a category and a CVSS v4.0 score, and pairing it with a fix.
 ---
@@ -8,7 +8,7 @@ description: Turn what detect found into a defense plan, rating each finding wit
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
 
-# /bluespec.plan
+# /lagune.plan
 
 🛡️ Turn what detect found into a defense plan: rate each finding with a category and a CVSS v4.0 score, then pair it with the fix to apply.
 
@@ -18,21 +18,21 @@ import Tabs from '@theme/Tabs';
   <TabItem value="full" label="Plan everything" default>
 
 ```prompt
-/bluespec.plan
+/lagune.plan
 ```
 
   </TabItem>
   <TabItem value="paths" label="Point at paths">
 
 ```prompt
-/bluespec.plan src/routes/upload.ts
+/lagune.plan src/routes/upload.ts
 ```
 
   </TabItem>
   <TabItem value="worry" label="Focus a worry">
 
 ```prompt
-/bluespec.plan where sensitive data could leak
+/lagune.plan where sensitive data could leak
 ```
 
   </TabItem>
@@ -55,16 +55,16 @@ From there, you have a rated, prioritized list of fixes, each tied to a finding 
 
 :::tip
 
-- It builds entirely on detect. If a file or worry was never mapped, it tells you to run `/bluespec.detect` on it first.
+- It builds entirely on detect. If a file or worry was never mapped, it tells you to run `/lagune.detect` on it first.
 - Running it again updates the plan: done fixes drop off, new ones come in.
-- The defense plan lives in `.bluespec/memory/plan.md`.
+- The defense plan lives in `.lagune/memory/plan.md`.
 
 :::
 
 :::warning[Depends on detect]
-Plan works only from what [`/bluespec.detect`](/docs/commands/detect) already mapped, so run detect first.
+Plan works only from what [`/lagune.detect`](/docs/commands/detect) already mapped, so run detect first.
 :::
 
 ## Next
 
-Apply the plan: [`/bluespec.harden`](/docs/commands/harden).
+Apply the plan: [`/lagune.harden`](/docs/commands/harden).

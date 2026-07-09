@@ -9,7 +9,7 @@ await describe('init scaffolds the agent-agnostic core', async () => {
 
     await initInto(workspace, { init: true, agent: 'claude' });
 
-    const entries = await readdir(join(workspace, '.bluespec/memory'));
+    const entries = await readdir(join(workspace, '.lagune/memory'));
 
     strict.strictEqual(entries.length, 0, 'memory should be empty');
   });
@@ -30,7 +30,7 @@ await describe('init scaffolds the agent-agnostic core', async () => {
         'utf8'
       );
       const scaffolded = await readFile(
-        join(workspace, `.bluespec/templates/${template}`),
+        join(workspace, `.lagune/templates/${template}`),
         'utf8'
       );
 
@@ -53,7 +53,7 @@ await describe('init scaffolds the agent-agnostic core', async () => {
         'utf8'
       );
       const scaffolded = await readFile(
-        join(workspace, `.bluespec/skills/${skill}`),
+        join(workspace, `.lagune/skills/${skill}`),
         'utf8'
       );
 
@@ -64,15 +64,11 @@ await describe('init scaffolds the agent-agnostic core', async () => {
   await it('renders a command for both skill and markdown agents', async () => {
     const skillWorkspace = await newWorkspace();
     await initInto(skillWorkspace, { init: true, agent: 'claude' });
-    await stat(
-      join(skillWorkspace, '.claude/skills/bluespec.charter/SKILL.md')
-    );
+    await stat(join(skillWorkspace, '.claude/skills/lagune.charter/SKILL.md'));
 
     const markdownWorkspace = await newWorkspace();
     await initInto(markdownWorkspace, { init: true, agent: 'opencode' });
-    await stat(
-      join(markdownWorkspace, '.opencode/commands/bluespec.charter.md')
-    );
+    await stat(join(markdownWorkspace, '.opencode/commands/lagune.charter.md'));
   });
 
   await it('creates an empty tracking map at init', async () => {
@@ -81,10 +77,10 @@ await describe('init scaffolds the agent-agnostic core', async () => {
     await initInto(workspace, { init: true, agent: 'claude' });
 
     const tracking: { name: string; entries: unknown[] } = JSON.parse(
-      await readFile(join(workspace, '.bluespec/tracking.json'), 'utf8')
+      await readFile(join(workspace, '.lagune/tracking.json'), 'utf8')
     );
 
-    strict.strictEqual(tracking.name, 'blue-spec');
+    strict.strictEqual(tracking.name, 'lagune');
     strict.deepStrictEqual(tracking.entries, [], 'entries should start empty');
   });
 
@@ -94,10 +90,10 @@ await describe('init scaffolds the agent-agnostic core', async () => {
     await initInto(workspace, { init: true, agent: 'claude' });
 
     const catalog: { name: string; entries: unknown[] } = JSON.parse(
-      await readFile(join(workspace, '.bluespec/skills.json'), 'utf8')
+      await readFile(join(workspace, '.lagune/skills.json'), 'utf8')
     );
 
-    strict.strictEqual(catalog.name, 'blue-spec');
+    strict.strictEqual(catalog.name, 'lagune');
     strict.deepStrictEqual(catalog.entries, [], 'entries should start empty');
   });
 });

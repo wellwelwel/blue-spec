@@ -8,7 +8,7 @@ const GITIGNORE_PATH = '.gitignore';
 const workspaces: string[] = [];
 
 export const newWorkspace = async (): Promise<string> => {
-  const workspace = await mkdtemp(join(tmpdir(), 'blue-spec-core-'));
+  const workspace = await mkdtemp(join(tmpdir(), 'lagune-core-'));
 
   workspaces.push(workspace);
   return workspace;

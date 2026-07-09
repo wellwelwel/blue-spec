@@ -39,7 +39,7 @@ const chainView = (
     return {
       kind: 'danger',
       title: 'Fix reproved',
-      body: 'Verify could not prove this fix holds. Run `/bluespec.harden` to rework it, then verify again.',
+      body: 'Verify could not prove this fix holds. Run `/lagune.harden` to rework it, then verify again.',
     };
 
   const harden = hardenState(finding.status);
@@ -48,27 +48,27 @@ const chainView = (
     return {
       kind: 'tip',
       title: 'Applied, not yet proven',
-      body: 'Harden applied this fix, but nothing has proven it holds yet. Run `/bluespec.verify` to prove it and close this finding.',
+      body: 'Harden applied this fix, but nothing has proven it holds yet. Run `/lagune.verify` to prove it and close this finding.',
     };
 
   if (harden === 'active')
     return {
       kind: 'info',
       title: 'Fix in progress',
-      body: 'Harden started this fix but has not finished it. Run `/bluespec.harden` to complete it.',
+      body: 'Harden started this fix but has not finished it. Run `/lagune.harden` to complete it.',
     };
 
   if (finding.planned)
     return {
       kind: 'info',
       title: 'Planned, not yet applied',
-      body: 'Plan prioritized this finding, but the fix is not applied yet. Run `/bluespec.harden` to apply it.',
+      body: 'Plan prioritized this finding, but the fix is not applied yet. Run `/lagune.harden` to apply it.',
     };
 
   return {
     kind: 'info',
     title: 'Mapped, not yet planned',
-    body: 'Detect mapped this finding, but it has no priority or shaped fix yet. Run `/bluespec.plan` to prioritize it and shape the fix.',
+    body: 'Detect mapped this finding, but it has no priority or shaped fix yet. Run `/lagune.plan` to prioritize it and shape the fix.',
   };
 };
 
@@ -77,14 +77,14 @@ const fixTitle = (finding: Finding): string =>
 
 const STEP_HINT: Partial<Record<PhaseName, StepHint>> = {
   Plan: {
-    command: '/bluespec.harden',
+    command: '/lagune.harden',
     verb: 'fix',
     eyebrow: 'Harden this finding',
     eyebrowIcon: 'shield',
     title: 'Fix only this finding',
   },
   Harden: {
-    command: '/bluespec.verify',
+    command: '/lagune.verify',
     verb: 'verify',
     eyebrow: 'Verify this finding',
     eyebrowIcon: 'shieldCheck',
@@ -110,7 +110,7 @@ const NextStepHint = (props: { finding: Finding }): VNode | null => {
           eyebrowIcon: hint.eyebrowIcon,
           title: hint.title,
           subtitle: 'Copy this prompt to your agent:',
-          banner: 'https://bluespec.weslley.io/img/docs/banner-5.png',
+          banner: 'https://lagune.weslley.io/img/docs/banner-5.png',
           hint: 'Works with any coding agent',
           prompt: stepPrompt(props.finding, hint),
         }}

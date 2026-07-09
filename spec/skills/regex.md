@@ -18,9 +18,9 @@ On a crafted input, the pattern takes an exploding amount of time to match, stal
 Begin every ReDoS pass with the deterministic scanner:
 
 ```bash
-node ./.bluespec/hooks/regex.mjs           # scans the whole project
-node ./.bluespec/hooks/regex.mjs -d <DIR>  # scans a directory
-node ./.bluespec/hooks/regex.mjs -f <FILE> # scans a single file
+node ./.lagune/hooks/regex.mjs           # scans the whole project
+node ./.lagune/hooks/regex.mjs -d <DIR>  # scans a directory
+node ./.lagune/hooks/regex.mjs -f <FILE> # scans a single file
 ```
 
 - `-d` and `-f` repeat to scan several targets at once.
@@ -32,14 +32,14 @@ node ./.bluespec/hooks/regex.mjs -f <FILE> # scans a single file
 Use `-p` only for a pattern the scan could not reach. Quote each pattern so its slashes or backticks cannot break the command:
 
 ```bash
-node ./.bluespec/hooks/regex.mjs -p '<PATTERN>'
+node ./.lagune/hooks/regex.mjs -p '<PATTERN>'
 ```
 
 - `-p` cannot combine with `-f` or `-d`.
 - Repeat `-p` to check several at once, one verdict printed per pattern, in order.
 - `-l` sets a custom repetition limit (a non-negative integer) for patterns with many small repeats. It applies to every `-p` in the call, and to a scan:
   ```bash
-  node ./.bluespec/hooks/regex.mjs -p '<PATTERN>' -l <LIMIT>
+  node ./.lagune/hooks/regex.mjs -p '<PATTERN>' -l <LIMIT>
   ```
 
 #### How to read the verdict

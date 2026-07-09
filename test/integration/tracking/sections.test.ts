@@ -26,7 +26,7 @@ const detectLike = [
   '',
   '## Applied sub-skills',
   '',
-  '- `.bluespec/skills/upload.md`: surfaced "Beta finding".',
+  '- `.lagune/skills/upload.md`: surfaced "Beta finding".',
   '',
 ].join('\n');
 

@@ -6,7 +6,7 @@ export const PHASE_COMMANDS: PhaseCommand[] = [
     label: 'Charter',
     icon: 'charter',
     tone: 'bg-accent-soft text-accent',
-    command: '/bluespec.charter',
+    command: '/lagune.charter',
     purpose:
       "Back in your agent, establish your project's security principles, the rules every later phase respects.",
   },
@@ -15,7 +15,7 @@ export const PHASE_COMMANDS: PhaseCommand[] = [
     label: 'Detect',
     icon: 'search',
     tone: 'bg-blue-soft text-blue',
-    command: '/bluespec.detect',
+    command: '/lagune.detect',
     purpose:
       'Back in your agent, read your code and map what your system does and where the risks are.',
   },
@@ -24,7 +24,7 @@ export const PHASE_COMMANDS: PhaseCommand[] = [
     label: 'Plan',
     icon: 'layers',
     tone: 'bg-accent-soft text-accent',
-    command: '/bluespec.plan',
+    command: '/lagune.plan',
     purpose:
       'Back in your agent, turn what detect found into a defense plan, ranking each finding by priority and pairing it with a fix.',
   },
@@ -33,7 +33,7 @@ export const PHASE_COMMANDS: PhaseCommand[] = [
     label: 'Harden',
     icon: 'shield',
     tone: 'bg-amber-soft text-amber',
-    command: '/bluespec.harden',
+    command: '/lagune.harden',
     purpose:
       "Back in your agent, apply the plan's fixes to your code, safely and one at a time.",
   },
@@ -42,7 +42,7 @@ export const PHASE_COMMANDS: PhaseCommand[] = [
     label: 'Verify',
     icon: 'checkCircle',
     tone: 'bg-teal-soft text-teal',
-    command: '/bluespec.verify',
+    command: '/lagune.verify',
     purpose:
       'Back in your agent, prove each applied fix holds, then close out the ones that do.',
   },

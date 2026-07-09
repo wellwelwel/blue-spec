@@ -10,20 +10,20 @@ const read = (workspace: string, relativePath: string): Promise<string> =>
 const remove = (workspace: string, relativePath: string): Promise<void> =>
   rm(join(workspace, relativePath), { recursive: true, force: true });
 
-const charterCommand = '.claude/skills/bluespec.charter/SKILL.md';
-const charterMemory = '.bluespec/memory/charter.md';
-const tracking = '.bluespec/tracking.json';
-const skillsCatalog = '.bluespec/skills.json';
-const regexSkill = '.bluespec/skills/regex.md';
-const userSkill = '.bluespec/skills/graphql.md';
-const specializations = '.bluespec/specializations.md';
+const charterCommand = '.claude/skills/lagune.charter/SKILL.md';
+const charterMemory = '.lagune/memory/charter.md';
+const tracking = '.lagune/tracking.json';
+const skillsCatalog = '.lagune/skills.json';
+const regexSkill = '.lagune/skills/regex.md';
+const userSkill = '.lagune/skills/graphql.md';
+const specializations = '.lagune/specializations.md';
 
 const stripGenerated = async (workspace: string): Promise<void> => {
-  await remove(workspace, '.bluespec/templates');
-  await remove(workspace, '.bluespec/hooks');
+  await remove(workspace, '.lagune/templates');
+  await remove(workspace, '.lagune/hooks');
   await remove(workspace, regexSkill);
   await remove(workspace, specializations);
-  await remove(workspace, '.claude/skills/bluespec.charter');
+  await remove(workspace, '.claude/skills/lagune.charter');
 };
 
 await describe('pull rebuilds generated files from a committed manifest', async () => {
@@ -104,10 +104,10 @@ await describe('pull rebuilds generated files from a committed manifest', async 
       skills: ['owasp'],
     });
     const before: { createdAt: string } = JSON.parse(
-      await read(workspace, '.bluespec/manifest.json')
+      await read(workspace, '.lagune/manifest.json')
     );
     await writeFile(
-      join(workspace, '.bluespec/manifest.json'),
+      join(workspace, '.lagune/manifest.json'),
       JSON.stringify({ ...before, version: '0.0.0-clone' }, null, 2),
       'utf8'
     );
@@ -116,7 +116,7 @@ await describe('pull rebuilds generated files from a committed manifest', async 
     await pullInto(workspace);
 
     const after: { version: string } = JSON.parse(
-      await read(workspace, '.bluespec/manifest.json')
+      await read(workspace, '.lagune/manifest.json')
     );
     const version = await loadVersion(packageRoot);
 
@@ -142,19 +142,19 @@ await describe('pull rebuilds generated files from a committed manifest', async 
 
     const contents = await read(workspace, '.gitignore');
     strict(
-      contents.includes('/.bluespec/skills/*'),
-      'the Blue Spec block is restored'
+      contents.includes('/.lagune/skills/*'),
+      'the Lagune block is restored'
     );
   });
 
   await it('rebuilds the commands of every recorded agent', async () => {
     const workspace = await newWorkspace();
-    const copilotCharter = '.github/prompts/bluespec.charter.prompt.md';
+    const copilotCharter = '.github/prompts/lagune.charter.prompt.md';
 
     await initInto(workspace, { init: true, agent: 'claude' });
     await initInto(workspace, { init: true, agent: 'copilot' });
 
-    await remove(workspace, '.claude/skills/bluespec.charter');
+    await remove(workspace, '.claude/skills/lagune.charter');
     await remove(workspace, copilotCharter);
     await pullInto(workspace);
 
@@ -168,7 +168,7 @@ await describe('pull rebuilds generated files from a committed manifest', async 
     await pullInto(workspace);
 
     await strict.rejects(
-      stat(join(workspace, '.bluespec/manifest.json')),
+      stat(join(workspace, '.lagune/manifest.json')),
       'no manifest is written without a prior init'
     );
   });

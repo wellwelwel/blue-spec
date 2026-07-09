@@ -26,13 +26,13 @@ export const Modal = (props: {
 
   return createPortal(
     <div
-      class='bs-backdrop fixed inset-0 z-100 flex items-center justify-center p-[clamp(12px,4vw,48px)] backdrop-blur-[6px]'
+      class='lagune-backdrop fixed inset-0 z-100 flex items-center justify-center p-[clamp(12px,4vw,48px)] backdrop-blur-[6px]'
       onClick={props.onClose}
       role='presentation'
     >
       <div
         ref={panel}
-        class={`bs-panel relative flex w-full ${props.width ?? 'max-w-130'} flex-col overflow-hidden rounded-xl shadow-pop outline-none`}
+        class={`lagune-panel relative flex w-full ${props.width ?? 'max-w-130'} flex-col overflow-hidden rounded-xl shadow-pop outline-none`}
         role='dialog'
         aria-modal='true'
         aria-label={props.label}

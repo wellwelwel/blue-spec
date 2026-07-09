@@ -161,7 +161,7 @@ const Home = (): ReactNode => {
     {
       label: 'Star on GitHub',
       Icon: FaStar,
-      href: 'https://github.com/wellwelwel/blue-spec',
+      href: 'https://github.com/wellwelwel/lagune',
     },
     {
       label: 'Support',
@@ -171,43 +171,43 @@ const Home = (): ReactNode => {
   ];
 
   return (
-    <div className='bs-canvas relative min-h-screen m-0 antialiased text-ink bg-[#050a18] font-sans'>
+    <div className='lagune-canvas relative min-h-screen m-0 antialiased text-ink bg-[#050a18] font-sans'>
       <Head>
         <title>
-          SDH: Blue Spec — Security-Driven Hardening for AI-built software
+          SDH: Lagune — Security-Driven Hardening for AI-built software
         </title>
-        <html className='bs-canvas-html' lang='en' />
-        <body className='bs-canvas-body' />
+        <html className='lagune-canvas-html' lang='en' />
+        <body className='lagune-canvas-body' />
         <meta
           name='description'
-          content='Blue Spec helps your AI agent make a project more secure. You point it at your code, and the agent figures out what your system actually does, then guides you through the security work that matters for it.'
+          content='Lagune helps your AI agent make a project more secure. You point it at your code, and the agent figures out what your system actually does, then guides you through the security work that matters for it.'
         />
-        <link rel='canonical' href='https://bluespec.weslley.io/' />
+        <link rel='canonical' href='https://lagune.weslley.io/' />
         <meta property='og:type' content='website' />
-        <meta property='og:url' content='https://bluespec.weslley.io/' />
+        <meta property='og:url' content='https://lagune.weslley.io/' />
         <meta
           property='og:title'
-          content='SDH: Blue Spec — Security-Driven Hardening for AI-built software'
+          content='SDH: Lagune — Security-Driven Hardening for AI-built software'
         />
         <meta
           property='og:description'
-          content='Blue Spec helps your AI agent make a project more secure. Point it at your code, and it guides you through the security work that matters for it.'
+          content='Lagune helps your AI agent make a project more secure. Point it at your code, and it guides you through the security work that matters for it.'
         />
         <meta
           property='og:image'
-          content='https://bluespec.weslley.io/img/og.png'
+          content='https://lagune.weslley.io/img/og.png'
         />
         <meta
           name='twitter:title'
-          content='SDH: Blue Spec — Security-Driven Hardening'
+          content='SDH: Lagune — Security-Driven Hardening'
         />
         <meta
           name='twitter:description'
-          content='Blue Spec helps your AI agent make a project more secure. Point it at your code, and it guides you through the security work that matters for it.'
+          content='Lagune helps your AI agent make a project more secure. Point it at your code, and it guides you through the security work that matters for it.'
         />
         <meta
           name='twitter:image'
-          content='https://bluespec.weslley.io/img/og.png'
+          content='https://lagune.weslley.io/img/og.png'
         />
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link
@@ -223,10 +223,10 @@ const Home = (): ReactNode => {
           {JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'WebSite',
-            name: 'Blue Spec',
-            url: 'https://bluespec.weslley.io',
+            name: 'Lagune',
+            url: 'https://lagune.weslley.io',
             description:
-              'Blue Spec helps your AI agent make a project more secure. You point it at your code, and the agent figures out what your system actually does, then guides you through the security work that matters for it.',
+              'Lagune helps your AI agent make a project more secure. You point it at your code, and the agent figures out what your system actually does, then guides you through the security work that matters for it.',
           })}
         </script>
       </Head>
@@ -327,7 +327,7 @@ const Home = (): ReactNode => {
               </button>
 
               {menuOpen && (
-                <div className='bs-menu-pop absolute top-[calc(100%+8px)] right-0 z-[20] flex w-[200px] flex-col gap-1 rounded-2xl border border-line bg-[rgba(10,15,31,0.92)] p-1.5 [backdrop-filter:blur(16px)_saturate(150%)] [-webkit-backdrop-filter:blur(16px)_saturate(150%)] [box-shadow:inset_0_1px_0_rgba(255,255,255,0.08),0_20px_48px_-16px_rgba(0,0,0,0.6)] min-[921px]:hidden'>
+                <div className='lagune-menu-pop absolute top-[calc(100%+8px)] right-0 z-[20] flex w-[200px] flex-col gap-1 rounded-2xl border border-line bg-[rgba(10,15,31,0.92)] p-1.5 [backdrop-filter:blur(16px)_saturate(150%)] [-webkit-backdrop-filter:blur(16px)_saturate(150%)] [box-shadow:inset_0_1px_0_rgba(255,255,255,0.08),0_20px_48px_-16px_rgba(0,0,0,0.6)] min-[921px]:hidden'>
                   {headerLinks.map(({ label, Icon, href, onClick }) =>
                     href ? (
                       <Link
@@ -366,7 +366,7 @@ const Home = (): ReactNode => {
             >
               <div
                 key={active}
-                className='bs-fade-in flex flex-col items-center gap-[26px] py-[clamp(24px,3vw,36px)] max-[600px]:flex-row max-[600px]:justify-center max-[600px]:gap-9 max-[600px]:px-7 max-[600px]:py-3.5'
+                className='lagune-fade-in flex flex-col items-center gap-[26px] py-[clamp(24px,3vw,36px)] max-[600px]:flex-row max-[600px]:justify-center max-[600px]:gap-9 max-[600px]:px-7 max-[600px]:py-3.5'
               >
                 {active === 'usage'
                   ? PHASE_STEPS.map((step, index) => {
@@ -379,7 +379,7 @@ const Home = (): ReactNode => {
                             onClick={() => goToStep(index)}
                             className={`relative flex items-center justify-center size-[22px] border-0 bg-none cursor-pointer transition-colors duration-200 ease-out [&>svg]:size-[19px] hover:text-ink after:absolute after:top-1/2 after:left-1/2 after:size-10 after:-translate-x-1/2 after:-translate-y-1/2 ${
                               index === usageStep
-                                ? 'bs-rail__item--active text-ink'
+                                ? 'lagune-rail__item--active text-ink'
                                 : 'text-[#515664]'
                             }`}
                             aria-label={`${step.phase.title} (step ${index + 1} of ${PHASE_STEPS.length})`}
@@ -395,7 +395,7 @@ const Home = (): ReactNode => {
                   : RAILS[active].map((item) => {
                       const railItemClass = `relative flex items-center justify-center size-[22px] border-0 bg-none cursor-pointer transition-colors duration-200 ease-out [&>svg]:size-[19px] hover:text-ink after:absolute after:top-1/2 after:left-1/2 after:size-10 after:-translate-x-1/2 after:-translate-y-1/2 ${
                         item.active
-                          ? 'bs-rail__item--active text-ink'
+                          ? 'lagune-rail__item--active text-ink'
                           : 'text-[#515664]'
                       }`;
 
@@ -438,11 +438,11 @@ const Home = (): ReactNode => {
             <div className='grid grid-cols-[1.15fr_0.85fr] gap-[clamp(20px,2.6vw,38px)] p-[clamp(22px,3vw,38px)] max-[920px]:grid-cols-[1fr] max-[600px]:pt-3 max-[600px]:pb-[calc(104px+env(safe-area-inset-bottom))]'>
               <div
                 ref={contentRef}
-                className='bs-flow flex flex-col min-w-0 h-[var(--bs-window-h)] overflow-y-auto max-[920px]:h-auto max-[920px]:overflow-visible'
+                className='lagune-flow flex flex-col min-w-0 h-[var(--lagune-window-h)] overflow-y-auto max-[920px]:h-auto max-[920px]:overflow-visible'
               >
                 <div
                   key={active}
-                  className='bs-fade-in-soft flex flex-col min-w-0 h-full max-[920px]:h-auto'
+                  className='lagune-fade-in-soft flex flex-col min-w-0 h-full max-[920px]:h-auto'
                 >
                   {active === 'overview' && (
                     <OverviewPanel onInstall={openInstall} />
@@ -472,7 +472,7 @@ const Home = (): ReactNode => {
                 </div>
               </div>
 
-              <aside className='relative flex flex-col justify-between h-[var(--bs-window-h)] rounded-[20px] overflow-hidden p-[clamp(22px,2.4vw,32px)] isolate max-[920px]:h-auto max-[920px]:min-h-[420px] max-[920px]:order-first max-[600px]:min-h-[340px]'>
+              <aside className='relative flex flex-col justify-between h-[var(--lagune-window-h)] rounded-[20px] overflow-hidden p-[clamp(22px,2.4vw,32px)] isolate max-[920px]:h-auto max-[920px]:min-h-[420px] max-[920px]:order-first max-[600px]:min-h-[340px]'>
                 {TABS.map((tab) => (
                   <img
                     key={tab.id}
@@ -489,7 +489,7 @@ const Home = (): ReactNode => {
 
                 <div
                   key={`top-${active}`}
-                  className='bs-fade-in flex flex-col items-start gap-3.5'
+                  className='lagune-fade-in flex flex-col items-start gap-3.5'
                 >
                   <span className='inline-flex items-center px-3.5 py-[7px] rounded-md bg-accent font-mono text-[12px] tracking-[0.075em] uppercase text-ink'>
                     <span className='size-[6px] rounded-full bg-white mr-[9px]' />
@@ -502,7 +502,7 @@ const Home = (): ReactNode => {
 
                 <div
                   key={`title-${active}`}
-                  className='bs-fade-in flex flex-col gap-[10px]'
+                  className='lagune-fade-in flex flex-col gap-[10px]'
                 >
                   <span className='font-mono text-[12px] tracking-[0.18em] uppercase text-[rgba(233, 237, 247,0.62)]'>
                     {feature.eyebrow}

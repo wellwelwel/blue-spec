@@ -10,7 +10,7 @@ const keepSkill = async (targetDir: string, skill: string): Promise<string> => {
 
   return outcome === 'unchanged'
     ? `${skill} is already tracked\n`
-    : `keeping .bluespec/skills/${skill}.md under version control\n`;
+    : `keeping .lagune/skills/${skill}.md under version control\n`;
 };
 
 /** Edits the project .gitignore: --keep-skill <name> re-includes a sub-skill */

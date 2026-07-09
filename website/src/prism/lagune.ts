@@ -1,8 +1,8 @@
 import type { PrismTheme } from 'prism-react-renderer';
 
 /*
- * Blue Spec code theme: a blue-family scheme over the dashboard's dark
- * canvas token, so code blocks read as native Blue Spec terminals in both
+ * Lagune code theme: a blue-family scheme over the dashboard's dark
+ * canvas token, so code blocks read as native Lagune terminals in both
  * docs themes. Three blue tones carry the structure (keywords, strings,
  * constants), pink marks the call sites, red is reserved for deletions.
  */
@@ -17,7 +17,7 @@ const periwinkle = '#a8b4ff';
 const pink = '#ef83b6';
 const red = '#ff7076';
 
-export const blueSpecCode: PrismTheme = {
+export const laguneCode: PrismTheme = {
   plain: {
     color: ink,
     backgroundColor: canvas,

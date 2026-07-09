@@ -11,7 +11,7 @@ Security-Driven Hardening (SDH) is a structured, AI-driven, defense-only securit
 
 This document argues that SDH is a missing convention, not a single tool. The intelligence lives in the methodology, not in the user, which lets it serve a novice and an expert through the same flow. Two properties set it apart from prior spec-first approaches `[1]`. SDH is **state-independent**: it adapts to an empty directory, a project in progress, a single pull request, or a large legacy codebase, in any stack. And SDH is **closable**: a risk verified closed is stood down out of the whole flow, so that finding reaches a settled state and is reopened only when the code changes. SDH does not replace security professionals or specialized Blue Team tooling. It extends the developer's own knowledge, and the more a developer understands security, the more they can drive it.
 
-**Blue Spec** is the reference implementation. It realizes SDH across 37 AI coding agents and proves the methodology is buildable and portable. SDH is offered as a convention others can adopt.
+**Lagune** is the reference implementation. It realizes SDH across 37 AI coding agents and proves the methodology is buildable and portable. SDH is offered as a convention others can adopt.
 
 > **Index Terms**
 >
@@ -338,11 +338,11 @@ The reconcile-never-append discipline (`§V`) needs a substrate that survives re
 >
 > **Identity-by-name:** A finding's identity is its name, written identically in every artifact. The prose carries the name, never a path. File paths live only in the tracking map, so a rename or a moved file breaks the link in exactly one place.
 
-Each detect finding is one tracked item. Its identity is its **name**, the section title, written identically in the detect map, the plan, and the hardening record. The later phases reuse that name verbatim as they act on the same item, and verify writes its verdict onto the hardening record under that same name. The tracking map (`.bluespec/tracking.json`) holds tracking and nothing else:
+Each detect finding is one tracked item. Its identity is its **name**, the section title, written identically in the detect map, the plan, and the hardening record. The later phases reuse that name verbatim as they act on the same item, and verify writes its verdict onto the hardening record under that same name. The tracking map (`.lagune/tracking.json`) holds tracking and nothing else:
 
 ```json
 {
-  "name": "blue-spec",
+  "name": "lagune",
   "entries": [{ "name": "File uploads", "paths": ["src/routes/upload.ts"] }]
 }
 ```
@@ -371,7 +371,7 @@ The methodology applies its own defense discipline to itself. The deterministic 
 
 ## XII. The carrier: agent-agnostic architecture as a portability proof
 
-For SDH to be a convention others adopt, it must not be tied to one agent or one stack. Blue Spec proves this is achievable. Its guiding rule is "adapters are data, not code."
+For SDH to be a convention others adopt, it must not be tied to one agent or one stack. Lagune proves this is achievable. Its guiding rule is "adapters are data, not code."
 
 The codebase splits into two layers. The **core is agent-agnostic**: the templates, the per-phase content, and the context-detection logic know nothing about which agent runs them. This is where the security value lives, and it is written once. An **adapter is thin**: its only job is to translate the core's commands into the format and location a given agent expects. It carries no security logic of its own.
 
@@ -387,7 +387,7 @@ flowchart TB
     dispatcher --> markdown["markdown<br/>(.opencode)"]
     dispatcher --> toml["TOML<br/>(gemini)"]
     dispatcher --> goose["Goose ...<br/>(.goose)"]
-    dispatcher -.-> bluespec[".bluespec/<br/>(charter, phase artifacts, hooks,<br/>knowledge modules, tracking)"]
+    dispatcher -.-> lagune[".lagune/<br/>(charter, phase artifacts, hooks,<br/>knowledge modules, tracking)"]
 ```
 
 **Figure 6.** The agent-agnostic carrier. One core renders through a format dispatcher into each agent's packaging, with the project state as a shared sibling.
@@ -486,7 +486,7 @@ A fair skeptic will raise several objections. The substantive ones are worth pos
 
 **"Doesn't an AI-reasoned method just hallucinate findings?"** The design constrains invention rather than trusting the model to behave. Detect records only what the code supports ("detection, not invention," `§IV`), verify confronts code against record and may answer "cannot tell from the code" (`§XV`), deterministic checkers ground the decidable cases (`§VII`), and the user is the final arbiter. This does not make the agent infallible, it makes its claims checkable.
 
-A note on positioning. SDH is defined here independently of its reference implementation. The five phases, the risk-framed charter, reconcile-never-append and its closability, prompt-on-demand knowledge, the preventive mode, identity-by-name tracking, and the defense-only boundary are the methodology. Another team could implement them in another stack and another agent ecosystem, and the result would still be SDH. Blue Spec is its proof, not its definition.
+A note on positioning. SDH is defined here independently of its reference implementation. The five phases, the risk-framed charter, reconcile-never-append and its closability, prompt-on-demand knowledge, the preventive mode, identity-by-name tracking, and the defense-only boundary are the methodology. Another team could implement them in another stack and another agent ecosystem, and the result would still be SDH. Lagune is its proof, not its definition.
 
 ---
 
@@ -527,7 +527,7 @@ The methodology and its reference implementation have clear next steps.
 
 AI-assisted development opened a security gap that generic checklists cannot fill, because the risk that matters is specific to what a system actually does, and the person shipping it may not know what to ask for. SDH closes that gap with a context-aware, defense-only, closable flow in which the intelligence lives in the methodology rather than the user. It detects the system's real context, triages the risks that context carries, applies fixes carefully, and verifies each one, then stands down what it has closed so each finding reaches an end state. The same defense also runs preventively while new work is built, so what the flow closes stays closed. It adapts to any development state in any stack, and it extends the developer's knowledge instead of replacing the people and tools that already do that job.
 
-Blue Spec is the proof, but the contribution is the convention. SDH is offered as the essential security flow for the era of development with AI, for others to adopt, refine, and implement in their own stacks.
+Lagune is the proof, but the contribution is the convention. SDH is offered as the essential security flow for the era of development with AI, for others to adopt, refine, and implement in their own stacks.
 
 ---
 

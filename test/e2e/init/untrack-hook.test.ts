@@ -7,7 +7,7 @@ import { initInto, newWorkspace } from './__utils__.js';
 
 const seedDetect = (workspace: string, ...findings: string[]): Promise<void> =>
   writeFile(
-    join(workspace, '.bluespec/memory/detect.md'),
+    join(workspace, '.lagune/memory/detect.md'),
     [
       '# Project Detect Map',
       '',
@@ -29,7 +29,7 @@ const runHook = (
   payload: string
 ): Promise<string> =>
   new Promise((resolve, reject) => {
-    const child = spawn(execPath, [`.bluespec/hooks/${hook}`, payload], {
+    const child = spawn(execPath, [`.lagune/hooks/${hook}`, payload], {
       cwd: workspace,
     });
     const chunks: string[] = [];
@@ -50,9 +50,7 @@ const runHook = (
 const readTracking = async (
   workspace: string
 ): Promise<{ entries: { name: string; paths: string[] }[] }> =>
-  JSON.parse(
-    await readFile(join(workspace, '.bluespec/tracking.json'), 'utf8')
-  );
+  JSON.parse(await readFile(join(workspace, '.lagune/tracking.json'), 'utf8'));
 
 await describe('the scaffolded untrack hook removes by name without install', async () => {
   await it('drops a closed finding from the map, leaving the rest', async () => {
@@ -111,7 +109,7 @@ await describe('the scaffolded untrack hook removes by name without install', as
     );
 
     const detect = await readFile(
-      join(workspace, '.bluespec/memory/detect.md'),
+      join(workspace, '.lagune/memory/detect.md'),
       'utf8'
     );
     strict.strictEqual(

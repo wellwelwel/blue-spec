@@ -11,7 +11,7 @@ import { BADGE_MUTED, EMPTY } from '../utils/tailwind-classes';
 
 const CHARTER_PROMPT: PromptSpec = {
   task: 'Create a login page.',
-  mention: '@.bluespec/memory/charter.md',
+  mention: '@.lagune/memory/charter.md',
   readPath: 'charter.md',
   tone: 'tip',
   reply: [{ text: 'On it!' }],
@@ -33,7 +33,7 @@ export const Charter = (): VNode => {
   return (
     <>
       <PageHeader
-        background='https://bluespec.weslley.io/img/docs/banner-3.png'
+        background='https://lagune.weslley.io/img/docs/banner-3.png'
         eyebrow='Governance'
         title='Charter'
         description={`The governing principles every phase respects · v${data.version}.`}
@@ -52,8 +52,8 @@ export const Charter = (): VNode => {
             and purpose of your project.
           </p>
           <p class='text-pretty'>
-            Think of it as the <code>AGENTS.md</code> of{' '}
-            <strong>Blue Spec</strong>: every phase reads and follows it.
+            Think of it as the <code>AGENTS.md</code> of <strong>Lagune</strong>
+            : every phase reads and follows it.
           </p>
         </Admonition>
 
@@ -62,9 +62,9 @@ export const Charter = (): VNode => {
             <p class='text-pretty'>
               Tag the charter file in your prompt so your agent follows the
               security rules from development onward:{' '}
-              <code>@.bluespec/memory/charter.md</code>{' '}
+              <code>@.lagune/memory/charter.md</code>{' '}
               <CopyButton
-                text='@.bluespec/memory/charter.md'
+                text='@.lagune/memory/charter.md'
                 label='Copy charter path'
                 inline
               />

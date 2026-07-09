@@ -17,7 +17,7 @@ await describe('discoverSkills reads the user catalog and fails closed', async (
   await it('parses valid entries and drops malformed ones', async () => {
     await withWorkspace(
       JSON.stringify({
-        name: 'blue-spec',
+        name: 'lagune',
         entries: [
           { name: 'graphql', tags: ['GraphQL', 'gql'] },
           { name: 'broken' },
@@ -35,7 +35,7 @@ await describe('discoverSkills reads the user catalog and fails closed', async (
   await it('defaults a missing groups field to an empty array', async () => {
     await withWorkspace(
       JSON.stringify({
-        name: 'blue-spec',
+        name: 'lagune',
         entries: [{ name: 'graphql', tags: ['GraphQL'] }],
       }),
       (entries) => {
@@ -49,7 +49,7 @@ await describe('discoverSkills reads the user catalog and fails closed', async (
   await it('round-trips a valid groups field', async () => {
     await withWorkspace(
       JSON.stringify({
-        name: 'blue-spec',
+        name: 'lagune',
         entries: [{ name: 'graphql', tags: ['GraphQL'], groups: ['owasp'] }],
       }),
       (entries) => {
@@ -63,7 +63,7 @@ await describe('discoverSkills reads the user catalog and fails closed', async (
   await it('drops an entry whose groups is present but not a string array', async () => {
     await withWorkspace(
       JSON.stringify({
-        name: 'blue-spec',
+        name: 'lagune',
         entries: [{ name: 'graphql', tags: ['GraphQL'], groups: 5 }],
       }),
       (entries) => {

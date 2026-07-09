@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bluespec.weslley.io/sitemap.xml
+Sitemap: https://lagune.weslley.io/sitemap.xml

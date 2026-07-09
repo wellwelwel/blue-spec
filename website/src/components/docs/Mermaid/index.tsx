@@ -103,7 +103,7 @@ export const Mermaid = ({
     <div
       ref={hostRef}
       role='img'
-      className='bs-mermaid my-6 flex justify-center overflow-x-auto rounded-panel border border-line-2 bg-surface-2 p-[clamp(14px,2.4vw,26px)] [&>svg]:h-auto [&>svg]:max-w-full'
+      className='lagune-mermaid my-6 flex justify-center overflow-x-auto rounded-panel border border-line-2 bg-surface-2 p-[clamp(14px,2.4vw,26px)] [&>svg]:h-auto [&>svg]:max-w-full'
     />
   );
 };

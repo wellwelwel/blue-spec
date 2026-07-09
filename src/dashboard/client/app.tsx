@@ -91,7 +91,7 @@ export const App = (): VNode => {
             <>
               Loading{' '}
               <code class='rounded-md bg-surface px-2 py-0.5 font-mono font-semibold'>
-                .bluespec/
+                .lagune/
               </code>{' '}
               …
             </>

@@ -1,10 +1,10 @@
 ---
-id: bluespec
-title: /bluespec
-sidebar_label: /bluespec
+id: lagune
+title: /lagune
+sidebar_label: /lagune
 description: Build what you ask and secure it as it is written, guided by the charter, with no flow to follow.
 keywords:
-  - bluespec
+  - lagune
   - secure by default
   - development
   - charter
@@ -14,13 +14,13 @@ keywords:
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
 
-# /bluespec
+# /lagune
 
-⌨️ Do the work you asked for, secured as it is written. **`/bluespec`** takes any prompt at any stage, builds what you wanted, and makes it safe by default before handing it back.
+⌨️ Do the work you asked for, secured as it is written. **`/lagune`** takes any prompt at any stage, builds what you wanted, and makes it safe by default before handing it back.
 
 ## Run it
 
-Mark **`/bluespec`** on any prompt, and describe the work as you always would.
+Mark **`/lagune`** on any prompt, and describe the work as you always would.
 
 <Tabs>
   <TabItem value="rules" label="📘 Agent Instructions" default>
@@ -32,7 +32,7 @@ Mark **`/bluespec`** on any prompt, and describe the work as you always would.
 
 ## Security
 
-- Use the `/bluespec` skill whenever you build or change code, so it improves safety by default.
+- Use the `/lagune` skill whenever you build or change code, so it improves safety by default.
 ```
 
     - For example: **AGENTS.md**, **CLAUDE.md**, **.github/copilot-instructions.md**, **.cursorrules**, etc.
@@ -41,33 +41,33 @@ Mark **`/bluespec`** on any prompt, and describe the work as you always would.
   <TabItem value="feature" label="💬 A feature">
 
 ```prompt
-/bluespec let users upload a custom photo on their profile.
+/lagune let users upload a custom photo on their profile.
 ```
 
   </TabItem>
   <TabItem value="fix" label="💬 A fix">
 
 ```prompt
-/bluespec nothing happens when the user submits the form. Look into what it might be and fix it.
+/lagune nothing happens when the user submits the form. Look into what it might be and fix it.
 ```
 
   </TabItem>
   <TabItem value="change" label="💬 A refactor">
 
 ```prompt
-/bluespec decouple and improve the payload logic
+/lagune decouple and improve the payload logic
 ```
 
   </TabItem>
 </Tabs>
 
 :::tip[Charter optional, but better with it]
-**`/bluespec`** runs with or without a charter. With one, your project's own rules shape every build. Set them once with [`/bluespec.charter`](/docs/commands/charter).
+**`/lagune`** runs with or without a charter. With one, your project's own rules shape every build. Set them once with [`/lagune.charter`](/docs/commands/charter).
 :::
 
 ## How it works
 
-It wraps the work in three movements, without writing anything to Blue Spec:
+It wraps the work in three movements, without writing anything to Lagune:
 
 1. It loads your charter, if it exists, and its principles govern the whole build, falling back to a safe-by-default baseline when you have none yet.
 2. It reads what you asked and matches the [sub-skills](/docs/commands/skills) your work touches, the same on-demand knowledge the audit flow uses.
@@ -76,10 +76,10 @@ It wraps the work in three movements, without writing anything to Blue Spec:
 The result is working code in your project, safe from the first line.
 
 :::tip[Use it anytime]
-No detect, no plan, no cleanup afterward. **`/bluespec`** fits a fresh scaffold or a change on a mature codebase equally, and it secures the work as it goes, not later.
+No detect, no plan, no cleanup afterward. **`/lagune`** fits a fresh scaffold or a change on a mature codebase equally, and it secures the work as it goes, not later.
 :::
 
 ## What it does not do
 
-- It writes nothing to the `.bluespec` directory, no artifact and no tracking, so the only thing it produces is the safe code you asked for.
+- It writes nothing to the `.lagune` directory, no artifact and no tracking, so the only thing it produces is the safe code you asked for.
 - It doesn't weaken a rule to satisfy a prompt, so if what you asked would break a charter principle, it stops and tells you first, instead of building it unsafely directly.

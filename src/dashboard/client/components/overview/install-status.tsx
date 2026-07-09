@@ -10,7 +10,7 @@ const presentation = (install: Install): InstallPresentation => {
     return {
       icon: 'package',
       tile: 'bg-accent-soft text-accent',
-      title: 'Blue Spec is not installed here',
+      title: 'Lagune is not installed here',
       detail:
         'No manifest was found. Install scaffolds the commands, templates, and hooks into this project.',
       action: { href: '/settings?tab=install', label: 'Install' },

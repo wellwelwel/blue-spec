@@ -5,19 +5,19 @@ import { groupScaffoldOutcomes } from '../../../src/core/scaffold-groups.js';
 const result = (created: string[], skipped: string[] = []): ScaffoldResult => ({
   created,
   skipped,
-  manifestPath: '.bluespec/manifest.json',
+  manifestPath: '.lagune/manifest.json',
 });
 
 const group = (created: string[], skipped: string[] = []): ScaffoldGroup[] =>
   groupScaffoldOutcomes(result(created, skipped), 'Claude Code');
 
 describe('grouping scaffold outcomes into categories', () => {
-  it('buckets each .bluespec path under its own category', () => {
+  it('buckets each .lagune path under its own category', () => {
     const groups = group([
-      '.bluespec/templates/charter-template.md',
-      '.bluespec/hooks/track.mjs',
-      '.bluespec/skills/regex.md',
-      '.bluespec/tracking.json',
+      '.lagune/templates/charter-template.md',
+      '.lagune/hooks/track.mjs',
+      '.lagune/skills/regex.md',
+      '.lagune/tracking.json',
     ]);
 
     strict.deepStrictEqual(
@@ -26,29 +26,26 @@ describe('grouping scaffold outcomes into categories', () => {
     );
   });
 
-  it('keeps the State bucket to top-level .bluespec files, not nested ones', () => {
-    const groups = group([
-      '.bluespec/skills.json',
-      '.bluespec/skills/network.md',
-    ]);
+  it('keeps the State bucket to top-level .lagune files, not nested ones', () => {
+    const groups = group(['.lagune/skills.json', '.lagune/skills/network.md']);
     const state = groups.find((entry) => entry.label === 'State');
     const subSkills = groups.find((entry) => entry.label === 'Sub-skills');
 
     strict.deepStrictEqual(
       state?.outcomes.map((outcome) => outcome.path),
-      ['.bluespec/skills.json']
+      ['.lagune/skills.json']
     );
     strict.deepStrictEqual(
       subSkills?.outcomes.map((outcome) => outcome.path),
-      ['.bluespec/skills/network.md']
+      ['.lagune/skills/network.md']
     );
   });
 
-  it('labels the non-Blue-Spec bucket with the agent name', () => {
+  it('labels the non-Lagune bucket with the agent name', () => {
     const groups = groupScaffoldOutcomes(
       result([
-        '.claude/skills/bluespec.charter/SKILL.md',
-        '.claude/skills/bluespec.detect/SKILL.md',
+        '.claude/skills/lagune.charter/SKILL.md',
+        '.claude/skills/lagune.detect/SKILL.md',
       ]),
       'Claude Code'
     );
@@ -63,7 +60,7 @@ describe('grouping scaffold outcomes into categories', () => {
   });
 
   it('derives the agent baseDir as the shared directory of its files', () => {
-    const groups = group(['.opencode/commands/bluespec.charter.md']);
+    const groups = group(['.opencode/commands/lagune.charter.md']);
     const agent = groups.find((entry) => entry.label === 'Claude Code');
 
     strict.strictEqual(agent?.baseDir, '.opencode/commands/');
@@ -71,8 +68,8 @@ describe('grouping scaffold outcomes into categories', () => {
 
   it('carries the created or skipped status onto each outcome', () => {
     const groups = group(
-      ['.bluespec/templates/charter-template.md'],
-      ['.bluespec/templates/detect-template.md']
+      ['.lagune/templates/charter-template.md'],
+      ['.lagune/templates/detect-template.md']
     );
     const templates = groups.find((entry) => entry.label === 'Templates');
 
@@ -83,7 +80,7 @@ describe('grouping scaffold outcomes into categories', () => {
   });
 
   it('drops categories that have no outcomes', () => {
-    const groups = group(['.bluespec/hooks/regex.mjs']);
+    const groups = group(['.lagune/hooks/regex.mjs']);
 
     strict.deepStrictEqual(
       groups.map((entry) => entry.label),

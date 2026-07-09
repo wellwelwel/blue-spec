@@ -18,7 +18,7 @@ await describe('the specialize command is wired as a command + template pair', a
     );
   });
 
-  it('renders a bluespec.specialize path pointing at the scaffolded template', () => {
+  it('renders a lagune.specialize path pointing at the scaffolded template', () => {
     const provider = createProvider({
       key: 'claude',
       displayName: 'Claude Code',
@@ -28,20 +28,18 @@ await describe('the specialize command is wired as a command + template pair', a
     });
     const commands = provider.buildCommands(assets);
     const specialize = commands.find((command) =>
-      command.relativePath.includes('bluespec.specialize')
+      command.relativePath.includes('lagune.specialize')
     );
 
     if (specialize === undefined)
-      throw new Error('a bluespec.specialize command should render');
+      throw new Error('a lagune.specialize command should render');
 
     strict.strictEqual(
       specialize.relativePath,
-      '.claude/skills/bluespec.specialize/SKILL.md'
+      '.claude/skills/lagune.specialize/SKILL.md'
     );
     strict(
-      specialize.contents.includes(
-        '.bluespec/templates/specialize-template.md'
-      ),
+      specialize.contents.includes('.lagune/templates/specialize-template.md'),
       'the rendered command should point at the scaffolded template path'
     );
   });

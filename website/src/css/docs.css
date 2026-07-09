@@ -1,12 +1,12 @@
 /*
- * Docs skin: the documentation's own design system, scoped under .bs-docs
+ * Docs skin: the documentation's own design system, scoped under .lagune-docs
  * as the token set every docs utility (bg-surface, text-ink…) resolves to.
  * The docs theme is independent from Docusaurus' color mode (locked to dark
- * for the landing page): it keys off the html attribute data-bs-docs-theme,
+ * for the landing page): it keys off the html attribute data-lagune-docs-theme,
  * set pre-paint by a script the docs plugin injects.
  */
 
-.bs-docs {
+.lagune-docs {
   --canvas: #eaedf5;
   --surface: #ffffff;
   --surface-2: #f2f4f9;
@@ -62,7 +62,7 @@
   text-rendering: optimizeLegibility;
 }
 
-html[data-bs-docs-theme='dark'] .bs-docs {
+html[data-lagune-docs-theme='dark'] .lagune-docs {
   --canvas: #0b0e17;
   --surface: #151a26;
   --surface-2: #1d2432;
@@ -90,24 +90,24 @@ html[data-bs-docs-theme='dark'] .bs-docs {
     0 2px 7px -4px rgba(0, 0, 0, 0.55), 0 9px 20px -11px rgba(0, 0, 0, 0.72);
 }
 
-.bs-docs :is(h1, h2, h3, h4) {
+.lagune-docs :is(h1, h2, h3, h4) {
   text-wrap: balance;
 }
 
-.bs-docs :is(p, li, figcaption, blockquote) {
+.lagune-docs :is(p, li, figcaption, blockquote) {
   text-wrap: pretty;
 }
 
-.bs-docs .bs-scroll {
+.lagune-docs .lagune-scroll {
   scrollbar-width: thin;
   scrollbar-color: var(--surface-3) transparent;
 }
 
-.bs-docs .bs-scroll::-webkit-scrollbar {
+.lagune-docs .lagune-scroll::-webkit-scrollbar {
   width: 11px;
 }
 
-.bs-docs .bs-scroll::-webkit-scrollbar-thumb {
+.lagune-docs .lagune-scroll::-webkit-scrollbar-thumb {
   background: var(--surface-3);
   border-radius: 999px;
   border: 3px solid var(--surface);
@@ -117,7 +117,7 @@ html[data-bs-docs-theme='dark'] .bs-docs {
  * Markdown content, remapping Infima onto the dashboard tokens.
  * ------------------------------------------------------------------------ */
 
-.bs-docs .markdown {
+.lagune-docs .markdown {
   --ifm-font-color-base: var(--ink-2);
   --ifm-heading-color: var(--ink);
   --ifm-link-color: var(--accent);
@@ -145,7 +145,7 @@ html[data-bs-docs-theme='dark'] .bs-docs {
   color: var(--ink-2);
 }
 
-.bs-docs .markdown :is(h1, h2, h3, h4, h5, h6) {
+.lagune-docs .markdown :is(h1, h2, h3, h4, h5, h6) {
   font-family:
     'Plus Jakarta Sans',
     system-ui,
@@ -160,49 +160,49 @@ html[data-bs-docs-theme='dark'] .bs-docs {
 /* The page banner already renders the title, so the leading Markdown h1
    (which MDX wraps in a <header>, kept in the files for GitHub readers)
    stays out of the page. */
-.bs-docs .markdown > header:first-child {
+.lagune-docs .markdown > header:first-child {
   display: none;
 }
 
-.bs-docs .markdown h2 {
+.lagune-docs .markdown h2 {
   font-size: 1.25rem;
   border-bottom: 1px solid var(--line);
   padding-bottom: 0.5rem;
 }
 
-.bs-docs .markdown h3 {
+.lagune-docs .markdown h3 {
   font-size: 1.05rem;
 }
 
-.bs-docs .markdown a:not(.hash-link) {
+.lagune-docs .markdown a:not(.hash-link) {
   font-weight: 600;
   text-decoration: none;
 }
 
-.bs-docs .markdown a:not(.hash-link):hover {
+.lagune-docs .markdown a:not(.hash-link):hover {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
-.bs-docs .markdown .hash-link {
+.lagune-docs .markdown .hash-link {
   color: var(--faint);
 }
 
-.bs-docs .markdown .hash-link:hover {
+.lagune-docs .markdown .hash-link:hover {
   color: var(--accent);
 }
 
-.bs-docs .markdown strong {
+.lagune-docs .markdown strong {
   color: var(--ink);
 }
 
-.bs-docs .markdown li::marker {
+.lagune-docs .markdown li::marker {
   color: var(--muted);
 }
 
 /* Task-list checkboxes: the native disabled control ignores the theme, so
    it is redrawn on the tokens (opacity: 1 undoes the disabled graying). */
-.bs-docs .markdown input[type='checkbox'] {
+.lagune-docs .markdown input[type='checkbox'] {
   appearance: none;
   width: 1rem;
   height: 1rem;
@@ -214,13 +214,13 @@ html[data-bs-docs-theme='dark'] .bs-docs {
   opacity: 1;
 }
 
-.bs-docs .markdown input[type='checkbox']:checked {
+.lagune-docs .markdown input[type='checkbox']:checked {
   border-color: var(--accent);
   background-color: var(--accent);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='m2.5 6.3 2.4 2.4 4.6-5.4'/%3E%3C/svg%3E");
 }
 
-.bs-docs .markdown :not(pre) > code {
+.lagune-docs .markdown :not(pre) > code {
   border: 1px solid var(--line-2);
   border-radius: 6px;
   color: var(--ink);
@@ -231,13 +231,13 @@ html[data-bs-docs-theme='dark'] .bs-docs {
 }
 
 @media (max-width: 767px) {
-  .bs-docs .markdown :not(pre) > code {
+  .lagune-docs .markdown :not(pre) > code {
     white-space: normal;
     overflow-wrap: anywhere;
   }
 }
 
-.bs-docs .markdown blockquote {
+.lagune-docs .markdown blockquote {
   border-left: 3px solid var(--accent);
   background: var(--accent-100);
   border-radius: 0 var(--radius-field) var(--radius-field) 0;
@@ -245,27 +245,27 @@ html[data-bs-docs-theme='dark'] .bs-docs {
   margin-block: 1.25rem;
 }
 
-.bs-docs .markdown .bs-callout-body > :first-child {
+.lagune-docs .markdown .lagune-callout-body > :first-child {
   margin-top: 0;
 }
 
-.bs-docs .markdown .bs-callout-body > :last-child {
+.lagune-docs .markdown .lagune-callout-body > :last-child {
   margin-bottom: 0;
 }
 
-.bs-docs .markdown img {
+.lagune-docs .markdown img {
   border-radius: var(--radius-field);
   filter: var(--drop-shadow-card);
 }
 
-.bs-docs .markdown .bs-docs-gallery {
+.lagune-docs .markdown .lagune-docs-gallery {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
   margin-block: 1.25rem;
 }
 
-.bs-docs .markdown .bs-docs-gallery img {
+.lagune-docs .markdown .lagune-docs-gallery img {
   flex: 1 1 240px;
   min-width: 0;
   aspect-ratio: 1920 / 1177;
@@ -273,20 +273,20 @@ html[data-bs-docs-theme='dark'] .bs-docs {
 }
 
 /* Code blocks stay dark in both docs themes, like the dashboard's
-   terminal previews, using the Blue Spec prism theme (src/prism). */
-.bs-docs .theme-code-block,
-.bs-docs div[class*='codeBlockContainer'] {
+   terminal previews, using the Lagune prism theme (src/prism). */
+.lagune-docs .theme-code-block,
+.lagune-docs div[class*='codeBlockContainer'] {
   border-radius: var(--radius-panel);
   box-shadow: var(--shadow-card);
   margin-bottom: 1.25rem;
 }
 
-.bs-docs .theme-code-block pre,
-.bs-docs div[class*='codeBlockContainer'] pre {
+.lagune-docs .theme-code-block pre,
+.lagune-docs div[class*='codeBlockContainer'] pre {
   border-radius: var(--radius-panel);
 }
 
-.bs-docs .theme-code-block pre code {
+.lagune-docs .theme-code-block pre code {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
   font-weight: 600;
@@ -295,19 +295,19 @@ html[data-bs-docs-theme='dark'] .bs-docs {
 
 /* Code blocks live on a dark surface regardless of the docs theme, so their
    selection keeps a light foreground instead of the page ink. */
-.bs-docs .theme-code-block ::selection,
-.bs-docs div[class*='codeBlockContainer'] ::selection {
+.lagune-docs .theme-code-block ::selection,
+.lagune-docs div[class*='codeBlockContainer'] ::selection {
   background: color-mix(in srgb, var(--accent) 45%, transparent);
   color: #ffffff;
 }
 
 /* Copy button: interruptible icon cross-fade (opacity, scale, blur) in
    place of the theme's transition: all, plus a 40px hit area. */
-.bs-docs .theme-code-block [class*='buttonGroup'] {
+.lagune-docs .theme-code-block [class*='buttonGroup'] {
   column-gap: 0.5rem;
 }
 
-.bs-docs .theme-code-block [class*='buttonGroup'] button {
+.lagune-docs .theme-code-block [class*='buttonGroup'] button {
   position: relative;
   border: 0;
   background: transparent;
@@ -319,36 +319,36 @@ html[data-bs-docs-theme='dark'] .bs-docs {
   transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
 }
 
-.bs-docs .theme-code-block:hover [class*='buttonGroup'] button {
+.lagune-docs .theme-code-block:hover [class*='buttonGroup'] button {
   opacity: 0.65;
   transform: scale(1);
   filter: blur(0);
 }
 
-.bs-docs .theme-code-block [class*='copyButtonIcons'] {
+.lagune-docs .theme-code-block [class*='copyButtonIcons'] {
   width: 1.2rem;
   height: 1.2rem;
 }
 
-.bs-docs .theme-code-block [class*='buttonGroup'] button::after {
+.lagune-docs .theme-code-block [class*='buttonGroup'] button::after {
   content: '';
   position: absolute;
   inset: -4px;
 }
 
-.bs-docs .theme-code-block svg[class*='copyButtonIcon_'],
-.bs-docs .theme-code-block svg[class*='copyButtonSuccessIcon_'] {
+.lagune-docs .theme-code-block svg[class*='copyButtonIcon_'],
+.lagune-docs .theme-code-block svg[class*='copyButtonSuccessIcon_'] {
   transition-property: opacity, transform, filter;
   transition-duration: 0.2s;
   transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
   transition-delay: 0s;
 }
 
-.bs-docs .theme-code-block svg[class*='copyButtonIcon_'] {
+.lagune-docs .theme-code-block svg[class*='copyButtonIcon_'] {
   filter: blur(0);
 }
 
-.bs-docs
+.lagune-docs
   .theme-code-block
   button[class*='copyButtonCopied']
   svg[class*='copyButtonIcon_'] {
@@ -357,13 +357,13 @@ html[data-bs-docs-theme='dark'] .bs-docs {
   filter: blur(4px);
 }
 
-.bs-docs .theme-code-block svg[class*='copyButtonSuccessIcon_'] {
+.lagune-docs .theme-code-block svg[class*='copyButtonSuccessIcon_'] {
   transform: translate(-50%, -50%) scale(0.25);
   filter: blur(4px);
   color: var(--teal);
 }
 
-.bs-docs
+.lagune-docs
   .theme-code-block
   button[class*='copyButtonCopied']
   svg[class*='copyButtonSuccessIcon_'] {
@@ -373,7 +373,7 @@ html[data-bs-docs-theme='dark'] .bs-docs {
   transition-delay: 0s;
 }
 
-.bs-docs .markdown table {
+.lagune-docs .markdown table {
   display: table;
   width: 100%;
   border-collapse: separate;
@@ -387,7 +387,7 @@ html[data-bs-docs-theme='dark'] .bs-docs {
    instead of bleeding past it. width: max-content keeps the border
    hugging the content when the table is narrower than the card. */
 @media (max-width: 1023px) {
-  .bs-docs .markdown table {
+  .lagune-docs .markdown table {
     display: block;
     width: max-content;
     max-width: 100%;
@@ -395,27 +395,27 @@ html[data-bs-docs-theme='dark'] .bs-docs {
   }
 }
 
-.bs-docs .markdown table th,
-.bs-docs .markdown table td {
+.lagune-docs .markdown table th,
+.lagune-docs .markdown table td {
   border: 0;
   border-bottom: 1px solid var(--line);
   padding: 0.6rem 0.9rem;
   font-size: 0.85rem;
 }
 
-.bs-docs .markdown table tr > *:not(:first-child) {
+.lagune-docs .markdown table tr > *:not(:first-child) {
   border-left: 1px solid var(--line);
 }
 
-.bs-docs .markdown table tbody tr:last-child > * {
+.lagune-docs .markdown table tbody tr:last-child > * {
   border-bottom: 0;
 }
 
-.bs-docs .markdown table thead {
+.lagune-docs .markdown table thead {
   background: var(--surface-2);
 }
 
-.bs-docs .markdown table th {
+.lagune-docs .markdown table th {
   color: var(--muted);
   font-size: 0.72rem;
   font-weight: 700;
@@ -423,25 +423,29 @@ html[data-bs-docs-theme='dark'] .bs-docs {
   letter-spacing: 0.06em;
 }
 
-.bs-docs .markdown table tr {
+.lagune-docs .markdown table tr {
   background: transparent;
 }
 
 /* Admonitions: every internal color (surface, border, heading, icon, and
-   inline code) derives from one accent per variant, --bs-adm, following
+   inline code) derives from one accent per variant, --lagune-adm, following
    the dashboard's soft chip palette. */
-.bs-docs .theme-admonition {
-  --bs-adm: var(--muted);
+.lagune-docs .theme-admonition {
+  --lagune-adm: var(--muted);
   --ifm-alert-background-color: color-mix(
     in srgb,
-    var(--bs-adm) 12%,
+    var(--lagune-adm) 12%,
     var(--surface)
   );
   --ifm-alert-background-color-highlight: transparent;
-  --ifm-alert-border-color: color-mix(in srgb, var(--bs-adm) 32%, transparent);
+  --ifm-alert-border-color: color-mix(
+    in srgb,
+    var(--lagune-adm) 32%,
+    transparent
+  );
   --ifm-alert-foreground-color: color-mix(
     in srgb,
-    var(--bs-adm) 34%,
+    var(--lagune-adm) 34%,
     var(--ink-2)
   );
   border-radius: var(--radius-panel);
@@ -450,62 +454,62 @@ html[data-bs-docs-theme='dark'] .bs-docs {
   margin-bottom: 1.25rem;
 }
 
-.bs-docs .theme-admonition-tip,
-.bs-docs .alert--success {
-  --bs-adm: var(--teal);
+.lagune-docs .theme-admonition-tip,
+.lagune-docs .alert--success {
+  --lagune-adm: var(--teal);
 }
 
-.bs-docs .theme-admonition-info,
-.bs-docs .alert--info {
-  --bs-adm: var(--blue);
+.lagune-docs .theme-admonition-info,
+.lagune-docs .alert--info {
+  --lagune-adm: var(--blue);
 }
 
-.bs-docs :is(.theme-admonition-warning, .theme-admonition-caution),
-.bs-docs .alert--warning {
-  --bs-adm: var(--amber);
+.lagune-docs :is(.theme-admonition-warning, .theme-admonition-caution),
+.lagune-docs .alert--warning {
+  --lagune-adm: var(--amber);
 }
 
-.bs-docs .theme-admonition-danger,
-.bs-docs .alert--danger {
-  --bs-adm: var(--red);
+.lagune-docs .theme-admonition-danger,
+.lagune-docs .alert--danger {
+  --lagune-adm: var(--red);
 }
 
-.bs-docs .theme-admonition [class*='admonitionHeading'] {
-  color: var(--bs-adm);
+.lagune-docs .theme-admonition [class*='admonitionHeading'] {
+  color: var(--lagune-adm);
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
-.bs-docs .theme-admonition [class*='admonitionIcon'] svg {
+.lagune-docs .theme-admonition [class*='admonitionIcon'] svg {
   width: 1.2em;
   height: 1.2em;
   fill: currentColor;
 }
 
-.bs-docs .theme-admonition :not(pre) > code {
-  background: color-mix(in srgb, var(--bs-adm) 9%, var(--surface));
-  border-color: color-mix(in srgb, var(--bs-adm) 30%, transparent);
-  color: color-mix(in srgb, var(--bs-adm) 45%, var(--ink));
+.lagune-docs .theme-admonition :not(pre) > code {
+  background: color-mix(in srgb, var(--lagune-adm) 9%, var(--surface));
+  border-color: color-mix(in srgb, var(--lagune-adm) 30%, transparent);
+  color: color-mix(in srgb, var(--lagune-adm) 45%, var(--ink));
 }
 
 /* Text selection: a soft tint of the site accent, on-brand instead of the
    browser default. Each admonition overrides it with its own accent, so a
    highlight inside a note reads teal, a warning amber, and so on. */
-.bs-docs ::selection {
+.lagune-docs ::selection {
   background: color-mix(in srgb, var(--accent) 22%, transparent);
   color: var(--ink);
 }
 
-.bs-docs .theme-admonition ::selection {
-  background: color-mix(in srgb, var(--bs-adm) 24%, transparent);
-  color: color-mix(in srgb, var(--bs-adm) 55%, var(--ink));
+.lagune-docs .theme-admonition ::selection {
+  background: color-mix(in srgb, var(--lagune-adm) 24%, transparent);
+  color: color-mix(in srgb, var(--lagune-adm) 55%, var(--ink));
 }
 
 /* Tabs as a segmented control: a recessed track where the active segment
    rises as a small card. Track radius 11px = chip radius 8px + 3px padding,
    keeping the corners concentric. */
-.bs-docs .tabs {
+.lagune-docs .tabs {
   display: inline-flex;
   max-width: 100%;
   overflow-x: auto;
@@ -519,11 +523,11 @@ html[data-bs-docs-theme='dark'] .bs-docs {
   margin-bottom: 0.5rem;
 }
 
-.bs-docs .tabs::-webkit-scrollbar {
+.lagune-docs .tabs::-webkit-scrollbar {
   display: none;
 }
 
-.bs-docs .tabs__item {
+.lagune-docs .tabs__item {
   border: 0;
   border-radius: var(--radius-chip);
   padding: 0.32rem 0.9rem;
@@ -536,12 +540,12 @@ html[data-bs-docs-theme='dark'] .bs-docs {
   transition-duration: 0.15s;
 }
 
-.bs-docs .tabs__item:not(.tabs__item--active):hover {
+.lagune-docs .tabs__item:not(.tabs__item--active):hover {
   background: transparent;
   color: var(--ink-2);
 }
 
-.bs-docs .tabs__item--active {
+.lagune-docs .tabs__item--active {
   background: var(--surface);
   color: var(--accent);
   box-shadow: var(--shadow-card-half);
@@ -549,7 +553,7 @@ html[data-bs-docs-theme='dark'] .bs-docs {
 
 /* Re-runs whenever a panel stops being [hidden], so switching tabs enters
    with the page rise at half the travel. */
-@keyframes bs-docs-tab-rise {
+@keyframes lagune-docs-tab-rise {
   from {
     opacity: 0;
     transform: translateY(6px);
@@ -560,15 +564,15 @@ html[data-bs-docs-theme='dark'] .bs-docs {
   }
 }
 
-.bs-docs .markdown [role='tabpanel']:not([hidden]) {
-  animation: bs-docs-tab-rise 0.45s cubic-bezier(0.2, 0, 0, 1) both;
+.lagune-docs .markdown [role='tabpanel']:not([hidden]) {
+  animation: lagune-docs-tab-rise 0.45s cubic-bezier(0.2, 0, 0, 1) both;
 }
 
 /* ---------------------------------------------------------------------------
  * Shell motion, ported from the dashboard.
  * ------------------------------------------------------------------------ */
 
-@keyframes bs-docs-fade {
+@keyframes lagune-docs-fade {
   from {
     opacity: 0;
   }
@@ -577,7 +581,7 @@ html[data-bs-docs-theme='dark'] .bs-docs {
   }
 }
 
-@keyframes bs-docs-fade-up {
+@keyframes lagune-docs-fade-up {
   from {
     opacity: 0;
     transform: translateY(12px);
@@ -588,7 +592,7 @@ html[data-bs-docs-theme='dark'] .bs-docs {
   }
 }
 
-@keyframes bs-docs-drawer {
+@keyframes lagune-docs-drawer {
   from {
     transform: translateX(-100%);
   }
@@ -597,23 +601,23 @@ html[data-bs-docs-theme='dark'] .bs-docs {
   }
 }
 
-.bs-docs-route-fade {
-  animation: bs-docs-fade 0.25s ease both;
+.lagune-docs-route-fade {
+  animation: lagune-docs-fade 0.25s ease both;
 }
 
-.bs-docs-route-rise {
-  animation: bs-docs-fade-up 0.5s cubic-bezier(0.2, 0, 0, 1) 0.08s both;
+.lagune-docs-route-rise {
+  animation: lagune-docs-fade-up 0.5s cubic-bezier(0.2, 0, 0, 1) 0.08s both;
 }
 
-.bs-docs-backdrop {
+.lagune-docs-backdrop {
   background: color-mix(in srgb, var(--dark) 62%, transparent);
-  animation: bs-docs-fade 0.18s ease both;
+  animation: lagune-docs-fade 0.18s ease both;
 }
 
-.bs-docs-drawer {
-  animation: bs-docs-drawer 0.28s cubic-bezier(0.2, 0, 0, 1) both;
+.lagune-docs-drawer {
+  animation: lagune-docs-drawer 0.28s cubic-bezier(0.2, 0, 0, 1) both;
 }
 
-body.bs-docs-drawer-open {
+body.lagune-docs-drawer-open {
   overflow: hidden;
 }

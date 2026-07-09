@@ -1,7 +1,7 @@
 import type { SkillsCatalogFile } from '../types/core.js';
 
 export const emptySkillsCatalog = (): SkillsCatalogFile => ({
-  name: 'blue-spec',
+  name: 'lagune',
   entries: [],
 });
 

@@ -38,7 +38,7 @@
 Run the regression proof:
 
 ```sh
-[RUN_COMMAND] <!-- The command that runs this finding's test, matching the runner used, such as "node --test .bluespec/proofs/<slug>/report.test.mjs" for the native Node.js runner, or "node .bluespec/proofs/<slug>/report.test.mjs" when the project uses Poku. It fails while the issue persists and passes once the code is fixed, so a passing run is the evidence the risk is closed. -->
+[RUN_COMMAND] <!-- The command that runs this finding's test, matching the runner used, such as "node --test .lagune/proofs/<slug>/report.test.mjs" for the native Node.js runner, or "node .lagune/proofs/<slug>/report.test.mjs" when the project uses Poku. It fails while the issue persists and passes once the code is fixed, so a passing run is the evidence the risk is closed. -->
 ```
 
 ## How it reproduces
@@ -47,7 +47,7 @@ Run the regression proof:
 
 ## Possible fix
 
-[FIX] <!-- A theoretical direction for the fix, one or two sentences, direct and to the point, the opposite of the runnable detail the Proof of Concept carries. Name what the secure behavior should be (apply the guard to the joined key, not each piece; encode the parameter; reject the path before it is used), not a patch. This is a pointer for the maintainer, not an applied or verified fix: applying and proving the fix is the job of `/bluespec.harden` and `/bluespec.verify`, never this command. Write no code here. -->
+[FIX] <!-- A theoretical direction for the fix, one or two sentences, direct and to the point, the opposite of the runnable detail the Proof of Concept carries. Name what the secure behavior should be (apply the guard to the joined key, not each piece; encode the parameter; reject the path before it is used), not a patch. This is a pointer for the maintainer, not an applied or verified fix: applying and proving the fix is the job of `/lagune.harden` and `/lagune.verify`, never this command. Write no code here. -->
 
 ## References <!-- Optional. Add links that give the reviewer context, such as the CWE page for the category, an OWASP cheat sheet, or the source the finding was distilled from. One per line. Remove this whole section when there is nothing to cite beyond the category already named above. Never invent a reference. -->
 

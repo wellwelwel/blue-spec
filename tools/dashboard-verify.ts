@@ -6,7 +6,7 @@ const here = dirname(fileURLToPath(import.meta.url));
 const distDir = join(here, '..', 'lib', 'dashboard');
 
 startDashboard({
-  cwd: '/tmp/bs-verify',
+  cwd: '/tmp/lagune-verify',
   distDir,
   packageRoot: new URL('../', import.meta.url),
   port: 4390,

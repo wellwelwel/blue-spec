@@ -8,9 +8,9 @@ import {
 import { hasFindingSection, removeSection } from '../../core/sections.js';
 
 const MEMORY_FILES = [
-  '.bluespec/memory/detect.md',
-  '.bluespec/memory/plan.md',
-  '.bluespec/memory/harden.md',
+  '.lagune/memory/detect.md',
+  '.lagune/memory/plan.md',
+  '.lagune/memory/harden.md',
 ] as const;
 
 const readMarkdown = async (path: string): Promise<string | undefined> => {

@@ -9,7 +9,7 @@ type RegexRun = { stdout: string; stderr: string; code: number | null };
 
 const runRegexRaw = (workspace: string, ...args: string[]): Promise<RegexRun> =>
   new Promise((resolve, reject) => {
-    const child = spawn(execPath, ['.bluespec/hooks/regex.mjs', ...args], {
+    const child = spawn(execPath, ['.lagune/hooks/regex.mjs', ...args], {
       cwd: workspace,
     });
     const out: string[] = [];

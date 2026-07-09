@@ -7,7 +7,7 @@ import { initInto, newWorkspace } from './__utils__.js';
 
 const runTrack = (workspace: string, payload: string): Promise<string> =>
   new Promise((resolve, reject) => {
-    const child = spawn(execPath, ['.bluespec/hooks/track.mjs', payload], {
+    const child = spawn(execPath, ['.lagune/hooks/track.mjs', payload], {
       cwd: workspace,
     });
     const chunks: string[] = [];
@@ -30,9 +30,7 @@ const readTracking = async (
 ): Promise<{
   entries: { name: string; paths: string[] }[];
 }> =>
-  JSON.parse(
-    await readFile(join(workspace, '.bluespec/tracking.json'), 'utf8')
-  );
+  JSON.parse(await readFile(join(workspace, '.lagune/tracking.json'), 'utf8'));
 
 await describe('the scaffolded track hook registers without install', async () => {
   await it('registers, follows a rename, and re-reports the same item by name', async () => {

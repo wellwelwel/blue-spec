@@ -25,18 +25,18 @@ const INSTALL_HEADER: Record<ActionRunState, ActionModalHeader> = {
     eyebrow: 'Install',
     icon: 'play',
     title: 'Ready to install',
-    subtitle: 'Scaffolding Blue Spec into this project.',
+    subtitle: 'Scaffolding Lagune into this project.',
   },
   pending: {
     eyebrow: 'Install',
     icon: 'refresh',
-    title: 'Installing Blue Spec',
+    title: 'Installing Lagune',
     subtitle: 'Scaffolding the commands, templates, and hooks.',
   },
   success: {
     eyebrow: 'Install',
     icon: 'checkCircle',
-    title: 'Blue Spec is installed',
+    title: 'Lagune is installed',
     subtitle: 'Here is what to run next in your agent.',
   },
   error: {
@@ -52,13 +52,13 @@ const PULL_HEADER: Record<ActionRunState, ActionModalHeader> = {
     eyebrow: 'Pull',
     icon: 'pullDown',
     title: 'Ready to pull',
-    subtitle: 'Rebuilding Blue Spec from the committed manifest.',
+    subtitle: 'Rebuilding Lagune from the committed manifest.',
   },
   pending: {
     eyebrow: 'Pull',
     icon: 'refresh',
-    title: 'Pulling Blue Spec',
-    subtitle: 'Restoring files from .bluespec/manifest.json.',
+    title: 'Pulling Lagune',
+    subtitle: 'Restoring files from .lagune/manifest.json.',
   },
   success: {
     eyebrow: 'Pull',
@@ -79,18 +79,18 @@ const UPDATE_HEADER: Record<ActionRunState, ActionModalHeader> = {
     eyebrow: 'Update',
     icon: 'upgrade',
     title: 'Ready to update',
-    subtitle: 'Refreshing Blue Spec to its newest version.',
+    subtitle: 'Refreshing Lagune to its newest version.',
   },
   pending: {
     eyebrow: 'Update',
     icon: 'refresh',
-    title: 'Updating Blue Spec',
+    title: 'Updating Lagune',
     subtitle: 'Refreshing the commands, templates, and hooks.',
   },
   success: {
     eyebrow: 'Update',
     icon: 'checkCircle',
-    title: 'Blue Spec is up to date',
+    title: 'Lagune is up to date',
     subtitle: 'Your charter, findings, and tracking were left untouched.',
   },
   error: {
@@ -276,7 +276,7 @@ export const ActionModal = (): VNode | null => {
       <div class='relative flex-none overflow-hidden bg-banner px-6 py-5 text-white'>
         <img
           class='pointer-events-none absolute inset-0 z-0 size-full object-cover mask-[linear-gradient(to_right,transparent,rgba(0,0,0,0.35)_38%,black)]'
-          src='https://bluespec.weslley.io/img/docs/banner-5.png'
+          src='https://lagune.weslley.io/img/docs/banner-5.png'
           alt=''
           aria-hidden='true'
         />
@@ -308,7 +308,7 @@ export const ActionModal = (): VNode | null => {
             <span class='text-[0.85rem] text-muted'>
               {state.kind === 'install' && (
                 <>
-                  Writing Blue Spec files for{' '}
+                  Writing Lagune files for{' '}
                   <span class='font-semibold text-ink-2'>
                     {state.agentName}
                   </span>
@@ -316,9 +316,9 @@ export const ActionModal = (): VNode | null => {
                 </>
               )}
               {state.kind === 'pull' &&
-                'Restoring Blue Spec files from the committed manifest…'}
+                'Restoring Lagune files from the committed manifest…'}
               {state.kind === 'update' &&
-                'Refreshing Blue Spec files to the newest version…'}
+                'Refreshing Lagune files to the newest version…'}
               {state.kind === 'specialize' &&
                 'Writing the sub-skills for this project…'}
             </span>

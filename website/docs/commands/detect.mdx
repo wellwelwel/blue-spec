@@ -1,6 +1,6 @@
 ---
 id: detect
-title: /bluespec.detect
+title: /lagune.detect
 sidebar_label: 2. Detect
 description: Read your code and map what your system does and where the risks are.
 ---
@@ -8,7 +8,7 @@ description: Read your code and map what your system does and where the risks ar
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
 
-# /bluespec.detect
+# /lagune.detect
 
 🔬 Find out what your system really does and where the risks are.
 
@@ -20,21 +20,21 @@ Detect reads the code and records only what it actually finds, with the evidence
   <TabItem value="full" label="Full scan" default>
 
 ```prompt
-/bluespec.detect
+/lagune.detect
 ```
 
   </TabItem>
   <TabItem value="paths" label="Point at paths">
 
 ```prompt
-/bluespec.detect src/routes/ src/auth.ts
+/lagune.detect src/routes/ src/auth.ts
 ```
 
   </TabItem>
   <TabItem value="concern" label="Describe a concern">
 
 ```prompt
-/bluespec.detect make sure customer data is never exposed
+/lagune.detect make sure customer data is never exposed
 ```
 
   </TabItem>
@@ -42,7 +42,7 @@ Detect reads the code and records only what it actually finds, with the evidence
 
 ## What it maps
 
-**Blue Spec** reads the code and maps what it finds. Each finding carries what it is, why it matters, and the evidence. For example:
+**Lagune** reads the code and maps what it finds. Each finding carries what it is, why it matters, and the evidence. For example:
 
 - **File uploads**, the system accepts files from users:
   - _Why it matters:_ a file disguised as an image can hide malicious code.
@@ -56,10 +56,10 @@ From there, you have a clear map of what your system does and where the risks li
 :::tip
 
 - Running it again updates the map: solved findings drop off, new ones come in.
-- The detect map lives in `.bluespec/memory/detect.md`.
+- The detect map lives in `.lagune/memory/detect.md`.
 
 :::
 
 ## Next
 
-Turn the map into a plan: [`/bluespec.plan`](/docs/commands/plan).
+Turn the map into a plan: [`/lagune.plan`](/docs/commands/plan).

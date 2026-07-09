@@ -169,7 +169,7 @@ await describe('run dispatches the scan mode', async () => {
     run_: () => Promise<void>,
     seed: string
   ): Promise<void> => {
-    const workspace = await mkdtemp(join(tmpdir(), 'blue-spec-regex-cli-'));
+    const workspace = await mkdtemp(join(tmpdir(), 'lagune-regex-cli-'));
     const previous = cwd();
 
     try {

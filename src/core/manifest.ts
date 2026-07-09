@@ -10,10 +10,10 @@ import { dirname, join } from 'node:path';
 import { appendUnique } from './collections.js';
 import { ensureDir, writeFileOverwrite } from './fs-actions.js';
 
-const MANIFEST_PATH = '.bluespec/manifest.json';
+const MANIFEST_PATH = '.lagune/manifest.json';
 
 export const buildManifest = (input: ManifestInput): ManifestData => ({
-  name: 'blue-spec',
+  name: 'lagune',
   version: input.version,
   agent: input.agent,
   createdAt: input.now.toISOString(),

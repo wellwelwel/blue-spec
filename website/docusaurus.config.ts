@@ -2,12 +2,12 @@ import type * as Preset from '@docusaurus/preset-classic';
 import type { Config } from '@docusaurus/types';
 import tailwindPostcss from '@tailwindcss/postcss';
 import { docsContentPlugin } from './plugins/docs-content';
-import { blueSpecCode } from './src/prism/blue-spec';
+import { laguneCode } from './src/prism/lagune';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'SDH: Blue Spec',
+  title: 'SDH: Lagune',
   tagline: 'Security-Driven Hardening for AI-built software',
   favicon: 'favicon.png',
 
@@ -17,11 +17,11 @@ const config: Config = {
     faster: true,
   },
 
-  url: 'https://bluespec.weslley.io',
+  url: 'https://lagune.weslley.io',
   baseUrl: '/',
   trailingSlash: false,
   organizationName: 'wellwelwel',
-  projectName: 'blue-spec',
+  projectName: 'lagune',
   deploymentBranch: 'website',
 
   onBrokenLinks: 'throw',
@@ -63,23 +63,23 @@ const config: Config = {
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'SoftwareApplication',
-        name: 'SDH: Blue Spec',
+        name: 'SDH: Lagune',
         applicationCategory: 'DeveloperApplication',
         applicationSubCategory: 'Security',
         operatingSystem: 'Node.js',
-        url: 'https://bluespec.weslley.io',
+        url: 'https://lagune.weslley.io',
         description:
-          'Blue Spec helps your AI agent make a project more secure. You point it at your code, and the agent figures out what your system actually does, then guides you through the security work that matters for it.',
+          'Lagune helps your AI agent make a project more secure. You point it at your code, and the agent figures out what your system actually does, then guides you through the security work that matters for it.',
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
         author: {
           '@type': 'Person',
           name: 'Weslley Araújo',
           url: 'https://github.com/wellwelwel',
         },
-        license: 'https://github.com/wellwelwel/blue-spec/blob/main/LICENSE',
+        license: 'https://github.com/wellwelwel/lagune/blob/main/LICENSE',
         sameAs: [
-          'https://github.com/wellwelwel/blue-spec',
-          'https://www.npmjs.com/package/blue-spec',
+          'https://github.com/wellwelwel/lagune',
+          'https://www.npmjs.com/package/lagune',
         ],
       }),
     },
@@ -122,7 +122,7 @@ const config: Config = {
       {
         name: 'description',
         content:
-          'Blue Spec helps your AI agent make a project more secure. You point it at your code, and the agent figures out what your system actually does, then guides you through the security work that matters for it.',
+          'Lagune helps your AI agent make a project more secure. You point it at your code, and the agent figures out what your system actually does, then guides you through the security work that matters for it.',
       },
       {
         name: 'keywords',
@@ -133,15 +133,15 @@ const config: Config = {
       { name: 'twitter:card', content: 'summary_large_image' },
       {
         name: 'twitter:title',
-        content: 'SDH: Blue Spec — Security-Driven Hardening',
+        content: 'SDH: Lagune — Security-Driven Hardening',
       },
       {
         name: 'twitter:description',
         content:
-          'Blue Spec helps your AI agent make a project more secure. Point it at your code, and it guides you through the security work that matters for it.',
+          'Lagune helps your AI agent make a project more secure. Point it at your code, and it guides you through the security work that matters for it.',
       },
       { property: 'og:type', content: 'website' },
-      { property: 'og:site_name', content: 'SDH: Blue Spec' },
+      { property: 'og:site_name', content: 'SDH: Lagune' },
       { property: 'og:locale', content: 'en_US' },
     ],
     colorMode: {
@@ -150,9 +150,9 @@ const config: Config = {
       respectPrefersColorScheme: false,
     },
     navbar: {
-      title: 'SDH: Blue Spec',
+      title: 'SDH: Lagune',
       logo: {
-        alt: 'Blue Spec',
+        alt: 'Lagune',
         src: 'favicon.png',
         href: '/',
       },
@@ -169,7 +169,7 @@ const config: Config = {
           position: 'left',
         },
         {
-          href: 'https://github.com/wellwelwel/blue-spec',
+          href: 'https://github.com/wellwelwel/lagune',
           label: 'GitHub',
           position: 'right',
         },
@@ -192,11 +192,11 @@ const config: Config = {
             { label: 'Home', to: '/' },
             {
               label: 'GitHub',
-              href: 'https://github.com/wellwelwel/blue-spec',
+              href: 'https://github.com/wellwelwel/lagune',
             },
             {
               label: 'npm',
-              href: 'https://www.npmjs.com/package/blue-spec',
+              href: 'https://www.npmjs.com/package/lagune',
             },
           ],
         },
@@ -205,11 +205,11 @@ const config: Config = {
           items: [
             {
               label: 'Security Policy',
-              href: 'https://github.com/wellwelwel/blue-spec/blob/main/SECURITY.md',
+              href: 'https://github.com/wellwelwel/lagune/blob/main/SECURITY.md',
             },
             {
               label: 'License',
-              href: 'https://github.com/wellwelwel/blue-spec/blob/main/LICENSE',
+              href: 'https://github.com/wellwelwel/lagune/blob/main/LICENSE',
             },
             {
               label: 'Sponsor',
@@ -220,8 +220,8 @@ const config: Config = {
       ],
     },
     prism: {
-      theme: blueSpecCode,
-      darkTheme: blueSpecCode,
+      theme: laguneCode,
+      darkTheme: laguneCode,
       additionalLanguages: [
         'javascript',
         'bash',

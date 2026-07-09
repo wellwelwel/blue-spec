@@ -97,10 +97,10 @@ const SkillCard = ({
               <Icon name='messageAi' />
             </span>
             <code class='min-w-0 flex-1 truncate border-0 bg-transparent p-0 font-mono text-[0.72rem] font-semibold text-[#6b737a]'>
-              @.bluespec/skills/{skill.name}.md
+              @.lagune/skills/{skill.name}.md
             </code>
             <CopyButton
-              text={`@.bluespec/skills/${skill.name}.md`}
+              text={`@.lagune/skills/${skill.name}.md`}
               label={`Copy path for ${skill.label}`}
             />
           </div>
@@ -154,7 +154,7 @@ export const Skills = (): VNode => {
   return (
     <>
       <PageHeader
-        background='https://bluespec.weslley.io/img/docs/banner-4.png'
+        background='https://lagune.weslley.io/img/docs/banner-4.png'
         eyebrow='Knowledge'
         title='Skills'
         description='Security skills applied, installed, and available for this project.'

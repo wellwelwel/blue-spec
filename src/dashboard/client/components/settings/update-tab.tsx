@@ -40,7 +40,7 @@ export const UpdateTab = (): VNode => {
     <ActionCard
       icon='upgrade'
       title='Update to the latest version'
-      body='Refresh the Blue Spec command, template, hook, and specialization files to their newest version, keeping your charter, findings, and tracking untouched.'
+      body='Refresh the Lagune command, template, hook, and specialization files to their newest version, keeping your charter, findings, and tracking untouched.'
       action='Run update'
       run={run}
       runButton={RUN_BUTTON}

@@ -1,6 +1,6 @@
 ---
 id: prove
-title: /bluespec.prove
+title: /lagune.prove
 sidebar_label: Prove
 description: Turn each detected finding into a runnable, defense-only proof of concept (PoC) and advisory for responsible disclosure.
 keywords:
@@ -22,14 +22,14 @@ keywords:
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
 
-# /bluespec.prove
+# /lagune.prove
 
 🧪 Turn each detected finding into runnable, defense-only evidence for responsible disclosure.
 
 For every finding the detect map carries, it writes a self-contained advisory and a test that asserts the **safe path**, so the test fails while the issue is live and passes once the code is fixed.
 
 :::tip
-**Blue Spec** tests live isolated under `.bluespec/`, apart from your own suite.
+**Lagune** tests live isolated under `.lagune/`, apart from your own suite.
 :::
 
 ## Run it
@@ -38,7 +38,7 @@ For every finding the detect map carries, it writes a self-contained advisory an
   <TabItem value="full" label="Every finding" default>
 
 ```prompt
-/bluespec.prove
+/lagune.prove
 ```
 
   </TabItem>
@@ -47,7 +47,7 @@ For every finding the detect map carries, it writes a self-contained advisory an
 See the findings already tracked by name:
 
 ```prompt
-npx -y blue-spec@latest list --findings
+npx -y lagune@latest list --findings
 
 # Findings
 #   ...
@@ -57,7 +57,7 @@ npx -y blue-spec@latest list --findings
 
 ```prompt
 # Then prove one of them
-/bluespec.prove SQL injection in user lookup
+/lagune.prove SQL injection in user lookup
 ```
 
   </TabItem>
@@ -65,7 +65,7 @@ npx -y blue-spec@latest list --findings
 
 ## How it works
 
-It reads the source each finding points at and writes one directory per proven finding under `.bluespec/proofs/`, holding exactly two files:
+It reads the source each finding points at and writes one directory per proven finding under `.lagune/proofs/`, holding exactly two files:
 
 | File                          | What it is                                                                                                                          |
 | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
@@ -77,14 +77,14 @@ The proofs are always JavaScript, so they stay portable whatever language your p
 :::tip
 
 - It is **optional and autonomous**: not one of the five phases, and not part of the tracking chain.
-- It writes only into `.bluespec/proofs/` and never touches the phase artifacts or your code, which it only reads.
-- A finding whose test does not reproduce the issue gets no proof, and it tells you to run [`/bluespec.detect`](/docs/commands/detect) on that spot to reconcile.
+- It writes only into `.lagune/proofs/` and never touches the phase artifacts or your code, which it only reads.
+- A finding whose test does not reproduce the issue gets no proof, and it tells you to run [`/lagune.detect`](/docs/commands/detect) on that spot to reconcile.
 - Running it again reconciles the proofs: a finding that is gone or no longer reproduces has its directory removed.
 
 :::
 
 :::warning[Builds on detect]
-Prove reads the detect map from [`/bluespec.detect`](/docs/commands/detect), so run detect first.
+Prove reads the detect map from [`/lagune.detect`](/docs/commands/detect), so run detect first.
 :::
 
 ## Defense only, and authorized
@@ -95,4 +95,4 @@ Before generating anything, it confirms you are authorized to test the target, a
 
 Each proven finding's two files belong together in a **private GitHub Gist** to report the vulnerability. They are evidence of a live, undisclosed issue, so keep them out of commits and share them only through that Gist until the maintainers have resolved it.
 
-Closing a finding in the **Blue Spec** chain is still the job of [`/bluespec.harden`](/docs/commands/harden) and [`/bluespec.verify`](/docs/commands/verify): prove produces evidence, it does not close anything.
+Closing a finding in the **Lagune** chain is still the job of [`/lagune.harden`](/docs/commands/harden) and [`/lagune.verify`](/docs/commands/verify): prove produces evidence, it does not close anything.

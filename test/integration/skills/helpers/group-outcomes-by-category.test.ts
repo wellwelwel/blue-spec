@@ -21,7 +21,7 @@ describe('groupOutcomesByCategory buckets sub-skills under their category', () =
     name: string,
     status: FileStatus,
     keptBy?: string
-  ): FileOutcome => ({ path: `.bluespec/skills/${name}.md`, status, keptBy });
+  ): FileOutcome => ({ path: `.lagune/skills/${name}.md`, status, keptBy });
 
   it('uses the friendly label and the shared skills dir as the header', () => {
     const result = groupOutcomesByCategory(
@@ -33,7 +33,7 @@ describe('groupOutcomesByCategory buckets sub-skills under their category', () =
 
     strict.strictEqual(result.length, 1);
     strict.strictEqual(result[0].label, 'Python');
-    strict.strictEqual(result[0].baseDir, '.bluespec/skills/');
+    strict.strictEqual(result[0].baseDir, '.lagune/skills/');
   });
 
   it('splits outcomes across the categories that requested them', () => {
@@ -54,8 +54,8 @@ describe('groupOutcomesByCategory buckets sub-skills under their category', () =
         group.outcomes.map((entry) => entry.path),
       ]),
       [
-        ['OWASP', ['.bluespec/skills/regex.md', '.bluespec/skills/network.md']],
-        ['Python', ['.bluespec/skills/python.md']],
+        ['OWASP', ['.lagune/skills/regex.md', '.lagune/skills/network.md']],
+        ['Python', ['.lagune/skills/python.md']],
       ]
     );
   });
