@@ -44,6 +44,6 @@ export const docsNav: DocsNavEntry[] = [
   },
   {
     label: 'Maintenance',
-    items: ['commands/repair'],
+    items: ['commands/repair', 'commands/migrate'],
   },
 ];
