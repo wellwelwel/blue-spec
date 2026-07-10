@@ -173,9 +173,7 @@ const Home = (): ReactNode => {
   return (
     <div className='lagune-canvas relative min-h-screen m-0 antialiased text-ink bg-[#050a18] font-sans'>
       <Head>
-        <title>
-          SDH: Lagune — Security-Driven Hardening for AI-built software
-        </title>
+        <title>Lagune — Security-Driven Hardening for AI-built software</title>
         <html className='lagune-canvas-html' lang='en' />
         <body className='lagune-canvas-body' />
         <meta
@@ -187,7 +185,7 @@ const Home = (): ReactNode => {
         <meta property='og:url' content='https://lagune.ai/' />
         <meta
           property='og:title'
-          content='SDH: Lagune — Security-Driven Hardening for AI-built software'
+          content='Lagune — Security-Driven Hardening for AI-built software'
         />
         <meta
           property='og:description'
@@ -196,7 +194,7 @@ const Home = (): ReactNode => {
         <meta property='og:image' content='https://lagune.ai/img/og.png' />
         <meta
           name='twitter:title'
-          content='SDH: Lagune — Security-Driven Hardening'
+          content='Lagune — Security-Driven Hardening'
         />
         <meta
           name='twitter:description'

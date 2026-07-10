@@ -7,7 +7,7 @@ import { laguneCode } from './src/prism/lagune';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'SDH: Lagune',
+  title: 'Lagune',
   tagline: 'Security-Driven Hardening for AI-built software',
   favicon: 'favicon.png',
 
@@ -63,7 +63,7 @@ const config: Config = {
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'SoftwareApplication',
-        name: 'SDH: Lagune',
+        name: 'Lagune',
         applicationCategory: 'DeveloperApplication',
         applicationSubCategory: 'Security',
         operatingSystem: 'Node.js',
@@ -133,7 +133,7 @@ const config: Config = {
       { name: 'twitter:card', content: 'summary_large_image' },
       {
         name: 'twitter:title',
-        content: 'SDH: Lagune — Security-Driven Hardening',
+        content: 'Lagune — Security-Driven Hardening',
       },
       {
         name: 'twitter:description',
@@ -141,7 +141,7 @@ const config: Config = {
           'Lagune helps your AI agent make a project more secure. Point it at your code, and it guides you through the security work that matters for it.',
       },
       { property: 'og:type', content: 'website' },
-      { property: 'og:site_name', content: 'SDH: Lagune' },
+      { property: 'og:site_name', content: 'Lagune' },
       { property: 'og:locale', content: 'en_US' },
     ],
     colorMode: {
@@ -150,7 +150,7 @@ const config: Config = {
       respectPrefersColorScheme: false,
     },
     navbar: {
-      title: 'SDH: Lagune',
+      title: 'Lagune',
       logo: {
         alt: 'Lagune',
         src: 'favicon.png',

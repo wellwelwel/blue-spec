@@ -23,7 +23,7 @@ export const DocsSmallPrint = (): ReactNode => (
       >
         contributors
       </a>
-      . SDH: Lagune is under the{' '}
+      . Lagune is under the{' '}
       <a
         className={SMALL_PRINT_LINK}
         href='https://github.com/wellwelwel/lagune/blob/main/LICENSE'
