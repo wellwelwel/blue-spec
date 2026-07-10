@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.10.0](https://github.com/wellwelwel/lagune/compare/v0.9.2...v0.10.0) (2026-07-10)
+
+
+### Features
+
+* add `migrate` command for legacy `.bluespec/` installs ([488b5d1](https://github.com/wellwelwel/lagune/commit/488b5d1415494604eb045aa9433fb23350788fe3))
+
+
+### Bug Fixes
+
+* improve the order of CLI agents ([1d150e7](https://github.com/wellwelwel/lagune/commit/1d150e728ba1fe4bb8c751e8a8b3f31d452fb244))
+
 ## [0.9.2](https://github.com/wellwelwel/lagune/compare/v0.9.1...v0.9.2) (2026-07-10)
 
 
