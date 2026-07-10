@@ -38,12 +38,9 @@ const definitions = (rows: [string, string][]): string[] => {
 };
 
 const agentsByInitial = (agents: AgentChoice[]): string[] => {
-  const sorted = [...agents].sort((left, right) =>
-    left.displayName.localeCompare(right.displayName)
-  );
   const byInitial = new Map<string, string[]>();
 
-  for (const agent of sorted) {
+  for (const agent of agents) {
     const initial = agent.displayName[0].toUpperCase();
     const label = `${agent.displayName} ${color.dim(`(${agent.key})`)}`;
 

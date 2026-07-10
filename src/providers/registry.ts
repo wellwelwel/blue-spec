@@ -7,13 +7,13 @@ export const AGENT_PROVIDERS: Record<string, AgentProvider> =
     AGENT_SPECS.map((spec) => [spec.key, createProvider(spec)])
   );
 
-export const listAgentKeys = (): string[] => Object.keys(AGENT_PROVIDERS);
+export const listAgentKeys = (): string[] =>
+  Object.keys(AGENT_PROVIDERS).sort((left, right) => left.localeCompare(right));
 
 export const listAgentChoices = (): AgentChoice[] =>
-  Object.values(AGENT_PROVIDERS).map(({ key, displayName }) => ({
-    key,
-    displayName,
-  }));
+  Object.values(AGENT_PROVIDERS)
+    .map(({ key, displayName }) => ({ key, displayName }))
+    .sort((left, right) => left.displayName.localeCompare(right.displayName));
 
 export const getProvider = (key: string): AgentProvider => {
   const provider = AGENT_PROVIDERS[key];
