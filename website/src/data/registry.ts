@@ -151,6 +151,3 @@ export const ALL_CATEGORIES: Category[] = [
     icon: '/img/icons/dot-net.svg',
   },
 ];
-
-// The categories surfaced directly in the install grid; the rest fold into "more".
-export const CATEGORIES: Category[] = ALL_CATEGORIES.slice(0, 7);

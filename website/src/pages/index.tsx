@@ -447,7 +447,6 @@ const Home = (): ReactNode => {
                       onOpenAgents={openAgents}
                       onOpenSpecs={openSpecs}
                       skills={skills}
-                      onToggleSkill={toggleSkill}
                     />
                   )}
 

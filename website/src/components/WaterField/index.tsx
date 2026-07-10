@@ -9,6 +9,7 @@ const COLOR_HIGHLIGHT = '#001428';
 
 const SPEED = 0.6;
 const SPEED_REDUCED = 0.5;
+const SPEED_MOBILE = 0.2;
 
 const EDGE_FADE = '#0051ff 50%, #08103a 75%, transparent';
 const FIELD_MASK = `linear-gradient(to bottom, transparent, ${EDGE_FADE})`;
@@ -45,8 +46,6 @@ const WaterFieldComponent = ({ className }: { className?: string }) => {
     return () => cancelAnimationFrame(frame);
   }, []);
 
-  if (isMobile) return null;
-
   return (
     <div
       className={`pointer-events-none ${className ?? 'fixed inset-0 z-0'}`}
@@ -70,7 +69,9 @@ const WaterFieldComponent = ({ className }: { className?: string }) => {
         caustic={0.25}
         size={0.25}
         scale={1.2}
-        speed={prefersReducedMotion ? SPEED_REDUCED : SPEED}
+        speed={
+          isMobile ? SPEED_MOBILE : prefersReducedMotion ? SPEED_REDUCED : SPEED
+        }
         fit='cover'
         style={{
           opacity: revealed ? 0.5 : 0,

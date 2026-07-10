@@ -1,20 +1,35 @@
+import type { PointerEvent } from 'react';
 import { AgentButton } from '@site/src/components/home/AgentButton';
-import { CategoryCheckbox } from '@site/src/components/home/CategoryCheckbox';
 import { CopyButton } from '@site/src/components/home/CopyButton';
 import { GroupHead } from '@site/src/components/home/GroupHead';
 import { IconSwap } from '@site/src/components/IconSwap';
+import { MaskIcon } from '@site/src/components/MaskIcon';
 import {
   selectableCard,
   selectableTint,
 } from '@site/src/components/selectable';
-import {
-  AGENTS,
-  ALL_AGENTS,
-  ALL_CATEGORIES,
-  CATEGORIES,
-} from '@site/src/data/registry';
+import { AGENTS, ALL_AGENTS, ALL_CATEGORIES } from '@site/src/data/registry';
 import { memo, useMemo } from 'react';
-import { LuCircleCheckBig, LuLayoutGrid, LuPlus } from 'react-icons/lu';
+import { LuChevronRight, LuCircleCheckBig, LuLayoutGrid } from 'react-icons/lu';
+
+const clampTip = (event: PointerEvent<HTMLSpanElement>) => {
+  const wrap = event.currentTarget;
+  const tip = wrap.lastElementChild;
+  const strip = wrap.parentElement;
+
+  if (!(tip instanceof HTMLElement) || strip === null) return;
+
+  const bounds = strip.getBoundingClientRect();
+  const anchor = wrap.getBoundingClientRect();
+  const center = anchor.left + anchor.width / 2;
+  const overflowLeft = bounds.left - (center - tip.offsetWidth / 2);
+  const overflowRight = bounds.right - (center + tip.offsetWidth / 2);
+
+  tip.style.setProperty(
+    '--tip-shift',
+    `${overflowLeft > 0 ? overflowLeft : Math.min(overflowRight, 0)}px`
+  );
+};
 
 const InstallPanelComponent = ({
   selected,
@@ -22,14 +37,12 @@ const InstallPanelComponent = ({
   onOpenAgents,
   onOpenSpecs,
   skills,
-  onToggleSkill,
 }: {
   selected: string;
   onSelect: (key: string) => void;
   onOpenAgents: () => void;
   onOpenSpecs: () => void;
   skills: string[];
-  onToggleSkill: (key: string) => void;
 }) => {
   const orderedSkills = useMemo(
     () =>
@@ -38,12 +51,6 @@ const InstallPanelComponent = ({
         .filter((category) => category !== undefined),
     [skills]
   );
-
-  const hiddenSelected = useMemo(() => {
-    const visible = new Set(CATEGORIES.map((category) => category.key));
-
-    return skills.some((key) => !visible.has(key));
-  }, [skills]);
 
   const installCommand = useMemo(
     () =>
@@ -91,44 +98,50 @@ const InstallPanelComponent = ({
             on={selectedFromModal}
             className={`shrink-0 [&_svg]:size-[18px] ${selectableTint(selectedFromModal)}`}
             active={<LuCircleCheckBig />}
-            inactive={<LuPlus />}
+            inactive={<LuChevronRight />}
           />
         </button>
       </div>
 
       <GroupHead title='Add specializations' meta='Optional' />
 
-      <div
-        className='grid grid-cols-4 gap-2 mb-[22px] max-[600px]:grid-cols-2'
-        role='group'
-        aria-label='Add security specializations'
-      >
-        {CATEGORIES.map((category) => (
-          <CategoryCheckbox
+      <div className='flex flex-wrap items-center gap-3 mb-[22px]'>
+        {ALL_CATEGORIES.map((category) => (
+          <span
             key={category.key}
-            category={category}
-            on={skills.includes(category.key)}
-            onToggle={() => onToggleSkill(category.key)}
-          />
+            role='img'
+            aria-label={category.name}
+            className='group/chip relative flex'
+            onPointerEnter={clampTip}
+          >
+            <MaskIcon
+              src={category.icon}
+              className={`size-5 bg-current transition-colors duration-200 ease-out ${selectableTint(skills.includes(category.key))}`}
+            />
+            <span
+              aria-hidden
+              className='pointer-events-none absolute bottom-[calc(100%+0.375rem)] left-[calc(50%+var(--tip-shift,0px))] -translate-x-1/2 translate-y-1 scale-95 whitespace-nowrap rounded-chip bg-dark px-2 py-1 text-[0.68rem] font-bold text-white opacity-0 transition-[opacity,scale,translate] duration-200 ease-[cubic-bezier(0.2,0,0,1)] group-hover/chip:translate-y-0 group-hover/chip:scale-100 group-hover/chip:opacity-100'
+            >
+              {category.name}
+            </span>
+          </span>
         ))}
         <button
           type='button'
           onClick={onOpenSpecs}
-          className={`flex items-center gap-3 p-[12px_14px] ${selectableCard(hiddenSelected)}`}
+          className={`flex items-center gap-3 p-[12px_14px] ml-auto ${selectableCard(false)}`}
         >
           <span
-            className={`shrink-0 size-5 flex items-center justify-center [&>svg]:size-5 transition-colors duration-200 ease-out ${selectableTint(hiddenSelected)}`}
+            className={`shrink-0 size-5 flex items-center justify-center [&>svg]:size-5 ${selectableTint(false)}`}
           >
             <LuLayoutGrid aria-hidden />
           </span>
-          <span className='flex-1 min-w-0 text-[13.5px] font-semibold tracking-[-0.01em] overflow-hidden text-ellipsis whitespace-nowrap'>
-            {ALL_CATEGORIES.length - CATEGORIES.length} more
+          <span className='text-[13.5px] font-semibold tracking-[-0.01em] whitespace-nowrap'>
+            Select
           </span>
-          <IconSwap
-            on={hiddenSelected}
-            className={`shrink-0 [&_svg]:size-[18px] ${selectableTint(hiddenSelected)}`}
-            active={<LuCircleCheckBig />}
-            inactive={<LuPlus />}
+          <LuChevronRight
+            className={`shrink-0 size-[18px] ${selectableTint(false)}`}
+            aria-hidden
           />
         </button>
       </div>
