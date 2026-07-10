@@ -3,8 +3,8 @@ import type { ReactNode } from 'react';
 import { IconSwap } from '@site/src/components/IconSwap';
 import {
   Modal,
-  ModalClose,
-  ModalHeader,
+  ModalAction,
+  ModalFooter,
   ModalSearch,
 } from '@site/src/components/Modal';
 import { ScrollFade } from '@site/src/components/ScrollFade';
@@ -13,7 +13,7 @@ import {
   selectableTint,
 } from '@site/src/components/selectable';
 import { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { LuCircle, LuCircleCheckBig } from 'react-icons/lu';
+import { LuArrowLeft, LuCircle, LuCircleCheckBig } from 'react-icons/lu';
 
 const AgentRow = memo(
   ({
@@ -85,15 +85,6 @@ export const AgentsModal = ({
       label='All agents'
       panelClassName='lagune-modal-panel relative flex flex-col w-full max-w-[680px] h-[860px] max-h-full rounded-[20px] border border-[#0c155c] bg-[#0a0f1f] overflow-hidden [box-shadow:0_40px_120px_-30px_rgba(0,0,0,0.8)] outline-none'
     >
-      <ModalHeader>
-        <span className='font-mono text-[11px] tracking-[0.14em] uppercase text-muted tabular-nums'>
-          {query.trim()
-            ? `Agents · ${filtered.length}`
-            : `All agents · ${agents.length}`}
-        </span>
-        <ModalClose onClose={onClose} />
-      </ModalHeader>
-
       <ModalSearch value={query} onChange={setQuery} label='Search agents' />
 
       <ScrollFade
@@ -119,6 +110,18 @@ export const AgentsModal = ({
           </p>
         )}
       </ScrollFade>
+
+      <ModalFooter>
+        <span className='font-mono text-[11px] tracking-[0.14em] uppercase text-muted tabular-nums'>
+          {query.trim()
+            ? `Agents · ${filtered.length}`
+            : `All agents · ${agents.length}`}
+        </span>
+        <ModalAction onClick={onClose}>
+          <LuArrowLeft className='size-[17px] shrink-0' aria-hidden />
+          <span>Back</span>
+        </ModalAction>
+      </ModalFooter>
     </Modal>
   );
 };

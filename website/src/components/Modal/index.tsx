@@ -71,12 +71,12 @@ export const Modal = ({
   );
 };
 
-export const ModalHeader = ({
+export const ModalFooter = ({
   children,
 }: {
   children: ReactNode;
 }): ReactNode => (
-  <div className='flex items-center justify-between gap-4 shrink-0 px-[clamp(20px,3vw,32px)] py-4 border-b border-[#0c155c] bg-[#0a0f1f]'>
+  <div className='flex items-center justify-between gap-4 shrink-0 px-[clamp(20px,3vw,32px)] py-4 border-t border-[#0c155c] bg-[#0a0f1f]'>
     {children}
   </div>
 );
@@ -107,6 +107,22 @@ export const ModalSearch = ({
       />
     </div>
   </div>
+);
+
+export const ModalAction = ({
+  onClick,
+  children,
+}: {
+  onClick: () => void;
+  children: ReactNode;
+}): ReactNode => (
+  <button
+    type='button'
+    onClick={onClick}
+    className='inline-flex items-center justify-center gap-2.5 pl-5 pr-[22px] py-[13px] rounded-[13px] overflow-hidden font-sans text-[14px] font-semibold tracking-[-0.01em] text-ink cursor-pointer transition-[background-color,border-color] duration-300 ease-out border border-accent/45 bg-accent/[0.12] hover:bg-accent/20 hover:border-accent/[0.65] focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2'
+  >
+    {children}
+  </button>
 );
 
 export const ModalClose = ({

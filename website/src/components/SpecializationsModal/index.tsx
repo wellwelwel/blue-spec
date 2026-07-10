@@ -1,14 +1,19 @@
 import type { Category } from '@site/src/data/registry';
 import type { ReactNode } from 'react';
 import { MaskIcon } from '@site/src/components/MaskIcon';
-import { Modal, ModalHeader, ModalSearch } from '@site/src/components/Modal';
+import {
+  Modal,
+  ModalAction,
+  ModalFooter,
+  ModalSearch,
+} from '@site/src/components/Modal';
 import { ScrollFade } from '@site/src/components/ScrollFade';
 import {
   selectableCard,
   selectableTint,
 } from '@site/src/components/selectable';
 import { memo, useEffect, useMemo, useState } from 'react';
-import { LuArrowLeft } from 'react-icons/lu';
+import { LuCheck } from 'react-icons/lu';
 
 const SpecializationRow = memo(
   ({
@@ -89,23 +94,6 @@ export const SpecializationsModal = ({
       label='All specializations'
       panelClassName='lagune-modal-panel relative flex flex-col w-full max-w-[680px] h-[860px] max-h-full rounded-[20px] border border-[#0c155c] bg-[#0a0f1f] overflow-hidden [box-shadow:0_40px_120px_-30px_rgba(0,0,0,0.8)] outline-none'
     >
-      <ModalHeader>
-        <button
-          type='button'
-          onClick={onClose}
-          aria-label='Back'
-          className='relative inline-flex items-center gap-1.5 -ml-2 pl-2 pr-2.5 h-9 rounded-full font-mono text-[11px] tracking-[0.14em] uppercase text-[#9499a5] cursor-pointer transition-[color,background-color] duration-200 ease-out hover:bg-white/[0.08] hover:text-ink after:absolute after:top-1/2 after:left-1/2 after:h-10 after:w-[calc(100%+8px)] after:-translate-x-1/2 after:-translate-y-1/2 [&>svg]:size-[16px]'
-        >
-          <LuArrowLeft />
-          Back
-        </button>
-        <span className='font-mono text-[11px] tracking-[0.14em] uppercase text-muted tabular-nums'>
-          {query.trim()
-            ? `Specializations · ${filtered.length}`
-            : `All specializations · ${categories.length}`}
-        </span>
-      </ModalHeader>
-
       <ModalSearch
         value={query}
         onChange={setQuery}
@@ -135,6 +123,18 @@ export const SpecializationsModal = ({
           </p>
         )}
       </ScrollFade>
+
+      <ModalFooter>
+        <span className='font-mono text-[11px] tracking-[0.14em] uppercase text-muted tabular-nums'>
+          {query.trim()
+            ? `Specializations · ${filtered.length}`
+            : `All specializations · ${categories.length}`}
+        </span>
+        <ModalAction onClick={onClose}>
+          <LuCheck className='size-[17px] shrink-0' aria-hidden />
+          <span>Confirm</span>
+        </ModalAction>
+      </ModalFooter>
     </Modal>
   );
 };

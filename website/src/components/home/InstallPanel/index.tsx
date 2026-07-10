@@ -126,10 +126,11 @@ const InstallPanelComponent = ({
             </span>
           </span>
         ))}
+        <span className='hidden w-full max-[600px]:block' aria-hidden />
         <button
           type='button'
           onClick={onOpenSpecs}
-          className={`flex items-center gap-3 p-[12px_14px] ml-auto ${selectableCard(false)}`}
+          className={`flex items-center gap-3 p-[12px_14px] ml-auto max-[600px]:ml-0 ${selectableCard(false)}`}
         >
           <span
             className={`shrink-0 size-5 flex items-center justify-center [&>svg]:size-5 ${selectableTint(false)}`}
@@ -175,9 +176,10 @@ const InstallPanelComponent = ({
         <CopyButton value={installCommand} label='Copy install command' />
       </div>
 
-      <p className='mx-1 mt-4 text-[13px] leading-[1.6] text-muted'>
-        Pick the agent you use, and any security specializations you want. Run
-        it once and Lagune sets it all up in your project.
+      <p className='mx-1 mt-6 text-[12px] leading-[1.6] text-muted'>
+        All product names, trademarks, and registered trademarks mentioned are
+        the property of their respective owners and are used for identification
+        purposes only.
       </p>
     </div>
   );
