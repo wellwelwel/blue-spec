@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { frameResizeObserver } from '@site/src/components/frameResizeObserver';
 import { Modal, ModalClose } from '@site/src/components/Modal';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa6';
@@ -172,7 +173,8 @@ const TypeChips = ({
     const group = groupRef.current;
     if (!group) return;
 
-    const observer = new ResizeObserver(measure);
+    const observer = frameResizeObserver(measure);
+
     observer.observe(group);
 
     return () => observer.disconnect();

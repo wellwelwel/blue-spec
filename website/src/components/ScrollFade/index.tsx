@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { frameResizeObserver } from '@site/src/components/frameResizeObserver';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 export const ScrollFade = ({
@@ -33,7 +34,8 @@ export const ScrollFade = ({
 
     update();
 
-    const observer = new ResizeObserver(update);
+    const observer = frameResizeObserver(update);
+
     observer.observe(node);
 
     for (const child of Array.from(node.children)) observer.observe(child);

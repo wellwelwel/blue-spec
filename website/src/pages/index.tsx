@@ -5,6 +5,7 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
 import Head from '@docusaurus/Head';
 import Link from '@docusaurus/Link';
 import { AgentsModal } from '@site/src/components/AgentsModal';
+import { frameResizeObserver } from '@site/src/components/frameResizeObserver';
 import { Brand } from '@site/src/components/home/Brand';
 import { InstallPanel } from '@site/src/components/home/InstallPanel';
 import { OverviewPanel } from '@site/src/components/home/OverviewPanel';
@@ -133,7 +134,8 @@ const Home = (): ReactNode => {
       if (el) setPill({ left: el.offsetLeft, width: el.offsetWidth });
     };
 
-    const observer = new ResizeObserver(measure);
+    const observer = frameResizeObserver(measure);
+
     observer.observe(nav);
     nav.addEventListener('scroll', measure, { passive: true });
 
