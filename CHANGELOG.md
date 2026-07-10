@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.2](https://github.com/wellwelwel/lagune/compare/v0.9.1...v0.9.2) (2026-07-10)
+
+
+### Miscellaneous Chores
+
+* release 0.9.2 ([657c930](https://github.com/wellwelwel/lagune/commit/657c9304898a182c320b116c9ac2302cf7d3bf6b))
+
 ## [0.9.1](https://github.com/wellwelwel/blue-spec/compare/v0.9.0...v0.9.1) (2026-07-08)
 
 
