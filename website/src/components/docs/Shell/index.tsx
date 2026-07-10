@@ -166,7 +166,12 @@ const SidebarNav = ({
         height={38}
       />
       <span className='flex flex-col gap-1 text-[1.25rem] font-extrabold leading-none tracking-[-0.02em] text-ink'>
-        Lagune
+        <span>
+          Lagune
+          <span className='px-0.5 text-[#2092ff] font-sans text-[1.05rem]'>
+            .ai
+          </span>
+        </span>
         <span className='sr-only'>Documentation</span>
         <span
           aria-hidden

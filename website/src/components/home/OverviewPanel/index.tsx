@@ -20,9 +20,9 @@ const OverviewPanelComponent = ({ onInstall }: { onInstall: () => void }) => (
             ? 'pr-7 border-r border-dashed border-[#021664] max-[600px]:pr-0 max-[600px]:border-r-0'
             : 'pl-7 max-[600px]:pl-0',
           isTop
-            ? 'pb-7 border-b border-dashed border-[#021664]'
-            : 'pt-7 max-[600px]:border-b-0',
-          'max-[600px]:pt-7 max-[600px]:pb-7 max-[600px]:border-b max-[600px]:border-dashed max-[600px]:border-[#021664] max-[600px]:last:border-b-0 max-[600px]:last:pb-0 max-[600px]:first:pt-0',
+            ? 'pb-7 border-b border-dashed border-[#021664] max-[600px]:border-b-0'
+            : 'pt-7',
+          'max-[600px]:pt-2 max-[600px]:pb-7 max-[600px]:last:pb-0 max-[600px]:first:pt-0',
         ].join(' ');
 
         return (

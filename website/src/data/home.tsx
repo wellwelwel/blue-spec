@@ -66,18 +66,23 @@ export const PHASE_GROUPS: Group[] = [
         no: 'UNIVERSAL',
         title: 'Build',
         command: '/lagune',
-        desc: 'Builds what your prompt asks for, with security guarding the work as it happens.',
+        desc: 'Builds what your prompt asks for, with security guarding the work as it happens, not later.',
         banner: '/img/docs/banner-0.png',
         nextLabel: 'See how to audit your existing project',
         modes: [
           {
-            label: 'Recommended (Feature)',
+            label: 'Feature',
             prompt:
               'Create a dashboard for my SaaS users. They should be able to change their profile picture and view all the content they have access to.',
           },
           {
+            label: 'Fix',
+            prompt:
+              'Nothing happens when the user submits the form. Look into what it might be and fix it.',
+          },
+          {
             label: 'Refactor',
-            prompt: 'Extract the credits checkout into its own module.',
+            prompt: 'Decouple and improve the payload logic.',
           },
         ],
       },
