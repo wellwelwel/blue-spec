@@ -178,7 +178,7 @@ const Home = (): ReactNode => {
         <body className='lagune-canvas-body' />
         <meta
           name='description'
-          content='Lagune helps your AI agent make a project more secure. You point it at your code, and the agent figures out what your system actually does, then guides you through the security work that matters for it.'
+          content="Lagune is your security copilot as you build, your Blue Team when you audit, whether you're a developer or not."
         />
         <link rel='canonical' href='https://lagune.ai/' />
         <meta property='og:type' content='website' />
@@ -189,7 +189,7 @@ const Home = (): ReactNode => {
         />
         <meta
           property='og:description'
-          content='Lagune helps your AI agent make a project more secure. Point it at your code, and it guides you through the security work that matters for it.'
+          content="Lagune is your security copilot as you build, your Blue Team when you audit, whether you're a developer or not."
         />
         <meta property='og:image' content='https://lagune.ai/img/og.png' />
         <meta
@@ -198,7 +198,7 @@ const Home = (): ReactNode => {
         />
         <meta
           name='twitter:description'
-          content='Lagune helps your AI agent make a project more secure. Point it at your code, and it guides you through the security work that matters for it.'
+          content="Lagune is your security copilot as you build, your Blue Team when you audit, whether you're a developer or not."
         />
         <meta name='twitter:image' content='https://lagune.ai/img/og.png' />
         <link rel='preconnect' href='https://fonts.googleapis.com' />
@@ -218,7 +218,7 @@ const Home = (): ReactNode => {
             name: 'Lagune',
             url: 'https://lagune.ai',
             description:
-              'Lagune helps your AI agent make a project more secure. You point it at your code, and the agent figures out what your system actually does, then guides you through the security work that matters for it.',
+              "Lagune is your security copilot as you build, your Blue Team when you audit, whether you're a developer or not.",
           })}
         </script>
       </Head>

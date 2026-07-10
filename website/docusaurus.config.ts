@@ -69,7 +69,7 @@ const config: Config = {
         operatingSystem: 'Node.js',
         url: 'https://lagune.ai',
         description:
-          'Lagune helps your AI agent make a project more secure. You point it at your code, and the agent figures out what your system actually does, then guides you through the security work that matters for it.',
+          "Lagune is your security copilot as you build, your Blue Team when you audit, whether you're a developer or not.",
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
         author: {
           '@type': 'Person',
@@ -122,12 +122,12 @@ const config: Config = {
       {
         name: 'description',
         content:
-          'Lagune helps your AI agent make a project more secure. You point it at your code, and the agent figures out what your system actually does, then guides you through the security work that matters for it.',
+          "Lagune is your security copilot as you build, your Blue Team when you audit, whether you're a developer or not.",
       },
       {
         name: 'keywords',
         content:
-          'security, application security, AI security, security hardening, secure coding, vulnerability detection, defensive security, blue team, AI agents, Claude Code, vibe coding, npx, OWASP, ReDoS, prototype pollution, DOM XSS',
+          'security, application security, AI security, security hardening, secure coding, vulnerability detection, defensive security, blue team, AI agents, Claude Code, vibe coding, npx, OWASP, Lagune AI, Lagune IA, SDH, Spec-Driven, SDH Lagune, Security-Driven Hardening',
       },
       { name: 'author', content: 'Weslley Araújo' },
       { name: 'twitter:card', content: 'summary_large_image' },
@@ -138,7 +138,7 @@ const config: Config = {
       {
         name: 'twitter:description',
         content:
-          'Lagune helps your AI agent make a project more secure. Point it at your code, and it guides you through the security work that matters for it.',
+          "Lagune is your security copilot as you build, your Blue Team when you audit, whether you're a developer or not.",
       },
       { property: 'og:type', content: 'website' },
       { property: 'og:site_name', content: 'Lagune' },
