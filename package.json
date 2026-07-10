@@ -1,6 +1,6 @@
 {
   "name": "lagune",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "🌊 Lagune is a toolkit for Security-Driven Hardening, a defensive workflow to help AI agents detect what a system does and harden the defenses that matter.",
   "license": "MIT",
   "type": "module",
