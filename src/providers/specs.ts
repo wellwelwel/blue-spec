@@ -337,4 +337,11 @@ export const AGENT_SPECS: AgentSpec[] = [
     layout: 'skill',
     dir: '.jazz/skills',
   },
+  {
+    key: 'kode',
+    displayName: 'Kode',
+    format: 'skill',
+    layout: 'skill',
+    dir: '.kode/skills',
+  },
 ];

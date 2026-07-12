@@ -71,6 +71,7 @@ export const ALL_AGENTS: AgentEntry[] = [
   { key: 'kilocode', name: 'Kilo Code' },
   { key: 'kimi', name: 'Kimi Code' },
   { key: 'kiro-cli', name: 'Kiro CLI' },
+  { key: 'kode', name: 'Kode' },
   { key: 'lingma', name: 'Lingma' },
   { key: 'vibe', name: 'Mistral Vibe' },
   { key: 'opencode', name: 'opencode' },
