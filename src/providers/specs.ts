@@ -379,4 +379,11 @@ export const AGENT_SPECS: AgentSpec[] = [
     layout: 'skill',
     dir: '.ona/skills',
   },
+  {
+    key: 'openclaw',
+    displayName: 'OpenClaw',
+    format: 'skill',
+    layout: 'skill',
+    dir: 'skills',
+  },
 ];
