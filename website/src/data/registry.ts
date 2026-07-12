@@ -79,6 +79,7 @@ export const ALL_AGENTS: AgentEntry[] = [
   { key: 'vibe', name: 'Mistral Vibe' },
   { key: 'moxby', name: 'Moxby' },
   { key: 'mux', name: 'Mux' },
+  { key: 'neovate', name: 'Neovate' },
   { key: 'ona', name: 'Ona' },
   { key: 'openclaw', name: 'OpenClaw' },
   { key: 'opencode', name: 'opencode' },

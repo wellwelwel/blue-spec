@@ -477,4 +477,10 @@ export const AGENT_SPECS: AgentSpec[] = [
     dir: '.firebender/commands',
     extension: '.mdc',
   },
+  {
+    key: 'neovate',
+    displayName: 'Neovate',
+    format: 'markdown',
+    dir: '.neovate/commands',
+  },
 ];
