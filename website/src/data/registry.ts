@@ -74,6 +74,7 @@ export const ALL_AGENTS: AgentEntry[] = [
   { key: 'kode', name: 'Kode' },
   { key: 'lingma', name: 'Lingma' },
   { key: 'loaf', name: 'Loaf' },
+  { key: 'mcpjam', name: 'MCPJam' },
   { key: 'vibe', name: 'Mistral Vibe' },
   { key: 'opencode', name: 'opencode' },
   { key: 'pi', name: 'Pi Coding Agent' },

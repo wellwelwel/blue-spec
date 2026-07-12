@@ -8,7 +8,7 @@
 
 **Lagune** helps your AI agent make a project more secure. You point it at your code, and the agent figures out what your system actually does, then guides you through the security work that matters for it.
 
-- **Lagune** works with projects in **any programming language** and supports [**53 agents**](https://lagune.ai/docs/supported-agents) ✨
+- **Lagune** works with projects in **any programming language** and supports [**54 agents**](https://lagune.ai/docs/supported-agents) ✨
 
 ---
 
@@ -260,7 +260,7 @@ Agent-by-agent compatibility across other agent-driven workflow tools: [**OpenSp
 | Jazz                    |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
 | Kode                    |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
 | Loaf                    |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| MCPJam                  |    ❌    |    ❌    |     ❌      |    ✅     |   ❌   |
+| MCPJam                  |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
 | Moxby                   |    ❌    |    ❌    |     ❌      |    ✅     |   ❌   |
 | Mux                     |    ❌    |    ❌    |     ❌      |    ✅     |   ❌   |
 | Neovate                 |    ❌    |    ❌    |     ❌      |    ✅     |   ❌   |
@@ -278,4 +278,4 @@ Agent-by-agent compatibility across other agent-driven workflow tools: [**OpenSp
 | ZCode                   |    ❌    |    ❌    |     ❌      |    ✅     |   ❌   |
 | Zencoder                |    ❌    |    ❌    |     ❌      |    ✅     |   ❌   |
 | Zenflow                 |    ❌    |    ❌    |     ❌      |    ✅     |   ❌   |
-| **Total**               |  **30**  |  **32**  |   **10**    |  **69**   | **53** |
+| **Total**               |  **30**  |  **32**  |   **10**    |  **69**   | **54** |
