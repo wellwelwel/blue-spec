@@ -53,6 +53,7 @@ export const ALL_AGENTS: AgentEntry[] = [
   { key: 'costrict', name: 'CoStrict' },
   { key: 'crush', name: 'Crush' },
   { key: 'cursor-agent', name: 'Cursor' },
+  { key: 'deepagents', name: 'Deep Agents (LangChain)' },
   { key: 'devin', name: 'Devin for Terminal' },
   { key: 'factory', name: 'Factory Droid' },
   { key: 'forge', name: 'Forge' },

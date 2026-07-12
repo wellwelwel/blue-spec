@@ -302,4 +302,11 @@ export const AGENT_SPECS: AgentSpec[] = [
     layout: 'skill',
     dir: '.cortex/skills',
   },
+  {
+    key: 'deepagents',
+    displayName: 'Deep Agents (LangChain)',
+    format: 'skill',
+    layout: 'skill',
+    dir: '.agents/skills',
+  },
 ];
