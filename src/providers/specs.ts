@@ -246,4 +246,11 @@ export const AGENT_SPECS: AgentSpec[] = [
     layout: 'skill',
     dir: '.adal/skills',
   },
+  {
+    key: 'aiderdesk',
+    displayName: 'AiderDesk',
+    format: 'skill',
+    layout: 'skill',
+    dir: '.aider-desk/skills',
+  },
 ];
