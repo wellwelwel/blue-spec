@@ -100,6 +100,7 @@ export const ALL_AGENTS: AgentEntry[] = [
   { key: 'zcode', name: 'ZCode' },
   { key: 'zed', name: 'Zed' },
   { key: 'zencoder', name: 'Zencoder' },
+  { key: 'zenflow', name: 'Zenflow' },
 ];
 
 export const ALL_CATEGORIES: Category[] = [
