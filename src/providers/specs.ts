@@ -253,4 +253,11 @@ export const AGENT_SPECS: AgentSpec[] = [
     layout: 'skill',
     dir: '.aider-desk/skills',
   },
+  {
+    key: 'astrbot',
+    displayName: 'AstrBot',
+    format: 'skill',
+    layout: 'skill',
+    dir: 'data/skills',
+  },
 ];

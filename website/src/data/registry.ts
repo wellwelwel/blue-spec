@@ -37,6 +37,7 @@ export const ALL_AGENTS: AgentEntry[] = [
   { key: 'amazonq', name: 'Amazon Q Developer' },
   { key: 'amp', name: 'Amp' },
   { key: 'agy', name: 'Antigravity' },
+  { key: 'astrbot', name: 'AstrBot' },
   { key: 'auggie', name: 'Auggie CLI' },
   { key: 'claude', name: 'Claude Code' },
   { key: 'cline', name: 'Cline' },
