@@ -42,6 +42,7 @@ export const ALL_AGENTS: AgentEntry[] = [
   { key: 'autohand', name: 'Autohand Code CLI' },
   { key: 'claude', name: 'Claude Code' },
   { key: 'cline', name: 'Cline' },
+  { key: 'codearts', name: 'CodeArts Agent (Huawei)' },
   { key: 'codebuddy', name: 'CodeBuddy CLI' },
   { key: 'codex', name: 'Codex CLI' },
   { key: 'continue', name: 'Continue' },
