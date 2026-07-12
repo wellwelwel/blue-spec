@@ -1,5 +1,46 @@
 # Changelog
 
+## [0.11.0](https://github.com/wellwelwel/lagune/compare/v0.10.0...v0.11.0) (2026-07-12)
+
+
+### Features
+
+* add support to AdaL agent ([f2adcd5](https://github.com/wellwelwel/lagune/commit/f2adcd5c355d2483c8404efa4c0547fdd38e12ec))
+* add support to AiderDesk agent ([7b35044](https://github.com/wellwelwel/lagune/commit/7b3504419dee67a29b38b7756a3b047febd90228))
+* add support to AstrBot agent ([7f7d1c9](https://github.com/wellwelwel/lagune/commit/7f7d1c9e3baeb3810362a489387b4b1862a6710c))
+* add support to Autohand Code CLI agent ([eb69d89](https://github.com/wellwelwel/lagune/commit/eb69d89550e6b5fb10e6c5b72c8d2a4f82b4facc))
+* add support to Code Studio agent ([0d69691](https://github.com/wellwelwel/lagune/commit/0d69691de950fe782d461dfae2bf064830d09683))
+* add support to CodeArts Agent (Huawei) agent ([7d53ec2](https://github.com/wellwelwel/lagune/commit/7d53ec2309f4ba8e70cf5da6c21d6063780be8f0))
+* add support to Codemaker agent ([3a4bce5](https://github.com/wellwelwel/lagune/commit/3a4bce5846b68965dd6a0f053fa678db74f514ec))
+* add support to Command Code agent ([c10e189](https://github.com/wellwelwel/lagune/commit/c10e18932909c054e467da87b60d51ae9218901b))
+* add support to Cortex Code (Snowflake) agent ([ce2a885](https://github.com/wellwelwel/lagune/commit/ce2a885828605ad88397bb3b03e799d94c70cd06))
+* add support to Deep Agents (LangChain) agent ([4514bf0](https://github.com/wellwelwel/lagune/commit/4514bf091f6caa365d804400b87624a934f5a268))
+* add support to Dexto agent ([7941ede](https://github.com/wellwelwel/lagune/commit/7941ede2448dabee0a879c5274bb61fa4550b7dd))
+* add support to Eve agent ([f638779](https://github.com/wellwelwel/lagune/commit/f638779687b0a8be34597e070c1ac6daa868b8fe))
+* add support to Firebender agent ([1f9cddc](https://github.com/wellwelwel/lagune/commit/1f9cddc2667a327e99daaa1e8a53a2c2d18f950f))
+* add support to inference.sh agent ([4d61414](https://github.com/wellwelwel/lagune/commit/4d614140546c5e95fc0a299ec30f03b913cd2b60))
+* add support to Jazz agent ([1dcb809](https://github.com/wellwelwel/lagune/commit/1dcb809ecadecb4fe80cc47f75cb8f909b0a93b8))
+* add support to Kode agent ([057d769](https://github.com/wellwelwel/lagune/commit/057d7696a30e0735a9c77812e965ba2bdc461f84))
+* add support to Loaf agent ([ab98e9a](https://github.com/wellwelwel/lagune/commit/ab98e9ad9a374be24cc1acac8cd7e8464ac34c7e))
+* add support to MCPJam agent ([3c20485](https://github.com/wellwelwel/lagune/commit/3c20485c7e5cd0ab60e79093db5addb12d0d2902))
+* add support to Moxby agent ([73d2a4f](https://github.com/wellwelwel/lagune/commit/73d2a4f79ef2154bdae44079c3123822925a6804))
+* add support to Mux agent ([ac6e16d](https://github.com/wellwelwel/lagune/commit/ac6e16d516f00ac5087bc5135e5edb1527c77cf1))
+* add support to Neovate agent ([687f87c](https://github.com/wellwelwel/lagune/commit/687f87cbfadc11d67a25c97f1f36116ddf56e191))
+* add support to Ona agent ([a9f1b02](https://github.com/wellwelwel/lagune/commit/a9f1b026fc6903aa3f6b2327021a691f45049989))
+* add support to OpenClaw agent ([4344d6e](https://github.com/wellwelwel/lagune/commit/4344d6e4c0b17961106388f35236d0c628a86c1b))
+* add support to OpenHands agent ([b127d94](https://github.com/wellwelwel/lagune/commit/b127d94c27d56befe2f9852049b719bb3dd7760f))
+* add support to Pochi agent ([0e91184](https://github.com/wellwelwel/lagune/commit/0e91184051e5f2ad944278cb99fde237061c41d5))
+* add support to PromptScript agent ([75224da](https://github.com/wellwelwel/lagune/commit/75224da02a5fdbce9f17b5eaf935a993b3ddf595))
+* add support to Reasonix agent ([bff0abb](https://github.com/wellwelwel/lagune/commit/bff0abb41cbf0306b05974543c27033aafd68a2c))
+* add support to Replit agent ([0c07ede](https://github.com/wellwelwel/lagune/commit/0c07edeef2814bb987dbb8b8864eb00782ad6393))
+* add support to Terramind agent ([776df75](https://github.com/wellwelwel/lagune/commit/776df75dba77b3450504095f36ddb7390e2e5d10))
+* add support to Tinycloud agent ([3ff44b3](https://github.com/wellwelwel/lagune/commit/3ff44b3e92955531f6ee82c5f8b6e6531e2e9bc7))
+* add support to Warp agent ([da04575](https://github.com/wellwelwel/lagune/commit/da04575b0c9aa00b42f5f64dbd4042fb9a79a1a3))
+* add support to ZCode agent ([e5370c0](https://github.com/wellwelwel/lagune/commit/e5370c0197257d66fefff851d8eb6d395f3389d8))
+* add support to Zed agent ([3c57ebb](https://github.com/wellwelwel/lagune/commit/3c57ebb7e8cc81ac643e908a80ae37742b29dc86))
+* add support to Zencoder agent ([9eb84ac](https://github.com/wellwelwel/lagune/commit/9eb84acd7621f086a60a89f85c6413eac000799b))
+* add support to Zenflow agent ([b8d1329](https://github.com/wellwelwel/lagune/commit/b8d1329240451488f9095b01fa5eae317c76ad4b))
+
 ## [0.10.0](https://github.com/wellwelwel/lagune/compare/v0.9.2...v0.10.0) (2026-07-10)
 
 
