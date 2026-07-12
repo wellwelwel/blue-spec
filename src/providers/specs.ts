@@ -358,4 +358,11 @@ export const AGENT_SPECS: AgentSpec[] = [
     layout: 'skill',
     dir: '.mcpjam/skills',
   },
+  {
+    key: 'moxby',
+    displayName: 'Moxby',
+    format: 'skill',
+    layout: 'skill',
+    dir: '.moxby/skills',
+  },
 ];

@@ -76,6 +76,7 @@ export const ALL_AGENTS: AgentEntry[] = [
   { key: 'loaf', name: 'Loaf' },
   { key: 'mcpjam', name: 'MCPJam' },
   { key: 'vibe', name: 'Mistral Vibe' },
+  { key: 'moxby', name: 'Moxby' },
   { key: 'opencode', name: 'opencode' },
   { key: 'pi', name: 'Pi Coding Agent' },
   { key: 'qodercli', name: 'Qoder CLI' },
