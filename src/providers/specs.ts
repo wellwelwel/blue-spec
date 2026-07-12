@@ -309,4 +309,11 @@ export const AGENT_SPECS: AgentSpec[] = [
     layout: 'skill',
     dir: '.agents/skills',
   },
+  {
+    key: 'dexto',
+    displayName: 'Dexto',
+    format: 'skill',
+    layout: 'skill',
+    dir: '.agents/skills',
+  },
 ];
