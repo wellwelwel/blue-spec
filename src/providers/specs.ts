@@ -330,4 +330,11 @@ export const AGENT_SPECS: AgentSpec[] = [
     layout: 'skill',
     dir: '.inferencesh/skills',
   },
+  {
+    key: 'jazz',
+    displayName: 'Jazz',
+    format: 'skill',
+    layout: 'skill',
+    dir: '.jazz/skills',
+  },
 ];
