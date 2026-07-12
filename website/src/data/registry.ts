@@ -81,6 +81,7 @@ export const ALL_AGENTS: AgentEntry[] = [
   { key: 'ona', name: 'Ona' },
   { key: 'openclaw', name: 'OpenClaw' },
   { key: 'opencode', name: 'opencode' },
+  { key: 'openhands', name: 'OpenHands' },
   { key: 'pi', name: 'Pi Coding Agent' },
   { key: 'pochi', name: 'Pochi' },
   { key: 'promptscript', name: 'PromptScript' },

@@ -463,4 +463,11 @@ export const AGENT_SPECS: AgentSpec[] = [
     layout: 'skill',
     dir: '.zencoder/skills',
   },
+  {
+    key: 'openhands',
+    displayName: 'OpenHands',
+    format: 'skill',
+    layout: 'skill',
+    dir: '.openhands/skills',
+  },
 ];
