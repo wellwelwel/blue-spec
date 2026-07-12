@@ -442,4 +442,11 @@ export const AGENT_SPECS: AgentSpec[] = [
     layout: 'skill',
     dir: '.agents/skills',
   },
+  {
+    key: 'zcode',
+    displayName: 'ZCode',
+    format: 'skill',
+    layout: 'skill',
+    dir: '.zcode/skills',
+  },
 ];

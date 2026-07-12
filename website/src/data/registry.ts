@@ -97,6 +97,7 @@ export const ALL_AGENTS: AgentEntry[] = [
   { key: 'trae', name: 'Trae' },
   { key: 'warp', name: 'Warp' },
   { key: 'windsurf', name: 'Windsurf' },
+  { key: 'zcode', name: 'ZCode' },
   { key: 'zed', name: 'Zed' },
 ];
 
