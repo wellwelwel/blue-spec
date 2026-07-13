@@ -268,11 +268,40 @@ const Home = (): ReactNode => {
         <script type='application/ld+json'>
           {JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'WebSite',
-            name: 'Lagune',
-            url: 'https://lagune.ai',
-            description:
-              "Lagune is your security copilot as you build, your Blue Team when you audit, whether you're a developer or not.",
+            '@graph': [
+              {
+                '@type': 'WebSite',
+                '@id': 'https://lagune.ai/#website',
+                name: 'Lagune',
+                alternateName: ['Lagune AI', 'lagune'],
+                url: 'https://lagune.ai/',
+                inLanguage: 'en',
+                description:
+                  "Lagune is your security copilot as you build, your Blue Team when you audit, whether you're a developer or not.",
+                publisher: { '@id': 'https://lagune.ai/#organization' },
+              },
+              {
+                '@type': 'SoftwareApplication',
+                '@id': 'https://lagune.ai/#software',
+                name: 'Lagune',
+                alternateName: ['Lagune AI', 'Lagune Security'],
+                applicationCategory: 'DeveloperApplication',
+                applicationSubCategory: 'Security',
+                operatingSystem: 'Node.js',
+                url: 'https://lagune.ai/',
+                description:
+                  "Lagune is your security copilot as you build, your Blue Team when you audit, whether you're a developer or not.",
+                offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+                screenshot: 'https://lagune.ai/img/og.png',
+                license:
+                  'https://github.com/wellwelwel/lagune/blob/main/LICENSE',
+                publisher: { '@id': 'https://lagune.ai/#organization' },
+                sameAs: [
+                  'https://github.com/wellwelwel/lagune',
+                  'https://www.npmjs.com/package/lagune',
+                ],
+              },
+            ],
           })}
         </script>
       </Head>
@@ -528,6 +557,8 @@ const Home = (): ReactNode => {
                     src={BACKGROUNDS[tab.id]}
                     alt=''
                     decoding='async'
+                    loading={active === tab.id ? 'eager' : 'lazy'}
+                    fetchPriority={active === tab.id ? 'auto' : 'low'}
                   />
                 ))}
                 <div className='absolute inset-0 -z-[3] [background:linear-gradient(180deg,#0a1a4a_0%,#050d2c_60%,#03081c_100%)]' />
@@ -553,12 +584,12 @@ const Home = (): ReactNode => {
                   <span className='font-mono text-[14px]! tracking-[0.18em] uppercase text-[rgba(233, 237, 247,0.62)] max-[600px]:text-[12px]!'>
                     {feature.eyebrow}
                   </span>
-                  <h1 className='font-display font-black text-[clamp(32px,4.4vw,34px)] leading-[1.5] tracking-[-0.02em] m-0 max-[600px]:text-[24px]'>
+                  <h2 className='font-display font-black text-[clamp(32px,4.4vw,34px)] leading-[1.5] tracking-[-0.02em] m-0 max-[600px]:text-[24px]'>
                     <span className='text-accent mr-2 [-webkit-text-stroke:0.04em_var(--color-accent)]'>
                       /
                     </span>
                     {feature.title}
-                  </h1>
+                  </h2>
                 </div>
               </aside>
             </div>
