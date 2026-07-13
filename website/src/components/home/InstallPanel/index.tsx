@@ -12,7 +12,7 @@ import { AGENTS, ALL_AGENTS, ALL_CATEGORIES } from '@site/src/data/registry';
 import { memo, useMemo } from 'react';
 import { LuChevronRight, LuCircleCheckBig, LuLayoutGrid } from 'react-icons/lu';
 
-const clampTip = (event: PointerEvent<HTMLSpanElement>) => {
+const clampTip = (event: PointerEvent<HTMLButtonElement>) => {
   const wrap = event.currentTarget;
   const tip = wrap.lastElementChild;
   const strip = wrap.parentElement;
@@ -36,12 +36,14 @@ const InstallPanelComponent = ({
   onSelect,
   onOpenAgents,
   onOpenSpecs,
+  onToggleSkill,
   skills,
 }: {
   selected: string;
   onSelect: (key: string) => void;
   onOpenAgents: () => void;
   onOpenSpecs: () => void;
+  onToggleSkill: (key: string) => void;
   skills: string[];
 }) => {
   const orderedSkills = useMemo(
@@ -106,26 +108,36 @@ const InstallPanelComponent = ({
       <GroupHead title='Add specializations' meta='Optional' />
 
       <div className='flex flex-wrap items-center gap-3 mb-[22px]'>
-        {ALL_CATEGORIES.map((category) => (
-          <span
-            key={category.key}
-            role='img'
-            aria-label={category.name}
-            className='group/chip relative flex'
-            onPointerEnter={clampTip}
-          >
-            <MaskIcon
-              src={category.icon}
-              className={`size-5 bg-current transition-colors duration-200 ease-out ${selectableTint(skills.includes(category.key))}`}
-            />
-            <span
-              aria-hidden
-              className='pointer-events-none absolute bottom-[calc(100%+0.375rem)] left-[calc(50%+var(--tip-shift,0px))] -translate-x-1/2 translate-y-1 scale-95 whitespace-nowrap rounded-chip bg-dark px-2 py-1 text-[0.68rem] font-bold text-white opacity-0 transition-[opacity,scale,translate] duration-200 ease-[cubic-bezier(0.2,0,0,1)] group-hover/chip:translate-y-0 group-hover/chip:scale-100 group-hover/chip:opacity-100'
+        {ALL_CATEGORIES.map((category) => {
+          const on = skills.includes(category.key);
+
+          return (
+            <button
+              key={category.key}
+              type='button'
+              role='checkbox'
+              aria-checked={on}
+              aria-label={category.name}
+              onClick={(event) => {
+                onToggleSkill(category.key);
+                event.currentTarget.focus({ preventScroll: true });
+              }}
+              onPointerEnter={clampTip}
+              className='group/chip relative flex after:absolute after:top-1/2 after:left-1/2 after:size-8 after:-translate-x-1/2 after:-translate-y-1/2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent'
             >
-              {category.name}
-            </span>
-          </span>
-        ))}
+              <MaskIcon
+                src={category.icon}
+                className={`size-5 bg-current transition-colors duration-200 ease-out ${selectableTint(on)}`}
+              />
+              <span
+                aria-hidden
+                className='pointer-events-none absolute bottom-[calc(100%+0.375rem)] left-[calc(50%+var(--tip-shift,0px))] -translate-x-1/2 translate-y-1 scale-95 whitespace-nowrap rounded-chip bg-dark px-2 py-1 text-[0.68rem] font-bold text-white opacity-0 transition-[opacity,scale,translate] duration-200 ease-[cubic-bezier(0.2,0,0,1)] group-hover/chip:translate-y-0 group-hover/chip:scale-100 group-hover/chip:opacity-100 group-focus-visible/chip:translate-y-0 group-focus-visible/chip:scale-100 group-focus-visible/chip:opacity-100 pointer-coarse:group-focus/chip:translate-y-0 pointer-coarse:group-focus/chip:scale-100 pointer-coarse:group-focus/chip:opacity-100'
+              >
+                {category.name}
+              </span>
+            </button>
+          );
+        })}
         <span className='hidden w-full max-[600px]:block' aria-hidden />
         <button
           type='button'

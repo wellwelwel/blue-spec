@@ -500,6 +500,7 @@ const Home = (): ReactNode => {
                       onSelect={setSelected}
                       onOpenAgents={openAgents}
                       onOpenSpecs={openSpecs}
+                      onToggleSkill={toggleSkill}
                       skills={skills}
                     />
                   )}
