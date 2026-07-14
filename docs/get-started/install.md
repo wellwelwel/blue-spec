@@ -162,15 +162,6 @@ npx -y lagune@latest
 
 🃏 **Lagune** runs on **Node.js** under the hood, you use whatever language you want.
 
-## What the dashboard sets up
-
-Running **Lagune** in your project creates two things:
-
-- **`.lagune/`** holds Lagune's state in that project: the charter, the artifact each phase produces, the on-demand skills you installed, and the internal tracking.
-- **Agent commands** are written into your agent's own location, in its native format, so the `/lagune.*` commands are ready to run.
-
-Your security work is committed alongside your code, versioned and reviewable like any other part of the project. **Lagune**'s own files are gitignored by default, since [`pull`](#pull) brings them back from the manifest.
-
 ## Requirements
 
 You will need these tools installed on your system:

@@ -70,7 +70,10 @@ Partners get an exclusive logo across the repositories and landing pages, plus a
 
 Really thanks to everyone who has supported and keeps supporting this work.
 
-[![Sponsors](https://wellwelwel.github.io/wellwelwel/sponsors.svg?v=1)](https://github.com/sponsors/wellwelwel)
+<a href='https://github.com/sponsors/wellwelwel'>
+![Our sponsors and supporters](https://wellwelwel.github.io/wellwelwel/sponsors.svg?v=1)
+
+</a>
 
 > Support my work by [becoming a sponsor](https://github.com/sponsors/wellwelwel)
 
