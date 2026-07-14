@@ -24,6 +24,11 @@
     "@docusaurus/tsconfig": "3.10.2",
     "@docusaurus/types": "3.10.2",
     "@docusaurus/utils": "3.10.2",
+    "@fontsource/archivo": "^5.2.8",
+    "@fontsource/fira-code": "^5.2.7",
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/plus-jakarta-sans": "^5.2.8",
+    "@fontsource/ubuntu-mono": "^5.2.8",
     "@mdx-js/react": "^3.1.1",
     "@paper-design/shaders-react": "^0.0.77",
     "@tailwindcss/postcss": "^4.3.2",
@@ -39,7 +44,7 @@
     "react-icons": "^5.7.0",
     "react-typed": "^2.0.12",
     "tailwindcss": "^4.3.2",
-    "typescript": "~7.0.2"
+    "typescript": "^7.0.2"
   },
   "browserslist": {
     "production": [

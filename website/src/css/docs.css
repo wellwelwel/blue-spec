@@ -1,3 +1,11 @@
+@import '@fontsource/plus-jakarta-sans/latin-400.css';
+@import '@fontsource/plus-jakarta-sans/latin-500.css';
+@import '@fontsource/plus-jakarta-sans/latin-600.css';
+@import '@fontsource/plus-jakarta-sans/latin-700.css';
+@import '@fontsource/plus-jakarta-sans/latin-800.css';
+@import '@fontsource/fira-code/latin-400.css';
+@import '@fontsource/fira-code/latin-600.css';
+
 /*
  * Docs skin: the documentation's own design system, scoped under .lagune-docs
  * as the token set every docs utility (bg-surface, text-ink…) resolves to.

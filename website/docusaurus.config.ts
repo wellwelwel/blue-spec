@@ -41,25 +41,6 @@ const config: Config = {
   headTags: [
     {
       tagName: 'link',
-      attributes: { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-    },
-    {
-      tagName: 'link',
-      attributes: {
-        rel: 'preconnect',
-        href: 'https://fonts.gstatic.com',
-        crossorigin: 'anonymous',
-      },
-    },
-    {
-      tagName: 'link',
-      attributes: {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Ubuntu+Mono:wght@400;700&display=swap',
-      },
-    },
-    {
-      tagName: 'link',
       attributes: {
         rel: 'apple-touch-icon',
         sizes: '180x180',

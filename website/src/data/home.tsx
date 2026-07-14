@@ -359,6 +359,17 @@ export const BACKGROUNDS: Record<WindowId, string> = {
   usage: '/img/bg-3.webp',
 };
 
+const backgroundSrcSet = (name: string) =>
+  `/img/${name}-480.webp 480w, /img/${name}-912.webp 912w, /img/${name}.webp 1380w`;
+
+export const BACKGROUND_SRCSETS: Record<WindowId, string> = {
+  overview: backgroundSrcSet('bg-1'),
+  install: backgroundSrcSet('bg-2'),
+  usage: backgroundSrcSet('bg-3'),
+};
+
+export const BACKGROUND_SIZES = '(max-width: 920px) 100vw, 456px';
+
 export const FEATURE: Record<
   WindowId,
   { kicker: ReactNode; chip: string; eyebrow: string; title: ReactNode }

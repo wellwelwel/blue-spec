@@ -4,18 +4,16 @@ import type { ReactNode } from 'react';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import Head from '@docusaurus/Head';
 import Link from '@docusaurus/Link';
-import { AgentsModal } from '@site/src/components/AgentsModal';
 import { frameResizeObserver } from '@site/src/components/frameResizeObserver';
 import { Brand } from '@site/src/components/home/Brand';
 import { InstallPanel } from '@site/src/components/home/InstallPanel';
 import { OverviewPanel } from '@site/src/components/home/OverviewPanel';
 import { RailTip } from '@site/src/components/home/RailTip';
 import { TopBar } from '@site/src/components/home/TopBar';
-import { UsagePanel } from '@site/src/components/home/UsagePanel';
 import { MaskIcon } from '@site/src/components/MaskIcon';
-import { SpecializationsModal } from '@site/src/components/SpecializationsModal';
-import { WaterField } from '@site/src/components/WaterField';
 import {
+  BACKGROUND_SIZES,
+  BACKGROUND_SRCSETS,
   BACKGROUNDS,
   FEATURE,
   PHASE_STEPS,
@@ -25,6 +23,8 @@ import {
 } from '@site/src/data/home';
 import { ALL_AGENTS, ALL_CATEGORIES } from '@site/src/data/registry';
 import {
+  lazy,
+  Suspense,
   useCallback,
   useEffect,
   useLayoutEffect,
@@ -34,6 +34,30 @@ import {
 import { FaStar } from 'react-icons/fa6';
 import { GoHeartFill } from 'react-icons/go';
 import { LuMenu, LuX } from 'react-icons/lu';
+
+const WaterField = lazy(() =>
+  import('@site/src/components/WaterField').then((module) => ({
+    default: module.WaterField,
+  }))
+);
+
+const AgentsModal = lazy(() =>
+  import('@site/src/components/AgentsModal').then((module) => ({
+    default: module.AgentsModal,
+  }))
+);
+
+const SpecializationsModal = lazy(() =>
+  import('@site/src/components/SpecializationsModal').then((module) => ({
+    default: module.SpecializationsModal,
+  }))
+);
+
+const UsagePanel = lazy(() =>
+  import('@site/src/components/home/UsagePanel').then((module) => ({
+    default: module.UsagePanel,
+  }))
+);
 
 const WaveIcon = (): ReactNode => (
   <span className='relative inline-block size-4 shrink-0'>
@@ -255,16 +279,6 @@ const Home = (): ReactNode => {
           content='Lagune helps your AI agent secure any codebase: it detects what your system actually does, then drives the defensive work that fits as you build.'
         />
         <meta name='twitter:image' content='https://lagune.ai/img/og.png' />
-        <link rel='preconnect' href='https://fonts.googleapis.com' />
-        <link
-          rel='preconnect'
-          href='https://fonts.gstatic.com'
-          crossOrigin='anonymous'
-        />
-        <link
-          href='https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=Ubuntu+Mono:wght@400;700&display=swap'
-          rel='stylesheet'
-        />
         <script type='application/ld+json'>
           {JSON.stringify({
             '@context': 'https://schema.org',
@@ -312,7 +326,9 @@ const Home = (): ReactNode => {
       >
         <BrowserOnly>
           {() => (
-            <WaterField className='absolute inset-0 z-[1] w-full h-full opacity-[0.32]' />
+            <Suspense fallback={null}>
+              <WaterField className='absolute inset-0 z-[1] w-full h-full opacity-[0.32]' />
+            </Suspense>
           )}
         </BrowserOnly>
         <div className='absolute inset-0 z-[2] [background:radial-gradient(120%_120%_at_50%_40%,transparent_30%,rgba(4,8,22,0.85)_100%)]' />
@@ -346,8 +362,11 @@ const Home = (): ReactNode => {
             >
               {pill && (
                 <span
-                  className='absolute top-1 bottom-1 rounded-lg border border-accent/50 bg-accent/15 transition-[left,width] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] pointer-events-none'
-                  style={{ left: pill.left, width: pill.width }}
+                  className='absolute top-1 bottom-1 left-0 rounded-lg border border-accent/50 bg-accent/15 transition-[transform,width] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] pointer-events-none'
+                  style={{
+                    transform: `translateX(${pill.left}px)`,
+                    width: pill.width,
+                  }}
                   aria-hidden
                 />
               )}
@@ -535,14 +554,16 @@ const Home = (): ReactNode => {
                   )}
 
                   {active === 'usage' && (
-                    <UsagePanel
-                      usageStep={usageStep}
-                      modeIndex={modeIndex}
-                      typedDone={typedDone}
-                      onSelectMode={selectMode}
-                      onStep={goToStep}
-                      onTyped={markTyped}
-                    />
+                    <Suspense fallback={null}>
+                      <UsagePanel
+                        usageStep={usageStep}
+                        modeIndex={modeIndex}
+                        typedDone={typedDone}
+                        onSelectMode={selectMode}
+                        onStep={goToStep}
+                        onTyped={markTyped}
+                      />
+                    </Suspense>
                   )}
                 </div>
               </div>
@@ -555,11 +576,13 @@ const Home = (): ReactNode => {
                       active === tab.id ? 'opacity-25' : 'opacity-0'
                     }`}
                     src={BACKGROUNDS[tab.id]}
+                    srcSet={BACKGROUND_SRCSETS[tab.id]}
+                    sizes={BACKGROUND_SIZES}
                     alt={`Lagune ${tab.label}`}
                     aria-hidden
                     decoding='async'
                     loading={active === tab.id ? 'eager' : 'lazy'}
-                    fetchPriority={active === tab.id ? 'auto' : 'low'}
+                    fetchPriority={active === tab.id ? 'high' : 'low'}
                   />
                 ))}
                 <div className='absolute inset-0 -z-[3] [background:linear-gradient(180deg,#0a1a4a_0%,#050d2c_60%,#03081c_100%)]' />
@@ -598,19 +621,27 @@ const Home = (): ReactNode => {
         </section>
       </main>
 
-      <AgentsModal
-        open={agentsOpen}
-        agents={ALL_AGENTS}
-        onSelect={setSelected}
-        onClose={closeAgents}
-      />
-      <SpecializationsModal
-        open={specsOpen}
-        categories={ALL_CATEGORIES}
-        skills={skills}
-        onToggle={toggleSkill}
-        onClose={() => setSpecsOpen(false)}
-      />
+      {agentsOpen && (
+        <Suspense fallback={null}>
+          <AgentsModal
+            open={agentsOpen}
+            agents={ALL_AGENTS}
+            onSelect={setSelected}
+            onClose={closeAgents}
+          />
+        </Suspense>
+      )}
+      {specsOpen && (
+        <Suspense fallback={null}>
+          <SpecializationsModal
+            open={specsOpen}
+            categories={ALL_CATEGORIES}
+            skills={skills}
+            onToggle={toggleSkill}
+            onClose={() => setSpecsOpen(false)}
+          />
+        </Suspense>
+      )}
     </div>
   );
 };
