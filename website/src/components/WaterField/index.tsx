@@ -9,7 +9,7 @@ const COLOR_HIGHLIGHT = '#001428';
 
 const SPEED = 0.6;
 const SPEED_REDUCED = 0.4;
-const SPEED_MOBILE = 0.2;
+const SPEED_INITIAL = 0.2;
 
 const ACTIVATION_EVENTS = [
   'pointermove',
@@ -45,6 +45,8 @@ const useMediaQuery = (query: string) => {
 
 const WaterFieldComponent = ({ className }: { className?: string }) => {
   const isMobile = useMediaQuery(MOBILE_QUERY);
+  if (isMobile) return null;
+
   const prefersReducedMotion = useMediaQuery(REDUCED_MOTION_QUERY);
   const [revealed, setRevealed] = useState(false);
   const [active, setActive] = useState(false);
@@ -79,12 +81,8 @@ const WaterFieldComponent = ({ className }: { className?: string }) => {
     };
   }, []);
 
-  const animatedSpeed = isMobile
-    ? SPEED_MOBILE
-    : prefersReducedMotion
-      ? SPEED_REDUCED
-      : SPEED;
-  const speed = active ? animatedSpeed : 0.1;
+  const animatedSpeed = prefersReducedMotion ? SPEED_REDUCED : SPEED;
+  const speed = active ? animatedSpeed : SPEED_INITIAL;
 
   return (
     <div
@@ -113,7 +111,7 @@ const WaterFieldComponent = ({ className }: { className?: string }) => {
           speed={speed}
           fit='cover'
           style={{
-            opacity: revealed ? (isMobile ? 1 : 0.5) : 0,
+            opacity: revealed ? 0.5 : 0,
             backgroundColor: COLOR_BACK,
             willChange: 'opacity',
             transition: 'opacity 400ms ease',
