@@ -1,6 +1,7 @@
 name: '🗑️ CD (Website) — Purge Cache'
 
 on:
+  deployment_status:
   workflow_dispatch:
 
 jobs:
@@ -8,6 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     name: Deploy
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.deployment_status.state == 'success' &&
+       github.event.deployment.environment == 'github-pages')
     steps:
       - name: Actions - Checkout
         uses: actions/checkout@v6
