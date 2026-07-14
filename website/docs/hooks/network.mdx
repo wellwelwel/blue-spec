@@ -5,6 +5,7 @@ sidebar_label: network
 description: Score one or many fetch destinations for SSRF, straight from the command line.
 ---
 
+import { Faq } from '@site/src/components/docs/Faq';
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
 
@@ -80,3 +81,18 @@ The hook is pure and never resolves DNS, so two runtime gaps are out of scope: *
 
 This is the same check the [`network` sub-skill](/docs/commands/skills) runs to prove a destination filter holds.
 :::
+
+<Faq
+  items={[
+    {
+      question: 'How do I test a URL for SSRF?',
+      answer:
+        'Run the network hook. It scores a fetch destination and returns safe, private-target, parser-divergent, or invalid url. Only safe is an allow.',
+    },
+    {
+      question: 'What is a parser-divergent URL?',
+      answer:
+        'A URL that different parsers read differently, which is a classic SSRF bypass. The network hook flags it rather than allowing it.',
+    },
+  ]}
+/>

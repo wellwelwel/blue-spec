@@ -2,8 +2,23 @@ import type { ReactNode } from 'react';
 
 const SMALL_PRINT_LINK = 'font-semibold text-ink-2 hover:text-accent';
 
-export const DocsSmallPrint = (): ReactNode => (
+export const DocsSmallPrint = ({
+  dateModified,
+}: {
+  dateModified?: string;
+}): ReactNode => (
   <footer className='mt-10 flex flex-col gap-1.5 px-1 text-[0.75rem] leading-relaxed text-[color-mix(in_srgb,var(--muted),var(--ink-2))]'>
+    {dateModified && (
+      <p className='m-0'>
+        Last updated on{' '}
+        {new Date(dateModified).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })}
+        .
+      </p>
+    )}
     <p className='m-0'>
       Copyright © 2026-present{' '}
       <a

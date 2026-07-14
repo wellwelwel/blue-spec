@@ -5,6 +5,7 @@ sidebar_label: 5. Verify
 description: Prove each applied fix holds, then close out the ones that do.
 ---
 
+import { Faq } from '@site/src/components/docs/Faq';
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
 
@@ -73,3 +74,23 @@ Verify builds on [`/lagune.harden`](/docs/commands/harden).
 ## The cycle closes
 
 When everything in scope is stood down, the cycle is at rest. It reopens only when the code changes. Security is closable, so the flow has an end state, not an endless loop.
+
+<Faq
+  items={[
+    {
+      question: 'How does Lagune verify a fix?',
+      answer:
+        '/lagune.verify reads the code and confronts it with what harden recorded, returning one of three verdicts: Risk closed, Risk not closed, or Cannot tell from the code.',
+    },
+    {
+      question: 'What is a stand down?',
+      answer:
+        'When verify proves a risk closed, the finding is stood down: removed from the whole chain, with your confirmation, so it stops being reprocessed.',
+    },
+    {
+      question: 'Can security work ever be finished?',
+      answer:
+        'Yes. SDH is closable: a proven-closed finding is stood down, so the flow has an end state, not an endless loop.',
+    },
+  ]}
+/>

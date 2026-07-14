@@ -13,6 +13,7 @@ keywords:
   - requirements
 ---
 
+import { Faq } from '@site/src/components/docs/Faq';
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
 
@@ -217,7 +218,7 @@ npx -y lagune@latest
 🃏 **Lagune** runs on **Node.js** under the hood, you use whatever language you want.
 :::
 
-## What gets created
+## What the dashboard sets up
 
 Running **Lagune** in your project creates two things:
 
@@ -239,3 +240,32 @@ You will need these tools installed on your system:
 ## Next
 
 Once **Lagune** is set up, your agent unlocks a set of slash commands. See [**Commands**](/docs/get-started/commands).
+
+<Faq
+  items={[
+    {
+      question: 'How do I install Lagune?',
+      answer:
+        'Run npx -y lagune@latest init in your project. It works in both new and existing projects.',
+    },
+    {
+      question: 'Does Lagune need an API key?',
+      answer:
+        'No. It runs through your own AI agent, so no API keys are required.',
+    },
+    {
+      question: 'What does Lagune add to my project?',
+      answer:
+        'A .lagune/ state directory and a set of slash commands your AI agent can run.',
+    },
+    {
+      question: 'How do I update Lagune?',
+      answer:
+        'Run npx -y lagune@latest update. Your charter, phase artifacts, and custom specializations stay untouched.',
+    },
+    {
+      question: 'What are the requirements?',
+      answer: 'Node.js (LTS) and at least one supported AI agent.',
+    },
+  ]}
+/>

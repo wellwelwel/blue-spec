@@ -12,9 +12,13 @@ keywords:
   - supported agents
 ---
 
+import { Faq } from '@site/src/components/docs/Faq';
+
 # Comparison
 
 Agent-by-agent compatibility across other agent-driven workflow tools: [OpenSpec](https://github.com/Fission-AI/OpenSpec) (v1.4.1), [Spec Kit](https://github.com/github/spec-kit) (v0.10.x), [Superpowers](https://github.com/obra/superpowers) (v6.0.3), and [Skills.sh](https://github.com/vercel-labs/skills) (v1.5.16).
+
+On agent compatibility, Lagune covers **72 agents**, more than OpenSpec (30), Spec Kit (32), Superpowers (10), and Skills.sh (69). Lagune is security-focused where the others are general-purpose workflow tools, so the comparison is compatibility-only.
 
 | Agent                                                                                       | OpenSpec | Spec Kit | Superpowers | Skills.sh | Lagune |
 | ------------------------------------------------------------------------------------------- | :------: | :------: | :---------: | :-------: | :----: |
@@ -91,3 +95,18 @@ Agent-by-agent compatibility across other agent-driven workflow tools: [OpenSpec
 | [Zencoder](https://zencoder.ai/)                                                            |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
 | [Zenflow](https://zencoder.ai/zenflow)                                                      |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
 | **Total**                                                                                   |  **30**  |  **32**  |   **10**    |  **69**   | **72** |
+
+<Faq
+  items={[
+    {
+      question:
+        'How does Lagune compare to OpenSpec, Spec Kit, Superpowers, and Skills.sh?',
+      answer:
+        'On agent compatibility, Lagune covers 72 agents, more than OpenSpec (30), Spec Kit (32), Superpowers (10), and Skills.sh (69).',
+    },
+    {
+      question: 'Which agent-workflow tool supports the most agents?',
+      answer: 'Lagune, at 72 agents in this comparison.',
+    },
+  ]}
+/>

@@ -11,6 +11,7 @@ keywords:
   - live security
 ---
 
+import { Faq } from '@site/src/components/docs/Faq';
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
 
@@ -83,3 +84,34 @@ No detect, no plan, no cleanup afterward. **`/lagune`** fits a fresh scaffold or
 
 - It writes nothing to the `.lagune` directory, no artifact and no tracking, so the only thing it produces is the safe code you asked for.
 - It doesn't weaken a rule to satisfy a prompt, so if what you asked would break a charter principle, it stops and tells you first, instead of building it unsafely directly.
+
+<Faq
+  items={[
+    {
+      question: 'What does /lagune do?',
+      answer:
+        'It takes any prompt at any stage, builds what you asked, and makes it safe by default before handing it back. The defense is applied as the code is written, not later.',
+    },
+    {
+      question: 'Do I need a charter to use /lagune?',
+      answer:
+        "No. It runs with or without one. With a charter, your project's own rules shape every build. Without one, it falls back to a safe-by-default baseline.",
+    },
+    {
+      question:
+        'What is the difference between /lagune and the Blue Team flow?',
+      answer:
+        '/lagune secures new work as you write it, with no flow to follow. The Blue Team flow runs the five audit phases in order over an existing project.',
+    },
+    {
+      question: 'Does /lagune track findings or write artifacts?',
+      answer:
+        'No. It writes nothing to the .lagune directory, no artifact and no tracking. The only thing it produces is the safe code you asked for.',
+    },
+    {
+      question: 'How do I make my agent use /lagune automatically?',
+      answer:
+        "Add an instruction to your agent's instruction file (AGENTS.md, CLAUDE.md, .cursorrules, and the like) telling it to use the /lagune skill whenever it builds or changes code.",
+    },
+  ]}
+/>

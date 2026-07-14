@@ -5,6 +5,7 @@ sidebar_label: Skills
 description: How sub-skills are loaded, by a phase on demand, and by you directly.
 ---
 
+import { Faq } from '@site/src/components/docs/Faq';
 import { SkillsOverview } from '@site/src/components/docs/SkillsOverview';
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
@@ -121,3 +122,21 @@ The relevant knowledge is pulled in for what the project actually is, instead of
 
   </TabItem>
 </Tabs>
+
+<Faq
+  items={[
+    {
+      question: 'What is a Lagune sub-skill?',
+      answer:
+        'A focused, language-agnostic security knowledge module that loads only on demand, never by default. It is not a command as the usual skills.',
+    },
+    {
+      question: 'Are Lagune skills loaded by default?',
+      answer: 'No. They load only on demand, for what the project actually is.',
+    },
+    {
+      question: 'How do I load a sub-skill directly?',
+      answer: 'Import it into any prompt with @.lagune/skills/<name>.md.',
+    },
+  ]}
+/>

@@ -3,6 +3,8 @@ import type { Config } from '@docusaurus/types';
 import tailwindPostcss from '@tailwindcss/postcss';
 import { docsContentPlugin } from './plugins/docs-content';
 import { laguneCode } from './src/prism/lagune';
+import { extraSitemapItems } from './src/seo/sitemap/extras';
+import { sitemapPriority } from './src/seo/sitemap/priority';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -48,6 +50,33 @@ const config: Config = {
       },
     },
     {
+      tagName: 'meta',
+      attributes: {
+        name: 'robots',
+        content:
+          'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+      },
+    },
+    {
+      tagName: 'script',
+      attributes: { type: 'application/ld+json' },
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        '@id': 'https://lagune.ai/#author',
+        name: 'Weslley Araújo',
+        url: 'https://github.com/wellwelwel',
+        sameAs: ['https://github.com/wellwelwel'],
+        knowsAbout: [
+          'Application security',
+          'Defensive security',
+          'Secure coding',
+          'Security-Driven Hardening',
+          'Security Hardening',
+        ],
+      }),
+    },
+    {
       tagName: 'script',
       attributes: { type: 'application/ld+json' },
       innerHTML: JSON.stringify({
@@ -62,6 +91,17 @@ const config: Config = {
           "Lagune is your security copilot as you build, your Blue Team when you audit, whether you're a developer or not.",
         disambiguatingDescription:
           'Lagune (also written Lagune AI) is a Security-Driven Hardening workflow that hardens any codebase, in any language, whether written by humans or an AI. It is not related to Laguna AI.',
+        foundingDate: '2026',
+        founder: { '@id': 'https://lagune.ai/#author' },
+        knowsAbout: [
+          'Application security',
+          'AI security',
+          'Vulnerability detection',
+          'Security-Driven Hardening',
+          'Security Hardening',
+          'Blue Team',
+          'OWASP',
+        ],
         sameAs: [
           'https://github.com/wellwelwel/lagune',
           'https://www.npmjs.com/package/lagune',
@@ -97,6 +137,18 @@ const config: Config = {
           changefreq: 'weekly',
           priority: 0.5,
           filename: 'sitemap.xml',
+          createSitemapItems: async ({
+            defaultCreateSitemapItems,
+            ...params
+          }) => {
+            const items = await defaultCreateSitemapItems(params);
+            const ranked = items.map((item) => ({
+              ...item,
+              priority: sitemapPriority(item.url),
+            }));
+
+            return [...ranked, ...extraSitemapItems(params.siteConfig.url)];
+          },
         },
       } satisfies Preset.Options,
     ],

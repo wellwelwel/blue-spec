@@ -5,6 +5,7 @@ sidebar_label: 3. Plan
 description: Turn what detect found into a defense plan, rating each finding with a category and a CVSS v4.0 score, and pairing it with a fix.
 ---
 
+import { Faq } from '@site/src/components/docs/Faq';
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
 
@@ -68,3 +69,23 @@ Plan works only from what [`/lagune.detect`](/docs/commands/detect) already mapp
 ## Next
 
 Apply the plan: [`/lagune.harden`](/docs/commands/harden).
+
+<Faq
+  items={[
+    {
+      question: 'How does Lagune prioritize vulnerabilities?',
+      answer:
+        '/lagune.plan rates each finding with a category and a CVSS v4.0 base score, then pairs it with the fix to apply.',
+    },
+    {
+      question: 'Does Lagune use CVSS v4.0?',
+      answer:
+        'Yes. Each finding gets a CVSS v4.0 base vector and score. Because the vector is Base-only, anyone can paste it into the FIRST or NVD calculator and re-derive the score.',
+    },
+    {
+      question: 'Does the plan read my code?',
+      answer:
+        'No. Plan never reads the code, which forces every fix to point at something detect actually detected.',
+    },
+  ]}
+/>

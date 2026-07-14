@@ -8,10 +8,12 @@ import {
   aliasedSitePath,
   aliasedSitePathToRelativePath,
   docuHash,
+  getFileCommitDate,
   Globby,
   parseMarkdownFile,
 } from '@docusaurus/utils';
 import { docsThemeBootScript } from '../../src/components/docs/theme';
+import { renderDocMarkdown } from './markdown';
 import { docsNav } from './nav';
 
 export type DocEntry = {
@@ -21,6 +23,8 @@ export type DocEntry = {
   title: string;
   sidebarLabel: string;
   description: string | undefined;
+  datePublished: string | undefined;
+  dateModified: string | undefined;
 };
 
 export type DocsSidebarLink = {
@@ -107,6 +111,23 @@ const buildSidebar = (docs: DocEntry[]): DocsSidebarEntry[] => {
   return docsNav.map(toEntry);
 };
 
+const orderDocsByNav = (docs: DocEntry[]): DocEntry[] => {
+  const docsById = new Map(docs.map((doc) => [doc.docId, doc]));
+  const navIds = docsNav.flatMap((entry) =>
+    typeof entry === 'string' ? [entry] : entry.items
+  );
+  const inNav = navIds.flatMap((docId) => {
+    const doc = docsById.get(docId);
+    return doc ? [doc] : [];
+  });
+  const seen = new Set(inNav.map((doc) => doc.docId));
+  const rest = docs
+    .filter((doc) => !seen.has(doc.docId))
+    .sort((a, b) => a.permalink.localeCompare(b.permalink));
+
+  return [...inNav, ...rest];
+};
+
 export const docsContentPlugin: PluginModule = async (context) => {
   const { siteConfig, siteDir, generatedFilesDir, baseUrl } = context;
   const contentPath = path.resolve(siteDir, 'docs');
@@ -132,6 +153,20 @@ export const docsContentPlugin: PluginModule = async (context) => {
 
     const title = asString(frontMatter.title) ?? contentTitle ?? docId;
 
+    let datePublished: string | undefined;
+    let dateModified: string | undefined;
+    try {
+      datePublished = (
+        await getFileCommitDate(filePath, { age: 'oldest' })
+      ).date.toISOString();
+      dateModified = (
+        await getFileCommitDate(filePath, { age: 'newest' })
+      ).date.toISOString();
+    } catch {
+      datePublished = undefined;
+      dateModified = undefined;
+    }
+
     return {
       docId,
       permalink: resolvePermalink({
@@ -143,6 +178,8 @@ export const docsContentPlugin: PluginModule = async (context) => {
       title,
       sidebarLabel: asString(frontMatter.sidebar_label) ?? title,
       description: asString(frontMatter.description),
+      datePublished,
+      dateModified,
     };
   };
 
@@ -217,6 +254,81 @@ export const docsContentPlugin: PluginModule = async (context) => {
     configureWebpack: () => ({
       module: { rules: [mdxLoaderRule] },
     }),
+
+    postBuild: async ({ outDir }) => {
+      const site = siteConfig.url;
+      const ordered = orderDocsByNav(loadedDocs);
+
+      const markdownDocs = await Promise.all(
+        ordered.map(async (doc) => {
+          const sourceFile =
+            doc.docId === 'references/paper'
+              ? path.join(siteDir, 'src', 'content', 'PAPER.mdx')
+              : path.join(siteDir, aliasedSitePathToRelativePath(doc.source));
+          const body = await fs.readFile(sourceFile, 'utf8');
+
+          return { doc, markdown: renderDocMarkdown({ ...doc, body }, site) };
+        })
+      );
+
+      const outRoot = path.resolve(outDir);
+      await Promise.all(
+        markdownDocs.map(async ({ doc, markdown }) => {
+          const target = path.resolve(
+            outRoot,
+            `${doc.permalink.replace(/^\//, '')}.md`
+          );
+          if (!target.startsWith(`${outRoot}${path.sep}`))
+            throw new Error(
+              `[${pluginName}] Refusing to write "${target}" outside the build directory.`
+            );
+
+          await fs.mkdir(path.dirname(target), { recursive: true });
+          await fs.writeFile(target, markdown, 'utf8');
+        })
+      );
+
+      const header = [
+        '# Lagune',
+        '',
+        `> ${siteConfig.tagline}`,
+        '',
+        'Lagune is an open-source, defense-only Security-Driven Hardening (SDH) workflow. It helps your AI agent secure any codebase in any language, at every moment: the charter sets the security rules before you build, the universal /lagune command secures work as it is written, and the five-phase Blue Team flow detects what your system actually does and drives the fixes that matter for that context. It works with 72 AI coding agents and needs no API key.',
+      ];
+
+      const lines = [
+        ...header,
+        '',
+        `Every link under Docs points to the plain-Markdown version of that page. Remove the .md suffix for the web page. The whole corpus in one file: ${site}/llms-full.txt`,
+        '',
+        '## Docs',
+        '',
+        ...ordered.map((doc) => {
+          const url = `${site}${doc.permalink}.md`;
+          return doc.description
+            ? `- [${doc.title}](${url}): ${doc.description}`
+            : `- [${doc.title}](${url})`;
+        }),
+        '',
+      ];
+
+      await fs.writeFile(
+        path.join(outDir, 'llms.txt'),
+        lines.join('\n'),
+        'utf8'
+      );
+
+      const full = [
+        header.join('\n'),
+        ...markdownDocs.map(({ markdown }) => markdown.trimEnd()),
+      ].join('\n\n---\n\n');
+
+      await fs.writeFile(
+        path.join(outDir, 'llms-full.txt'),
+        `${full}\n`,
+        'utf8'
+      );
+    },
 
     injectHtmlTags: () => ({
       headTags: [

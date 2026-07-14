@@ -15,6 +15,7 @@ keywords:
 ---
 
 import { ArrowLink } from '@site/src/components/docs/ArrowLink';
+import { Faq } from '@site/src/components/docs/Faq';
 import { PartnerLink } from '@site/src/components/docs/PartnerLink';
 
 # 🌊 Security-Driven Hardening: Lagune
@@ -41,6 +42,46 @@ Instead of running a generic checklist, Lagune detects the context of your syste
 - New here? Start with <ArrowLink to="/docs/get-started/install">Install</ArrowLink>
 - Want the command map? See <ArrowLink to="/docs/get-started/commands">Commands</ArrowLink>
 - Curious about the on-demand knowledge? Read about the <ArrowLink to="/docs/commands/skills">sub-skills</ArrowLink>
+
+<Faq
+  items={[
+    {
+      question: 'What is Lagune?',
+      answer:
+        'Lagune is an open-source, defense-only security workflow that helps your AI agent harden any codebase. You point it at your code, it detects what your system actually does, then it guides the security fixes that matter for that context.',
+    },
+    {
+      question: 'Do I need to finish building before securing my project?',
+      answer:
+        'No. The /lagune command secures work as it is written: it takes any prompt, builds what you asked, and makes it safe by default, guided by the charter. The five-phase Blue Team flow audits what already exists.',
+    },
+    {
+      question: 'Can Lagune audit an existing project?',
+      answer:
+        'Yes. The five-phase Blue Team flow audits what already exists: charter sets your security rules, detect maps what the system does and where the risks are, plan scores each finding and pairs it with a fix, harden applies the fixes, and verify proves they hold and closes them.',
+    },
+    {
+      question: 'What programming languages does Lagune support?',
+      answer:
+        'Any. Lagune runs on Node.js under the hood, but it audits and hardens projects written in any programming language.',
+    },
+    {
+      question: 'How many AI agents does Lagune work with?',
+      answer:
+        '72, including Claude Code, Codex, Cursor, Gemini CLI, and GitHub Copilot.',
+    },
+    {
+      question: 'What is Security-Driven Hardening (SDH)?',
+      answer:
+        "SDH is the methodology Lagune implements: a context-aware, blue-team convention that detects a system's context, triages the risks that context carries, and guides the fixes. The intelligence lives in the spec, not in the user.",
+    },
+    {
+      question: 'Does Lagune need an API key?',
+      answer:
+        'No. It runs through your own AI agent, so no API keys are required.',
+    },
+  ]}
+/>
 
 ## Acknowledgements
 

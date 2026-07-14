@@ -13,7 +13,11 @@ keywords:
   - supported agents
 ---
 
+import { Faq } from '@site/src/components/docs/Faq';
+
 # Supported Agents
+
+Lagune works with **72 AI coding agents**, including Claude Code, Codex, Cursor, Gemini CLI, and GitHub Copilot. Each agent maps to a CLI key you pass to `init`, listed in the table below.
 
 Pick your agent by passing its key, for example `npx -y lagune@latest init <alias>`. Without it, **Lagune** asks you to choose.
 
@@ -96,3 +100,23 @@ npx -y lagune@latest init claude
 | [Zed](https://zed.dev/)                                                                     | `zed`          |
 | [Zencoder](https://zencoder.ai/)                                                            | `zencoder`     |
 | [Zenflow](https://zencoder.ai/zenflow)                                                      | `zenflow`      |
+
+<Faq
+  items={[
+    {
+      question: 'How many agents does Lagune support?',
+      answer: '72.',
+    },
+    {
+      question:
+        'Does Lagune work with Cursor, GitHub Copilot, Hermes, and Gemini?',
+      answer:
+        'Yes. All three are supported, along with Claude Code, Codex, and 66 others.',
+    },
+    {
+      question: 'How do I pick my agent when installing?',
+      answer:
+        "Pass the agent's CLI key to init, for example npx -y lagune@latest init claude. Each agent's key is listed in the table.",
+    },
+  ]}
+/>

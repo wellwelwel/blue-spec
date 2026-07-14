@@ -5,6 +5,7 @@ sidebar_label: Specialize
 description: Distill a security source or topic you give it into a new on-demand sub-skill.
 ---
 
+import { Faq } from '@site/src/components/docs/Faq';
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
 
@@ -64,3 +65,22 @@ Specializing a name that already exists, whether a built-in like `regex` or one 
 - When the material has an identifiable origin (an article, an author, a link, a standard), the sub-skill credits it. A bare topic carries no source.
 
 :::
+
+<Faq
+  items={[
+    {
+      question: 'How do I add a custom security skill?',
+      answer:
+        'Run /lagune.specialize with a source or topic. It distills it into a defense-only sub-skill, written to .lagune/skills/<name>.md plus a row in .lagune/skills.json.',
+    },
+    {
+      question: 'Can Lagune learn from an exploit write-up?',
+      answer:
+        'Yes, as a source, never as output. An attack can be the source, never the product. Specialize never writes attack inputs or exploits.',
+    },
+    {
+      question: 'Does specialize overwrite built-in skills?',
+      answer: 'No. It refines, never overwrites.',
+    },
+  ]}
+/>

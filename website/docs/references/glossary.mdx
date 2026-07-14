@@ -1,0 +1,106 @@
+---
+id: glossary
+title: 'Lagune Glossary: SDH, Charter, Findings, and Controls'
+sidebar_label: Glossary
+description: 'Plain-language definitions of every Lagune and Security-Driven Hardening term: SDH, charter, detect, finding, control, harden, verify, stand down, closability, sub-skills, and specializations.'
+keywords:
+  - Security-Driven Hardening
+  - SDH
+  - charter
+  - finding
+  - control
+  - stand down
+  - closability
+  - sub-skill
+  - specialization
+---
+
+import { Faq } from '@site/src/components/docs/Faq';
+
+# Glossary
+
+Every load-bearing term in Lagune and the Security-Driven Hardening methodology, defined once, in plain language.
+
+### Security-Driven Hardening (SDH)
+
+The methodology Lagune implements: a context-aware, blue-team convention that detects a system's context, triages the risks that context carries, and guides the fixes. The intelligence lives in the spec, not in the user, so a developer and a non-developer are served through the same flow.
+
+### Lagune
+
+The reference implementation of SDH. A collection of templates and agent commands that an AI agent runs to harden a codebase, distributed via npm and run with `npx`.
+
+### Charter
+
+Lagune's governing layer: a set of security-first principles every later phase must respect. Think of it as the compile-time check for a project's security posture. It is stored at `.lagune/memory/charter.md`.
+
+### Development flow
+
+The universal command `/lagune` that secures work as it is written. It takes any prompt at any stage, builds what you asked, and makes it safe by default before handing it back, guided by the charter when one exists. It writes nothing to Lagune's tracking, so its only product is the safe code. Together with the charter (before) and the Blue Team flow (after), it is how Lagune protects during the build.
+
+### Blue Team flow
+
+The five-phase audit at the core of Lagune: charter, detect, plan, harden, verify. Each phase builds on the previous one. "Blue Team" is the security tradition of defenders, as opposed to the offensive Red Team.
+
+### Finding
+
+One detected risk. Each finding carries what it is, why it matters, and the evidence in the code. A finding is the single tracked unit that plan, harden, and verify carry forward, identified by name across every artifact.
+
+### Control
+
+A security measure applied to close a risk. Harden applies controls, verify proves they hold. Lagune never weakens a control to satisfy a prompt.
+
+### Detect
+
+The phase that reads the code and maps what the system does and where the risks are. Its governing rule is detection, not invention: it records only what the code supports.
+
+### Harden
+
+The one phase that touches your code. It applies the plan's fixes one at a time and records each as Applied, Partial, or Blocked. Applied does not mean proven yet.
+
+### Verify
+
+The phase that proves each applied fix holds, by reading the code and confronting it with what harden recorded. It returns one of three verdicts: Risk closed, Risk not closed, or Cannot tell from the code.
+
+### Stand down
+
+When verify proves a risk closed, the finding is stood down: removed from the whole chain, with your confirmation, so it stops being reprocessed.
+
+### Closability
+
+The property that security work has an end state. Because a proven-closed finding is stood down, the flow can come to rest, reopened only when the code changes. SDH is closable, not an endless loop.
+
+### Sub-skill
+
+A focused, language-agnostic security knowledge module that loads only on demand, never by default. A sub-skill is not a command. You can load one into any prompt with `@.lagune/skills/<name>.md`.
+
+### Specialization
+
+A category that groups sub-skills you install together, from `owasp` to per-language ones like `javascript`, `python`, `go`, and `rust`. You pick them with the `--skills` flag at init and change them anytime with `add` and `remove`. The agent commands are always set up, specializations are what you choose on top.
+
+### Prompt-on-demand
+
+The principle that the relevant security knowledge is pulled in for what the project actually is, instead of every check running by default.
+
+### Identity-by-name
+
+Lagune's tracking model: each finding's name, written identically as a section title in every artifact, is its identity throughout the chain. The tracking map (`.lagune/tracking.json`) holds only tracking, never prose.
+
+<Faq
+  items={[
+    {
+      question: 'What is Security-Driven Hardening (SDH)?',
+      answer:
+        "SDH is a context-aware, blue-team security methodology. It detects a system's context, triages the risks that context carries, and guides the fixes, keeping every finding in plain language. Lagune is its reference implementation.",
+    },
+    {
+      question: 'What is a charter in Lagune?',
+      answer:
+        "The charter is Lagune's governing layer, a set of security-first principles every later phase must respect. It is stored at .lagune/memory/charter.md.",
+    },
+    {
+      question: 'What does it mean to stand down a finding?',
+      answer:
+        'When verify proves a risk closed, the finding is stood down: removed from the whole chain with your confirmation, so it stops being reprocessed.',
+    },
+  ]}
+/>

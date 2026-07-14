@@ -310,9 +310,112 @@ const Home = (): ReactNode => {
                 license:
                   'https://github.com/wellwelwel/lagune/blob/main/LICENSE',
                 publisher: { '@id': 'https://lagune.ai/#organization' },
+                author: { '@id': 'https://lagune.ai/#author' },
+                downloadUrl: 'https://www.npmjs.com/package/lagune',
+                softwareHelp: 'https://lagune.ai/docs',
+                featureList: [
+                  'Detects what a system actually does, whatever that is, then drives the fixes that matter for that context, in any language',
+                  'Secures new work as it is written with the universal /lagune command, guided by the charter',
+                  'Five-phase Blue Team flow: charter, detect, plan, harden, verify',
+                  'CVSS v4.0 scoring for each finding',
+                  'On-demand, language-agnostic security sub-skills',
+                  'Works with 72 AI coding agents, no API key required',
+                  'Defense-only: never generates exploits or attack tooling',
+                  'Local, private dashboard to follow findings, fixes, and proofs',
+                ],
                 sameAs: [
                   'https://github.com/wellwelwel/lagune',
                   'https://www.npmjs.com/package/lagune',
+                ],
+              },
+              {
+                '@type': 'HowTo',
+                '@id': 'https://lagune.ai/#howto',
+                name: 'How to harden a codebase with Lagune (the Blue Team flow)',
+                description:
+                  'Lagune runs a five-phase, defense-first flow that audits and hardens any codebase, driven by your AI agent.',
+                step: [
+                  {
+                    '@type': 'HowToStep',
+                    position: 1,
+                    name: 'Charter',
+                    text: "Set your project's security principles, the rules every later phase respects.",
+                    url: 'https://lagune.ai/docs/commands/charter',
+                  },
+                  {
+                    '@type': 'HowToStep',
+                    position: 2,
+                    name: 'Detect',
+                    text: 'Read the code and map what the system does and where the risks are.',
+                    url: 'https://lagune.ai/docs/commands/detect',
+                  },
+                  {
+                    '@type': 'HowToStep',
+                    position: 3,
+                    name: 'Plan',
+                    text: 'Rate each finding with a category and a CVSS v4.0 score, then pair it with a fix.',
+                    url: 'https://lagune.ai/docs/commands/plan',
+                  },
+                  {
+                    '@type': 'HowToStep',
+                    position: 4,
+                    name: 'Harden',
+                    text: "Apply the plan's fixes to the code, safely and one at a time.",
+                    url: 'https://lagune.ai/docs/commands/harden',
+                  },
+                  {
+                    '@type': 'HowToStep',
+                    position: 5,
+                    name: 'Verify',
+                    text: 'Prove each applied fix holds, then stand down the ones that do.',
+                    url: 'https://lagune.ai/docs/commands/verify',
+                  },
+                ],
+              },
+              {
+                '@type': 'FAQPage',
+                '@id': 'https://lagune.ai/#faq',
+                mainEntity: [
+                  {
+                    '@type': 'Question',
+                    name: 'What is Lagune?',
+                    acceptedAnswer: {
+                      '@type': 'Answer',
+                      text: 'Lagune is an open-source, defense-only security workflow that helps your AI agent harden any codebase. It detects what your system actually does, then guides the security fixes that matter for that context.',
+                    },
+                  },
+                  {
+                    '@type': 'Question',
+                    name: 'Can Lagune secure code as I build it?',
+                    acceptedAnswer: {
+                      '@type': 'Answer',
+                      text: 'Yes. The /lagune command takes any prompt, builds what you asked, and makes it safe by default as it is written, guided by your charter. The five-phase Blue Team flow then audits what already exists.',
+                    },
+                  },
+                  {
+                    '@type': 'Question',
+                    name: 'Can Lagune audit an existing project?',
+                    acceptedAnswer: {
+                      '@type': 'Answer',
+                      text: 'Yes. The five-phase Blue Team flow audits what already exists: charter sets your security rules, detect maps what the system does and where the risks are, plan scores each finding and pairs it with a fix, harden applies the fixes, and verify proves they hold and closes them.',
+                    },
+                  },
+                  {
+                    '@type': 'Question',
+                    name: 'How do I install Lagune?',
+                    acceptedAnswer: {
+                      '@type': 'Answer',
+                      text: 'Run npx -y lagune@latest init in your project. It works in both new and existing projects and needs no API key.',
+                    },
+                  },
+                  {
+                    '@type': 'Question',
+                    name: 'How many AI agents does Lagune work with?',
+                    acceptedAnswer: {
+                      '@type': 'Answer',
+                      text: 'Lagune works with 72 AI coding agents, including Claude Code, Codex, Cursor, Gemini CLI, and GitHub Copilot.',
+                    },
+                  },
                 ],
               },
             ],

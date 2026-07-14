@@ -5,6 +5,7 @@ sidebar_label: 1. Charter
 description: Establish your project's security principles, the rules every later phase respects.
 ---
 
+import { Faq } from '@site/src/components/docs/Faq';
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
 
@@ -64,3 +65,22 @@ From there, **Lagune** builds a tailored set of security rules for the project, 
 ## Next
 
 With the rules set, map what your system actually does: [`/lagune.detect`](/docs/commands/detect).
+
+<Faq
+  items={[
+    {
+      question: 'What is a charter in Lagune?',
+      answer:
+        "The charter is Lagune's governing layer, a set of security-first principles every later phase must respect. Think of it as the compile-time check for your project's security posture.",
+    },
+    {
+      question: 'Where is the charter stored?',
+      answer: 'At .lagune/memory/charter.md.',
+    },
+    {
+      question: 'Can I write my own charter rules?',
+      answer:
+        'Yes. Lagune proposes rules from your description and your code, and you can reword, drop, add, or scope them down.',
+    },
+  ]}
+/>

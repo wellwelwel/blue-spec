@@ -40,12 +40,35 @@ export default function DocPage({ content: Content }: DocPageProps): ReactNode {
   const breadcrumb = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
+    '@id': `${SITE_URL}${metadata.permalink}#breadcrumb`,
     itemListElement: trail.map((crumb, index) => ({
       '@type': 'ListItem',
       position: index + 1,
       name: crumb.name,
       item: crumb.url,
     })),
+  };
+
+  const isPaper = metadata.docId === 'references/paper';
+
+  const article = {
+    '@context': 'https://schema.org',
+    '@type': isPaper ? 'ScholarlyArticle' : 'TechArticle',
+    '@id': `${SITE_URL}${metadata.permalink}#article`,
+    headline: metadata.title,
+    name: metadata.title,
+    description: metadata.description,
+    inLanguage: 'en',
+    url: `${SITE_URL}${metadata.permalink}`,
+    image: `${SITE_URL}/img/og.png`,
+    author: { '@id': `${SITE_URL}/#author` },
+    publisher: { '@id': `${SITE_URL}/#organization` },
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+    breadcrumb: { '@id': `${SITE_URL}${metadata.permalink}#breadcrumb` },
+    ...(metadata.datePublished
+      ? { datePublished: metadata.datePublished }
+      : {}),
+    ...(metadata.dateModified ? { dateModified: metadata.dateModified } : {}),
   };
 
   return (
@@ -56,7 +79,13 @@ export default function DocPage({ content: Content }: DocPageProps): ReactNode {
         keywords={frontMatter.keywords}
       />
       <Head>
+        <link
+          rel='alternate'
+          type='text/markdown'
+          href={`${SITE_URL}${metadata.permalink}.md`}
+        />
         <script type='application/ld+json'>{JSON.stringify(breadcrumb)}</script>
+        <script type='application/ld+json'>{JSON.stringify(article)}</script>
       </Head>
       <section className='lagune-docs-route-fade relative mb-5 flex-none overflow-hidden rounded-card bg-banner px-5 py-6 text-white shadow-card sm:px-9 sm:py-7.5'>
         <img
@@ -86,7 +115,7 @@ export default function DocPage({ content: Content }: DocPageProps): ReactNode {
         </MDXContent>
       </article>
       <DocsPagination previous={context.previous} next={context.next} />
-      <DocsSmallPrint />
+      <DocsSmallPrint dateModified={metadata.dateModified} />
     </DocsShell>
   );
 }

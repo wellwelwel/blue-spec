@@ -5,6 +5,7 @@ sidebar_label: regex
 description: Sweep a codebase for ReDoS-prone regex, or score a single pattern, from the command line.
 ---
 
+import { Faq } from '@site/src/components/docs/Faq';
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
 
@@ -184,3 +185,18 @@ Each pattern is passed as a flag value, never interpolated into the command. A v
 :::tip
 This is the same engine the [`regex` sub-skill](/docs/commands/skills) runs: the scan opens a ReDoS pass, the check confirms a pattern it surfaces.
 :::
+
+<Faq
+  items={[
+    {
+      question: 'How do I check a regex for ReDoS from the CLI?',
+      answer:
+        "Run node ./.lagune/hooks/regex.mjs -p '<pattern>'. It returns safe, unsafe, or invalid regex.",
+    },
+    {
+      question: 'How do I scan a whole project for unsafe regex?',
+      answer:
+        'Run the regex hook in scan mode over the codebase. It reports ReDoS-prone patterns across 25 supported languages.',
+    },
+  ]}
+/>

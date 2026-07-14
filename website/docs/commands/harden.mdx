@@ -5,6 +5,7 @@ sidebar_label: 4. Harden
 description: Apply the plan's fixes to your code, safely and one at a time.
 ---
 
+import { Faq } from '@site/src/components/docs/Faq';
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
 
@@ -68,3 +69,23 @@ Harden builds on [`/lagune.plan`](/docs/commands/plan). It is the one phase that
 ## Next
 
 Prove each fix holds: [`/lagune.verify`](/docs/commands/verify).
+
+<Faq
+  items={[
+    {
+      question: 'Does /lagune.harden change my code?',
+      answer:
+        "Yes. It is the one phase that touches your code, applying the plan's fixes one at a time.",
+    },
+    {
+      question: 'What do Applied, Partial, and Blocked mean?',
+      answer:
+        'They are the status Lagune records for each fix. Applied means the fix was made, Partial means only part of it, Blocked means it could not be applied. Applied does not mean proven yet.',
+    },
+    {
+      question: 'Does Lagune apply fixes without asking?',
+      answer:
+        'No. It never weakens a control to satisfy a prompt. If a fix would conflict with a charter rule, it stops and tells you first.',
+    },
+  ]}
+/>

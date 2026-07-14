@@ -13,6 +13,7 @@ keywords:
   - slash commands
 ---
 
+import { Faq } from '@site/src/components/docs/Faq';
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
 
@@ -78,3 +79,23 @@ Security is not a cost, it is an investment: what you put in upfront, you save m
 
   </TabItem>
 </Tabs>
+
+<Faq
+  items={[
+    {
+      question: 'What slash commands does Lagune add?',
+      answer:
+        '/lagune to secure work as you build it, and the five-phase Blue Team audit flow: /lagune.charter, /lagune.detect, /lagune.plan, /lagune.harden, /lagune.verify. Plus /lagune.specialize and /lagune.prove.',
+    },
+    {
+      question: 'What is the Lagune Blue Team flow?',
+      answer:
+        'A five-phase audit: charter (set rules), detect (map risks), plan (score and plan fixes), harden (apply fixes), verify (prove they hold and close them).',
+    },
+    {
+      question: 'What is the difference between /lagune and the audit flow?',
+      answer:
+        '/lagune secures new work as you write it, with no flow to follow. The audit flow runs the five phases in order over an existing project.',
+    },
+  ]}
+/>

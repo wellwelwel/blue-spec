@@ -19,6 +19,7 @@ keywords:
   - Snyk
 ---
 
+import { Faq } from '@site/src/components/docs/Faq';
 import TabItem from '@theme/TabItem';
 import Tabs from '@theme/Tabs';
 
@@ -96,3 +97,23 @@ Before generating anything, it confirms you are authorized to test the target, a
 Each proven finding's two files belong together in a **private GitHub Gist** to report the vulnerability. They are evidence of a live, undisclosed issue, so keep them out of commits and share them only through that Gist until the maintainers have resolved it.
 
 Closing a finding in the **Lagune** chain is still the job of [`/lagune.harden`](/docs/commands/harden) and [`/lagune.verify`](/docs/commands/verify): prove produces evidence, it does not close anything.
+
+<Faq
+  items={[
+    {
+      question: 'Does Lagune generate exploits?',
+      answer:
+        'No. /lagune.prove writes defense-only evidence: a test that asserts the safe path, so it fails while the issue is live and passes once the code is fixed, plus an advisory for responsible disclosure.',
+    },
+    {
+      question: 'What does prove output?',
+      answer:
+        'Two files per finding: a test (report.test.mjs or .cjs) and an advisory (report.md).',
+    },
+    {
+      question: 'How do I responsibly disclose a bug Lagune found?',
+      answer:
+        'Prove writes a self-contained advisory you can share through a private channel such as a private GitHub Gist, following responsible disclosure.',
+    },
+  ]}
+/>
