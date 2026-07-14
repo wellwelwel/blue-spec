@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.0](https://github.com/wellwelwel/lagune/compare/v0.11.0...v0.12.0) (2026-07-14)
+
+
+### Features
+
+* **skills:** name decoy controls that don't close a risk ([cc7d365](https://github.com/wellwelwel/lagune/commit/cc7d365d29cf819020dc6a9b18b377dc556c2617))
+
 ## [0.11.0](https://github.com/wellwelwel/lagune/compare/v0.10.0...v0.11.0) (2026-07-12)
 
 
