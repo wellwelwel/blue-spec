@@ -3,7 +3,7 @@
 > Repair the chain when a rename or a moved file confuses Lagune's tracking.
 
 Canonical: https://lagune.ai/docs/commands/repair
-Last updated: 2026-07-14
+Last updated: 2026-07-13
 
 🧰 Repair the chain when a rename or a moved file confuses it.
 

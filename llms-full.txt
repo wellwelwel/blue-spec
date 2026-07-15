@@ -1495,7 +1495,7 @@ A URL that different parsers read differently, which is a classic SSRF bypass. T
 > The Security-Driven Hardening (SDH) methodology: a context-aware, blue-team convention for auditing and hardening AI-assisted and vibe-coded software.
 
 Canonical: https://lagune.ai/docs/references/paper
-Last updated: 2026-07-14
+Last updated: 2026-07-13
 
 - **Weslley Araújo**
 - **Methodology Paper, 2026.**
@@ -2264,7 +2264,7 @@ Lagune, at 72 agents in this comparison.
 > Where the built-in OWASP sub-skill knowledge comes from, mapped to its canonical OWASP attack and Cheat Sheet pages.
 
 Canonical: https://lagune.ai/docs/references/skills-sources
-Last updated: 2026-07-14
+Last updated: 2026-07-10
 
 This document maps every OWASP **attack** (`www-community`) and **Cheat Sheet** (`CheatSheetSeries`) to a security category, each linked to its canonical public page. Within a category, equivalent items share a single checklist line: the attack(s) and the cheat sheet(s) that address the same risk are listed together, comma-separated. Items with no direct counterpart stand on their own line.
 
@@ -2620,7 +2620,7 @@ These are not sub-skill terrains and carry no checkbox: they are governance, pro
 > Repair the chain when a rename or a moved file confuses Lagune's tracking.
 
 Canonical: https://lagune.ai/docs/commands/repair
-Last updated: 2026-07-14
+Last updated: 2026-07-13
 
 🧰 Repair the chain when a rename or a moved file confuses it.
 
