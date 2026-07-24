@@ -49,6 +49,10 @@ export const docsNav: DocsNavEntry[] = [
     ],
   },
   {
+    label: 'Examples',
+    items: ['examples/prompts'],
+  },
+  {
     label: 'References & Sources',
     items: [
       'references/paper',

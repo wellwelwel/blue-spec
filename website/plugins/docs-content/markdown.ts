@@ -96,6 +96,7 @@ const transformInline = (line: string, siteUrl: string): string =>
       /<PartnerLink\s*>(.*?)<\/PartnerLink>/g,
       `[$1](${siteUrl}/docs#partners)`
     )
+    .replace(/<Level\s+value=\{(\d+)\}\s*\/>/g, '$1/5')
     .replace(/\]\(\//g, `](${siteUrl}/`);
 
 export const cleanMdxBody = (source: string, siteUrl: string): string => {
