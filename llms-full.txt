@@ -11,7 +11,7 @@ Lagune is an open-source, defense-only Security-Driven Hardening (SDH) workflow.
 > Get started with Lagune, an open-source, defense-only security workflow that hardens any codebase: set the rules, detect risks, apply fixes, and verify.
 
 Canonical: https://lagune.ai/docs
-Last updated: 2026-07-14
+Last updated: 2026-07-24
 
 **Lagune** helps your AI agent make a project more secure. You point it at your code, the agent figures out what your system actually does, then it guides you through the security work that matters for it.
 
@@ -35,6 +35,73 @@ Instead of running a generic checklist, Lagune detects the context of your syste
 - New here? Start with [Install](https://lagune.ai/docs/get-started/install)
 - Want the command map? See [Commands](https://lagune.ai/docs/get-started/commands)
 - Curious about the on-demand knowledge? Read about the [sub-skills](https://lagune.ai/docs/commands/skills)
+
+## Acknowledgements
+
+### Partners
+
+Partners get an exclusive logo across the repositories and landing pages, plus a spot on a dedicated partners page.
+
+> Help my work grow by [becoming a partner](https://lagune.ai/docs#partners)
+
+### Supporters
+
+Really thanks to everyone who has supported and keeps supporting this work.
+
+<a href='https://github.com/sponsors/wellwelwel'>
+![Our sponsors and supporters](https://wellwelwel.github.io/wellwelwel/sponsors.svg?v=1)
+
+</a>
+
+> Support my work by [becoming a sponsor](https://github.com/sponsors/wellwelwel)
+
+---
+
+## Use a badge ✨
+
+Using **Lagune**? Add one to your **README**:
+
+**Two tones**
+
+![Secured By Lagune](https://img.shields.io/badge/Lagune-2f7bff?logo=springsecurity&logoColor=white&label=Secured%20By&labelColor=303952)
+
+```md
+[![Secured By Lagune](https://img.shields.io/badge/Lagune-2f7bff?logo=springsecurity&logoColor=white&label=Secured%20By&labelColor=303952)](https://lagune.ai)
+```
+
+![Security Powered By Lagune](https://img.shields.io/badge/Lagune-2f7bff?logo=springsecurity&logoColor=white&label=Security%20Powered%20By&labelColor=303952)
+
+```md
+[![Security Powered By Lagune](https://img.shields.io/badge/Lagune-2f7bff?logo=springsecurity&logoColor=white&label=Security%20Powered%20By&labelColor=303952)](https://lagune.ai)
+```
+
+![Security-Driven Hardening with Lagune](https://img.shields.io/badge/Lagune-2f7bff?logo=springsecurity&logoColor=white&label=Security-Driven%20Hardening&labelColor=303952)
+
+```md
+[![Security-Driven Hardening with Lagune](https://img.shields.io/badge/Lagune-2f7bff?logo=springsecurity&logoColor=white&label=Security-Driven%20Hardening&labelColor=303952)](https://lagune.ai)
+```
+
+**Solid**
+
+![Secured By Lagune](https://img.shields.io/badge/Secured%20By%20Lagune-2f7bff?logo=springsecurity&logoColor=white)
+
+```md
+[![Secured By Lagune](https://img.shields.io/badge/Secured%20By%20Lagune-2f7bff?logo=springsecurity&logoColor=white)](https://lagune.ai)
+```
+
+![Security Powered By Lagune](https://img.shields.io/badge/Security%20Powered%20By%20Lagune-2f7bff?logo=springsecurity&logoColor=white)
+
+```md
+[![Security Powered By Lagune](https://img.shields.io/badge/Security%20Powered%20By%20Lagune-2f7bff?logo=springsecurity&logoColor=white)](https://lagune.ai)
+```
+
+![Security-Driven Hardening](https://img.shields.io/badge/Security--Driven%20Hardening-2f7bff?logo=springsecurity&logoColor=white)
+
+```md
+[![Security-Driven Hardening](https://img.shields.io/badge/Security--Driven%20Hardening-2f7bff?logo=springsecurity&logoColor=white)](https://lagune.ai)
+```
+
+---
 
 ## Frequently Asked Questions
 
@@ -66,25 +133,6 @@ SDH is the methodology Lagune implements: a context-aware, blue-team convention 
 
 No. It runs through your own AI agent, so no API keys are required.
 
-## Acknowledgements
-
-### Partners
-
-Partners get an exclusive logo across the repositories and landing pages, plus a spot on a dedicated partners page.
-
-> Help my work grow by [becoming a partner](https://lagune.ai/docs#partners)
-
-### Supporters
-
-Really thanks to everyone who has supported and keeps supporting this work.
-
-<a href='https://github.com/sponsors/wellwelwel'>
-![Our sponsors and supporters](https://wellwelwel.github.io/wellwelwel/sponsors.svg?v=1)
-
-</a>
-
-> Support my work by [becoming a sponsor](https://github.com/sponsors/wellwelwel)
-
 ## Security Policy
 
 Please check the [SECURITY.md](https://github.com/wellwelwel/lagune/blob/main/SECURITY.md).
@@ -102,7 +150,7 @@ Copyright © 2026-present [Weslley Araújo](https://github.com/wellwelwel) and [
 > Set Lagune up in any project, new or existing, with a single command via npx, and choose the security specializations that fit it.
 
 Canonical: https://lagune.ai/docs/get-started/install
-Last updated: 2026-07-14
+Last updated: 2026-07-24
 
 **Lagune** adapts to your environment, whether it is a new project or an existing one.
 
@@ -301,7 +349,7 @@ Node.js (LTS) and at least one supported AI agent.
 > The slash commands your AI agent unlocks with Lagune: audit an existing project or secure new work as you build, all governed by the charter.
 
 Canonical: https://lagune.ai/docs/get-started/commands
-Last updated: 2026-07-14
+Last updated: 2026-07-24
 
 Once **Lagune** is set up in your project, your **AI** agent unlocks a set of slash commands. There are two ways to use them, and both are governed by the **charter**: secure new work as you build it, or run the full audit over a project.
 
@@ -380,7 +428,7 @@ A five-phase audit: charter (set rules), detect (map risks), plan (score and pla
 > The 72 AI agents Lagune works with, and the key for each, including Claude Code, Codex, Cursor, Gemini, and Copilot.
 
 Canonical: https://lagune.ai/docs/supported-agents
-Last updated: 2026-07-14
+Last updated: 2026-07-24
 
 Lagune works with **72 AI coding agents**, including Claude Code, Codex, Cursor, Gemini CLI, and GitHub Copilot. Each agent maps to a CLI key you pass to `init`, listed in the table below.
 
@@ -487,7 +535,7 @@ Pass the agent's CLI key to init, for example npx -y lagune@latest init claude. 
 > Build what you ask and harden it as it is written, guided by the charter, with no flow to follow.
 
 Canonical: https://lagune.ai/docs/commands/lagune
-Last updated: 2026-07-14
+Last updated: 2026-07-24
 
 ⌨️ Do the work you asked for, secured as it is written. **`/lagune`** takes any prompt at any stage, builds what you wanted, and hardens it with safe defaults before handing it back.
 
@@ -579,7 +627,7 @@ Add an instruction to your agent's instruction file (AGENTS.md, CLAUDE.md, .curs
 > Establish your project's security principles, the rules every later phase respects.
 
 Canonical: https://lagune.ai/docs/commands/charter
-Last updated: 2026-07-14
+Last updated: 2026-07-24
 
 🧬 Tell **Lagune** what your project is, and it turns that into your security rules (or, with no description, works them out from the project alone).
 
@@ -650,7 +698,7 @@ Yes. Lagune proposes rules from your description and your code, and you can rewo
 > Read your code and map what your system does and where the risks are.
 
 Canonical: https://lagune.ai/docs/commands/detect
-Last updated: 2026-07-14
+Last updated: 2026-07-24
 
 🔬 Find out what your system really does and where the risks are.
 
@@ -719,7 +767,7 @@ At .lagune/memory/detect.md.
 > Turn what detect found into a defense plan, rating each finding with a category and a CVSS v4.0 score, and pairing it with a fix.
 
 Canonical: https://lagune.ai/docs/commands/plan
-Last updated: 2026-07-14
+Last updated: 2026-07-24
 
 🛡️ Turn what detect found into a defense plan: rate each finding with a category and a CVSS v4.0 score, then pair it with the fix to apply.
 
@@ -793,7 +841,7 @@ No. Plan never reads the code, which forces every fix to point at something dete
 > Apply the plan's fixes to your code, safely and one at a time.
 
 Canonical: https://lagune.ai/docs/commands/harden
-Last updated: 2026-07-14
+Last updated: 2026-07-24
 
 🔧 Apply the plan's fixes to your code, safely and one at a time.
 
@@ -867,7 +915,7 @@ No. It never weakens a control to satisfy a prompt. If a fix would conflict with
 > Prove each applied fix holds, then close out the ones that do.
 
 Canonical: https://lagune.ai/docs/commands/verify
-Last updated: 2026-07-14
+Last updated: 2026-07-24
 
 ⚖️ Prove each applied fix holds, by reading the code and confronting it with what harden recorded, then close out the ones that do.
 
@@ -946,7 +994,7 @@ Yes. SDH is closable: a proven-closed finding is stood down, so the flow has an 
 > How sub-skills are loaded, by a phase on demand, and by you directly.
 
 Canonical: https://lagune.ai/docs/commands/skills
-Last updated: 2026-07-14
+Last updated: 2026-07-24
 
 🧠 **Lagune**'s sub-skills are focused, language-agnostic security knowledge modules that load only on demand, never by default. They are not commands. The detect and verify phases reach for them while they run, and you can use one directly any time.
 
@@ -1075,7 +1123,7 @@ Import it into any prompt with @.lagune/skills/<name>.md.
 > Distill a security source or topic you give it into a new on-demand sub-skill.
 
 Canonical: https://lagune.ai/docs/commands/specialize
-Last updated: 2026-07-14
+Last updated: 2026-07-24
 
 🎓 Specialize **Lagune** in a specific security area, from a source or topic you give it.
 
@@ -1145,7 +1193,7 @@ No. It refines, never overwrites.
 > Turn each detected finding into a runnable, defense-only proof of concept (PoC) and advisory for responsible disclosure.
 
 Canonical: https://lagune.ai/docs/commands/prove
-Last updated: 2026-07-14
+Last updated: 2026-07-24
 
 🧪 Turn each detected finding into runnable, defense-only evidence for responsible disclosure.
 
@@ -1229,12 +1277,570 @@ Prove writes a self-contained advisory you can share through a private channel s
 
 ---
 
+# agent hook: Detect uncapped agent loops
+
+> Sweep a codebase for agent/LLM calls with no step or time cap, or score a single call, from the command line.
+
+Canonical: https://lagune.ai/docs/hooks/agent
+Last updated: 2026-07-24
+
+The `agent` hook flags **agent runtimes that loop with no turn, budget, or time cap**, the runaway-autonomy hole that turns a crafted input into unbounded cost or prompt-injection escalation. It is **language-aware**, covering the two agent-framework ecosystems: **JavaScript** (the **Claude** agent SDK `query` runtime) and **Python** (**LangChain**, **LangGraph**, **CrewAI**, **OpenAI Agents**). It is the deterministic engine behind the [`llm` sub-skill](https://lagune.ai/docs/commands/skills), which you can run yourself in **scan** or **check** mode.
+
+## Run it
+
+**Scan the codebase**
+
+```bash
+node ./.lagune/hooks/agent.mjs           # scans the whole project
+node ./.lagune/hooks/agent.mjs -d src/ai # scans a directory
+node ./.lagune/hooks/agent.mjs -f chat.ts # scans a single file
+```
+
+**Check a call**
+
+```bash
+node ./.lagune/hooks/agent.mjs -l javascript -p 'query({ prompt })'                        # => uncapped
+node ./.lagune/hooks/agent.mjs -l javascript -p 'query({ prompt, options: { maxTurns: 5 } })' # => safe
+node ./.lagune/hooks/agent.mjs -l python -p 'AgentExecutor(agent=a, max_iterations=None)' # => uncapped
+```
+
+Every line under **Uncapped agent loops found** is, in a file that imports an agent SDK, either the Claude agent SDK `query` runtime called with no turn, budget, or time cap (JavaScript, unbounded by default), or an explicit removal of a framework's default cap such as `max_iterations=None` / `max_turns=None` (Python, capped by default). Either exits non-zero. The Vercel AI SDK `generateText`/`streamText` default to a single step (`stopWhen: stepCountIs(1)`), so a bare call there cannot loop and is not flagged, and an ordinary `db.query(...)` is never mistaken for an agent call. A clean run prints `no uncapped agent loops found`.
+
+## How to read the verdict
+
+| Verdict    | Meaning                                                                                          |
+| ---------- | ------------------------------------------------------------------------------------------------ |
+| `uncapped` | A `query` runtime call with no cap (JS), or an explicit cap removal (`=None`, Py).               |
+| `safe`     | A `query` call that sets a cap, a single-step generation, or a capped-by-default framework call. |
+| `invalid`  | The snippet contains no recognizable agent call to judge.                                        |
+
+### CLI options
+
+| Option      | Alias | Value          | Description                                                    |
+| ----------- | ----- | -------------- | -------------------------------------------------------------- |
+| `--pattern` | `-p`  | a code snippet | Check one call. Repeat to check several, one verdict per line. |
+| `--lang`    | `-l`  | a language     | Required with `-p`: `javascript` or `python`.                  |
+| `--dir`     | `-d`  | a directory    | Scope a scan to a directory. Repeats and combines with `-f`.   |
+| `--file`    | `-f`  | a file         | Scope a scan to a single file. Repeats and combines with `-d`. |
+
+With no option it scans the whole project. `-p` needs `-l` and cannot be combined with `-d` or `-f`.
+
+**Best-effort, not exhaustive**
+
+A hand-rolled agent loop, in any language, is beyond a static scan. Treat this as a strong floor, not a complete inventory.
+
+**Tip**
+
+The hook decides only the cap: capability scoping, trust mixing, and authorization are judgment the [`llm` sub-skill](https://lagune.ai/docs/commands/skills) still covers.
+
+## Frequently Asked Questions
+
+### Why cap an agent loop?
+
+An uncapped agent can be driven into unbounded recursion, cost, or prompt-injection escalation. Setting maxTurns/maxBudgetUsd/stopWhen/signal bounds it, and the agent hook flags a query runtime call that sets none.
+
+---
+
+# cors hook: Audit CORS origins
+
+> Scan source for a bypassable CORS origin allowlist, or score a single origin value for over-permissive access, from the command line.
+
+Canonical: https://lagune.ai/docs/hooks/cors
+Last updated: 2026-07-24
+
+The `cors` hook is the deterministic engine behind the [`http-request` sub-skill](https://lagune.ai/docs/commands/skills), and you can run it yourself. It works in two modes from one command: a **scan** that sweeps source for a **bypassable origin allowlist** (a host-validation regex an attacker host slips past), and a **score** that rates a single **CORS origin** value as `wildcard`, `null`, or `safe`.
+
+## Scan a codebase
+
+With no flag it scans the whole project.
+
+**Whole project**
+
+```bash
+node ./.lagune/hooks/cors.mjs
+```
+
+**A directory**
+
+```bash
+node ./.lagune/hooks/cors.mjs -d src/server
+```
+
+**A single file**
+
+```bash
+node ./.lagune/hooks/cors.mjs -f internal/auth/origin.go
+```
+
+It lists each bypassable allowlist under one header, grouped by file. A host validator whose `.+`/`.*` sits in the authority segment before the trusted-host suffix (`^https?://.+\.trusted\.com`) lets an attacker host like `your-site.com.attacker.com` slip past.
+
+```text
+Origin-allowlist patterns with a greedy wildcard (bypassable, review):
+
+internal/auth/origin.go
+  ^https?://.+\.trusted\.com
+```
+
+This is a review lead, not a closed finding: whether the regex gates a real trust decision is undecidable from the text, so a scan never changes the exit code. Read each and confirm the allowlist compares by full equality. When nothing is found, it prints a single line.
+
+```bash
+node ./.lagune/hooks/cors.mjs -d src/clean
+# => no bypassable origin allowlist found
+```
+
+## Score an origin
+
+Pass each origin with `-o`. The hook prints one word per origin and exits non-zero on any `wildcard` or `null`.
+
+**One origin**
+
+```bash
+node ./.lagune/hooks/cors.mjs -o '*'                       # => wildcard
+node ./.lagune/hooks/cors.mjs -o 'null'                    # => null
+node ./.lagune/hooks/cors.mjs -o 'https://app.example.com' # => safe
+```
+
+**Several origins**
+
+Repeat `-o` to score a whole allowlist in one call, one verdict per line, in order.
+
+```bash
+node ./.lagune/hooks/cors.mjs \
+  -o 'https://app.example.com' \
+  -o '*' \
+  -o 'null'
+# => safe
+# => wildcard
+# => null
+```
+
+| Verdict    | Meaning                                                                          |
+| ---------- | -------------------------------------------------------------------------------- |
+| `safe`     | Not `*`, `null`, or a `*`-glob. It does not guarantee a well-formed origin.      |
+| `wildcard` | `*`, a subdomain/host/port glob: any site (or a wide set) may read the response. |
+| `null`     | The `null` origin, which sandboxed iframes and redirects can forge.              |
+
+Only `safe` is an allow, and `-o` is a value oracle: it judges the value, not the handler, so confirm the handler with the `http-request` sub-skill.
+
+### CLI options
+
+| Option     | Alias | Value       | Description                                                    |
+| ---------- | ----- | ----------- | -------------------------------------------------------------- |
+| `--origin` | `-o`  | an origin   | Score one origin value. Repeat to score several, one per line. |
+| `--dir`    | `-d`  | a directory | Scope a scan to a directory. Repeats and combines with `-f`.   |
+| `--file`   | `-f`  | a file      | Scope a scan to a single file. Repeats and combines with `-d`. |
+
+With no option it scans the whole project. `-o` is the score mode and cannot be combined with `-d` or `-f`.
+
+**What it does not cover**
+
+The scan reads the **bypassable-regex** shape, and `-o` scores origin **values**. Two source-level patterns stay out of reach: reflection of the request's `Origin` (the server echoes the incoming `Origin` back, or pairs it with credentials), and a permissive `endsWith`/substring allowlist. Recognize them in the code and treat them as the [`http-request` sub-skill](https://lagune.ai/docs/commands/skills) describes.
+
+## Frequently Asked Questions
+
+### Why is a null CORS origin dangerous?
+
+Sandboxed iframes and some redirects send Origin: null, so an allowlist that trusts null grants those contexts read access. The cors hook flags it alongside the wildcard.
+
+### How do I catch a bypassable CORS origin allowlist?
+
+Run node ./.lagune/hooks/cors.mjs over the codebase. It flags a host-validation regex whose greedy wildcard sits before the trusted suffix, so an attacker host like your-site.com.attacker.com slips past.
+
+---
+
+# crypto hook: Detect weak cryptography
+
+> Sweep a codebase for weak cryptographic primitives, or score a single snippet, from the command line.
+
+Canonical: https://lagune.ai/docs/hooks/crypto
+Last updated: 2026-07-24
+
+The `crypto` hook flags **weak cryptographic primitives** at the call site: a deprecated cipher, an insecure mode, or a broken digest. It is **language-aware**, reading each file by its own rules so a Python construct is never flagged on a Rust file, and it is the deterministic engine behind the [`crypto` sub-skill](https://lagune.ai/docs/commands/skills), which you can run yourself in **scan** or **check** mode.
+
+## Run it
+
+**Scan the codebase**
+
+```bash
+node ./.lagune/hooks/crypto.mjs           # scans the whole project
+node ./.lagune/hooks/crypto.mjs -d src    # scans a directory
+node ./.lagune/hooks/crypto.mjs -f hash.ts # scans a single file
+```
+
+**Check a snippet**
+
+```bash
+node ./.lagune/hooks/crypto.mjs -l javascript -p 'createCipher("aes-256-cbc", k)' # => weak
+node ./.lagune/hooks/crypto.mjs -l python -p 'hashlib.md5(data)'                   # => review
+node ./.lagune/hooks/crypto.mjs -l go -p 'sha256.Sum256(data)'                     # => safe
+```
+
+The scan prints up to two sections. **Weak cryptography found** is the finding set (DES/3DES/RC4/Blowfish/RC2, ECB mode): each is a broken cipher primitive, so the hook exits non-zero. **Cryptography to review manually** is a lead set it cannot judge alone: an MD5/SHA-1 digest (broken for security use, but legitimate as a plain checksum, so intent decides), a non-cryptographic RNG in a security context, or a timing-unsafe comparison. A clean run prints `no weak cryptography found`.
+
+## How to read the verdict
+
+| Verdict   | Meaning                                                                                               |
+| --------- | ----------------------------------------------------------------------------------------------------- |
+| `weak`    | The snippet uses a broken cipher primitive (DES/3DES, RC4, Blowfish, RC2, or ECB mode).               |
+| `review`  | An intent-dependent primitive: an MD5/SHA-1 digest, or a non-cryptographic RNG in a security context. |
+| `safe`    | The snippet uses crypto, and no weak primitive was found.                                             |
+| `invalid` | The snippet contains no recognizable cryptographic construct to judge.                                |
+
+### CLI options
+
+| Option      | Alias | Value          | Description                                                                                       |
+| ----------- | ----- | -------------- | ------------------------------------------------------------------------------------------------- |
+| `--pattern` | `-p`  | a code snippet | Check one snippet. Repeat to check several, one verdict per line.                                 |
+| `--lang`    | `-l`  | a language     | Required with `-p`: one of javascript, python, go, java, kotlin, php, ruby, rust, csharp, c, cpp. |
+| `--dir`     | `-d`  | a directory    | Scope a scan to a directory. Repeats and combines with `-f`.                                      |
+| `--file`    | `-f`  | a file         | Scope a scan to a single file. Repeats and combines with `-d`.                                    |
+
+With no option it scans the whole project. `-p` needs `-l` and cannot be combined with `-d` or `-f`.
+
+### Supported languages
+
+The scan reads these languages, keyed by file extension, each checked against its own cryptographic APIs.
+
+| Language                    | Weak ciphers (finding) & digests/RNG (review)                                                               |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| **JavaScript / TypeScript** | `createCipher`, `CryptoJS.DES/RC4`, quoted `*-ecb`; MD5/SHA-1 `createHash`/`subtle.digest`; `Math.random()` |
+| **Python**                  | pycryptodome `DES/ARC4/Blowfish.new`, `algorithms.TripleDES`, `MODE_ECB`; `hashlib.md5/sha1`; `random.*`    |
+| **Go**                      | `des.NewCipher`, `rc4.NewCipher`, `blowfish.NewCipher`, `NewECBEncrypter`; `md5/sha1.Sum`; `math/rand`      |
+| **Java / Kotlin**           | `Cipher.getInstance("DES"/…/ECB")`; `MessageDigest.getInstance("MD5")`, `HmacMD5`; `java.util.Random`       |
+| **PHP**                     | `openssl_encrypt("des-…"/`…`-ecb")`, `mcrypt_*`; `md5()`/`sha1()`, `hash("md5", …)`; `rand()`/`mt_rand()`   |
+| **Ruby**                    | `OpenSSL::Cipher.new("des-…")`, `:ECB`; `Digest::MD5/SHA1`; `rand()`/`Random`                               |
+| **Rust**                    | `Rc4::`, `Blowfish::`, `des::`, `ecb::`; `Md5::`, `Sha1::`, `Hmac<Md5>`; `SmallRng`/`XorShiftRng`           |
+| **C#**                      | `DES/TripleDES/RC2.Create`, `CipherMode.ECB`; `MD5/SHA1.Create`, `HMACMD5`; `new Random()`                  |
+| **C / C++**                 | OpenSSL `DES_*`/`RC4`/`EVP_des_*`, `EVP_*_ecb`; `MD5()`/`SHA1()`, `EVP_md5`; `rand()`/`random()`            |
+
+**Best-effort, not exhaustive**
+
+It reads source as text, so a primitive assembled at runtime, hidden behind an alias, or written in a form it does not recognize can slip past. Treat the table as a strong starting point, not a complete inventory.
+
+**Tip**
+
+The hook guarantees the floor (these constructs exist): key management, IV reuse, and RSA padding are judgment the [`crypto` sub-skill](https://lagune.ai/docs/commands/skills) still covers.
+
+## Frequently Asked Questions
+
+### How do I scan a codebase for weak cryptography?
+
+Run the crypto hook with no flag. Broken ciphers and ECB mode are findings that exit non-zero. An MD5/SHA-1 digest is a review lead, since it is broken for security use but legitimate as a plain checksum.
+
+### Does the crypto hook flag Math.random()?
+
+Only as a review lead in a security context, never as an automatic finding, since randomness is legitimate for jitter or UI ordering.
+
+---
+
+# infra hook: Detect IaC misconfiguration
+
+> Sweep Terraform, Dockerfiles, and GitHub Actions for misconfiguration, or score a single snippet, from the command line.
+
+Canonical: https://lagune.ai/docs/hooks/infra
+Last updated: 2026-07-24
+
+The `infra` hook flags **infrastructure-as-code misconfiguration** that is decidable from the file: a network open to the world, a wildcard permission, a secret in a manifest, a root container, an untrusted value in a CI shell. It reads only IaC files (`.tf`/`.tf.json`/`.hcl`, `Dockerfile*`, `.github/workflows/**`). It is the deterministic engine behind the [`infra` sub-skill](https://lagune.ai/docs/commands/skills), in **scan** or **check** mode.
+
+## Run it
+
+**Scan the codebase**
+
+```bash
+node ./.lagune/hooks/infra.mjs             # scans every IaC file
+node ./.lagune/hooks/infra.mjs -d infra    # scans a directory
+node ./.lagune/hooks/infra.mjs -f Dockerfile # scans a single file
+```
+
+**Check a snippet**
+
+Pass the snippet with `-p` and its kind with `-k` (`terraform`, `dockerfile`, or `github-actions`).
+
+```bash
+node ./.lagune/hooks/infra.mjs -k terraform  -p 'actions = ["*"]'  # => iam-wildcard
+node ./.lagune/hooks/infra.mjs -k dockerfile -p 'FROM node:20'     # => mutable-tag
+```
+
+The scan prints up to two sections. **Infrastructure risks found** exits non-zero and holds the decidable defects (a `0.0.0.0/0` ingress on a sensitive port, a wildcard IAM statement, a manifest secret, `encrypted = false`, an unpinned git module, an image that explicitly runs as root, a `curl | sh`, a CI script injection, `permissions: write-all`). **Infrastructure hardening advisories** does not change the exit code (a mutable base tag, a tag-pinned action). A clean run prints `no infrastructure risks found`.
+
+## How to read the verdict
+
+The check mode prints the highest-severity tag it matched (for example `public-ingress`, `iam-wildcard`, `root-user`, `curl-pipe`, `script-injection`, `write-all`), an advisory tag (`mutable-tag`, `unpinned-action`), or `safe`. Only a finding-severity tag exits non-zero.
+
+### CLI options
+
+| Option      | Alias | Value                                           | Description                                                    |
+| ----------- | ----- | ----------------------------------------------- | -------------------------------------------------------------- |
+| `--pattern` | `-p`  | a snippet                                       | Check one snippet. Requires `-k`. Repeat for several.          |
+| `--kind`    | `-k`  | `terraform` \| `dockerfile` \| `github-actions` | The kind the snippet is judged as.                             |
+| `--dir`     | `-d`  | a directory                                     | Scope a scan to a directory. Repeats and combines with `-f`.   |
+| `--file`    | `-f`  | a file                                          | Scope a scan to a single file. Repeats and combines with `-d`. |
+
+With no option it scans every IaC file in the project. `-p` cannot be combined with `-d` or `-f`.
+
+**Tip**
+
+The hook catches the blunt, decidable cases: absent encryption, `pull_request_target` exposure, and the right IAM scope are judgment the [`infra` sub-skill](https://lagune.ai/docs/commands/skills) still covers.
+
+## Frequently Asked Questions
+
+### What infrastructure files does the infra hook read?
+
+Terraform/HCL (.tf, .tf.json, .hcl), Dockerfiles, and GitHub Actions workflow and action YAML under .github/. It reaches those files even though the source scanners skip them.
+
+---
+
+# interpreter hook: Flag dynamic-code-execution sinks
+
+> Sweep a codebase for dynamic-code-execution sinks across languages, or score a single snippet, from the command line.
+
+Canonical: https://lagune.ai/docs/hooks/interpreter
+Last updated: 2026-07-24
+
+The `interpreter` hook flags **dynamic-code-execution sinks**: constructs that turn data into running code or hand it to a shell, from `eval` to native deserialization. It is language-aware, reading each file by its own rules, and it is the deterministic engine behind the [`interpreter` sub-skill](https://lagune.ai/docs/commands/skills), which you can run yourself in **scan** or **check** mode.
+
+## Run it
+
+**Scan the codebase**
+
+```bash
+node ./.lagune/hooks/interpreter.mjs           # scans the whole project
+node ./.lagune/hooks/interpreter.mjs -d src    # scans a directory
+node ./.lagune/hooks/interpreter.mjs -f app.py # scans a single file
+```
+
+**Check a snippet**
+
+```bash
+node ./.lagune/hooks/interpreter.mjs -l javascript -p 'eval(x)'    # => careful
+node ./.lagune/hooks/interpreter.mjs -l python -p 'json.loads(x)'  # => safe
+```
+
+These sinks are dual-use: whether attacker-influenced input reaches one is undecidable by a static scan, so every match is a **caution to review**, never a confirmed finding. The scan prints a single **Dynamic-execution sinks to review** section, grouped by file. A clean run prints `no dynamic-execution sinks found`.
+
+**Read the flagged code, never run it!**
+
+Reason about each sink **statically**, tracing whether untrusted input reaches it. Never execute or `eval` the flagged code, nor any remote or runtime-fetched code it pulls in, to "test" what it does.
+
+## How to read the verdict
+
+| Verdict   | Meaning                                                                                                    |
+| --------- | ---------------------------------------------------------------------------------------------------------- |
+| `careful` | The snippet contains a dynamic-execution sink for its language. Review it by reading, never by running it. |
+| `safe`    | No dynamic-execution sink was found for the given language.                                                |
+
+### CLI options
+
+| Option      | Alias | Value          | Description                                                                                       |
+| ----------- | ----- | -------------- | ------------------------------------------------------------------------------------------------- |
+| `--pattern` | `-p`  | a code snippet | Check one snippet. Repeat to check several, one verdict per line.                                 |
+| `--lang`    | `-l`  | a language     | Required with `-p`: one of javascript, python, php, ruby, java, kotlin, go, rust, c, cpp, csharp. |
+| `--dir`     | `-d`  | a directory    | Scope a scan to a directory. Repeats and combines with `-f`.                                      |
+| `--file`    | `-f`  | a file         | Scope a scan to a single file. Repeats and combines with `-d`.                                    |
+
+With no option it scans the whole project. `-p` needs `-l` and cannot be combined with `-d` or `-f`.
+
+### Supported languages
+
+The scan reads these languages, keyed by file extension, each checked against its own set of dynamic-execution sinks.
+
+| #   | Language                    | Extensions                                                                                                   | Sinks it flags                                                                                                                                                                                                |
+| --- | --------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | **JavaScript / TypeScript** | `.js`, `.jsx`, `.mjs`, `.cjs`, `.ts`, `.tsx`, `.mts`, `.cts`, `.astro`, `.vue`, `.svelte`, `.marko`, `.riot` | `eval()`, Function constructor, string-body `setTimeout`/`setInterval`, `vm` module, `child_process` exec, dynamic `require()`, dynamic `import()`                                                            |
+| 2   | **Python**                  | `.py`, `.pyi`                                                                                                | `eval`/`exec`, `__import__()`, `os.system`/`os.popen`, `subprocess` `shell=True`, `pickle.load`/`loads`, `yaml.load` (unsafe)                                                                                 |
+| 3   | **Ruby**                    | `.rb`                                                                                                        | eval family (`instance_eval`/`class_eval`/`module_eval`/`eval`), `system`/`exec`, backticks or `%x`, `Kernel#open` / `IO.popen`/`read`/`binread` / `Open3`, `Process.spawn`, `Marshal.load`                   |
+| 4   | **Go**                      | `.go`                                                                                                        | `exec.Command`/`exec.CommandContext`, `plugin.Open`                                                                                                                                                           |
+| 5   | **PHP**                     | `.php`                                                                                                       | `eval()`, `assert()` on string, `create_function()`, shell exec (`system`/`exec`/`shell_exec`/`passthru`/`popen`/`proc_open`), `call_user_func`/`call_user_func_array`, `include`/`require` with runtime path |
+| 6   | **Rust**                    | `.rs`                                                                                                        | `Command::new`, `process::Command`                                                                                                                                                                            |
+| 7   | **Java**                    | `.java`                                                                                                      | `Runtime.exec`, `ProcessBuilder`, `ScriptEngine`, `ObjectInputStream.readObject`                                                                                                                              |
+| 8   | **Kotlin**                  | `.kt`, `.kts`                                                                                                | The JVM sinks: `Runtime.exec`, `ProcessBuilder`, `ScriptEngine`, `ObjectInputStream.readObject`                                                                                                               |
+| 9   | **C#**                      | `.cs`                                                                                                        | `Process.Start` / `new Process`, `BinaryFormatter`, `Assembly.Load`                                                                                                                                           |
+| 10  | **C**                       | `.c`, `.h`                                                                                                   | `system()`, `popen()`, the `exec*` family (`execl`, `execve`, `execvp`, …)                                                                                                                                    |
+| 11  | **C++**                     | `.cc`, `.cpp`, `.cxx`, `.hpp`, `.hh`, `.hxx`                                                                 | `system()`, `popen()`, the `exec*` family (`execl`, `execve`, `execvp`, …)                                                                                                                                    |
+
+**Best-effort, not exhaustive**
+
+It reads source as text, so a sink assembled at runtime, hidden behind an alias, or written in a form it does not recognize can slip past. Treat the table as a strong starting point, not a complete inventory.
+
+**Tip**
+
+The hook guarantees the floor (these sinks exist and where): whether an untrusted value actually reaches one is the judgment the [`interpreter` sub-skill](https://lagune.ai/docs/commands/skills) covers.
+
+## Frequently Asked Questions
+
+### Does the interpreter hook confirm a vulnerability?
+
+No. It flags dynamic-execution sinks as a caution to review, never a confirmed finding, because whether attacker-influenced input reaches the sink cannot be decided by a static scan.
+
+### Which languages does the interpreter hook cover?
+
+It reads the languages in the Supported languages table, keyed by file extension, each checked against its own set of sinks. Other languages produce no sinks.
+
+---
+
+# jwt hook: Detect unpinned JWT verification
+
+> Sweep a codebase for JWT verification without an algorithm pin, or score a single call, from the command line.
+
+Canonical: https://lagune.ai/docs/hooks/jwt
+Last updated: 2026-07-24
+
+The `jwt` hook flags **JWT verification without an algorithm pin**, the algorithm-confusion hole where a verifier trusts the token's own `alg` header, and **verification turned off entirely**. It is **language-aware**, reading each file by its own JWT library, and it is the deterministic engine behind the [`federation` sub-skill](https://lagune.ai/docs/commands/skills), which you can run yourself in **scan** or **check** mode.
+
+## Run it
+
+**Scan the codebase**
+
+```bash
+node ./.lagune/hooks/jwt.mjs           # scans the whole project
+node ./.lagune/hooks/jwt.mjs -d src    # scans a directory
+node ./.lagune/hooks/jwt.mjs -f auth.ts # scans a single file
+```
+
+**Check a call**
+
+```bash
+node ./.lagune/hooks/jwt.mjs -l javascript -p 'jwt.verify(token, secret)'                    # => unpinned
+node ./.lagune/hooks/jwt.mjs -l python -p 'jwt.decode(t, k, options={"verify_signature": False})' # => unpinned
+node ./.lagune/hooks/jwt.mjs -l python -p 'jwt.decode(t, k, algorithms=["HS256"])'           # => safe
+```
+
+Every line under **Unpinned JWT verification found** is a verify call that sets no `algorithms` allowlist (where the library needs one), accepts an unsafe one (`none`, or an asymmetric algorithm mixed with HMAC), or disables signature checking outright, so it trusts the token's own `alg`. A confirmed exposure, so the hook exits non-zero. A clean run prints `no unpinned JWT verification found`.
+
+## How to read the verdict
+
+| Verdict    | Meaning                                                                                                        |
+| ---------- | -------------------------------------------------------------------------------------------------------------- |
+| `unpinned` | A verify call with no algorithm allowlist (where one is needed), an unsafe one, or with verification disabled. |
+| `safe`     | A verify call that pins a sound algorithm allowlist, or whose library pins it implicitly.                      |
+| `invalid`  | The snippet contains no recognizable verify call to judge.                                                     |
+
+### CLI options
+
+| Option      | Alias | Value          | Description                                                                               |
+| ----------- | ----- | -------------- | ----------------------------------------------------------------------------------------- |
+| `--pattern` | `-p`  | a code snippet | Check one call. Repeat to check several, one verdict per line.                            |
+| `--lang`    | `-l`  | a language     | Required with `-p`: one of javascript, python, go, java, kotlin, php, ruby, rust, csharp. |
+| `--dir`     | `-d`  | a directory    | Scope a scan to a directory. Repeats and combines with `-f`.                              |
+| `--file`    | `-f`  | a file         | Scope a scan to a single file. Repeats and combines with `-d`.                            |
+
+With no option it scans the whole project. `-p` needs `-l` and cannot be combined with `-d` or `-f`.
+
+### Supported languages
+
+The scan reads these libraries, keyed by file extension. Because some pin the algorithm implicitly (a missing explicit list is sound), the "no allowlist ⇒ unpinned" rule applies only where the library expects an explicit one, so a correctly-configured call is never flagged.
+
+| Language                    | Library                 | Flags no-allowlist as unpinned?                                 | Always flags                                    |
+| --------------------------- | ----------------------- | --------------------------------------------------------------- | ----------------------------------------------- |
+| **JavaScript / TypeScript** | jsonwebtoken, jose      | Yes                                                             | `none`, asymmetric+HMAC mix                     |
+| **Python**                  | PyJWT, python-jose      | Yes (PyJWT requires it, python-jose defaults `algorithms=None`) | `none`, `verify_signature: False`               |
+| **Go**                      | golang-jwt              | Yes (no `WithValidMethods`)                                     | `none`, `ParseUnverified`                       |
+| **Ruby**                    | ruby-jwt                | Yes                                                             | `none`, `verify = false`                        |
+| **Java / Kotlin**           | jjwt, nimbus            | No (key-derived)                                                | `none`, an unsigned/`unsecured` parser          |
+| **PHP**                     | firebase/php-jwt        | No (`Key` carries the alg)                                      | `none`                                          |
+| **Rust**                    | jsonwebtoken            | No (`Validation` requires one)                                  | `none`, `insecure_disable_signature_validation` |
+| **C#**                      | Microsoft.IdentityModel | No (multi-line params)                                          | `none`, `RequireSignedTokens = false`           |
+
+**Tip**
+
+The hook decides only the algorithm pin: the claim, key, and flow checks are judgment the [`federation` sub-skill](https://lagune.ai/docs/commands/skills) still covers.
+
+## Frequently Asked Questions
+
+### What is JWT algorithm confusion?
+
+A verifier that reads the algorithm from the token header lets an attacker swap RS256 for HS256 and sign with the public key. Pinning a sound algorithm allowlist in code prevents it, and the jwt hook flags a verify call that sets none or an unsafe one.
+
+---
+
+# network hook: Score URLs for SSRF
+
+> Score one or many fetch destinations for SSRF, straight from the command line.
+
+Canonical: https://lagune.ai/docs/hooks/network
+Last updated: 2026-07-24
+
+The `network` hook decides whether a server-side fetch destination is safe from **SSRF** (a request that can be aimed at internal services, cloud metadata, or private hosts). It is the deterministic engine behind the [`network` sub-skill](https://lagune.ai/docs/commands/skills), and you can run it yourself.
+
+## Run it
+
+Pass each destination with `-u`. The hook prints one word per destination, read in the table below.
+
+**One destination**
+
+```bash
+node ./.lagune/hooks/network.mjs -u 'http://example.com/'
+# => safe
+
+node ./.lagune/hooks/network.mjs -u 'http://0x7f000001/'
+# => private-target
+```
+
+**Several destinations**
+
+Repeat `-u` to score a whole allowlist or denylist in one call, one verdict per line, in order.
+
+```bash
+node ./.lagune/hooks/network.mjs \
+  -u 'http://example.com/' \
+  -u 'http://[::1]/' \
+  -u 'http://allowed.com@evil.example/'
+# => safe
+# => private-target
+# => parser-divergent
+```
+
+It resolves the host the way the network does, so encoded forms of an internal address do not slip past: hex, octal, dotless decimal, shorthand, IPv6, and IPv4-mapped all read `private-target`. And where a sloppy validator and the real fetcher would read different hosts, the verdict is `parser-divergent`.
+
+## How to read the verdict
+
+| Verdict            | Meaning                                                                                        |
+| ------------------ | ---------------------------------------------------------------------------------------------- |
+| `safe`             | The destination connects to a public host, and a sloppy validator would read the same host.    |
+| `private-target`   | The host resolves to a private, loopback, link-local, unspecified, or cloud-metadata address.  |
+| `parser-divergent` | A sloppy text validator would read a different real host than the one the fetcher connects to. |
+| `invalid url`      | The string does not parse as a URL, so there is nothing to fetch.                              |
+
+Only `safe` is an allow. Treat `private-target`, `parser-divergent`, and `invalid url` all as a block.
+
+### CLI options
+
+| Option  | Alias | Value         | Description                                                           |
+| ------- | ----- | ------------- | --------------------------------------------------------------------- |
+| `--url` | `-u`  | a URL or host | Check one destination. Repeat to check several, one verdict per line. |
+
+At least one `-u` is required. The destination is never a bare positional, so it cannot be mistaken for a flag.
+
+**Why a flag value**
+
+Each destination is passed as a flag value, never interpolated into the command. A value with quotes or backticks stays inert and cannot inject into the shell. Always wrap it in single quotes so your shell does not expand it first.
+
+**What it does not cover**
+
+The hook is pure and never resolves DNS, so two runtime gaps are out of scope: **DNS rebinding** (a name that resolves public when checked, internal when fetched) and **redirect chains** (a first hop that passes, then redirects inward). Close those by resolving once and connecting to the validated address, and by refusing redirects. It pins the reserved loopback names (`localhost` and the `.localhost` family) to internal with no lookup, but any other DNS name reads `safe`, because asserting it resolves inward would require resolution: the allowlist guards those, and is what this checker validates.
+
+**Tip**
+
+This is the same check the [`network` sub-skill](https://lagune.ai/docs/commands/skills) runs to prove a destination filter holds.
+
+## Frequently Asked Questions
+
+### How do I test a URL for SSRF?
+
+Run the network hook. It scores a fetch destination and returns safe, private-target, parser-divergent, or invalid url. Only safe is an allow.
+
+### What is a parser-divergent URL?
+
+A URL that different parsers read differently, which is a classic SSRF bypass. The network hook flags it rather than allowing it.
+
+---
+
 # regex hook: Detect ReDoS Patterns
 
 > Sweep a codebase for ReDoS-prone regex, or score a single pattern, from the command line.
 
 Canonical: https://lagune.ai/docs/hooks/regex
-Last updated: 2026-07-14
+Last updated: 2026-07-24
 
 The `regex` hook is the deterministic regex-safety engine the [`regex` sub-skill](https://lagune.ai/docs/commands/skills) runs, and you can run it yourself. It works in two modes from one command: a **scan** that sweeps a codebase for **ReDoS**-prone and runtime-built patterns, and a **check** that scores a single pattern you hand it.
 
@@ -1282,7 +1888,7 @@ Vulnerable regular expressions found:
 cmd/server/main.go
   ([a-z]+)+$
 
-Dynamically built regular expressions (review manually):
+Dynamically built regular expressions (review manually by simulating a constructed regex):
 
 app/payments.php
 crates/parser/lexer.rs
@@ -1302,11 +1908,11 @@ node ./.lagune/hooks/regex.mjs -d src/clean
 
 ### How to read the sections
 
-| Section                                                         | Meaning                                                                                                                         |
-| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `Vulnerable regular expressions found`                          | ReDoS-prone patterns, grouped by file with each pattern indented beneath. Every line is unsafe, so the verdict is not repeated. |
-| `Dynamically built regular expressions (review manually)`       | Files that build a regex from a variable, a concatenation, or an interpolation. Not a finding on its own: read each by hand.    |
-| `Static regex wrapped in a constructor (use a literal instead)` | Files that pass a plain string literal to a regex constructor where a regex literal is simpler and skips a runtime compile.     |
+| Section                                                                                     | Meaning                                                                                                                         |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `Vulnerable regular expressions found`                                                      | ReDoS-prone patterns, grouped by file with each pattern indented beneath. Every line is unsafe, so the verdict is not repeated. |
+| `Dynamically built regular expressions (review manually by simulating a constructed regex)` | Files that build a regex from a variable, a concatenation, or an interpolation. Not a finding on its own: read each by hand.    |
+| `Static regex wrapped in a constructor (use a literal instead)`                             | Files that pass a plain string literal to a regex constructor where a regex literal is simpler and skips a runtime compile.     |
 
 The first section is a security finding. The second is a pointer to code a static check cannot judge, so it asks for a human read. The third is a clarity hint, not a security finding.
 
@@ -1408,85 +2014,308 @@ Run the regex hook in scan mode over the codebase. It reports ReDoS-prone patter
 
 ---
 
-# network hook: Score URLs for SSRF
+# secrets hook: Detect hardcoded secrets
 
-> Score one or many fetch destinations for SSRF, straight from the command line.
+> Sweep a codebase for hardcoded credentials from the command line.
 
-Canonical: https://lagune.ai/docs/hooks/network
-Last updated: 2026-07-14
+Canonical: https://lagune.ai/docs/hooks/secrets
+Last updated: 2026-07-24
 
-The `network` hook decides whether a server-side fetch destination is safe from **SSRF** (a request that can be aimed at internal services, cloud metadata, or private hosts). It is the deterministic engine behind the [`network` sub-skill](https://lagune.ai/docs/commands/skills), and you can run it yourself.
+The `secrets` hook flags **credentials compiled into the source** instead of read from the environment. It keys on **provenance** (a literal versus an environment lookup), not on the value's contents, so it needs no exhaustive catalog of provider prefixes and produces almost no false positives. It is the deterministic engine behind the [`secrets` sub-skill](https://lagune.ai/docs/commands/skills).
+
+Provider-format signatures, connection-string credentials, and a literal bound to a secret-named identifier are **language-agnostic**: the same string reads the same in any file. The two heuristics that depend on syntax, an environment lookup with a hardcoded default and a secret flowing into a log sink, are **language-aware**, so a JavaScript `console.log` is never read on a Rust file and Python's `os.getenv("X", "default")` is seen on its own.
 
 ## Run it
 
-Pass each destination with `-u`. The hook prints one word per destination, read in the table below.
-
-**One destination**
-
 ```bash
-node ./.lagune/hooks/network.mjs -u 'http://example.com/'
-# => safe
-
-node ./.lagune/hooks/network.mjs -u 'http://0x7f000001/'
-# => private-target
+node ./.lagune/hooks/secrets.mjs           # scans the whole project
+node ./.lagune/hooks/secrets.mjs -d src    # scans a directory
+node ./.lagune/hooks/secrets.mjs -f config.ts # scans a single file
 ```
 
-**Several destinations**
-
-Repeat `-u` to score a whole allowlist or denylist in one call, one verdict per line, in order.
-
-```bash
-node ./.lagune/hooks/network.mjs \
-  -u 'http://example.com/' \
-  -u 'http://[::1]/' \
-  -u 'http://allowed.com@evil.example/'
-# => safe
-# => private-target
-# => parser-divergent
-```
-
-It resolves the host the way the network does, so encoded forms of an internal address do not slip past: hex, octal, dotless decimal, shorthand, IPv6, and IPv4-mapped all read `private-target`. And where a sloppy validator and the real fetcher would read different hosts, the verdict is `parser-divergent`.
-
-## How to read the verdict
-
-| Verdict            | Meaning                                                                                        |
-| ------------------ | ---------------------------------------------------------------------------------------------- |
-| `safe`             | The destination connects to a public host, and a sloppy validator would read the same host.    |
-| `private-target`   | The host resolves to a private, loopback, link-local, unspecified, or cloud-metadata address.  |
-| `parser-divergent` | A sloppy text validator would read a different real host than the one the fetcher connects to. |
-| `invalid url`      | The string does not parse as a URL, so there is nothing to fetch.                              |
-
-Only `safe` is an allow. Treat `private-target`, `parser-divergent`, and `invalid url` all as a block.
+The scan prints up to two sections. **Hardcoded secrets found** is the finding set (a hardcoded default for a secret-named environment variable, a credential embedded in a connection string, or a value matching a curated provider format), so the hook exits non-zero. **Secret handling to review manually** is a lead set: a plain literal bound to a secret-named identifier (its provenance is decidable, but whether the value is a real secret is not), and a secret-named value flowing into a log or response sink. A clean run prints `no hardcoded secrets found`.
 
 ### CLI options
 
-| Option  | Alias | Value         | Description                                                           |
-| ------- | ----- | ------------- | --------------------------------------------------------------------- |
-| `--url` | `-u`  | a URL or host | Check one destination. Repeat to check several, one verdict per line. |
+| Option   | Alias | Value       | Description                                                    |
+| -------- | ----- | ----------- | -------------------------------------------------------------- |
+| `--dir`  | `-d`  | a directory | Scope a scan to a directory. Repeats and combines with `-f`.   |
+| `--file` | `-f`  | a file      | Scope a scan to a single file. Repeats and combines with `-d`. |
 
-At least one `-u` is required. The destination is never a bare positional, so it cannot be mistaken for a flag.
+With no option it scans the whole project.
 
-**Why a flag value**
+### Language coverage
 
-Each destination is passed as a flag value, never interpolated into the command. A value with quotes or backticks stays inert and cannot inject into the shell. Always wrap it in single quotes so your shell does not expand it first.
+The environment-fallback finding and the log-sink lead read a per-language set of forms, so they cover the languages below and stay silent elsewhere. The other three signals run on **every** file.
 
-**What it does not cover**
+| Signal              | Languages                                                                       |
+| ------------------- | ------------------------------------------------------------------------------- |
+| Environment default | JavaScript/TypeScript, Python, Ruby, PHP, Kotlin, Java, Go (`cmp.Or`), Rust, C# |
+| Log / response sink | JavaScript/TypeScript, Python, Ruby, PHP, Java, Kotlin, Go, Rust, C, C++, C#    |
 
-The hook is pure and never resolves DNS, so two runtime gaps are out of scope: **DNS rebinding** (a name that resolves public when checked, internal when fetched) and **redirect chains** (a first hop that passes, then redirects inward). Close those by resolving once and connecting to the validated address, and by refusing redirects. It pins the reserved loopback names (`localhost` and the `.localhost` family) to internal with no lookup, but any other DNS name reads `safe`, because asserting it resolves inward would require resolution: the allowlist guards those, and is what this checker validates.
+**Is this a policy problem?**
 
-**Tip**
-
-This is the same check the [`network` sub-skill](https://lagune.ai/docs/commands/skills) runs to prove a destination filter holds.
+No. Detecting a secret's format to warn that it was committed is standard defensive tooling, the same operation gitleaks, trufflehog, and GitHub push-protection perform. The hook ships detection signatures (public token **formats**), never a live secret, and it audits and explains rather than exfiltrating.
 
 ## Frequently Asked Questions
 
-### How do I test a URL for SSRF?
+### How does the secrets hook avoid false positives?
 
-Run the network hook. It scores a fetch destination and returns safe, private-target, parser-divergent, or invalid url. Only safe is an allow.
+It keys on provenance, not on the value contents. High-confidence formats (provider tokens, environment fallbacks, connection strings) are findings that exit non-zero. A plain literal bound to a secret-named identifier is a review lead to confirm, and the same identifier read from process.env is not flagged at all.
 
-### What is a parser-divergent URL?
+---
 
-A URL that different parsers read differently, which is a classic SSRF bypass. The network hook flags it rather than allowing it.
+# Lagune Prompt Examples: Automate the Blue Team Flow
+
+> Copy-ready Lagune prompts: a read-only scan, the full Blue Team flow, and a Zero Trust audit, plus detection scoped to a commit, a branch or PR diff, or a real incident.
+
+Canonical: https://lagune.ai/docs/examples/prompts
+Last updated: 2026-07-24
+
+Copy-ready Lagune prompts you can paste directly into your AI agent.
+
+## 💧 Shallow Scan
+
+A read-only sweep that reads the code on its own and reports every flaw with a fix, without running the Blue Team flow or writing to Lagune's tracking.
+
+**Tip**
+
+Works better in planning mode and with a charter (`/lagune.charter`) defined.
+
+**🪼 Default**
+
+| Aspect          | Trade-off                                             | Level               |
+| --------------- | ----------------------------------------------------- | ------------------- |
+| **Effort**      | One agent scans and reports, no sub-agents.           | 1/5 |
+| **Time**        | Quick. A single read-only pass, nothing is applied.   | 2/5 |
+| **Token Usage** | Moderate, shared. The whole scan runs in one context. | 2/5 |
+
+```md
+/lagune You are a cybersecurity researcher with deep expertise in defensive security, using Lagune to improve your knowledge and precision.
+
+Scan the workspace on your own and pair each flaw you find with a concrete fix. This is a standalone sweep, not the Blue Team flow: do not run detect, plan, harden, or verify, and write nothing to Lagune's tracking.
+
+At the end, list every flaw you found, each with its severity and a concrete fix.
+```
+
+**🐬 Multi Agents**
+
+| Aspect          | Trade-off                                                        | Level               |
+| --------------- | ---------------------------------------------------------------- | ------------------- |
+| **Effort**      | One sub-agent per file, scaled to the size of your codebase.     | 2/5 |
+| **Time**        | Parallel per file, then merged into one report. Still read-only. | 3/5 |
+| **Token Usage** | Higher, but isolated. Each sub-agent scans in its own context.   | 3/5 |
+
+````md
+/lagune You are a cybersecurity orchestrator using Lagune to enumerate, dispatch a subagent per path, and merge their reports (all content is read by the subagents).
+
+You must delegate the task to sub-agents based on the current project's size: the larger the codebase, the more sub-agents should be dispatched, all in parallel, giving each the prompt below:
+
+```prompt
+/lagune You are a cybersecurity researcher with deep expertise in defensive security, using Lagune to improve your knowledge and precision.
+
+Scan <path> on your own and pair each flaw you find with a concrete fix. This is a standalone sweep, not the Blue Team flow: do not run detect, plan, harden, or verify, and write nothing to Lagune's tracking.
+
+At the end, list every flaw in <path>, each with its severity and a concrete fix.
+```
+
+At the end, merge all sub-agent reports into one prioritized list of flaws and fixes.
+````
+
+**Warning**
+
+A quick scan is one broad, unscoped prompt, so some agents are likelier to refuse it or cut it short. If yours pushes back, run the full **Blue Team flow** below instead: its scoped, step-by-step phases are far less likely to be blocked.
+
+---
+
+## 🌊 Auto Blue Team Audit Flow
+
+Runs the [full command flow](https://lagune.ai/docs/get-started/commands) end to end without asking for user confirmation.
+
+**🪼 Default**
+
+| Aspect          | Trade-off                                                                                | Level               |
+| --------------- | ---------------------------------------------------------------------------------------- | ------------------- |
+| **Effort**      | One agent, no sub-agents, regardless of codebase size.                                   | 3/5 |
+| **Time**        | Medium, but less thorough in large codebases. Each command runs once, one after another. | 4/5 |
+| **Token Usage** | Lower, but less isolated. Every command shares the same context.                         | 4/5 |
+
+```md
+Execute the following commands, one by one: `/lagune.charter`, `/lagune.detect`, `/lagune.plan`, `/lagune.harden`, and `/lagune.verify`.
+
+## Loop
+
+When `/lagune.verify` reproves one or more fixes, repeat `/lagune.harden` and then `/lagune.verify` until all findings are properly resolved.
+
+## Important
+
+The `/lagune.harden` command requires user confirmation before executing. Confirm everything automatically to not block the execution.
+
+- Don't pause, don't ask: in case of doubt, do everything in "full" mode.
+```
+
+**🐋 Multi Agents (Deep Scan)**
+
+| Aspect          | Trade-off                                                                                                   | Level               |
+| --------------- | ----------------------------------------------------------------------------------------------------------- | ------------------- |
+| **Effort**      | The number of sub-agents is scaled to the size of your codebase.                                            | 5/5 |
+| **Time**        | Longer, but more thorough. Dispatches multiple sub-agents to detect, plan, and harden findings in parallel. | 5/5 |
+| **Token Usage** | Higher, but safer. Each sub-agent has its own isolated context without bias.                                | 5/5 |
+
+````md
+Execute the following commands each to one sub-agent, one at a time (without backticks, just the command):
+
+Sub-agent 1 prompt: `/lagune.charter`
+Sub-agent 2 prompt: `/lagune.detect`
+Sub-agent 3 prompt: `/lagune.plan`
+Sub-agent 4 prompt: `/lagune.harden`
+Sub-agent 5 prompt: `/lagune.verify`
+
+In the `/lagune.detect`, `/lagune.plan`, `/lagune.harden`, and `/lagune.verify` commands, you must delegate the task to sub-agents based on the current project's size: the larger the codebase, the more sub-agents should be dispatched. For example:
+
+```prompt
+/lagune.detect <path>
+```
+
+```prompt
+/lagune.plan <finding>
+```
+
+```prompt
+/lagune.harden <finding>
+```
+
+```prompt
+/lagune.verify <finding>
+```
+
+- Multiple agents on the same command should be dispatched in parallel.
+- At the end of all `/lagune.detect` sub-agents, perform:
+
+```prompt
+/lagune.detect merge equivalent findings. Don't detect for new findings nor scan the codebase again.
+```
+
+## Loop
+
+When `/lagune.verify` reproves one or more fixes, repeat `/lagune.harden` and then `/lagune.verify` until all findings are properly resolved.
+
+## Important
+
+The `/lagune.harden` command requires user confirmation before executing. Confirm everything automatically to not block the execution.
+
+- Don't pause, don't ask: in case of doubt, do everything in "full" mode.
+````
+
+---
+
+## 🪄 Scoped Detection
+
+Point [`/lagune.detect`](https://lagune.ai/docs/commands/detect) at a slice of your project instead of the whole thing. Describe the scope in plain language (a commit, a pull request, or a real situation) and it maps only the security-relevant findings there.
+
+**Tip**
+
+Everything it detects here is a normal finding, so you can carry it straight into `/lagune.plan`, `/lagune.harden`, and `/lagune.verify`, scoped to just those items.
+
+**📌 Since a commit**
+
+Give a fresh batch of commits its own security pass, scoped to just what they changed, for example:
+
+```prompt
+/lagune.detect Scope the detection to everything that changed since commit `a1b2c3d`.
+```
+
+**🔀 Branch or PR diff**
+
+Review a pull request for security before it merges, scoped to just its diff, for example:
+
+```prompt
+/lagune.detect Scope the detection to the changes this branch introduces against `main`.
+```
+
+**⛑️ After an incident**
+
+Describe what happened in your own words. Lagune reads the situation, not a flag, and turns it into a focused hunt, for example:
+
+```prompt
+/lagune.detect Our site had a data leak a few weeks ago. I don't know exactly how it happened, and I'm worried something is still open that could leak data again. Go through the code carefully, focus on anywhere sensitive data is read, stored, or exposed, and map anything that could still be a way out. Treat this as a real incident, not a drill.
+```
+
+---
+
+## 🚨 Zero Trust Audit
+
+Treats the whole workspace and every dependency as hostile: it hunts for interpreters, network calls, encoded payloads, and code hidden in unlikely places to slip past scanners, then ends with a go/no-go verdict on whether the project is safe to use.
+
+We recommend installing with the specializations this audit leans on:
+
+- **OWASP**, **AI/LLM**, and the project's stack (e.g., **JavaScript**, **Python**, etc.).
+
+**Danger**
+
+Be careful when running projects from untrusted sources in your local environment. Use an isolated environment, such as a **sandbox** (recommended), **VM**, or similar, to prevent malicious code from affecting your system.
+
+**🪼 Default**
+
+| Aspect          | Trade-off                                                                                       | Level               |
+| --------------- | ----------------------------------------------------------------------------------------------- | ------------------- |
+| **Effort**      | One agent sweeps the whole workspace, no sub-agents.                                            | 2/5 |
+| **Time**        | Medium. One agent works through the code and its dependencies in sequence.                      | 3/5 |
+| **Token Usage** | Moderate, but shared. The sub-skills, the code, and the dependencies all load into one context. | 3/5 |
+
+```md
+/lagune You are a cybersecurity researcher with deep expertise in zero trust defensive security, using Lagune to improve your knowledge and precision.
+
+Map the entire workspace as an untrusted source and a potential malicious scope. Every interpreter, fetch, base64, and the like must be treated as a potential threat.
+
+Extend your analysis to the dependencies and sub-dependencies: a project may try to hide malicious code in an unlikely place to slip past scanners.
+
+Mandatory sub-skills (read them one at a time):
+
+- @.lagune/skills/interpreter.md
+- @.lagune/skills/secrets.md
+- @.lagune/skills/llm.md
+- @.lagune/skills/path.md
+
+To be clear: every mapped vulnerability must be treated as a potential threat, without exception.
+
+At the end, give a verdict on whether the project is safe and trustworthy for me to use or not.
+```
+
+**🐋 Multi Agents (Deep Scan)**
+
+| Aspect          | Trade-off                                                                             | Level               |
+| --------------- | ------------------------------------------------------------------------------------- | ------------------- |
+| **Effort**      | One sub-agent per file, scaled to the size of your codebase.                          | 5/5 |
+| **Time**        | Longer, but more thorough. Files are swept in parallel, then merged into one verdict. | 4/5 |
+| **Token Usage** | Highest, but safest. Each sub-agent reads the sub-skills in its own isolated context. | 5/5 |
+
+````md
+/lagune You are a cybersecurity orchestrator using Lagune to enumerate, dispatch a subagent per file, and generate reports (all content is read by the subagents).
+
+Dispatch one sub-agent per file, all in parallel, giving each the prompt below, scoped to its file:
+
+```prompt
+/lagune You are a cybersecurity researcher with deep expertise in zero trust defensive security, using Lagune to improve your knowledge and precision.
+
+Treat <file> as an untrusted source and a potential malicious scope. Every interpreter, fetch, base64, and the like must be treated as a potential threat.
+
+Extend the analysis to whatever <file> imports, including dependencies and sub-dependencies, where malicious code may hide to slip past scanners.
+
+Mandatory sub-skills for every sub-agent (read them one at a time):
+
+- @.lagune/skills/interpreter.md
+- @.lagune/skills/secrets.md
+- @.lagune/skills/llm.md
+- @.lagune/skills/path.md
+
+To be clear: every mapped vulnerability must be treated as a potential threat, without exception.
+
+At the end, give a verdict on whether the project is safe and trustworthy for me to use or not.
+```
+
+At the end, merge all sub-agent reports into one final verdict.
+````
 
 ---
 
@@ -1495,7 +2324,7 @@ A URL that different parsers read differently, which is a classic SSRF bypass. T
 > The Security-Driven Hardening (SDH) methodology: a context-aware, blue-team convention for auditing and hardening AI-assisted and vibe-coded software.
 
 Canonical: https://lagune.ai/docs/references/paper
-Last updated: 2026-07-13
+Last updated: 2026-07-24
 
 - **Weslley Araújo**
 - **Methodology Paper, 2026.**
@@ -2076,7 +2905,7 @@ Lagune is the proof, but the contribution is the convention. SDH is offered as t
 > Plain-language definitions of every Lagune and Security-Driven Hardening term: SDH, charter, detect, finding, control, harden, verify, stand down, closability, sub-skills, and specializations.
 
 Canonical: https://lagune.ai/docs/references/glossary
-Last updated: 2026-07-14
+Last updated: 2026-07-24
 
 Every load-bearing term in Lagune and the Security-Driven Hardening methodology, defined once, in plain language.
 
@@ -2160,102 +2989,167 @@ When verify proves a risk closed, the finding is stood down: removed from the wh
 
 ---
 
-# Agent Compatibility: Lagune vs OpenSpec, Spec Kit, and Skills.sh
+# Lagune vs. Deepsec: Two AI-Driven Security Approaches, Side by Side
 
-> Agent-by-agent compatibility of Lagune against other agent-driven workflow tools, OpenSpec, Spec Kit, Superpowers, and Skills.sh.
+> A reference comparing Lagune and Vercel's Deepsec across how they work, lifecycle, detection, cost, findings, and closure.
 
-Canonical: https://lagune.ai/docs/references/comparison
-Last updated: 2026-07-14
+Canonical: https://lagune.ai/docs/references/deepsec
+Last updated: 2026-07-24
 
-Agent-by-agent compatibility across other agent-driven workflow tools: [OpenSpec](https://github.com/Fission-AI/OpenSpec) (v1.4.1), [Spec Kit](https://github.com/github/spec-kit) (v0.10.x), [Superpowers](https://github.com/obra/superpowers) (v6.0.3), and [Skills.sh](https://github.com/vercel-labs/skills) (v1.5.16).
+[Lagune](https://github.com/wellwelwel/lagune) and [Deepsec](https://github.com/vercel-labs/deepsec) (`v2.2.1`) are two defensive answers to the same problem: security in the age of AI-assisted development. Their premise, their beginning, middle, and end, and how each presents itself to a user diverge by design, even where their mechanics overlap.
 
-On agent compatibility, Lagune covers **72 agents**, more than OpenSpec (30), Spec Kit (32), Superpowers (10), and Skills.sh (69). Lagune is security-focused where the others are general-purpose workflow tools, so the comparison is compatibility-only.
+**Tip**
 
-| Agent                                                                                       | OpenSpec | Spec Kit | Superpowers | Skills.sh | Lagune |
-| ------------------------------------------------------------------------------------------- | :------: | :------: | :---------: | :-------: | :----: |
-| [AdaL](https://docs.sylph.ai/)                                                              |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [AiderDesk](https://github.com/hotovo/aider-desk)                                           |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Amazon Q Developer](https://aws.amazon.com/q/developer/)                                   |    ✅    |    ❌    |     ❌      |    ❌     |   ✅   |
-| [Amp](https://ampcode.com/)                                                                 |    ❌    |    ✅    |     ❌      |    ✅     |   ✅   |
-| [Antigravity](https://antigravity.google/)                                                  |    ✅    |    ✅    |     ✅      |    ✅     |   ✅   |
-| [AstrBot](https://astrbot.app/)                                                             |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Auggie](https://docs.augmentcode.com/cli/overview)                                         |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
-| [Autohand Code CLI](https://autohand.ai/)                                                   |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Claude Code](https://www.anthropic.com/claude-code)                                        |    ✅    |    ✅    |     ✅      |    ✅     |   ✅   |
-| [Cline](https://github.com/cline/cline)                                                     |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
-| [Code Studio](https://www.syncfusion.com/code-studio/)                                      |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [CodeArts Agent (Huawei)](https://codearts.huaweicloud.com/)                                |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [CodeBuddy](https://www.codebuddy.ai/cli)                                                   |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
-| [Codemaker](https://github.com/codemakerai)                                                 |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Codex (OpenAI)](https://github.com/openai/codex)                                           |    ✅    |    ✅    |     ✅      |    ✅     |   ✅   |
-| [Command Code](https://commandcode.ai/)                                                     |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Continue](https://continue.dev/)                                                           |    ✅    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Cortex Code (Snowflake)](https://docs.snowflake.com/en/user-guide/cortex-code/cortex-code) |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [CoStrict](https://github.com/zgsm-ai/costrict)                                             |    ✅    |    ❌    |     ❌      |    ❌     |   ✅   |
-| [Crush](https://github.com/charmbracelet/crush)                                             |    ✅    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Cursor](https://cursor.sh/)                                                                |    ✅    |    ✅    |     ✅      |    ✅     |   ✅   |
-| [Deep Agents (LangChain)](https://github.com/langchain-ai/deepagents)                       |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Devin](https://cli.devin.ai/docs)                                                          |    ❌    |    ✅    |     ❌      |    ✅     |   ✅   |
-| [Dexto](https://dexto.ai/)                                                                  |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Eve](https://eve.dev/)                                                                     |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Factory Droid](https://factory.ai/)                                                        |    ✅    |    ❌    |     ✅      |    ✅     |   ✅   |
-| [Firebender](https://docs.firebender.com/)                                                  |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Forge / ForgeCode](https://forgecode.dev/)                                                 |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
-| [Gemini CLI](https://github.com/google-gemini/gemini-cli)                                   |    ✅    |    ✅    |     ✅      |    ✅     |   ✅   |
-| [GitHub Copilot](https://code.visualstudio.com/)                                            |    ✅    |    ✅    |     ✅      |    ✅     |   ✅   |
-| [Goose](https://block.github.io/goose/)                                                     |    ❌    |    ✅    |     ❌      |    ✅     |   ✅   |
-| [Hermes](https://hermes-agent.nousresearch.com/)                                            |    ❌    |    ✅    |     ❌      |    ✅     |   ✅   |
-| [IBM Bob](https://www.ibm.com/products/bob)                                                 |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
-| [iFlow](https://docs.iflow.cn/en/cli/quickstart)                                            |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
-| [inference.sh](https://inference.sh/)                                                       |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Jazz](https://github.com/lvndry/jazz)                                                      |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Junie (JetBrains)](https://junie.jetbrains.com/)                                           |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
-| [Kilo Code](https://github.com/Kilo-Org/kilocode)                                           |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
-| [Kimi](https://code.kimi.com/)                                                              |    ✅    |    ✅    |     ✅      |    ✅     |   ✅   |
-| [Kiro](https://kiro.dev/docs/cli/)                                                          |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
-| [Kode](https://github.com/shareAI-lab/kode)                                                 |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Lingma](https://lingma.aliyun.com/)                                                        |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
-| [Loaf](https://github.com/levifig/loaf)                                                     |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [MCPJam](https://mcpjam.com/)                                                               |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Mistral Vibe](https://github.com/mistralai/mistral-vibe)                                   |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
-| [Moxby](https://moxby.com/)                                                                 |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Mux](https://mux.coder.com/)                                                               |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Neovate](https://neovateai.dev/)                                                           |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Ona](https://ona.com/)                                                                     |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [OpenClaw](https://docs.openclaw.ai/)                                                       |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [OpenCode](https://opencode.ai/)                                                            |    ✅    |    ✅    |     ✅      |    ✅     |   ✅   |
-| [OpenHands](https://docs.openhands.dev/)                                                    |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Pi](https://pi.dev)                                                                        |    ✅    |    ✅    |     ✅      |    ✅     |   ✅   |
-| [Pochi](https://getpochi.com/)                                                              |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [PromptScript](https://getpromptscript.dev/)                                                |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Qoder](https://qoder.com/cli)                                                              |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
-| [Qwen Code](https://github.com/QwenLM/qwen-code)                                            |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
-| [Reasonix](https://github.com/esengine/DeepSeek-Reasonix)                                   |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Replit](https://replit.com/)                                                               |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Roo Code](https://roocode.com/)                                                            |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
-| [RovoDev (Atlassian)](https://www.atlassian.com/software/rovo-dev)                          |    ❌    |    ✅    |     ❌      |    ✅     |   ✅   |
-| [SHAI (OVHcloud)](https://github.com/ovh/shai)                                              |    ❌    |    ✅    |     ❌      |    ❌     |   ✅   |
-| [Tabnine CLI](https://docs.tabnine.com/main/getting-started/tabnine-cli)                    |    ❌    |    ✅    |     ❌      |    ✅     |   ✅   |
-| [Terramind](https://terramind.com/)                                                         |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Tinycloud](https://tinycloud.cloudglue.dev/)                                               |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Trae](https://www.trae.ai/)                                                                |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
-| [Warp](https://www.warp.dev/)                                                               |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Windsurf](https://windsurf.com/)                                                           |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
-| [ZCode](https://zcode.z.ai/)                                                                |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Zed](https://zed.dev/)                                                                     |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Zencoder](https://zencoder.ai/)                                                            |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| [Zenflow](https://zencoder.ai/zenflow)                                                      |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
-| **Total**                                                                                   |  **30**  |  **32**  |   **10**    |  **69**   | **72** |
+Is Lagune inspired by Deepsec? No, Lagune is written from scratch and is inspired by Spec-Driven Development and Security Hardening. The two projects were developed independently, and the comparison here is to help users understand their differences.
+
+## At a glance
+
+| Aspect            | Lagune                                                                             | Deepsec                                                             |
+| ----------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Kind              | A methodology (SDH) with a reference implementation                                | A product: an agent-powered vulnerability scanner                   |
+| Center of gravity | A charter and on-demand knowledge drive the agent, grounded in deterministic hooks | A wide regex net feeds a mandatory AI investigation                 |
+| What it produces  | Hardened code, proofs, and a tracked chain of findings                             | A severity-ranked, triaged findings report                          |
+| Touches your code | Yes: `harden` edits your code                                                      | No: static analysis only, emits findings and recommendation text    |
+| Runtime           | Runs on the agent and model you already run, any tier                              | Runs its own model pipeline, a frontier tier by default             |
+| Getting started   | One `init`, then drive it in plain language, no new tool to stand up               | Stand up a `.deepsec/` workspace, install deps, and add a model key |
+
+## How it works
+
+Lagune is agent-first: the agent drives, pulls in knowledge on demand for what the code is, and delegates a decidable slice to the deterministic hooks.
+
+Deepsec is deterministic-first: a wide scan flags candidates that point a mandatory model at what to investigate and judge.
+
+| Aspect             | Lagune                                                                                        | Deepsec                                                          |
+| ------------------ | --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| Order              | Charter and matched knowledge steer the agent, which delegates to hooks and judges the rest   | Matchers flag candidates, the model investigates and judges each |
+| Deterministic role | Multi-language hooks that return a verdict or aim the agent, combined with category knowledge | Matchers that flag candidates for the mandatory model to judge   |
+| Development flow   | `/lagune` builds securely inline as you code                                                  | It reviews code, it does not write it                            |
+| Audit flow         | `charter` → `detect` → `plan` → `harden` → `verify`                                           | `scan` → `process` → `triage` → `revalidate` → `report`          |
+| The AI's job       | Reason from the knowledge, apply the fix, and prove it holds                                  | Investigate every candidate and report the findings              |
+
+## Lifecycle
+
+Lagune works before, during, and after the code is written. Deepsec reviews a repository once the code exists.
+
+| Moment             | Lagune                                                           | Deepsec                                                 |
+| ------------------ | ---------------------------------------------------------------- | ------------------------------------------------------- |
+| Before code exists | `charter` mints a security policy from stated intent             | Starts from existing code: `init` needs a directory     |
+| While building     | `/lagune` builds safe-by-default inline, no artifact left behind | Reviews after building, not during it                   |
+| On existing code   | `detect` → `plan` → `harden` → `verify`                          | `scan` → `process`, the core flow                       |
+| Continuous review  | Re-run phases per scope, no packaged CI gate                     | Incremental re-scan, `process --diff` as a CI exit gate |
+
+## Detection layer
+
+The two deterministic layers are opposite in kind: one decides, the other flags.
+
+| Aspect          | Lagune                                                              | Deepsec                                                        |
+| --------------- | ------------------------------------------------------------------- | -------------------------------------------------------------- |
+| Grouping        | Security groups and hooks per specialization or sub-skill           | Matchers per pattern or framework                              |
+| Output          | Literal verdict (finding / review / advisory) plus a classify label | Verdict-less candidate (slug, lines, snippet, matched pattern) |
+| Tuning          | Precision: comment-aware, placeholder and window guards             | Recall: wide nets, the AI prunes false positives after         |
+| Depth           | Deeper on shared classes                                            | Broader, less deep on shared classes                           |
+| False positives | Kept low at the source, then judged in context                      | Over-generated on purpose, cut back by a `revalidate` pass     |
+
+## Knowledge and judgment
+
+Both carry security knowledge the regex cannot. They differ in where it lives and who can shape it.
+
+| Aspect              | Lagune                                                                     | Deepsec                                                                      |
+| ------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Form                | Editable markdown modules, several backed by a deterministic hook          | A short prompt and per-tech highlights, drawing on the model's own knowledge |
+| Selection           | Matched to the code, loaded only when its context is present               | Injected into every AI batch, plus highlights for the detected tech          |
+| Who authors it      | The user edits modules and adds new ones with `specialize`                 | The maintainer owns the prompt, the user fills an `INFO.md`                  |
+| Where judgment sits | The hooks decide their floor, the agent judges the rest from the knowledge | Centralized: one AI processor judges every candidate                         |
+| Reuse               | One module guides both `detect` and `verify`                               | One prompt drives the single `process` stage                                 |
+
+## Findings and closure
+
+They diverge most on what a finding becomes once it is resolved.
+
+| Aspect         | Lagune                                                           | Deepsec                                                                   |
+| -------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Severity       | A CVSS v4.0 score, adjusted for exposure and stakes              | An AI severity, plus a P0 / P1 / P2 triage of exploitability and impact   |
+| Verdicts       | Risk closed, not closed, or cannot tell from the code            | true-positive, false-positive, fixed, uncertain, accepted-risk, duplicate |
+| Persistence    | Working chain reconciles, closed findings distilled to a history | Append-only per-file records, nothing removed                             |
+| End state      | Closable: a proven finding stands down, the chain can rest       | Every finding is kept for good, hidden from views once resolved           |
+| History detail | A compact summary of what the risk was                           | The full verdict trail, including how it was fixed                        |
+
+## Cost
+
+| Aspect              | Lagune                                                                                                                                  | Deepsec                                                                                                                                                                                                      |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Deterministic floor | Free: hooks run with no AI, no key, no network, already emitting verdicts                                                               | Free: `scan` runs with no AI, but emits no verdicts on its own                                                                                                                                               |
+| Typical bill        | Folded into an agent you already run, down to $0 on a local model, the plan price you already use, or per iteration for API-based usage | [Roughly $25 to $1,200 per run for 100 to 2,000 files, more at scale](https://github.com/vercel-labs/deepsec/blob/f75a16803ec5250938bacfe41571d929e8564f45/docs/getting-started.md#run-the-ai-investigation) |
+| Cheapest path       | Any model, including a free local one, closes the cycle                                                                                 | Cheaper paid tiers exist, but findings need the paid AI stage                                                                                                                                                |
+
+## Extensibility and governance
+
+Each opens the layer the other keeps closed.
+
+| Aspect           | Lagune                                           | Deepsec                                         |
+| ---------------- | ------------------------------------------------ | ----------------------------------------------- |
+| What you extend  | Edit modules, or add new via `specialize`        | Add matchers, agents, notifiers, and ownership  |
+| Policy layer     | The charter governs every phase and is versioned | Config is operational (matchers, models, paths) |
+| Override by name | A refined module shadows the built-in            | A matcher slug collision, your matcher wins     |
+
+## Interfaces
+
+Deepsec emits deliverables for a security organization. Lagune renders a live view for whoever runs it.
+
+| Aspect             | Lagune                                                       | Deepsec                                                         |
+| ------------------ | ------------------------------------------------------------ | --------------------------------------------------------------- |
+| Human surface      | A live local dashboard of the whole chain, in plain language | Report, export, metrics, and PR-comment files, plus a docs site |
+| Accountability     | Surfaces files and the sub-skills that applied               | Routes a suggested assignee: on-call, manager, or committer     |
+| Reproducible proof | `prove` writes runnable tests and a disclosure advisory      | Stays static by design, it never executes the target            |
+| Tool self-defense  | Hardens a local write API on the dashboard                   | Hardens its own AI execution against untrusted target code      |
+
+## Scale and deployment
+
+| Aspect          | Lagune                                                        | Deepsec                                                       |
+| --------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| Install         | Scaffolds files into the repo, no separate runtime            | A `.deepsec/` workspace with its own package and dependencies |
+| Scale direction | Scopes to any slice, a context, one file to the whole project | Sweeps whole repositories, up to large monorepos              |
+| Distribution    | Local only, the one server binds to loopback                  | Optional fan-out across Vercel Sandbox worker VMs             |
+| Portability     | Renders commands to dozens of agent formats, adapters as data | Drives a small set of agent SDKs, plugin-extensible           |
+
+## User experience
+
+How each meets the person running it: what the first run takes, and how the operator aims it.
+
+### Onboarding
+
+Lagune runs through the agent already open. Deepsec provisions its own workspace and model access first.
+
+| Aspect             | Lagune                                                     | Deepsec                                                                            |
+| ------------------ | ---------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| First command      | `npx -y lagune@latest init`, then `/lagune.*` in the agent | `npx deepsec init`, then `cd .deepsec`, `pnpm install`, `scan`, `process`          |
+| Credentials to run | No separate key, it uses your current agent                | A model key (e.g., AI Gateway, a 12-hour Vercel OIDC token, or an Anthropic token) |
+
+### Driving it
+
+Both take direction. Lagune reads the shape of the input per phase. Deepsec narrows the file set the same investigation runs over.
+
+| Aspect          | Lagune                                                           | Deepsec                                               |
+| --------------- | ---------------------------------------------------------------- | ----------------------------------------------------- |
+| Whole project   | A phase with no input scans the whole scope                      | `scan` and `process` sweep the repository             |
+| A slice         | Any phase scopes to given files or directories                   | `--files`, `--files-from`, or `--diff` narrow the run |
+| A concern       | A phase scopes to a described worry                              | The investigation prompt is fixed                     |
+| A priority band | `harden` and `verify` scope to Critical, High, Medium, or Low    | Findings are labeled after the run                    |
+| A single value  | A hook scores one snippet, pattern, or URL directly (`-p`, `-u`) | The unit of work is a file                            |
 
 ## Frequently Asked Questions
 
-### How does Lagune compare to OpenSpec, Spec Kit, Superpowers, and Skills.sh?
+### How is Lagune different from Deepsec?
 
-On agent compatibility, Lagune covers 72 agents, more than OpenSpec (30), Spec Kit (32), Superpowers (10), and Skills.sh (69).
+Lagune is agent-first and works before, during, and after the code is written: it sets policy before code, hardens inline while building, and audits, hardens, and verifies code already written. Deepsec is deterministic-first: a wide regex scan feeds a mandatory frontier-model investigation that reviews existing code and reports findings, without changing it.
 
-### Which agent-workflow tool supports the most agents?
+### Can I run either one for free?
 
-Lagune, at 72 agents in this comparison.
+Lagune's whole flow can run at $0 on a free local model, and its deterministic hooks emit verdicts with no AI at all. Deepsec's scan is free but emits no verdicts, so any finding requires its paid AI stage.
+
+### Does either modify my code?
+
+Lagune does: harden applies fixes to your code. Deepsec does not: it is static analysis only, emitting findings and recommendation text that a person or agent applies separately.
 
 ---
 
@@ -2264,7 +3158,7 @@ Lagune, at 72 agents in this comparison.
 > Where the built-in OWASP sub-skill knowledge comes from, mapped to its canonical OWASP attack and Cheat Sheet pages.
 
 Canonical: https://lagune.ai/docs/references/skills-sources
-Last updated: 2026-07-10
+Last updated: 2026-07-24
 
 This document maps every OWASP **attack** (`www-community`) and **Cheat Sheet** (`CheatSheetSeries`) to a security category, each linked to its canonical public page. Within a category, equivalent items share a single checklist line: the attack(s) and the cheat sheet(s) that address the same risk are listed together, comma-separated. Items with no direct counterpart stand on their own line.
 
@@ -2615,12 +3509,111 @@ These are not sub-skill terrains and carry no checkbox: they are governance, pro
 
 ---
 
+# Agent Compatibility: Lagune vs OpenSpec, Spec Kit, and Skills.sh
+
+> Agent-by-agent compatibility of Lagune against other agent-driven workflow tools, OpenSpec, Spec Kit, Superpowers, and Skills.sh.
+
+Canonical: https://lagune.ai/docs/references/comparison
+Last updated: 2026-07-24
+
+Agent-by-agent compatibility across other agent-driven workflow tools: [OpenSpec](https://github.com/Fission-AI/OpenSpec) (v1.4.1), [Spec Kit](https://github.com/github/spec-kit) (v0.10.x), [Superpowers](https://github.com/obra/superpowers) (v6.0.3), and [Skills.sh](https://github.com/vercel-labs/skills) (v1.5.16).
+
+On agent compatibility, Lagune covers **72 agents**, more than OpenSpec (30), Spec Kit (32), Superpowers (10), and Skills.sh (69). Lagune is security-focused where the others are general-purpose workflow tools, so the comparison is compatibility-only.
+
+| Agent                                                                                       | OpenSpec | Spec Kit | Superpowers | Skills.sh | Lagune |
+| ------------------------------------------------------------------------------------------- | :------: | :------: | :---------: | :-------: | :----: |
+| [AdaL](https://docs.sylph.ai/)                                                              |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [AiderDesk](https://github.com/hotovo/aider-desk)                                           |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Amazon Q Developer](https://aws.amazon.com/q/developer/)                                   |    ✅    |    ❌    |     ❌      |    ❌     |   ✅   |
+| [Amp](https://ampcode.com/)                                                                 |    ❌    |    ✅    |     ❌      |    ✅     |   ✅   |
+| [Antigravity](https://antigravity.google/)                                                  |    ✅    |    ✅    |     ✅      |    ✅     |   ✅   |
+| [AstrBot](https://astrbot.app/)                                                             |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Auggie](https://docs.augmentcode.com/cli/overview)                                         |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
+| [Autohand Code CLI](https://autohand.ai/)                                                   |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Claude Code](https://www.anthropic.com/claude-code)                                        |    ✅    |    ✅    |     ✅      |    ✅     |   ✅   |
+| [Cline](https://github.com/cline/cline)                                                     |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
+| [Code Studio](https://www.syncfusion.com/code-studio/)                                      |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [CodeArts Agent (Huawei)](https://codearts.huaweicloud.com/)                                |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [CodeBuddy](https://www.codebuddy.ai/cli)                                                   |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
+| [Codemaker](https://github.com/codemakerai)                                                 |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Codex (OpenAI)](https://github.com/openai/codex)                                           |    ✅    |    ✅    |     ✅      |    ✅     |   ✅   |
+| [Command Code](https://commandcode.ai/)                                                     |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Continue](https://continue.dev/)                                                           |    ✅    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Cortex Code (Snowflake)](https://docs.snowflake.com/en/user-guide/cortex-code/cortex-code) |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [CoStrict](https://github.com/zgsm-ai/costrict)                                             |    ✅    |    ❌    |     ❌      |    ❌     |   ✅   |
+| [Crush](https://github.com/charmbracelet/crush)                                             |    ✅    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Cursor](https://cursor.sh/)                                                                |    ✅    |    ✅    |     ✅      |    ✅     |   ✅   |
+| [Deep Agents (LangChain)](https://github.com/langchain-ai/deepagents)                       |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Devin](https://cli.devin.ai/docs)                                                          |    ❌    |    ✅    |     ❌      |    ✅     |   ✅   |
+| [Dexto](https://dexto.ai/)                                                                  |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Eve](https://eve.dev/)                                                                     |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Factory Droid](https://factory.ai/)                                                        |    ✅    |    ❌    |     ✅      |    ✅     |   ✅   |
+| [Firebender](https://docs.firebender.com/)                                                  |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Forge / ForgeCode](https://forgecode.dev/)                                                 |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
+| [Gemini CLI](https://github.com/google-gemini/gemini-cli)                                   |    ✅    |    ✅    |     ✅      |    ✅     |   ✅   |
+| [GitHub Copilot](https://code.visualstudio.com/)                                            |    ✅    |    ✅    |     ✅      |    ✅     |   ✅   |
+| [Goose](https://block.github.io/goose/)                                                     |    ❌    |    ✅    |     ❌      |    ✅     |   ✅   |
+| [Hermes](https://hermes-agent.nousresearch.com/)                                            |    ❌    |    ✅    |     ❌      |    ✅     |   ✅   |
+| [IBM Bob](https://www.ibm.com/products/bob)                                                 |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
+| [iFlow](https://docs.iflow.cn/en/cli/quickstart)                                            |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
+| [inference.sh](https://inference.sh/)                                                       |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Jazz](https://github.com/lvndry/jazz)                                                      |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Junie (JetBrains)](https://junie.jetbrains.com/)                                           |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
+| [Kilo Code](https://github.com/Kilo-Org/kilocode)                                           |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
+| [Kimi](https://code.kimi.com/)                                                              |    ✅    |    ✅    |     ✅      |    ✅     |   ✅   |
+| [Kiro](https://kiro.dev/docs/cli/)                                                          |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
+| [Kode](https://github.com/shareAI-lab/kode)                                                 |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Lingma](https://lingma.aliyun.com/)                                                        |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
+| [Loaf](https://github.com/levifig/loaf)                                                     |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [MCPJam](https://mcpjam.com/)                                                               |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Mistral Vibe](https://github.com/mistralai/mistral-vibe)                                   |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
+| [Moxby](https://moxby.com/)                                                                 |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Mux](https://mux.coder.com/)                                                               |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Neovate](https://neovateai.dev/)                                                           |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Ona](https://ona.com/)                                                                     |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [OpenClaw](https://docs.openclaw.ai/)                                                       |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [OpenCode](https://opencode.ai/)                                                            |    ✅    |    ✅    |     ✅      |    ✅     |   ✅   |
+| [OpenHands](https://docs.openhands.dev/)                                                    |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Pi](https://pi.dev)                                                                        |    ✅    |    ✅    |     ✅      |    ✅     |   ✅   |
+| [Pochi](https://getpochi.com/)                                                              |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [PromptScript](https://getpromptscript.dev/)                                                |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Qoder](https://qoder.com/cli)                                                              |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
+| [Qwen Code](https://github.com/QwenLM/qwen-code)                                            |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
+| [Reasonix](https://github.com/esengine/DeepSeek-Reasonix)                                   |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Replit](https://replit.com/)                                                               |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Roo Code](https://roocode.com/)                                                            |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
+| [RovoDev (Atlassian)](https://www.atlassian.com/software/rovo-dev)                          |    ❌    |    ✅    |     ❌      |    ✅     |   ✅   |
+| [SHAI (OVHcloud)](https://github.com/ovh/shai)                                              |    ❌    |    ✅    |     ❌      |    ❌     |   ✅   |
+| [Tabnine CLI](https://docs.tabnine.com/main/getting-started/tabnine-cli)                    |    ❌    |    ✅    |     ❌      |    ✅     |   ✅   |
+| [Terramind](https://terramind.com/)                                                         |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Tinycloud](https://tinycloud.cloudglue.dev/)                                               |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Trae](https://www.trae.ai/)                                                                |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
+| [Warp](https://www.warp.dev/)                                                               |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Windsurf](https://windsurf.com/)                                                           |    ✅    |    ✅    |     ❌      |    ✅     |   ✅   |
+| [ZCode](https://zcode.z.ai/)                                                                |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Zed](https://zed.dev/)                                                                     |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Zencoder](https://zencoder.ai/)                                                            |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| [Zenflow](https://zencoder.ai/zenflow)                                                      |    ❌    |    ❌    |     ❌      |    ✅     |   ✅   |
+| **Total**                                                                                   |  **30**  |  **32**  |   **10**    |  **69**   | **72** |
+
+## Frequently Asked Questions
+
+### How does Lagune compare to OpenSpec, Spec Kit, Superpowers, and Skills.sh?
+
+On agent compatibility, Lagune covers 72 agents, more than OpenSpec (30), Spec Kit (32), Superpowers (10), and Skills.sh (69).
+
+### Which agent-workflow tool supports the most agents?
+
+Lagune, at 72 agents in this comparison.
+
+---
+
 # /lagune.repair: Fix Broken Finding Tracking
 
 > Repair the chain when a rename or a moved file confuses Lagune's tracking.
 
 Canonical: https://lagune.ai/docs/commands/repair
-Last updated: 2026-07-13
+Last updated: 2026-07-24
 
 🧰 Repair the chain when a rename or a moved file confuses it.
 
@@ -2652,7 +3645,7 @@ The one volatile thing the tracking stores is the file paths the item points at.
 > Move a legacy .bluespec/ install to Lagune with a single command, keeping your charter, artifacts, tracking, and own sub-skills.
 
 Canonical: https://lagune.ai/docs/commands/migrate
-Last updated: 2026-07-14
+Last updated: 2026-07-24
 
 🔀 Move a legacy `.bluespec/` install to **Lagune**, keeping everything you wrote.
 

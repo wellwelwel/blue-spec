@@ -1,0 +1,72 @@
+# jwt hook: Detect unpinned JWT verification
+
+> Sweep a codebase for JWT verification without an algorithm pin, or score a single call, from the command line.
+
+Canonical: https://lagune.ai/docs/hooks/jwt
+Last updated: 2026-07-24
+
+The `jwt` hook flags **JWT verification without an algorithm pin**, the algorithm-confusion hole where a verifier trusts the token's own `alg` header, and **verification turned off entirely**. It is **language-aware**, reading each file by its own JWT library, and it is the deterministic engine behind the [`federation` sub-skill](https://lagune.ai/docs/commands/skills), which you can run yourself in **scan** or **check** mode.
+
+## Run it
+
+**Scan the codebase**
+
+```bash
+node ./.lagune/hooks/jwt.mjs           # scans the whole project
+node ./.lagune/hooks/jwt.mjs -d src    # scans a directory
+node ./.lagune/hooks/jwt.mjs -f auth.ts # scans a single file
+```
+
+**Check a call**
+
+```bash
+node ./.lagune/hooks/jwt.mjs -l javascript -p 'jwt.verify(token, secret)'                    # => unpinned
+node ./.lagune/hooks/jwt.mjs -l python -p 'jwt.decode(t, k, options={"verify_signature": False})' # => unpinned
+node ./.lagune/hooks/jwt.mjs -l python -p 'jwt.decode(t, k, algorithms=["HS256"])'           # => safe
+```
+
+Every line under **Unpinned JWT verification found** is a verify call that sets no `algorithms` allowlist (where the library needs one), accepts an unsafe one (`none`, or an asymmetric algorithm mixed with HMAC), or disables signature checking outright, so it trusts the token's own `alg`. A confirmed exposure, so the hook exits non-zero. A clean run prints `no unpinned JWT verification found`.
+
+## How to read the verdict
+
+| Verdict    | Meaning                                                                                                        |
+| ---------- | -------------------------------------------------------------------------------------------------------------- |
+| `unpinned` | A verify call with no algorithm allowlist (where one is needed), an unsafe one, or with verification disabled. |
+| `safe`     | A verify call that pins a sound algorithm allowlist, or whose library pins it implicitly.                      |
+| `invalid`  | The snippet contains no recognizable verify call to judge.                                                     |
+
+### CLI options
+
+| Option      | Alias | Value          | Description                                                                               |
+| ----------- | ----- | -------------- | ----------------------------------------------------------------------------------------- |
+| `--pattern` | `-p`  | a code snippet | Check one call. Repeat to check several, one verdict per line.                            |
+| `--lang`    | `-l`  | a language     | Required with `-p`: one of javascript, python, go, java, kotlin, php, ruby, rust, csharp. |
+| `--dir`     | `-d`  | a directory    | Scope a scan to a directory. Repeats and combines with `-f`.                              |
+| `--file`    | `-f`  | a file         | Scope a scan to a single file. Repeats and combines with `-d`.                            |
+
+With no option it scans the whole project. `-p` needs `-l` and cannot be combined with `-d` or `-f`.
+
+### Supported languages
+
+The scan reads these libraries, keyed by file extension. Because some pin the algorithm implicitly (a missing explicit list is sound), the "no allowlist ⇒ unpinned" rule applies only where the library expects an explicit one, so a correctly-configured call is never flagged.
+
+| Language                    | Library                 | Flags no-allowlist as unpinned?                                 | Always flags                                    |
+| --------------------------- | ----------------------- | --------------------------------------------------------------- | ----------------------------------------------- |
+| **JavaScript / TypeScript** | jsonwebtoken, jose      | Yes                                                             | `none`, asymmetric+HMAC mix                     |
+| **Python**                  | PyJWT, python-jose      | Yes (PyJWT requires it, python-jose defaults `algorithms=None`) | `none`, `verify_signature: False`               |
+| **Go**                      | golang-jwt              | Yes (no `WithValidMethods`)                                     | `none`, `ParseUnverified`                       |
+| **Ruby**                    | ruby-jwt                | Yes                                                             | `none`, `verify = false`                        |
+| **Java / Kotlin**           | jjwt, nimbus            | No (key-derived)                                                | `none`, an unsigned/`unsecured` parser          |
+| **PHP**                     | firebase/php-jwt        | No (`Key` carries the alg)                                      | `none`                                          |
+| **Rust**                    | jsonwebtoken            | No (`Validation` requires one)                                  | `none`, `insecure_disable_signature_validation` |
+| **C#**                      | Microsoft.IdentityModel | No (multi-line params)                                          | `none`, `RequireSignedTokens = false`           |
+
+**Tip**
+
+The hook decides only the algorithm pin: the claim, key, and flow checks are judgment the [`federation` sub-skill](https://lagune.ai/docs/commands/skills) still covers.
+
+## Frequently Asked Questions
+
+### What is JWT algorithm confusion?
+
+A verifier that reads the algorithm from the token header lets an attacker swap RS256 for HS256 and sign with the public key. Pinning a sound algorithm allowlist in code prevents it, and the jwt hook flags a verify call that sets none or an unsafe one.

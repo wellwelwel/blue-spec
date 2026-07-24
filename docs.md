@@ -3,7 +3,7 @@
 > Get started with Lagune, an open-source, defense-only security workflow that hardens any codebase: set the rules, detect risks, apply fixes, and verify.
 
 Canonical: https://lagune.ai/docs
-Last updated: 2026-07-14
+Last updated: 2026-07-24
 
 **Lagune** helps your AI agent make a project more secure. You point it at your code, the agent figures out what your system actually does, then it guides you through the security work that matters for it.
 
@@ -27,6 +27,73 @@ Instead of running a generic checklist, Lagune detects the context of your syste
 - New here? Start with [Install](https://lagune.ai/docs/get-started/install)
 - Want the command map? See [Commands](https://lagune.ai/docs/get-started/commands)
 - Curious about the on-demand knowledge? Read about the [sub-skills](https://lagune.ai/docs/commands/skills)
+
+## Acknowledgements
+
+### Partners
+
+Partners get an exclusive logo across the repositories and landing pages, plus a spot on a dedicated partners page.
+
+> Help my work grow by [becoming a partner](https://lagune.ai/docs#partners)
+
+### Supporters
+
+Really thanks to everyone who has supported and keeps supporting this work.
+
+<a href='https://github.com/sponsors/wellwelwel'>
+![Our sponsors and supporters](https://wellwelwel.github.io/wellwelwel/sponsors.svg?v=1)
+
+</a>
+
+> Support my work by [becoming a sponsor](https://github.com/sponsors/wellwelwel)
+
+---
+
+## Use a badge ✨
+
+Using **Lagune**? Add one to your **README**:
+
+**Two tones**
+
+![Secured By Lagune](https://img.shields.io/badge/Lagune-2f7bff?logo=springsecurity&logoColor=white&label=Secured%20By&labelColor=303952)
+
+```md
+[![Secured By Lagune](https://img.shields.io/badge/Lagune-2f7bff?logo=springsecurity&logoColor=white&label=Secured%20By&labelColor=303952)](https://lagune.ai)
+```
+
+![Security Powered By Lagune](https://img.shields.io/badge/Lagune-2f7bff?logo=springsecurity&logoColor=white&label=Security%20Powered%20By&labelColor=303952)
+
+```md
+[![Security Powered By Lagune](https://img.shields.io/badge/Lagune-2f7bff?logo=springsecurity&logoColor=white&label=Security%20Powered%20By&labelColor=303952)](https://lagune.ai)
+```
+
+![Security-Driven Hardening with Lagune](https://img.shields.io/badge/Lagune-2f7bff?logo=springsecurity&logoColor=white&label=Security-Driven%20Hardening&labelColor=303952)
+
+```md
+[![Security-Driven Hardening with Lagune](https://img.shields.io/badge/Lagune-2f7bff?logo=springsecurity&logoColor=white&label=Security-Driven%20Hardening&labelColor=303952)](https://lagune.ai)
+```
+
+**Solid**
+
+![Secured By Lagune](https://img.shields.io/badge/Secured%20By%20Lagune-2f7bff?logo=springsecurity&logoColor=white)
+
+```md
+[![Secured By Lagune](https://img.shields.io/badge/Secured%20By%20Lagune-2f7bff?logo=springsecurity&logoColor=white)](https://lagune.ai)
+```
+
+![Security Powered By Lagune](https://img.shields.io/badge/Security%20Powered%20By%20Lagune-2f7bff?logo=springsecurity&logoColor=white)
+
+```md
+[![Security Powered By Lagune](https://img.shields.io/badge/Security%20Powered%20By%20Lagune-2f7bff?logo=springsecurity&logoColor=white)](https://lagune.ai)
+```
+
+![Security-Driven Hardening](https://img.shields.io/badge/Security--Driven%20Hardening-2f7bff?logo=springsecurity&logoColor=white)
+
+```md
+[![Security-Driven Hardening](https://img.shields.io/badge/Security--Driven%20Hardening-2f7bff?logo=springsecurity&logoColor=white)](https://lagune.ai)
+```
+
+---
 
 ## Frequently Asked Questions
 
@@ -57,25 +124,6 @@ SDH is the methodology Lagune implements: a context-aware, blue-team convention 
 ### Does Lagune need an API key?
 
 No. It runs through your own AI agent, so no API keys are required.
-
-## Acknowledgements
-
-### Partners
-
-Partners get an exclusive logo across the repositories and landing pages, plus a spot on a dedicated partners page.
-
-> Help my work grow by [becoming a partner](https://lagune.ai/docs#partners)
-
-### Supporters
-
-Really thanks to everyone who has supported and keeps supporting this work.
-
-<a href='https://github.com/sponsors/wellwelwel'>
-![Our sponsors and supporters](https://wellwelwel.github.io/wellwelwel/sponsors.svg?v=1)
-
-</a>
-
-> Support my work by [becoming a sponsor](https://github.com/sponsors/wellwelwel)
 
 ## Security Policy
 

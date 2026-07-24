@@ -3,7 +3,7 @@
 > Set Lagune up in any project, new or existing, with a single command via npx, and choose the security specializations that fit it.
 
 Canonical: https://lagune.ai/docs/get-started/install
-Last updated: 2026-07-14
+Last updated: 2026-07-24
 
 **Lagune** adapts to your environment, whether it is a new project or an existing one.
 

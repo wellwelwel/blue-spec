@@ -3,7 +3,7 @@
 > Apply the plan's fixes to your code, safely and one at a time.
 
 Canonical: https://lagune.ai/docs/commands/harden
-Last updated: 2026-07-14
+Last updated: 2026-07-24
 
 🔧 Apply the plan's fixes to your code, safely and one at a time.
 

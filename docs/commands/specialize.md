@@ -3,7 +3,7 @@
 > Distill a security source or topic you give it into a new on-demand sub-skill.
 
 Canonical: https://lagune.ai/docs/commands/specialize
-Last updated: 2026-07-14
+Last updated: 2026-07-24
 
 🎓 Specialize **Lagune** in a specific security area, from a source or topic you give it.
 

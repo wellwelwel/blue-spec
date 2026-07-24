@@ -3,7 +3,7 @@
 > The Security-Driven Hardening (SDH) methodology: a context-aware, blue-team convention for auditing and hardening AI-assisted and vibe-coded software.
 
 Canonical: https://lagune.ai/docs/references/paper
-Last updated: 2026-07-13
+Last updated: 2026-07-24
 
 - **Weslley Araújo**
 - **Methodology Paper, 2026.**

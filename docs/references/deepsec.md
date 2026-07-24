@@ -1,0 +1,161 @@
+# Lagune vs. Deepsec: Two AI-Driven Security Approaches, Side by Side
+
+> A reference comparing Lagune and Vercel's Deepsec across how they work, lifecycle, detection, cost, findings, and closure.
+
+Canonical: https://lagune.ai/docs/references/deepsec
+Last updated: 2026-07-24
+
+[Lagune](https://github.com/wellwelwel/lagune) and [Deepsec](https://github.com/vercel-labs/deepsec) (`v2.2.1`) are two defensive answers to the same problem: security in the age of AI-assisted development. Their premise, their beginning, middle, and end, and how each presents itself to a user diverge by design, even where their mechanics overlap.
+
+**Tip**
+
+Is Lagune inspired by Deepsec? No, Lagune is written from scratch and is inspired by Spec-Driven Development and Security Hardening. The two projects were developed independently, and the comparison here is to help users understand their differences.
+
+## At a glance
+
+| Aspect            | Lagune                                                                             | Deepsec                                                             |
+| ----------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Kind              | A methodology (SDH) with a reference implementation                                | A product: an agent-powered vulnerability scanner                   |
+| Center of gravity | A charter and on-demand knowledge drive the agent, grounded in deterministic hooks | A wide regex net feeds a mandatory AI investigation                 |
+| What it produces  | Hardened code, proofs, and a tracked chain of findings                             | A severity-ranked, triaged findings report                          |
+| Touches your code | Yes: `harden` edits your code                                                      | No: static analysis only, emits findings and recommendation text    |
+| Runtime           | Runs on the agent and model you already run, any tier                              | Runs its own model pipeline, a frontier tier by default             |
+| Getting started   | One `init`, then drive it in plain language, no new tool to stand up               | Stand up a `.deepsec/` workspace, install deps, and add a model key |
+
+## How it works
+
+Lagune is agent-first: the agent drives, pulls in knowledge on demand for what the code is, and delegates a decidable slice to the deterministic hooks.
+
+Deepsec is deterministic-first: a wide scan flags candidates that point a mandatory model at what to investigate and judge.
+
+| Aspect             | Lagune                                                                                        | Deepsec                                                          |
+| ------------------ | --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| Order              | Charter and matched knowledge steer the agent, which delegates to hooks and judges the rest   | Matchers flag candidates, the model investigates and judges each |
+| Deterministic role | Multi-language hooks that return a verdict or aim the agent, combined with category knowledge | Matchers that flag candidates for the mandatory model to judge   |
+| Development flow   | `/lagune` builds securely inline as you code                                                  | It reviews code, it does not write it                            |
+| Audit flow         | `charter` → `detect` → `plan` → `harden` → `verify`                                           | `scan` → `process` → `triage` → `revalidate` → `report`          |
+| The AI's job       | Reason from the knowledge, apply the fix, and prove it holds                                  | Investigate every candidate and report the findings              |
+
+## Lifecycle
+
+Lagune works before, during, and after the code is written. Deepsec reviews a repository once the code exists.
+
+| Moment             | Lagune                                                           | Deepsec                                                 |
+| ------------------ | ---------------------------------------------------------------- | ------------------------------------------------------- |
+| Before code exists | `charter` mints a security policy from stated intent             | Starts from existing code: `init` needs a directory     |
+| While building     | `/lagune` builds safe-by-default inline, no artifact left behind | Reviews after building, not during it                   |
+| On existing code   | `detect` → `plan` → `harden` → `verify`                          | `scan` → `process`, the core flow                       |
+| Continuous review  | Re-run phases per scope, no packaged CI gate                     | Incremental re-scan, `process --diff` as a CI exit gate |
+
+## Detection layer
+
+The two deterministic layers are opposite in kind: one decides, the other flags.
+
+| Aspect          | Lagune                                                              | Deepsec                                                        |
+| --------------- | ------------------------------------------------------------------- | -------------------------------------------------------------- |
+| Grouping        | Security groups and hooks per specialization or sub-skill           | Matchers per pattern or framework                              |
+| Output          | Literal verdict (finding / review / advisory) plus a classify label | Verdict-less candidate (slug, lines, snippet, matched pattern) |
+| Tuning          | Precision: comment-aware, placeholder and window guards             | Recall: wide nets, the AI prunes false positives after         |
+| Depth           | Deeper on shared classes                                            | Broader, less deep on shared classes                           |
+| False positives | Kept low at the source, then judged in context                      | Over-generated on purpose, cut back by a `revalidate` pass     |
+
+## Knowledge and judgment
+
+Both carry security knowledge the regex cannot. They differ in where it lives and who can shape it.
+
+| Aspect              | Lagune                                                                     | Deepsec                                                                      |
+| ------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Form                | Editable markdown modules, several backed by a deterministic hook          | A short prompt and per-tech highlights, drawing on the model's own knowledge |
+| Selection           | Matched to the code, loaded only when its context is present               | Injected into every AI batch, plus highlights for the detected tech          |
+| Who authors it      | The user edits modules and adds new ones with `specialize`                 | The maintainer owns the prompt, the user fills an `INFO.md`                  |
+| Where judgment sits | The hooks decide their floor, the agent judges the rest from the knowledge | Centralized: one AI processor judges every candidate                         |
+| Reuse               | One module guides both `detect` and `verify`                               | One prompt drives the single `process` stage                                 |
+
+## Findings and closure
+
+They diverge most on what a finding becomes once it is resolved.
+
+| Aspect         | Lagune                                                           | Deepsec                                                                   |
+| -------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Severity       | A CVSS v4.0 score, adjusted for exposure and stakes              | An AI severity, plus a P0 / P1 / P2 triage of exploitability and impact   |
+| Verdicts       | Risk closed, not closed, or cannot tell from the code            | true-positive, false-positive, fixed, uncertain, accepted-risk, duplicate |
+| Persistence    | Working chain reconciles, closed findings distilled to a history | Append-only per-file records, nothing removed                             |
+| End state      | Closable: a proven finding stands down, the chain can rest       | Every finding is kept for good, hidden from views once resolved           |
+| History detail | A compact summary of what the risk was                           | The full verdict trail, including how it was fixed                        |
+
+## Cost
+
+| Aspect              | Lagune                                                                                                                                  | Deepsec                                                                                                                                                                                                      |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Deterministic floor | Free: hooks run with no AI, no key, no network, already emitting verdicts                                                               | Free: `scan` runs with no AI, but emits no verdicts on its own                                                                                                                                               |
+| Typical bill        | Folded into an agent you already run, down to $0 on a local model, the plan price you already use, or per iteration for API-based usage | [Roughly $25 to $1,200 per run for 100 to 2,000 files, more at scale](https://github.com/vercel-labs/deepsec/blob/f75a16803ec5250938bacfe41571d929e8564f45/docs/getting-started.md#run-the-ai-investigation) |
+| Cheapest path       | Any model, including a free local one, closes the cycle                                                                                 | Cheaper paid tiers exist, but findings need the paid AI stage                                                                                                                                                |
+
+## Extensibility and governance
+
+Each opens the layer the other keeps closed.
+
+| Aspect           | Lagune                                           | Deepsec                                         |
+| ---------------- | ------------------------------------------------ | ----------------------------------------------- |
+| What you extend  | Edit modules, or add new via `specialize`        | Add matchers, agents, notifiers, and ownership  |
+| Policy layer     | The charter governs every phase and is versioned | Config is operational (matchers, models, paths) |
+| Override by name | A refined module shadows the built-in            | A matcher slug collision, your matcher wins     |
+
+## Interfaces
+
+Deepsec emits deliverables for a security organization. Lagune renders a live view for whoever runs it.
+
+| Aspect             | Lagune                                                       | Deepsec                                                         |
+| ------------------ | ------------------------------------------------------------ | --------------------------------------------------------------- |
+| Human surface      | A live local dashboard of the whole chain, in plain language | Report, export, metrics, and PR-comment files, plus a docs site |
+| Accountability     | Surfaces files and the sub-skills that applied               | Routes a suggested assignee: on-call, manager, or committer     |
+| Reproducible proof | `prove` writes runnable tests and a disclosure advisory      | Stays static by design, it never executes the target            |
+| Tool self-defense  | Hardens a local write API on the dashboard                   | Hardens its own AI execution against untrusted target code      |
+
+## Scale and deployment
+
+| Aspect          | Lagune                                                        | Deepsec                                                       |
+| --------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| Install         | Scaffolds files into the repo, no separate runtime            | A `.deepsec/` workspace with its own package and dependencies |
+| Scale direction | Scopes to any slice, a context, one file to the whole project | Sweeps whole repositories, up to large monorepos              |
+| Distribution    | Local only, the one server binds to loopback                  | Optional fan-out across Vercel Sandbox worker VMs             |
+| Portability     | Renders commands to dozens of agent formats, adapters as data | Drives a small set of agent SDKs, plugin-extensible           |
+
+## User experience
+
+How each meets the person running it: what the first run takes, and how the operator aims it.
+
+### Onboarding
+
+Lagune runs through the agent already open. Deepsec provisions its own workspace and model access first.
+
+| Aspect             | Lagune                                                     | Deepsec                                                                            |
+| ------------------ | ---------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| First command      | `npx -y lagune@latest init`, then `/lagune.*` in the agent | `npx deepsec init`, then `cd .deepsec`, `pnpm install`, `scan`, `process`          |
+| Credentials to run | No separate key, it uses your current agent                | A model key (e.g., AI Gateway, a 12-hour Vercel OIDC token, or an Anthropic token) |
+
+### Driving it
+
+Both take direction. Lagune reads the shape of the input per phase. Deepsec narrows the file set the same investigation runs over.
+
+| Aspect          | Lagune                                                           | Deepsec                                               |
+| --------------- | ---------------------------------------------------------------- | ----------------------------------------------------- |
+| Whole project   | A phase with no input scans the whole scope                      | `scan` and `process` sweep the repository             |
+| A slice         | Any phase scopes to given files or directories                   | `--files`, `--files-from`, or `--diff` narrow the run |
+| A concern       | A phase scopes to a described worry                              | The investigation prompt is fixed                     |
+| A priority band | `harden` and `verify` scope to Critical, High, Medium, or Low    | Findings are labeled after the run                    |
+| A single value  | A hook scores one snippet, pattern, or URL directly (`-p`, `-u`) | The unit of work is a file                            |
+
+## Frequently Asked Questions
+
+### How is Lagune different from Deepsec?
+
+Lagune is agent-first and works before, during, and after the code is written: it sets policy before code, hardens inline while building, and audits, hardens, and verifies code already written. Deepsec is deterministic-first: a wide regex scan feeds a mandatory frontier-model investigation that reviews existing code and reports findings, without changing it.
+
+### Can I run either one for free?
+
+Lagune's whole flow can run at $0 on a free local model, and its deterministic hooks emit verdicts with no AI at all. Deepsec's scan is free but emits no verdicts, so any finding requires its paid AI stage.
+
+### Does either modify my code?
+
+Lagune does: harden applies fixes to your code. Deepsec does not: it is static analysis only, emitting findings and recommendation text that a person or agent applies separately.

@@ -3,7 +3,7 @@
 > Move a legacy .bluespec/ install to Lagune with a single command, keeping your charter, artifacts, tracking, and own sub-skills.
 
 Canonical: https://lagune.ai/docs/commands/migrate
-Last updated: 2026-07-14
+Last updated: 2026-07-24
 
 🔀 Move a legacy `.bluespec/` install to **Lagune**, keeping everything you wrote.
 

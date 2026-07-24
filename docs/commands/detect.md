@@ -3,7 +3,7 @@
 > Read your code and map what your system does and where the risks are.
 
 Canonical: https://lagune.ai/docs/commands/detect
-Last updated: 2026-07-14
+Last updated: 2026-07-24
 
 🔬 Find out what your system really does and where the risks are.
 
