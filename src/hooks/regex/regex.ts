@@ -11,13 +11,12 @@ const validSource = (regex: RegexInput): string | null => {
   try {
     if (regex instanceof RegExp) {
       new RegExp(regex.source, regex.flags);
-
       return regex.source;
     }
 
     const source = String(regex);
-    new RegExp(source);
 
+    new RegExp(source);
     return source;
   } catch {
     return null;
@@ -46,7 +45,6 @@ export const check = (
 
   const repetitionLimit = options.repetitionLimit ?? DEFAULT_REPETITION_LIMIT;
   const { repetitionCount, backtrack } = scanQuantifiers(source);
-
   const safe = repetitionCount <= repetitionLimit && !backtrack;
 
   return safe ? 'safe' : 'unsafe';

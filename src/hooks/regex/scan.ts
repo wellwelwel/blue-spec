@@ -1,13 +1,26 @@
-import type { FileScan, RegexScanResult } from '../../types/hooks/regex.js';
+import type {
+  FileScan,
+  RegexScanResult,
+  UnsafeFinding,
+} from '../../types/hooks/regex.js';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { languageOf } from '../../core/scan/language.js';
 import { buildsDynamicRegex, wrapsStaticRegex } from './dynamic.js';
 import { extractCandidates } from './extract.js';
-import { languageOf } from './language.js';
 import { check } from './regex.js';
 import { walk } from './walk.js';
 
-const EMPTY: FileScan = { unsafe: [], dynamic: null, staticWrap: null };
+const EMPTY: FileScan = {
+  unsafe: [],
+  dynamic: null,
+  staticWrap: null,
+};
+
+const findings = (sources: Set<string>, file: string): UnsafeFinding[] =>
+  [...sources]
+    .toSorted((a, b) => a.localeCompare(b))
+    .map((source) => ({ file, source }));
 
 const scanFile = async (
   root: string,
@@ -32,9 +45,7 @@ const scanFile = async (
     if (check(source, { repetitionLimit }) === 'unsafe') unsafe.add(source);
 
   return {
-    unsafe: [...unsafe]
-      .toSorted((a, b) => a.localeCompare(b))
-      .map((source) => ({ file, source })),
+    unsafe: findings(unsafe, file),
     dynamic: buildsDynamicRegex(text, language) ? file : null,
     staticWrap: wrapsStaticRegex(text, language) ? file : null,
   };

@@ -1,68 +1,8 @@
 import type {
   CarrierMap,
   LanguageId,
-  LanguageMap,
   RegexCarriers,
 } from '../../types/hooks/regex.js';
-import { extname } from 'node:path';
-
-const EXTENSIONS = {
-  '.js': 'javascript',
-  '.jsx': 'javascript',
-  '.mjs': 'javascript',
-  '.cjs': 'javascript',
-  '.ts': 'javascript',
-  '.tsx': 'javascript',
-  '.mts': 'javascript',
-  '.cts': 'javascript',
-  '.astro': 'javascript',
-  '.vue': 'javascript',
-  '.svelte': 'javascript',
-  '.marko': 'javascript',
-  '.riot': 'javascript',
-  '.py': 'python',
-  '.pyi': 'python',
-  '.rb': 'ruby',
-  '.go': 'go',
-  '.php': 'php',
-  '.rs': 'rust',
-  '.java': 'java',
-  '.cs': 'csharp',
-  '.c': 'c',
-  '.h': 'c',
-  '.cc': 'cpp',
-  '.cpp': 'cpp',
-  '.cxx': 'cpp',
-  '.hpp': 'cpp',
-  '.hh': 'cpp',
-  '.hxx': 'cpp',
-  '.kt': 'kotlin',
-  '.kts': 'kotlin',
-  '.swift': 'swift',
-  '.scala': 'scala',
-  '.sc': 'scala',
-  '.dart': 'dart',
-  '.ps1': 'powershell',
-  '.psm1': 'powershell',
-  '.psd1': 'powershell',
-  '.ex': 'elixir',
-  '.exs': 'elixir',
-  '.m': 'objc',
-  '.mm': 'objc',
-  '.r': 'r',
-  '.jl': 'julia',
-  '.clj': 'clojure',
-  '.cljs': 'clojure',
-  '.cljc': 'clojure',
-  '.edn': 'clojure',
-  '.cr': 'crystal',
-  '.nim': 'nim',
-  '.nims': 'nim',
-  '.v': 'vlang',
-  '.d': 'dlang',
-  '.pl': 'perl',
-  '.pm': 'perl',
-} satisfies LanguageMap;
 
 const NO_CARRIERS: RegexCarriers = {
   slashLiteral: false,
@@ -153,11 +93,6 @@ const CARRIERS = {
   dlang: { slashLiteral: false, quoteApis: ['regex'], stringApis: [] },
   perl: { slashLiteral: true, quoteApis: [], stringApis: [] },
 } satisfies CarrierMap;
-
-const BY_EXTENSION: LanguageMap = EXTENSIONS;
-
-export const languageOf = (file: string): LanguageId | null =>
-  BY_EXTENSION[extname(file).toLowerCase()] ?? null;
 
 export const carriersOf = (language: LanguageId): RegexCarriers =>
   CARRIERS[language];
