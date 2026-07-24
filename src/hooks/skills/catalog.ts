@@ -93,6 +93,11 @@ export const SKILLS_CATALOG: BuiltinSkillEntry[] = [
     groups: ['owasp', 'infra'],
   },
   {
+    name: 'infra',
+    tags: ['Terraform', 'Dockerfile', 'GitHub Actions', 'IaC'],
+    groups: ['infra'],
+  },
+  {
     name: 'serverless',
     tags: ['FaaS', 'Lambda', 'Cloud Functions', 'IAM'],
     groups: ['owasp', 'infra', 'lovable'],
