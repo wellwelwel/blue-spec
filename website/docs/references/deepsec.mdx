@@ -25,13 +25,14 @@ Is Lagune inspired by Deepsec? No, Lagune is written from scratch and is inspire
 
 ## At a glance
 
-| Aspect            | Lagune                                                                             | Deepsec                                                          |
-| ----------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| Kind              | A methodology (SDH) with a reference implementation                                | A product: an agent-powered vulnerability scanner                |
-| Center of gravity | A charter and on-demand knowledge drive the agent, grounded in deterministic hooks | A wide regex net feeds a mandatory AI investigation              |
-| What it produces  | Hardened code, proofs, and a tracked chain of findings                             | A severity-ranked, triaged findings report                       |
-| Touches your code | Yes: `harden` edits your code                                                      | No: static analysis only, emits findings and recommendation text |
-| Runtime           | Runs on the agent and model you already run, any tier                              | Runs its own model pipeline, a frontier tier by default          |
+| Aspect            | Lagune                                                                             | Deepsec                                                             |
+| ----------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Kind              | A methodology (SDH) with a reference implementation                                | A product: an agent-powered vulnerability scanner                   |
+| Center of gravity | A charter and on-demand knowledge drive the agent, grounded in deterministic hooks | A wide regex net feeds a mandatory AI investigation                 |
+| What it produces  | Hardened code, proofs, and a tracked chain of findings                             | A severity-ranked, triaged findings report                          |
+| Touches your code | Yes: `harden` edits your code                                                      | No: static analysis only, emits findings and recommendation text    |
+| Runtime           | Runs on the agent and model you already run, any tier                              | Runs its own model pipeline, a frontier tier by default             |
+| Getting started   | One `init`, then drive it in plain language, no new tool to stand up               | Stand up a `.deepsec/` workspace, install deps, and add a model key |
 
 ## How it works
 
@@ -131,14 +132,6 @@ Deepsec emits deliverables for a security organization. Lagune renders a live vi
 | Scale direction | Scopes to any slice, a context, one file to the whole project | Sweeps whole repositories, up to large monorepos              |
 | Distribution    | Local only, the one server binds to loopback                  | Optional fan-out across Vercel Sandbox worker VMs             |
 | Portability     | Renders commands to dozens of agent formats, adapters as data | Drives a small set of agent SDKs, plugin-extensible           |
-
-## Unique to each
-
-Some capabilities exist on only one side.
-
-| Only in Lagune                                   | Only in Deepsec                                                               |
-| ------------------------------------------------ | ----------------------------------------------------------------------------- |
-| A ReDoS engine and SSRF address canonicalization | Deterministic SQLi, XSS, auth-bypass, and framework route/handler enumeration |
 
 ## User experience
 

@@ -266,6 +266,11 @@ html[data-lagune-docs-theme='dark'] .lagune-docs {
   filter: var(--drop-shadow-card);
 }
 
+.lagune-docs .markdown img[src*='img.shields.io'] {
+  border-radius: 0;
+  filter: none;
+}
+
 .lagune-docs .markdown .lagune-docs-gallery {
   display: flex;
   flex-wrap: wrap;
@@ -498,6 +503,10 @@ html[data-lagune-docs-theme='dark'] .lagune-docs {
 .lagune-docs .theme-admonition :not(pre) > code {
   background: color-mix(in srgb, var(--lagune-adm) 9%, var(--surface));
   border-color: color-mix(in srgb, var(--lagune-adm) 30%, transparent);
+  color: color-mix(in srgb, var(--lagune-adm) 45%, var(--ink));
+}
+
+.lagune-docs .theme-admonition strong {
   color: color-mix(in srgb, var(--lagune-adm) 45%, var(--ink));
 }
 

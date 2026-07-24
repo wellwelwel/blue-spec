@@ -2,7 +2,7 @@
 id: prompts
 title: 'Lagune Prompt Examples: Automate the Blue Team Flow'
 sidebar_label: Prompts
-description: 'Copy-ready Lagune prompts: map and plan fixes, run the full Blue Team flow, or run a Zero Trust audit, each in a single-agent or parallel multi-agent variant.'
+description: 'Copy-ready Lagune prompts: a read-only scan, the full Blue Team flow, and a Zero Trust audit, plus detection scoped to a commit, a branch or PR diff, or a real incident.'
 keywords:
   - lagune prompt
   - lagune example prompt
@@ -13,6 +13,9 @@ keywords:
   - multi-agent
   - deep scan
   - automate security hardening
+  - scoped detection
+  - pull request security review
+  - incident response
 ---
 
 import { Level } from '@site/src/components/docs/Level';
@@ -160,6 +163,46 @@ The `/lagune.harden` command requires user confirmation before executing. Confir
 
 - Don't pause, don't ask: in case of doubt, do everything in "full" mode.
 ````
+
+  </TabItem>
+</Tabs>
+
+---
+
+## 🪄 Scoped Detection
+
+Point [`/lagune.detect`](/docs/commands/detect) at a slice of your project instead of the whole thing. Describe the scope in plain language (a commit, a pull request, or a real situation) and it maps only the security-relevant findings there.
+
+:::tip
+Everything it detects here is a normal finding, so you can carry it straight into `/lagune.plan`, `/lagune.harden`, and `/lagune.verify`, scoped to just those items.
+:::
+
+<Tabs>
+  <TabItem value="commit" label="📌 Since a commit" default>
+
+Give a fresh batch of commits its own security pass, scoped to just what they changed, for example:
+
+```prompt
+/lagune.detect Scope the detection to everything that changed since commit `a1b2c3d`.
+```
+
+  </TabItem>
+  <TabItem value="diff" label="🔀 Branch or PR diff">
+
+Review a pull request for security before it merges, scoped to just its diff, for example:
+
+```prompt
+/lagune.detect Scope the detection to the changes this branch introduces against `main`.
+```
+
+  </TabItem>
+  <TabItem value="incident" label="⛑️ After an incident">
+
+Describe what happened in your own words. Lagune reads the situation, not a flag, and turns it into a focused hunt, for example:
+
+```prompt
+/lagune.detect Our site had a data leak a few weeks ago. I don't know exactly how it happened, and I'm worried something is still open that could leak data again. Go through the code carefully, focus on anywhere sensitive data is read, stored, or exposed, and map anything that could still be a way out. Treat this as a real incident, not a drill.
+```
 
   </TabItem>
 </Tabs>

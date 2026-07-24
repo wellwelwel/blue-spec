@@ -10,7 +10,7 @@ metadata:
 
 This skill is the specialized, authoritative description of **how Lagune is structured**: repository layout, how commands and templates are organized, the core/adapter boundary, what Lagune scaffolds into a target project, and the tracking-map model. Consult it before changing source, before adding an agent, and whenever a decision depends on the shape of the codebase.
 
-The product mission and workflow philosophy live in [CLAUDE.md](../../../CLAUDE.md). The toolchain, code conventions, build path, and how the tracking hooks are implemented live in the [engineering](../engineering/SKILL.md) skill. This skill covers the _shape_, not the _build_.
+The product mission and workflow philosophy live in [CLAUDE.md](../../../CLAUDE.md). The toolchain, code conventions, build path, and how the tracking hooks are implemented live in the [engineering](../engineering/SKILL.md) skill. The language conventions and the boundaries on what prose carries and who may author it live in the [writer](../writer/SKILL.md) skill. This skill covers the _shape_, not the _build_.
 
 ## Repository layout
 
