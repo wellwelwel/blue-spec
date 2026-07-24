@@ -68,6 +68,11 @@ export const SKILLS_CATALOG: BuiltinSkillEntry[] = [
     groups: ['owasp', 'lovable'],
   },
   {
+    name: 'secrets',
+    tags: ['Hardcoded Credential', 'API Key', 'Token', 'Env Var'],
+    groups: ['owasp', 'lovable'],
+  },
+  {
     name: 'api-endpoint',
     tags: ['GraphQL', 'gRPC', 'WebSocket', 'RPC'],
     groups: ['owasp'],
