@@ -1,4 +1,5 @@
-import type { Tracking, TrackingEntry } from '../../../types/dashboard/server';
+import type { TrackingEntry } from '../../../types/core';
+import type { Tracking } from '../../../types/dashboard/server';
 
 const isStringArray = (value: unknown): value is string[] =>
   Array.isArray(value) && value.every((item) => typeof item === 'string');

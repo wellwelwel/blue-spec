@@ -2,8 +2,6 @@ import type { IncomingMessage, ServerResponse } from 'node:http';
 import type { TrackingEntry } from '../core.js';
 import type { ActionResponse } from './api.js';
 
-export type { TrackingEntry } from '../core.js';
-
 export type Tracking = {
   entries: TrackingEntry[];
 };
