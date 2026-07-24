@@ -57,8 +57,9 @@ export const docsNav: DocsNavEntry[] = [
     items: [
       'references/paper',
       'references/glossary',
-      'references/comparison',
+      'references/deepsec',
       'references/skills-sources',
+      'references/comparison',
     ],
   },
   {
