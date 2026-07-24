@@ -1,6 +1,6 @@
 # SDH (Security-Driven Hardening): Lagune
 
-> This file orients any AI agent (and human) working in this repository. Read it fully before making changes. It describes **what Lagune is**, **who it is for**, **how it is built**, and **how to work in this codebase**. For the file/folder layout and concrete structure, invoke the internal `/architecture` skill, and for the toolchain, code conventions, and build path, the `/engineering` skill.
+> This file orients any AI agent (and human) working in this repository. Read it fully before making changes. It describes **what Lagune is**, **who it is for**, **how it is built**, and **how to work in this codebase**. For the file/folder layout and concrete structure, invoke the internal `/architecture` skill, for the toolchain, code conventions, and build path, the `/engineering` skill, and for the language conventions and how to write Lagune's prose, the `/writer` skill.
 
 ---
 
@@ -79,17 +79,17 @@ These are binding instructions for any agent or contributor working here.
 1. **Safe-by-default, in plain language, for everyone equally.** Every default, message, and fix must be safe out of the box and intelligible to any user, developer or not. No user tier is privileged over another.
 2. **Context-aware over generic.** Every phase must start from the context detected in `detect` (login, uploads, payments, and so on) and act on what the system actually does. Prefer recommendations specific to that context over generic checklists. The deep security knowledge is carried by the spec and its on-demand sub-skills, a baseline every user can build on.
 3. **Flexible over rigid.** Lagune flexes to the project and the user. Principles, requirements, and recommendations are starting points, not a fixed contract. Let the user reword, drop, add, or scope anything down. Every phase adapts to what the project actually is. Flexibility never weakens the safe-by-default baseline, it only lets the user shape how it is applied.
-4. **Reconcile, never append-only.** Lagune's artifacts are living documents, not logs. When a phase re-runs and its artifact already exists, reconcile it against the current truth: re-check each existing entry, keep what still holds, rewrite what changed, and remove what no longer applies (for example, a finding the code shows is now resolved). Write genuinely new content only for what is actually new. The past does not matter for its own sake. Never let an artifact grow by accumulation alone. Closure is this same reconcile reaching its conclusion: when `verify` proves a risk closed, it stands the finding down across the whole chain, with the user's confirmation, instead of leaving a later phase to drop it. This is why `verify` is the one phase that writes to the other phases' artifacts.
+4. **Reconcile, never append-only.** Lagune's artifacts are living documents, not logs, so a re-run reconciles each existing entry against the current truth rather than appending to it. The full discipline, including how closure stands a proven-closed finding down across the whole chain, lives in the `/writer` skill.
 5. **Defense only.** Lagune audits, hardens, and verifies. It never produces offensive tooling, exploits for malicious use, or detection-evasion for harm. Dual-use security content is acceptable only in a clearly defensive, authorized framing.
 6. **TypeScript in, JavaScript out.** Author in strict TypeScript and ship compiled JavaScript. The end-user runtime is JavaScript via `npx`.
 7. **Spec-first, agent-driven, framed for security.** Build the workflow from a proven structure: templates, commands, a governing charter, and an agent that runs the phases. Reimplement that structure in our stack with a defensive purpose.
-8. **Structure and engineering live elsewhere.** Concrete repo structure and file layout belong in the internal `/architecture` skill, and the toolchain, code conventions, type rules, and build path belong in the `/engineering` skill. Both load automatically when an agent touches the relevant code. Keep this file focused on the _what_ and _why_, and keep structural and implementation decisions in those skills.
+8. **Structure, engineering, and writing live elsewhere.** Concrete repo structure and file layout belong in the internal `/architecture` skill, the toolchain, code conventions, type rules, and build path belong in the `/engineering` skill, and the language conventions, the plain-language rule, and the reconcile discipline for prose belong in the `/writer` skill. They load when an agent touches the relevant work. Keep this file focused on the _what_ and _why_, and keep those decisions in those skills.
 9. **Never kill processes you did not start.** Only stop the processes you launched yourself (for example a headless browser you spawned for verification). Before starting a server, check whether the port is already serving what you need (for example the dashboard on its dev port) and reuse it instead of launching another.
 
 ---
 
-## 6. Naming, language, and writing conventions
+## 6. Naming
 
 - **Project name:** Lagune. Working command prefix: `lagune` / `/lagune.*`.
-- **All project content is written in English** (docs, code, comments, command text, user messages), regardless of the language used in chat.
-- **Prose style:** avoid em dashes where not grammatically necessary (prefer commas, parentheses, or colons) and avoid semicolons (prefer two sentences or a comma).
+
+The language conventions that governed the rest of this section (English-only content, no em dashes where not grammatically necessary, no semicolons) now live in the internal `/writer` skill, alongside the plain-language rule and the reconcile discipline for prose.
