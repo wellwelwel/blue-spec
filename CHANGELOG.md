@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.13.0](https://github.com/wellwelwel/lagune/compare/v0.12.0...v0.13.0) (2026-07-24)
+
+
+### Features
+
+* add `agent` hook to llm ([7d1ce8c](https://github.com/wellwelwel/lagune/commit/7d1ce8c6c90e3ac24ca786fa6fc880dacfa39fe5))
+* add `cors` hook to http-request ([ff70cca](https://github.com/wellwelwel/lagune/commit/ff70cca39575248742bc20208ab8f1688b1b011d))
+* add `crypto` hook to crypto ([55f6c1d](https://github.com/wellwelwel/lagune/commit/55f6c1d4e21e02a9b8e1193b1602d590b11ceeef))
+* add `infra` hook to infra ([2bc59ab](https://github.com/wellwelwel/lagune/commit/2bc59abbdf443acf31ec58e3cb4b2763aff8447a))
+* add `interpreter` hook to interpreter ([cea5899](https://github.com/wellwelwel/lagune/commit/cea589924350aab9442687ae65b361d8dfbda306))
+* add `jwt` hook to federation ([8a14b0c](https://github.com/wellwelwel/lagune/commit/8a14b0cf8bbe43242c92a45d65c5c578b4ebbfbe))
+* add `secrets` hook to secrets ([4271944](https://github.com/wellwelwel/lagune/commit/4271944d258c42d27c374968bc6742d6f75d3813))
+
 ## [0.12.0](https://github.com/wellwelwel/lagune/compare/v0.11.0...v0.12.0) (2026-07-14)
 
 
