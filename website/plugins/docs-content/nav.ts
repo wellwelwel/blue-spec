@@ -36,7 +36,17 @@ export const docsNav: DocsNavEntry[] = [
   },
   {
     label: 'Hooks',
-    items: ['hooks/regex', 'hooks/network'],
+    items: [
+      'hooks/agent',
+      'hooks/cors',
+      'hooks/crypto',
+      'hooks/infra',
+      'hooks/interpreter',
+      'hooks/jwt',
+      'hooks/network',
+      'hooks/regex',
+      'hooks/secrets',
+    ],
   },
   {
     label: 'References & Sources',
