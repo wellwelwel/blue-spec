@@ -3,8 +3,8 @@
 # 🌊 [Lagune AI](https://lagune.ai)
 
 [![Version](https://img.shields.io/npm/v/lagune?label=&color=2f7bff&logo=npm&logoColor=white)](https://www.npmjs.com/package/lagune)
-[![Docs](https://img.shields.io/badge/Documentation-2f7bff?logo=docusaurus&logoColor=white)](https://lagune.ai/docs)
 [![No API Key Needed](https://img.shields.io/badge/No%20API%20Key%20Needed-2f7bff?logo=claudecode&logoColor=white)](https://lagune.ai/docs/supported-agents)
+[![Secured By Lagune](https://img.shields.io/badge/Lagune-2f7bff?logo=springsecurity&logoColor=white&label=Secured%20By&labelColor=303952)](https://lagune.ai)
 
 **Lagune** helps your AI agent make a project more secure. You point it at your code, and the agent figures out what your system actually does, then guides you through the security work that matters for it.
 
@@ -34,7 +34,7 @@ Love **Lagune**? [**Give us a ⭐ on GitHub**](https://github.com/wellwelwel/lag
 
 > [!TIP]
 >
-> No API keys are needed, it runs directly through your own agent [(**Claude**, **Codex**, and more)](https://lagune.ai/docs/supported-agents).
+> See real-world [**Prompt Samples**](https://lagune.ai/docs/examples/prompts) 🪼
 
 ---
 
@@ -53,12 +53,12 @@ It serves a dashboard and opens it in a random port:
 - [x] **Install**, **Pull**, **Update**, and **Manage** all **Lagune** features directly from your browser
 - [x] No `node_modules` or `package.json` is needed 📦
 
-> <img width="260" src="./website/static/img/dashboard/01.png" />
-> <img width="260" src="./website/static/img/dashboard/02.png" />
-> <img width="260" src="./website/static/img/dashboard/03.png" />
-> <img width="260" src="./website/static/img/dashboard/04.png" />
-> <img width="260" src="./website/static/img/dashboard/05.png" />
-> <img width="260" src="./website/static/img/dashboard/06.png" />
+> <img width="240" src="./website/static/img/dashboard/01.png" />
+> <img width="240" src="./website/static/img/dashboard/02.png" />
+> <img width="240" src="./website/static/img/dashboard/03.png" />
+> <img width="240" src="./website/static/img/dashboard/04.png" />
+> <img width="240" src="./website/static/img/dashboard/05.png" />
+> <img width="240" src="./website/static/img/dashboard/06.png" />
 
 > [!TIP]
 >

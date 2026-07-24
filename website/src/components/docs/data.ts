@@ -26,6 +26,8 @@ export const flattenSidebar = (
 ): DocsSidebarLink[] =>
   sidebar.flatMap((entry) => (isCategory(entry) ? entry.items : [entry]));
 
+const banners = [0, 2, 3, 4, 5];
+
 export const findDocContext = (
   sidebar: DocsSidebarEntry[],
   docId: string
@@ -42,7 +44,7 @@ export const findDocContext = (
 
   return {
     eyebrow: entry && isCategory(entry) ? entry.label : 'Documentation',
-    banner: `/img/docs/banner-${(Math.max(owner, 0) % 5) + 1}.webp`,
+    banner: `/img/docs/banner-${banners[Math.max(owner, 0) % banners.length]}.webp`,
     previous: position > 0 ? links[position - 1] : undefined,
     next:
       position !== -1 && position < links.length - 1
